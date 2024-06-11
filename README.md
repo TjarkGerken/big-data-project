@@ -2,8 +2,8 @@
 
 ```json
 { 
-	mission: 'sts-10', 
-	timestamp: 1604325221 
+	"mission": "sts-10", 
+	"timestamp": 1604325221 
 }
 ```
 
