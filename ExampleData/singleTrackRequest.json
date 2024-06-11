@@ -1,0 +1,77 @@
+{
+  "album": {
+    "album_type": "album",
+    "total_tracks": 15,
+    "external_urls": {
+      "spotify": "https://open.spotify.com/album/57sSH1kVdI6JemNs5jJHvd"
+    },
+    "href": "https://api.spotify.com/v1/albums/57sSH1kVdI6JemNs5jJHvd",
+    "id": "57sSH1kVdI6JemNs5jJHvd",
+    "images": [
+      {
+        "url": "https://i.scdn.co/image/ab67616d0000b273e9ba2f511fbb7a98464e8ebd",
+        "height": 640,
+        "width": 640
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00001e02e9ba2f511fbb7a98464e8ebd",
+        "height": 300,
+        "width": 300
+      },
+      {
+        "url": "https://i.scdn.co/image/ab67616d00004851e9ba2f511fbb7a98464e8ebd",
+        "height": 64,
+        "width": 64
+      }
+    ],
+    "name": "Zentrum",
+    "release_date": "2024-04-26",
+    "release_date_precision": "day",
+    "type": "album",
+    "uri": "spotify:album:57sSH1kVdI6JemNs5jJHvd",
+    "artists": [
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0dKNwVc2gaxqvpAl2Hy5Ic"
+        },
+        "href": "https://api.spotify.com/v1/artists/0dKNwVc2gaxqvpAl2Hy5Ic",
+        "id": "0dKNwVc2gaxqvpAl2Hy5Ic",
+        "name": "Teuterekordz",
+        "type": "artist",
+        "uri": "spotify:artist:0dKNwVc2gaxqvpAl2Hy5Ic"
+      }
+    ],
+    "is_playable": true
+  },
+  "artists": [
+    {
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/0dKNwVc2gaxqvpAl2Hy5Ic"
+      },
+      "href": "https://api.spotify.com/v1/artists/0dKNwVc2gaxqvpAl2Hy5Ic",
+      "id": "0dKNwVc2gaxqvpAl2Hy5Ic",
+      "name": "Teuterekordz",
+      "type": "artist",
+      "uri": "spotify:artist:0dKNwVc2gaxqvpAl2Hy5Ic"
+    }
+  ],
+  "disc_number": 1,
+  "duration_ms": 152250,
+  "explicit": true,
+  "external_ids": {
+    "isrc": "DEKF22400306"
+  },
+  "external_urls": {
+    "spotify": "https://open.spotify.com/track/0Gk91Jfd5ZLMkWyXuRiC29"
+  },
+  "href": "https://api.spotify.com/v1/tracks/0Gk91Jfd5ZLMkWyXuRiC29",
+  "id": "0Gk91Jfd5ZLMkWyXuRiC29",
+  "is_playable": true,
+  "name": "Beste Crew der Welt",
+  "popularity": 41,
+  "preview_url": "https://p.scdn.co/mp3-preview/d2ace6149b4b98c55e3c3dadf320c0e1585186c5?cid=cfe923b2d660439caf2b557b21f31221",
+  "track_number": 11,
+  "type": "track",
+  "uri": "spotify:track:0Gk91Jfd5ZLMkWyXuRiC29",
+  "is_local": false
+}
