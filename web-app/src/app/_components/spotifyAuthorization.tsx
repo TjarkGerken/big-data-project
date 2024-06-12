@@ -14,7 +14,7 @@ function generateRandomString(length: number) {
 
 export default function SpotifyAuthorization() {
     const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID || "";
-    const redirect_uri = "https://localhost:3000/api/spotify/callback";
+    const redirect_uri = "http://localhost:3000/spotify/callback";
     const state = generateRandomString(16);
     const scope =    'user-read-private user-read-email';
 
@@ -26,7 +26,7 @@ export default function SpotifyAuthorization() {
     }
 
     return (
-        <div className={"bg-black text-green-800 rounded-full py-4 px-2"}>
+        <div className={"bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-xl"}>
             <button onClick={initiateSpotifyAuthorization}>Authorize with your Spotify Account</button>
         </div>
     );
