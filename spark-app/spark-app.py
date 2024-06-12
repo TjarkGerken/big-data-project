@@ -12,7 +12,7 @@ slidingDuration = '1 minute'
 # Example Part 1
 # Create a spark session
 spark = SparkSession.builder \
-    .appName("Use Case").getOrCreate()
+    .appName("Spotify Wrapped").getOrCreate()
 
 # Set log level
 spark.sparkContext.setLogLevel('WARN')
