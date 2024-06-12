@@ -1,5 +1,7 @@
 "use client"
+import Link from "next/link";
 import {useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 export default function Callback({ params }: { params: { slug: string } }){
     const searchParams = useSearchParams()
@@ -7,6 +9,10 @@ export default function Callback({ params }: { params: { slug: string } }){
     const code = searchParams.get("code")
     const state = searchParams.get("state")
 
+    const [error, setError] = useState(false);
+    if (code == "access_denied") {
+        setError(true)
+    }
 
     if (code) {
         localStorage.setItem("authCode", code)
@@ -16,11 +22,16 @@ export default function Callback({ params }: { params: { slug: string } }){
 
     return (
         <div className={"flex  flex-col h-screen justify-center items-center bg-spotify-black text-white p-4"}>
-            {!code && <div className={"text-red-400"}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                           stroke="currentColor" className="size-24 text-spotify-green">
-                <path strokeLinecap="round" strokeLinejoin="round"
-                      d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/>
-            </svg></div>
+            { error || !code  && <div className={"text-red-400 flex flex-col space-y-4 items-center justify-center"}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                     stroke="currentColor" className="size-24 text-spotify-green">
+                    <path strokeLinecap="round" strokeLinejoin="round"
+                          d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/>
+                </svg>
+                <span className={"text-center"}>Something went wrong while connecting your Account.</span>
+                <Link className={"py-2 px-4 font-bold bg-spotify-green text-spotify-black rounded-full"} href={"/"}>Go
+                    Home</Link>
+            </div>
             }
 
             {code &&

@@ -5,5 +5,5 @@ export default function sendDemoRequest() {
 
     return(
 <div className={"bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-xl"}>
-    <button onClick={sendReq}>Authorize with your Spotify Account</button>
+    <button onClick={sendReq}>Send Request</button>
 </div>)}
