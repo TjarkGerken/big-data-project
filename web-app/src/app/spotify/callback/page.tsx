@@ -42,7 +42,7 @@ export default function Callback({ params }: { params: { slug: string } }) {
           if (response.statusText != "OK") {
             setFetchError(true);
           }
-          localStorage.setItem("authCode", JSON.stringify(response.data));
+          localStorage.setItem("authCode", JSON.stringify({...response.data, issuedAt : new Date()}));
           router.push("/spotify/authorized");
         })
         .catch((error) => {

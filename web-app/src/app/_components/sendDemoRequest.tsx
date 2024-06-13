@@ -4,15 +4,42 @@ import { AuthCode } from "../_interfaces/AuthCode";
 import axios from "axios";
 import { useState } from "react";
 import { GetLastSongsResponse } from "../_interfaces/GetLastSongsResponse";
+import { Kafka } from "kafkajs";
 
 export default function sendDemoRequest() {
+
+    const kafka = new Kafka({
+        clientId: "tracker-" + Math.floor(Math.random() * 100000),
+        brokers: ["my-cluster-kafka-bootstrap:9092"]
+    })
+
+
+    async function sendTracksToKafka(tracks: GetLastSongsResponse) {
+        const producer = kafka.producer()
+        await producer.connect()
+        await producer.send({
+            topic: 'spotify-track-data',
+            messages:
+                tracks.items.map((track) => {
+                    // TODO: We somehow have to add the user id to the message
+                    return { value: JSON.stringify(track) }
+                })
+            ,
+        })
+        await producer.disconnect()
+    }
+
   const router = useRouter();
   const [response, setResponse] = useState({} as GetLastSongsResponse);
   var token = null;
+  
+
   function sendReq() {
     try {
       const authCode: AuthCode = JSON.parse(
         localStorage.getItem("authCode") || "",
+          
+          
       );
       token = authCode.access_token;
     } catch (error) {
@@ -23,7 +50,6 @@ export default function sendDemoRequest() {
       return "No token found";
     }
 
-    console.log(token);
     axios
       .get("https://api.spotify.com/v1/me/player/recently-played?limit=50", {
         headers: { Authorization: `Bearer ${token}` },
