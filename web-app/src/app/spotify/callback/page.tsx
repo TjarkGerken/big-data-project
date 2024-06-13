@@ -6,6 +6,8 @@ import axios from "axios";
 import querystring from "querystring";
 
 export default function Callback({ params }: { params: { slug: string } }) {
+  const [fetchError, setFetchError] = useState(false);
+
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -14,7 +16,7 @@ export default function Callback({ params }: { params: { slug: string } }) {
 
   const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
   const client_secret = process.env.NEXT_PUBLIC_SPOTIFY_SECRET;
-  const redirect_uri = process.env.NEXT_PUBLIC_REDIRECT_URI ;
+  const redirect_uri = process.env.NEXT_PUBLIC_REDIRECT_URI;
 
   const authOptions = {
     url: "https://accounts.spotify.com/api/token",
@@ -30,22 +32,29 @@ export default function Callback({ params }: { params: { slug: string } }) {
   };
 
   async function sendAuthRequest() {
-    try {
-      if (code) {
-        const response = await axios.post(authOptions.url, authOptions.data, {
+    if (code) {
+      await axios
+        .post(authOptions.url, authOptions.data, {
           headers: authOptions.headers,
+        })
+        .then((response) => {
+          console.log(response.statusText);
+          if (response.statusText != "OK") {
+            setFetchError(true);
+          }
+          localStorage.setItem("authCode", JSON.stringify(response.data));
+          router.push("/spotify/authorized");
+        })
+        .catch((error) => {
+          console.log(error);
+          setFetchError(true);
+          console.log(error);
         });
-        localStorage.setItem("authCode", JSON.stringify(response.data));
-        router.push("/spotify/authorized");
-      }
-    } catch (error) {
-      setError(true);
     }
   }
 
-  const [error, setError] = useState(false);
   if (code == "access_denied") {
-    setError(true);
+    setFetchError(true);
   }
 
   useEffect(() => {
@@ -60,42 +69,41 @@ export default function Callback({ params }: { params: { slug: string } }) {
         "flex  flex-col h-screen justify-center items-center bg-spotify-black text-white p-4"
       }
     >
-      {error ||
-        (!code && (
-          <div
-            className={
-              "text-red-400 flex flex-col space-y-4 items-center justify-center"
-            }
+      {(fetchError || !code) && (
+        <div
+          className={
+            "text-red-400 flex flex-col space-y-4 items-center justify-center"
+          }
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-24 text-spotify-green"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-24 text-spotify-green"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-              />
-            </svg>
-            <span className={"text-center"}>
-              Something went wrong while connecting your Account.
-            </span>
-            <Link
-              className={
-                "py-2 px-4 font-bold bg-spotify-green text-spotify-black rounded-full"
-              }
-              href={"/"}
-            >
-              Go Home
-            </Link>
-          </div>
-        ))}
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+            />
+          </svg>
+          <span className={"text-center"}>
+            Something went wrong while connecting your Account.
+          </span>
+          <Link
+            className={
+              "py-2 px-4 font-bold bg-spotify-green text-spotify-black rounded-full"
+            }
+            href={"/"}
+          >
+            Go Home
+          </Link>
+        </div>
+      )}
 
-      {code && (
+      {code && !fetchError && (
         <div role="status">
           <svg
             aria-hidden="true"
