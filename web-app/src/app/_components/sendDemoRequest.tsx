@@ -6,6 +6,9 @@ import { useState } from "react";
 import { GetLastSongsResponse } from "../_interfaces/GetLastSongsResponse";
 
 export async function getRefreshedToken(refreshToken: string) {
+    if (!refreshToken) {
+    return;
+    }
   axios
     .post("/api/refresh-token", { refresh_token: refreshToken })
     .then((response) => {
@@ -34,7 +37,7 @@ export default function sendDemoRequest() {
         authCode.issuedAt.getTime() + authCode.expires_in * 1000 <
         new Date().getTime()
       ) {
-        await getRefreshedToken(authCode.refresh_token);
+        await getRefreshedToken(localStorage.getItem("refreshToken") || "");
       }
 
       token = authCode.access_token;
@@ -60,7 +63,7 @@ export default function sendDemoRequest() {
       <button
         onClick={() =>
           getRefreshedToken(
-            "AQCziuSvuk43fpRwUxmkN2JLJPODnTVnTZ_29twRvXaEOK2dbyBS4E9m1ju1yfQpwJTVhMeWlgV17kiOCV-HNyBy_3BJXfzj8eMQBQ1_P49ZbS55-vGHuiKz6Zpvcz6wMWk",
+            localStorage.getItem("refreshToken") || ""
           )
         }
       >

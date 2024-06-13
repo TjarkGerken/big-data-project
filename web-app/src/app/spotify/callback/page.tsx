@@ -23,6 +23,7 @@ export default function Callback({ params }: { params: { slug: string } }) {
           "authCode",
           JSON.stringify({ ...response.data, issuedAt: new Date() }),
         );
+        localStorage.setItem("refreshToken", response.data.refresh_token);
         router.push("/spotify/authorized");
       })
       .catch((error) => {
