@@ -4,4 +4,5 @@ export interface AuthCode {
   expires_in: number;
   refresh_token: string;
   scope: string;
+  issuedAt: Date;
 }

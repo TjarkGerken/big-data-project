@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import querystring from "querystring";
 
@@ -13,44 +13,22 @@ export default function Callback({ params }: { params: { slug: string } }) {
 
   const code = searchParams.get("code");
   const state = searchParams.get("state");
-
-  const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
-  const client_secret = process.env.NEXT_PUBLIC_SPOTIFY_SECRET;
-  const redirect_uri = process.env.NEXT_PUBLIC_REDIRECT_URI;
-
-  const authOptions = {
-    url: "https://accounts.spotify.com/api/token",
-    data: querystring.stringify({
-      code: code,
-      redirect_uri: redirect_uri,
-      grant_type: "authorization_code",
-    }),
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: "Basic " + btoa(client_id + ":" + client_secret),
-    },
-  };
+  const isFirstRender = useRef(true);
 
   async function sendAuthRequest() {
-    if (code) {
-      await axios
-        .post(authOptions.url, authOptions.data, {
-          headers: authOptions.headers,
-        })
-        .then((response) => {
-          console.log(response.statusText);
-          if (response.statusText != "OK") {
-            setFetchError(true);
-          }
-          localStorage.setItem("authCode", JSON.stringify({...response.data, issuedAt : new Date()}));
-          router.push("/spotify/authorized");
-        })
-        .catch((error) => {
-          console.log(error);
-          setFetchError(true);
-          console.log(error);
-        });
-    }
+    await axios
+      .post("/api/auth-request", { code: code })
+      .then((response) => {
+        localStorage.setItem(
+          "authCode",
+          JSON.stringify({ ...response.data, issuedAt: new Date() }),
+        );
+        router.push("/spotify/authorized");
+      })
+      .catch((error) => {
+        console.error(error);
+        setFetchError(true);
+      });
   }
 
   if (code == "access_denied") {
@@ -58,10 +36,14 @@ export default function Callback({ params }: { params: { slug: string } }) {
   }
 
   useEffect(() => {
-    if (code) {
-      sendAuthRequest();
-    }
-  }, [code, redirect_uri, client_id, client_secret]);
+      if (isFirstRender.current) {
+        isFirstRender.current = false;
+      } else {
+        if (code) {
+          sendAuthRequest();
+        }
+      }
+  }, [code]);
 
   return (
     <div
