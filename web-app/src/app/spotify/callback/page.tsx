@@ -14,26 +14,34 @@ export default function Callback({ params }: { params: { slug: string } }){
     const client_secret = "6529c64ef2a549a79f18fadb7ed65f06";
 
 
-    const redirect_uri = "http://localhost:3000/spotify/autorized";
+    const redirect_uri = "http://localhost:3000/spotify/callback";
+
 
     const authOptions = {
         url: 'https://accounts.spotify.com/api/token',
         data: querystring.stringify({
-            code: code,
+                code: code,
             redirect_uri: redirect_uri,
             grant_type: 'authorization_code'
         }),
         headers: {
-            'content-type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64')
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + btoa(client_id + ':' + client_secret)
         }
     };
 
     async function sendAuthRequest() {
-        const response = await axios.post(authOptions.url, authOptions.data, {
-            headers: authOptions.headers
-        });
-        console.log(response.data);
+        try {
+            if (code) {
+                const response = await axios.post(authOptions.url, authOptions.data, {
+                    headers: authOptions.headers
+                });
+                localStorage.setItem("authCode", JSON.stringify(response.data));
+                router.push("/spotify/authorized")
+            }
+        } catch (error) {
+            setError(true)
+        }
     }
 
 
@@ -46,11 +54,11 @@ export default function Callback({ params }: { params: { slug: string } }){
         setError(true)
     }
 
-    if (code) {
-        sendAuthRequest();
-        // localStorage.setItem("authCode", code)
-        // router.push("/spotify/authorized")
-    }
+    useEffect(() => {
+        if (code) {
+            sendAuthRequest();
+        }
+    }, [code]);
 
 
     return (
