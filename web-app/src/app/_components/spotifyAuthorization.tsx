@@ -17,7 +17,7 @@ export default function SpotifyAuthorization() {
   const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID || "";
   const redirect_uri = "http://localhost:3000/spotify/callback";
   const state = generateRandomString(16);
-  const scope = "user-read-private user-read-email";
+  const scope = "user-read-private user-read-email user-read-recently-played";
 
   const router = useRouter();
   const query = `https://accounts.spotify.com/authorize?response_type=code&client_id=${client_id}&scope=${scope}&redirect_uri=${redirect_uri}&state=${state}`;
