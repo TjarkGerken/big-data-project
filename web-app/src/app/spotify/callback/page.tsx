@@ -1,13 +1,45 @@
 "use client"
 import Link from "next/link";
 import {useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import {useEffect, useState } from "react";
+import axios from 'axios';
+import querystring from 'querystring';
 
 export default function Callback({ params }: { params: { slug: string } }){
     const searchParams = useSearchParams()
     const router = useRouter()
     const code = searchParams.get("code")
     const state = searchParams.get("state")
+    const client_id = "d56d678a443a4184b88dfaba2883e18f";
+    const client_secret = "6529c64ef2a549a79f18fadb7ed65f06";
+
+
+    const redirect_uri = "http://localhost:3000/spotify/autorized";
+
+    const authOptions = {
+        url: 'https://accounts.spotify.com/api/token',
+        data: querystring.stringify({
+            code: code,
+            redirect_uri: redirect_uri,
+            grant_type: 'authorization_code'
+        }),
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64')
+        }
+    };
+
+    async function sendAuthRequest() {
+        const response = await axios.post(authOptions.url, authOptions.data, {
+            headers: authOptions.headers
+        });
+        console.log(response.data);
+    }
+
+
+
+
+
 
     const [error, setError] = useState(false);
     if (code == "access_denied") {
@@ -15,8 +47,9 @@ export default function Callback({ params }: { params: { slug: string } }){
     }
 
     if (code) {
-        localStorage.setItem("authCode", code)
-        router.push("/spotify/authorized")
+        sendAuthRequest();
+        // localStorage.setItem("authCode", code)
+        // router.push("/spotify/authorized")
     }
 
 
