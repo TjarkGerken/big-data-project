@@ -4,7 +4,8 @@ export default function ResetSpotifyAuthorization() {
   const router = useRouter();
   function resetAuth() {
     localStorage.removeItem("authCode");
-    router.push("/");
+    localStorage.removeItem("refreshToken");
+    window.location.reload()
   }
   return (
     <div
