@@ -1,47 +1,37 @@
-import { useRouter } from "next/navigation";
-
+"use client"
 import { AuthCode } from "../_interfaces/AuthCode";
 import axios from "axios";
 import { useState } from "react";
 import { GetLastSongsResponse } from "../_interfaces/GetLastSongsResponse";
 
-export async function getRefreshedToken(refreshToken: string) {
-    if (!refreshToken) {
-    return;
-    }
-  axios
-    .post("/api/refresh-token", { refresh_token: refreshToken })
-    .then((response) => {
-      localStorage.setItem(
-        "authCode",
-        JSON.stringify({ ...response.data, issuedAt: new Date() }),
-      );
-    });
-}
-
-export default function sendDemoRequest() {
+export default function SendDemoRequest() {
   async function sendTracksToKafka(tracks: GetLastSongsResponse) {
-    axios.post("/api/send-to-kafka", tracks).then((response) => {});
+    axios.post("/api/send-to-kafka", tracks).then((response) => { console.log(response)});
   }
-  const router = useRouter();
   const [response, setResponse] = useState({} as GetLastSongsResponse);
   var token = null;
 
   async function sendReq() {
+      console.log("sending request")
     try {
-      const authCode: AuthCode = JSON.parse(
+        console.log("sending request")
+
+        const authCode: AuthCode = JSON.parse(
         localStorage.getItem("authCode") || "",
       );
+        console.log(authCode);
 
       if (
-        authCode.issuedAt.getTime() + authCode.expires_in * 1000 <
+          new Date(authCode.issuedAt).getTime() + (authCode.expires_in - 100 ) * 1000 <
         new Date().getTime()
       ) {
+
         await getRefreshedToken(localStorage.getItem("refreshToken") || "");
       }
-
       token = authCode.access_token;
+      console.log(token);
     } catch (error) {
+          console.log(error);
       return error;
     }
 
@@ -54,34 +44,53 @@ export default function sendDemoRequest() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
+        sendTracksToKafka(response.data);
         setResponse(response.data);
       });
   }
 
   return (
-    <div>
+    <div className={"bg-spotify-black h-full"}>
       <button
+          className={
+              "bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-xl"
+          }
         onClick={() =>
-          getRefreshedToken(
-            localStorage.getItem("refreshToken") || ""
-          )
+          getRefreshedToken(localStorage.getItem("refreshToken") || "")
         }
       >
         get refresh token
       </button>
       <div
-        className={
-          "bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-xl"
-        }
+
       >
-        <button onClick={sendReq}>Send Request</button>
+        <button
+            className={
+                "bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-xl"
+            }
+            onClick={sendReq}>Send Request</button>
       </div>
-      <div>
+        { response.items &&
+      <div className={"text-white"}>
         <h1>Spotify Response</h1>
         {response.items?.map((item, i) => {
           return <div key={i}>{item.track.name}</div>;
         })}
-      </div>
+      </div>}
     </div>
   );
+}
+
+export async function getRefreshedToken(refreshToken: string) {
+    if (!refreshToken) {
+        return;
+    }
+    axios
+        .post("/api/refresh-token", { refresh_token: refreshToken })
+        .then((response) => {
+            localStorage.setItem(
+                "authCode",
+                JSON.stringify({ ...response.data, issuedAt: new Date() }),
+            );
+        });
 }

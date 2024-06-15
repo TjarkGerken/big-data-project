@@ -22,7 +22,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col max-w-screen bg-yellow-100 items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between  text-sm flex flex-col space-y-4">
         {!authCode && (
           <div>
@@ -31,8 +31,8 @@ export default function Home() {
           </div>
         )}
         {authCode && (
-          <div className={"flex flex-col space-y-4"}>
-            <p>Auth Code: {JSON.stringify(authCode)}</p>
+          <div className={"flex flex-col space-y-4 max-w-5xl "}>
+            <pre className={"text-balance w-full break-words max-w-full"}>Auth Code: {JSON.stringify(authCode)}</pre>
             <ResetSpotifyAuthorization />
             <SendDemoRequest />{" "}
           </div>
