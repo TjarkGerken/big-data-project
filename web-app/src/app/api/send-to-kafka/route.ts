@@ -1,5 +1,5 @@
 import { GetLastSongsResponse } from "@/app/_interfaces/GetLastSongsResponse";
-import { Kafka } from "kafkajs";
+import { Kafka, Partitioners } from "kafkajs";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +11,8 @@ export async function POST(request: Request) {
     brokers: ["my-cluster-kafka-bootstrap:9092"],
   });
 
-  const producer = kafka.producer();
+  const producer = kafka.producer({ createPartitioner: Partitioners.DefaultPartitioner })
+
   await producer.connect();
   await producer.send({
     topic: "spotify-track-data",
@@ -19,6 +20,9 @@ export async function POST(request: Request) {
       return { value: JSON.stringify(track) };
     }),
   });
+
+
+
   await producer.disconnect();
   return Response.json(
     { message: "Tracks sent successfully" },

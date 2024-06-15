@@ -16,7 +16,8 @@ function HandleAuth(){
   const isFirstRender = useRef(true);
 
   async function sendAuthRequest(setFetchError: React.Dispatch<React.SetStateAction<boolean>>) {
-    await axios
+      console.log("About to send request...");
+      await axios
         .post("/api/auth-request", { code: code })
         .then((response) => {
           localStorage.setItem(
@@ -37,13 +38,14 @@ function HandleAuth(){
   }
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-    } else {
+
+        console.log("CP1 : ", code);
       if (code) {
+          console.log("CP1 : ", code);
         sendAuthRequest(setFetchError);
+          console.log("CP2 : ", code);
       }
-    }
+
   }, [code, sendAuthRequest] );
 
   return (
@@ -108,8 +110,6 @@ function HandleAuth(){
 
             <span>Debug</span>
             <span>Callback: {code}</span>
-
-
             <span>State: {state}</span>
 
         </div>
@@ -119,8 +119,6 @@ function HandleAuth(){
 
 
 export default function Callback({ params }: { params: { slug: string } }) {
-
-
   return (
     <div
       className={
@@ -130,7 +128,6 @@ export default function Callback({ params }: { params: { slug: string } }) {
       <Suspense fallback={<div>Loading...</div>}>
             <HandleAuth/>
       </Suspense>
-
     </div>
   );
 }
