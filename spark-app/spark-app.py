@@ -51,16 +51,6 @@ trackingMessages = kafkaMessages.select(
 
 
 
-# Example Part 5
-# Start running the query; print running counts to the console
-consoleDump = popular \
-    .writeStream \
-    .outputMode("update") \
-    .format("console") \
-    .start()
-
-
-
 
 
 # Wait for termination
