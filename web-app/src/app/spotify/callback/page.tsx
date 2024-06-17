@@ -38,12 +38,8 @@ function HandleAuth(){
   }
 
   useEffect(() => {
-
-        console.log("CP1 : ", code);
       if (code) {
-          console.log("CP1 : ", code);
         sendAuthRequest(setFetchError);
-          console.log("CP2 : ", code);
       }
 
   }, [code, sendAuthRequest] );

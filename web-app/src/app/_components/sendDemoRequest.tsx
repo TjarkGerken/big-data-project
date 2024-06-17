@@ -15,15 +15,10 @@ export default function SendDemoRequest() {
   var token = null;
 
   async function sendReq() {
-      console.log("sending request")
     try {
-        console.log("sending request")
-
         const authCode: AuthCode = JSON.parse(
         localStorage.getItem("authCode") || "",
       );
-        console.log(authCode);
-
       if (
           new Date(authCode.issuedAt).getTime() + (authCode.expires_in - 100 ) * 1000 <
         new Date().getTime()
@@ -32,12 +27,10 @@ export default function SendDemoRequest() {
         await getRefreshedToken(localStorage.getItem("refreshToken") || "");
       }
       token = authCode.access_token;
-      console.log(token);
     } catch (error) {
           console.log(error);
       return error;
     }
-
     if (!token) {
       return "No token found";
     }

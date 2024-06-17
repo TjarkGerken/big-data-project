@@ -21,8 +21,6 @@ export async function POST(request: Request) {
     }),
   });
 
-
-
   await producer.disconnect();
   return Response.json(
     { message: "Tracks sent successfully" },

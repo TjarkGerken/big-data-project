@@ -13,16 +13,14 @@ export default function Home() {
       if (authCode) {
         setAuthCode(JSON.parse(authCode));
       }
-    }, 1); // Refreshes every 1 second
-
-    // Clear interval on component unmount
+    }, 1);
     return () => {
       clearInterval(intervalId);
     };
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col max-w-screen bg-yellow-100 items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col max-w-screen bg-spotify-black items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between  text-sm flex flex-col space-y-4">
         {!authCode && (
           <div>
@@ -31,7 +29,7 @@ export default function Home() {
           </div>
         )}
         {authCode && (
-          <div className={"flex flex-col space-y-4 max-w-5xl "}>
+          <div className={"flex flex-col space-y-4 max-w-5xl text-white"}>
             <pre className={"text-balance w-full break-words max-w-full"}>Auth Code: {JSON.stringify(authCode)}</pre>
             <ResetSpotifyAuthorization />
             <SendDemoRequest />{" "}
