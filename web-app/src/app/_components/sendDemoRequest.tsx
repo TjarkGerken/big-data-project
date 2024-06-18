@@ -6,7 +6,7 @@ import { GetLastSongsResponse } from "../_interfaces/GetLastSongsResponse";
 
 export default function SendDemoRequest() {
   async function sendTracksToKafka(tracks: GetLastSongsResponse) {
-    axios.post("/api/send-to-kafka", tracks).then((response) => { console.log(response)});
+    axios.post("/api/send-to-kafka", tracks).then((response) => {});
       console.log(tracks.items.map((track) => {
           return { value: JSON.stringify(track) };
       }),);
