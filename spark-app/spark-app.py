@@ -91,6 +91,34 @@ query = kafkaMessages \
     .format("console") \
     .start()
 
+top_Artist = kafkaMessages \
+    .select(from_json(col("value").cast("string"), messageSchema).alias("value")) \
+    .select("value.track.artists.name") \
+    .groupBy("name") \
+    .count() \
+    .orderBy(desc("count"))
+
+top_Artist_query = top_Artist \
+     .writeStream \
+     .outputMode("complete") \
+     .format("console") \
+     .start()
+
+top_tracks = kafkaMessages \
+     .select(from_json(col("value").cast("string"), messageSchema).alias("value")) \
+     .select("value.track.name") \
+     .groupBy("name") \
+     .count() \
+     .orderBy(desc("count"))
+
+top_tracks_query = top_tracks \
+     .writeStream \
+     .outputMode("complete") \
+     .format("console") \
+     .start()
+
+
+
 query.awaitTermination()
 
 # Wait for termination
