@@ -35,13 +35,19 @@ export default function SendDemoRequest() {
       return "No token found";
     }
 
+    const threeDaysInSeconds = 3 * 24 * 60 * 60 * 1000;
+    const unixTimestamp: string = Math.floor(Date.now() - threeDaysInSeconds).toString();
+    const url = `https://api.spotify.com/v1/me/player/recently-played?limit=50&after=${unixTimestamp}`;
+
     axios
-      .get("https://api.spotify.com/v1/me/player/recently-played?limit=50", {
+      .get(url, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
+        
         sendTracksToKafka(response.data);
         setResponse(response.data);
+        
       });
   }
 
