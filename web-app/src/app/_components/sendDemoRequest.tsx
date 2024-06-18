@@ -35,21 +35,33 @@ export default function SendDemoRequest() {
       return "No token found";
     }
 
-    const threeDaysInSeconds = 3 * 24 * 60 * 60 * 1000;
-    const unixTimestamp: string = Math.floor(Date.now() - threeDaysInSeconds).toString();
-    const url = `https://api.spotify.com/v1/me/player/recently-played?limit=50&after=${unixTimestamp}`;
+    const url = `https://api.spotify.com/v1/me/player/recently-played?limit=50`;
+    
+    const header = {
+      headers: { Authorization: `Bearer ${token}` },
+    }
 
-    axios
-      .get(url, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+    let latestResponseDate = -1
+    
+    const threeDaysInMilliSeconds = 3 * 24 * 60 * 60 * 1000;
+    const unixTimestamp = new Date().getTime() - threeDaysInMilliSeconds;
+
+    while (latestResponseDate > unixTimestamp || latestResponseDate === -1) {
+      latestResponseDate = -2
+      console.log("Hello")
+      axios
+      .get(url, header)
       .then((response) => {
-        
-        sendTracksToKafka(response.data);
+        // sendTracksToKafka(response.data);
+        console.log(response.data.items[response.data.items.length-1].played_at)
+        latestResponseDate = new Date(response.data.items[response.data.items.length-1].played_at).getTime();
+        console.log(latestResponseDate  )
         setResponse(response.data);
         
       });
+    }  
   }
+
 
   return (
     <div className={"bg-spotify-black h-full"}>
