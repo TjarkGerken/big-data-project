@@ -35,27 +35,37 @@ export default function SendDemoRequest() {
       return "No token found";
     }
 
-    const url = `https://api.spotify.com/v1/me/player/recently-played?limit=50`;
+    let url = `https://api.spotify.com/v1/me/player/recently-played?limit=10&time_range=long_term`;
     
     const header = {
       headers: { Authorization: `Bearer ${token}` },
     }
 
     let latestResponseDate = -1
-    
+
     const threeDaysInMilliSeconds = 3 * 24 * 60 * 60 * 1000;
     const unixTimestamp = new Date().getTime() - threeDaysInMilliSeconds;
 
     while (latestResponseDate > unixTimestamp || latestResponseDate === -1) {
-      latestResponseDate = -2
-      console.log("Hello")
-      axios
+      console.log("Hello");
+      // latestResponseDate = -2;
+      await axios
       .get(url, header)
       .then((response) => {
         // sendTracksToKafka(response.data);
-        console.log(response.data.items[response.data.items.length-1].played_at)
+
+        if (response.data.next === null) {
+            latestResponseDate = -2
+            return
+        }
+            console.log(response.data.items[response.data.items.length-1].played_at);
         latestResponseDate = new Date(response.data.items[response.data.items.length-1].played_at).getTime();
-        console.log(latestResponseDate  )
+        console.log(header)
+        url =  response.data.next + "&time_range=long_term"
+          console.log(url)
+        console.log(latestResponseDate)
+          console.log(unixTimestamp)
+
         setResponse(response.data);
         
       });
