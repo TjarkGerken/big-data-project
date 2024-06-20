@@ -5,10 +5,16 @@ from pyspark.sql.types import IntegerType, StringType, StructType, TimestampType
 windowDuration = '1 minute'
 slidingDuration = '1 minute'
 
+mongo_uri = "mongodb://admin:password@mongodb:27017"
+mongo_db = "spotify"
+mongo_collection = "track_data"
+
 # Example Part 1
 # Create a spark session
 spark = SparkSession.builder \
-    .appName("Spotify Wrapped").getOrCreate()
+    .appName("Spotify Wrapped") \
+    .config("spark.mongodb.output.uri", mongo_uri) \
+    .getOrCreate()
 
 # Set log level
 spark.sparkContext.setLogLevel('ERROR')
@@ -85,13 +91,34 @@ messageSchema = StructType() \
               .add("spotify", StringType())) \
          .add("uri", StringType()))
 
-query = kafkaMessages \
-    .writeStream \
-    .outputMode("append") \
-    .format("console") \
-    .start()
+#query = kafkaMessages \
+ #   .writeStream \
+  #  .outputMode("append") \
+   # .format("console") \
+    #.start()
 
-query.awaitTermination()
+# query.awaitTermination()
+
+
+parsedMessages = kafkaMessages.select(from_json(col("value").cast("string"), messageSchema).alias("data")).select("data.*")
+
+parsedMessages = parsedMessages.withColumn("played_at", col("played_at").cast(TimestampType()))
+
+#query = parsedMessages \
+     #.writeStream \
+     #.format("mongodb") \
+     #.option("spark.mongodb.output.uri", f"{mongo_uri}/{mongo_db}.{mongo_collection}") \
+     #.option("checkpointLocation", "/tmp/checkpoints") \
+     #.outputMode("append") \
+     #.start()
+
+# query.awaitTermination()
+
+df = spark.read.format("mongo").option("uri", f"{mongo_uri}/{mongo_db}.{mongo_collection}").load()
+print("\n\n\n\n\test\n\n\n\n\n")
+print(df.to_string())
+
+
 
 # Wait for termination
 spark.streams.awaitAnyTermination()
