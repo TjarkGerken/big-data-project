@@ -13,7 +13,7 @@ spark = SparkSession \
 .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector:10.0.2') \
 .getOrCreate()
 
-# read data from mongodb collection "questions" into a dataframe "df"
+
 df = spark.read \
 .format("mongodb") \
 .option("uri", "mongodb://admin:password@mongodb:27017/cool?authSource=admin") \
@@ -81,29 +81,30 @@ messageSchema = StructType() \
          .add("external_urls", StructType() \
               .add("spotify", StringType())) \
          .add("uri", StringType()))
+"""
+query = kafkaMessages \
+    .writeStream \
+    .outputMode("append") \
+    .format("console") \
+    .start()
 
-#query = kafkaMessages \
- #   .writeStream \
-  #  .outputMode("append") \
-   # .format("console") \
-    #.start()
-
-# query.awaitTermination()
+query.awaitTermination()
 
 
 parsedMessages = kafkaMessages.select(from_json(col("value").cast("string"), messageSchema).alias("data")).select("data.*")
 
 parsedMessages = parsedMessages.withColumn("played_at", col("played_at").cast(TimestampType()))
 
-#query = parsedMessages \
-     #.writeStream \
-     #.format("mongodb") \
-     #.option("spark.mongodb.output.uri", f"{mongo_uri}/{mongo_db}.{mongo_collection}") \
-     #.option("checkpointLocation", "/tmp/checkpoints") \
-     #.outputMode("append") \
-     #.start()
+query = parsedMessages \
+     .writeStream \
+     .format("mongodb") \
+     .option("spark.mongodb.output.uri", f"{mongo_uri}/{mongo_db}.{mongo_collection}") \
+     .option("checkpointLocation", "/tmp/checkpoints") \
+     .outputMode("append") \
+     .start()
 
-# query.awaitTermination()
+query.awaitTermination()
+"""
 
 df = spark.read.format("mongo").option("uri", f"{mongo_uri}/{mongo_db}.{mongo_collection}").load()
 print("\n\n\n\n\test\n\n\n\n\n")
