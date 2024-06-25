@@ -1,34 +1,25 @@
-from pyspark.sql import SparkSession
+import pyspark
+from pyspark import SparkContext, SparkConf
+from pyspark.sql import SparkSession, SQLContext, functions as F
 from pyspark.sql.functions import *
-from pyspark.sql.types import IntegerType, StringType, StructType, TimestampType, BooleanType, ArrayType
 
-windowDuration = '1 minute'
-slidingDuration = '1 minute'
+# create a spark session
+spark = SparkSession \
+.builder \
+.master("local") \
+.appName("ABC") \
+.config("spark.mongodb.read.connection.uri", "mongodb://admin:password@mongodb:27017/cool?authSource=admin") \
+.config("spark.mongodb.write.connection.uri", "mongodb://admin:password@mongodb:27017/cool?authSource=admin") \
+.config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector:10.0.2') \
+.getOrCreate()
 
-mongo_uri = "mongodb://admin:password@mongodb:27017"
-mongo_db = "spotify"
-mongo_collection = "track_data"
-
-# Example Part 1
-# Create a spark session
-spark = SparkSession.builder \
-    .appName("Spotify Wrapped") \
-    .config("spark.mongodb.output.uri", mongo_uri) \
-    .getOrCreate()
-
-# Set log level
-spark.sparkContext.setLogLevel('ERROR')
-
-# Example Part 2
-# Read messages from Kafka
-kafkaMessages = spark \
-    .readStream \
-    .format("kafka") \
-    .option("kafka.bootstrap.servers",
-            "my-cluster-kafka-bootstrap:9092") \
-    .option("subscribe", "spotify-track-data") \
-    .option("startingOffsets", "earliest") \
-    .load()
+# read data from mongodb collection "questions" into a dataframe "df"
+df = spark.read \
+.format("mongodb") \
+.option("uri", "mongodb://admin:password@mongodb:27017/cool?authSource=admin") \
+.option("database", "cool") \
+.option("collection", "questions") \
+.load()
 
 messageSchema = StructType() \
     .add("value", StringType()) \
@@ -147,7 +138,9 @@ top_tracks_query = top_tracks \
 
 
 query.awaitTermination()
+print("test")
 
+df.printSchema()
 
 # Wait for termination
 spark.streams.awaitAnyTermination()
