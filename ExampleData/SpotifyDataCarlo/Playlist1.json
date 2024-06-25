@@ -1,0 +1,4169 @@
+{
+  "playlists": [
+    {
+      "name": "Rkr",
+      "lastModifiedDate": "2023-02-03",
+      "items": [
+        {
+          "track": {
+            "trackName": "Drop",
+            "artistName": "Connor Price",
+            "albumName": "Spin The Globe",
+            "trackUri": "spotify:track:5HrBwBW9Teiys6bYlsOZpm"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-02-03"
+        }
+      ],
+      "description": null,
+      "numberOfFollowers": 0
+    },
+    {
+      "name": "Deine Top-Songs 2022",
+      "lastModifiedDate": "2023-02-05",
+      "items": [
+        {
+          "track": {
+            "trackName": "Centre Court",
+            "artistName": "Bausa",
+            "albumName": "Centre Court",
+            "trackUri": "spotify:track:6Xlske5nAmkPb123IfyZ5S"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "San Andreas",
+            "artistName": "RIN",
+            "albumName": "San Andreas",
+            "trackUri": "spotify:track:1VuBab65w8vPFeFvREDA32"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Avirex",
+            "artistName": "RIN",
+            "albumName": "Planet Megatron",
+            "trackUri": "spotify:track:76hTV1J1bMqLtLLSaT0oUt"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Stir Fry",
+            "artistName": "Migos",
+            "albumName": "Culture II",
+            "trackUri": "spotify:track:2UVbBKQOdFAekPTRsnkzcf"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Trance",
+            "artistName": "RIN",
+            "albumName": "Kleinstadt",
+            "trackUri": "spotify:track:6CWXM1T57DAsBAiWKg376m"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "XXL",
+            "artistName": "Miksu / Macloud",
+            "albumName": "XXL",
+            "trackUri": "spotify:track:60Yyqzr83eKaUOgpogcyfF"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "MANCHESTER",
+            "artistName": "reezy",
+            "albumName": "MANCHESTER",
+            "trackUri": "spotify:track:1e2dv35yQh0yNKyZ6Nmw4h"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "2002",
+            "artistName": "Sido",
+            "albumName": "Ich & keine Maske",
+            "trackUri": "spotify:track:2u8AXJyk8pICzj2wyPBL0b"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Insomnia (feat. Giant Rooks)",
+            "artistName": "RIN",
+            "albumName": "Kleinstadt",
+            "trackUri": "spotify:track:1ubxTdRoFmi7KzxAOJQs1z"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Hurricane",
+            "artistName": "Kanye West",
+            "albumName": "Donda",
+            "trackUri": "spotify:track:6Hfu9sc7jvv6coyy2LlzBF"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "PHANTOM (feat. Summer Cem)",
+            "artistName": "reezy",
+            "albumName": "PHANTOM (feat. Summer Cem)",
+            "trackUri": "spotify:track:1s0nANz8q6gEZOms034GbU"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "SYGL (feat. Shindy)",
+            "artistName": "CRO",
+            "albumName": "SYGL (feat. Shindy)",
+            "trackUri": "spotify:track:1tUF7dEhqmV2Z1pTsGAGnD"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Money on my Mind",
+            "artistName": "RIN",
+            "albumName": "Kleinstadt",
+            "trackUri": "spotify:track:47Ovil2A3Rgq17Y4NkNU8v"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Bös",
+            "artistName": "Jay Jiggy",
+            "albumName": "Made it",
+            "trackUri": "spotify:track:256uxgAwGLwvQ8uII3vnCg"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "SAGROTAN (feat. reezy)",
+            "artistName": "KALIM",
+            "albumName": "T.O.T.Y.",
+            "trackUri": "spotify:track:2R5kWKlRKal6lZOkdQxUSc"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "KEiNE CHAiN",
+            "artistName": "TJ_beastboy",
+            "albumName": "KEiNE CHAiN",
+            "trackUri": "spotify:track:6tRpnL8pE9R0HWObq837eW"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Commitment Issues",
+            "artistName": "RIN",
+            "albumName": "Boys Do Cry",
+            "trackUri": "spotify:track:3tjoq1CMR4YtSUegC5sbU8"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Mami Freestyle",
+            "artistName": "Shindy",
+            "albumName": "Mami Freestyle",
+            "trackUri": "spotify:track:0xdTwXMHYli9KaAvGtw9fA"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Leave The Door Open",
+            "artistName": "Bruno Mars",
+            "albumName": "An Evening With Silk Sonic",
+            "trackUri": "spotify:track:02VBYrHfVwfEWXk5DXyf0T"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Life Is Good (feat. Drake)",
+            "artistName": "Future",
+            "albumName": "Life Is Good (feat. Drake)",
+            "trackUri": "spotify:track:5yY9lUy8nbvjM1Uyo1Uqoc"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "1976",
+            "artistName": "RIN",
+            "albumName": "1976",
+            "trackUri": "spotify:track:0jTWSs2OyxzYIk1sF7sUsO"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Niemand bringt Marten um",
+            "artistName": "Marteria",
+            "albumName": "Niemand bringt Marten um",
+            "trackUri": "spotify:track:0nYSnbFVX5ghrERjwVZgwZ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "HELLA SEXY",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:42LjNYXAIZv1zQPAXpYBrA"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "West Connect (feat. Central Cee)",
+            "artistName": "Luciano",
+            "albumName": "Majestic",
+            "trackUri": "spotify:track:1Fb8gCHRkmNAaN8vytd5vg"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Douglas (feat. Schmyt)",
+            "artistName": "RIN",
+            "albumName": "Kleinstadt",
+            "trackUri": "spotify:track:6Z205jgJQuB8tq300LmYZm"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "FREIHEIT",
+            "artistName": "CRO",
+            "albumName": "FREIHEIT",
+            "trackUri": "spotify:track:4nAxLl9fbnEEmYdSOHCQMt"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "CRiNGY",
+            "artistName": "TJ_beastboy",
+            "albumName": "CRiNGY",
+            "trackUri": "spotify:track:5eZj8oMomoON23LE2JXJUM"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Rotlichtsonate",
+            "artistName": "Kollegah",
+            "albumName": "Rotlichtsonate",
+            "trackUri": "spotify:track:1wxnA0kd9ywcsxG2YABWwm"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Vintage",
+            "artistName": "RIN",
+            "albumName": "Nimmerland",
+            "trackUri": "spotify:track:2DGaC5ET92bgg0fMunJKIF"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "dich",
+            "artistName": "CRO",
+            "albumName": "trip",
+            "trackUri": "spotify:track:57qN0c4J7tm8g9q5gGEo3N"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "GUT<BESSER<ICH",
+            "artistName": "TJ_beastboy",
+            "albumName": "HUMANOID-FLAMETHROWER",
+            "trackUri": "spotify:track:0KM9WrAeweNFtbc7YdWGuN"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "EXCEL",
+            "artistName": "reezy",
+            "albumName": "WEISSWEIN & HEARTBREAKS",
+            "trackUri": "spotify:track:4rN5fs60mui4nKGkTUV5tK"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "golden hour",
+            "artistName": "JVKE",
+            "albumName": "this is what ____ feels like (Vol. 1-4)",
+            "trackUri": "spotify:track:5odlY52u43F5BjByhxg7wg"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "MARiO KART",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:651E6DVVzWyaGSSayJ2qxr"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "DAS RENNEN",
+            "artistName": "RIN",
+            "albumName": "DAS RENNEN",
+            "trackUri": "spotify:track:3qT2eKpWNq5cze7kGGORDZ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "goosebumps",
+            "artistName": "Travis Scott",
+            "albumName": "Birds In The Trap Sing McKnight",
+            "trackUri": "spotify:track:6gBFPUFcJLzWGx4lenP6h2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Nimm's leicht",
+            "artistName": "Die Orsons",
+            "albumName": "Orsons Island",
+            "trackUri": "spotify:track:3m4ixqg1Rm6hjJTlIM0siE"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "We Made It",
+            "artistName": "t-low",
+            "albumName": "Percocet Party",
+            "trackUri": "spotify:track:1pKwwH7xRmxyeBiGX3n2RX"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "UP IN SMOKE",
+            "artistName": "RIN",
+            "albumName": "Nimmerland",
+            "trackUri": "spotify:track:0nnmA43aDEfmau2Vyo7b4g"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Laugh Now Cry Later (feat. Lil Durk)",
+            "artistName": "Drake",
+            "albumName": "Laugh Now Cry Later (feat. Lil Durk)",
+            "trackUri": "spotify:track:2SAqBLGA283SUiwJ3xOUVI"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Apple",
+            "artistName": "RIN",
+            "albumName": "Apple",
+            "trackUri": "spotify:track:1SVV2YIx9ouyD2WwQqBL61"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "My Oh My (feat. DaBaby)",
+            "artistName": "Camila Cabello",
+            "albumName": "Romance",
+            "trackUri": "spotify:track:3yOlyBJuViE2YSGn3nVE1K"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Life Goes On",
+            "artistName": "Oliver Tree",
+            "albumName": "Ugly is Beautiful: Shorter, Thicker & Uglier",
+            "trackUri": "spotify:track:0eu4C55hL6x29mmeAjytzC"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "One Night",
+            "artistName": "RIN",
+            "albumName": "Planet Megatron",
+            "trackUri": "spotify:track:5Ed3Ou1Ob2ZmYZX3SqvRXO"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Sunflower - Spider-Man: Into the Spider-Verse",
+            "artistName": "Post Malone",
+            "albumName": "Spider-Man: Into the Spider-Verse",
+            "trackUri": "spotify:track:3KkXRkHbMCARz0aVfEt68P"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Hurt",
+            "artistName": "Oliver Tree",
+            "albumName": "Ugly is Beautiful",
+            "trackUri": "spotify:track:6Ph8QwsRfZunN5e1GGBIqa"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "ALLES DOPE",
+            "artistName": "CRO",
+            "albumName": "ALLES DOPE",
+            "trackUri": "spotify:track:7HZMdCSq7oUYmn6OHU6kSB"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "As It Was",
+            "artistName": "Harry Styles",
+            "albumName": "As It Was",
+            "trackUri": "spotify:track:4LRPiXqCikLlN15c3yImP7"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "edamame",
+            "artistName": "bbno$",
+            "albumName": "edamame",
+            "trackUri": "spotify:track:1uMHCAyGmHqyygoNRuo7MV"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "40K",
+            "artistName": "Ufo361",
+            "albumName": "VVS",
+            "trackUri": "spotify:track:395dCxJ3bkML5cFKhQzMOc"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "GOD BLESS",
+            "artistName": "badchieff",
+            "albumName": "CHIEFF LOVES YOU",
+            "trackUri": "spotify:track:3niPPVsI6rsnqrXC5V4xPX"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "ACH KOMM",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:4bihuyicCWYqcVOOmlrIQ2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Writing's On The Wall - From \"Spectre\" Soundtrack",
+            "artistName": "Sam Smith",
+            "albumName": "Writing's On The Wall",
+            "trackUri": "spotify:track:1PWnAEQcbwQwK759otUbta"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "WHOLE LOTTA MONEY (feat. Nicki Minaj) - Remix",
+            "artistName": "BIA",
+            "albumName": "WHOLE LOTTA MONEY (feat. Nicki Minaj)",
+            "trackUri": "spotify:track:67G6iaOw8DZqp1z8STR89R"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Miss You",
+            "artistName": "Oliver Tree",
+            "albumName": "Miss You",
+            "trackUri": "spotify:track:73vIOb4Q7YN6HeJTbscRx5"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Versace on the Floor (Bruno Mars vs. David Guetta)",
+            "artistName": "Bruno Mars",
+            "albumName": "Versace On The Floor (Bruno Mars vs. David Guetta)",
+            "trackUri": "spotify:track:5UJshy5HDHdNEVqlJwzsQB"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Reckless",
+            "artistName": "Madison Beer",
+            "albumName": "Reckless",
+            "trackUri": "spotify:track:5ajjAnNRh8bxFvaVHzpPjh"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Raffaello",
+            "artistName": "Shindy",
+            "albumName": "Drama",
+            "trackUri": "spotify:track:7GGhY0m7PZ408BYVXgXtjt"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Beverly Hills",
+            "artistName": "Ufo361",
+            "albumName": "808",
+            "trackUri": "spotify:track:0Pd12PpdvKf7YmlubgA8EM"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "noch da",
+            "artistName": "CRO",
+            "albumName": "tru. (Deluxe Edition)",
+            "trackUri": "spotify:track:1sDakSrQxr9yqETKITgRAg"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Bros",
+            "artistName": "RIN",
+            "albumName": "EROS (2018)",
+            "trackUri": "spotify:track:4e50dVimJDgOVLIvnWvpMT"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "The Way I Am",
+            "artistName": "Charlie Puth",
+            "albumName": "Voicenotes",
+            "trackUri": "spotify:track:6qNALlmZa1ESnCxJmXE1K9"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Treasure",
+            "artistName": "Bruno Mars",
+            "albumName": "Unorthodox Jukebox",
+            "trackUri": "spotify:track:55h7vJchibLdUkxdlX3fK7"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "$W4G",
+            "artistName": "TJ_beastboy",
+            "albumName": "PARANORMAL-FLOWMACHINE",
+            "trackUri": "spotify:track:652B19XSbtB8uj9zV6iC8K"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Summer Feelings (feat. Charlie Puth) - Jengi Remix",
+            "artistName": "Lennon Stella",
+            "albumName": "Summer Feelings (feat. Charlie Puth)",
+            "trackUri": "spotify:track:6hkTs28altlfo5SSAwEwv9"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Ain't Shit",
+            "artistName": "Doja Cat",
+            "albumName": "Planet Her",
+            "trackUri": "spotify:track:5lAnYvAIkSDNXqfo7DyFUm"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Watermelon Sugar",
+            "artistName": "Harry Styles",
+            "albumName": "Fine Line",
+            "trackUri": "spotify:track:6UelLqGlWMcVH1E5c4H7lY"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "You Don't Know Love",
+            "artistName": "Olly Murs",
+            "albumName": "24 HRS",
+            "trackUri": "spotify:track:3gnHm6E1NkMJUJr0mbRiBS"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Kiss Me More (feat. SZA)",
+            "artistName": "Doja Cat",
+            "albumName": "Kiss Me More (feat. SZA)",
+            "trackUri": "spotify:track:748mdHapucXQri7IAO8yFK"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Affalterbach",
+            "artistName": "Shindy",
+            "albumName": "Drama",
+            "trackUri": "spotify:track:2e3bkN2QCScPUnUQiA9ZA4"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Quarterback",
+            "artistName": "KC Rebell",
+            "albumName": "Hasso",
+            "trackUri": "spotify:track:1ruJOruqpQWJq0zRiAAJRE"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "His & Hers (feat. Don Toliver, Lil Uzi Vert & Gunna)",
+            "artistName": "Internet Money",
+            "albumName": "His & Hers (feat. Don Toliver, Lil Uzi Vert & Gunna)",
+            "trackUri": "spotify:track:2IePEfMAtqWS6rLXXFZIgI"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Woman",
+            "artistName": "Doja Cat",
+            "albumName": "Planet Her",
+            "trackUri": "spotify:track:6Uj1ctrBOjOas8xZXGqKk4"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Fall Auf",
+            "artistName": "CRO",
+            "albumName": "Fall Auf",
+            "trackUri": "spotify:track:012iHyRvQQquWQGUTYvDxy"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Sucker",
+            "artistName": "Jonas Brothers",
+            "albumName": "Happiness Begins",
+            "trackUri": "spotify:track:22vgEDb5hykfaTwLuskFGD"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Tamam Tamam",
+            "artistName": "Summer Cem",
+            "albumName": "Endstufe",
+            "trackUri": "spotify:track:2eRq2jwsZtb0uGH4qUsvT1"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "WEREGARURUMON",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:0lWWMmAAzcNr9tsQ4dB3Wo"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Benzema",
+            "artistName": "Capital Bra",
+            "albumName": "Benzema",
+            "trackUri": "spotify:track:7KPGeiXWDsGEvFK62wzU8E"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "WHATS POPPIN",
+            "artistName": "Jack Harlow",
+            "albumName": "Sweet Action",
+            "trackUri": "spotify:track:1jaTQ3nqY3oAAYyCTbIvnM"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "This Love",
+            "artistName": "Maroon 5",
+            "albumName": "Songs About Jane: 10th Anniversary Edition",
+            "trackUri": "spotify:track:6ECp64rv50XVz93WvxXMGF"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Se Acabo (feat. Method Man) - Remix",
+            "artistName": "The Beatnuts",
+            "albumName": "Take It Or Squeeze It",
+            "trackUri": "spotify:track:4F3AZKEJubvPsl0hBArVBW"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-12-03"
+        },
+        {
+          "track": {
+            "trackName": "Father Stretch My Hands Pt. 1",
+            "artistName": "Kanye West",
+            "albumName": "The Life Of Pablo",
+            "trackUri": "spotify:track:4KW1lqgSr8TKrvBII0Brf8"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-01-15"
+        },
+        {
+          "track": {
+            "trackName": "Heartless",
+            "artistName": "Kanye West",
+            "albumName": "808s & Heartbreak",
+            "trackUri": "spotify:track:4EWCNWgDS8707fNSZ1oaA5"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-01-15"
+        },
+        {
+          "track": {
+            "trackName": "Violent Crimes",
+            "artistName": "Kanye West",
+            "albumName": "ye",
+            "trackUri": "spotify:track:3s7MCdXyWmwjdcWh7GWXas"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-01-15"
+        },
+        {
+          "track": {
+            "trackName": "All Mine",
+            "artistName": "Kanye West",
+            "albumName": "ye",
+            "trackUri": "spotify:track:3U21A07gAloCc4P7J8rxcn"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-01-15"
+        },
+        {
+          "track": {
+            "trackName": "SICKO MODE",
+            "artistName": "Travis Scott",
+            "albumName": "ASTROWORLD",
+            "trackUri": "spotify:track:2xLMifQCjDGFmkHkpNLD9h"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-01-15"
+        },
+        {
+          "track": {
+            "trackName": "Drop",
+            "artistName": "Connor Price",
+            "albumName": "Spin The Globe",
+            "trackUri": "spotify:track:5HrBwBW9Teiys6bYlsOZpm"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2023-02-05"
+        }
+      ],
+      "description": null,
+      "numberOfFollowers": 0
+    },
+    {
+      "name": "Top Songs 2021",
+      "lastModifiedDate": "2021-12-02",
+      "items": [
+        {
+          "track": {
+            "trackName": "Sunflower - Spider-Man: Into the Spider-Verse",
+            "artistName": "Post Malone",
+            "albumName": "Spider-Man: Into the Spider-Verse",
+            "trackUri": "spotify:track:3KkXRkHbMCARz0aVfEt68P"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Rotlichtsonate",
+            "artistName": "Kollegah",
+            "albumName": "Rotlichtsonate",
+            "trackUri": "spotify:track:1wxnA0kd9ywcsxG2YABWwm"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "goosebumps",
+            "artistName": "Travis Scott",
+            "albumName": "Birds In The Trap Sing McKnight",
+            "trackUri": "spotify:track:6gBFPUFcJLzWGx4lenP6h2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "KEiNE CHAiN",
+            "artistName": "TJ_beastboy",
+            "albumName": "KEiNE CHAiN",
+            "trackUri": "spotify:track:2N4Gpu7k9hwU0hPceMCfji"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "HELLA SEXY",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:3oaqo6x6PFU9Sz91WccfbE"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "BÖS",
+            "artistName": "Jay Jiggy",
+            "albumName": "BÖS",
+            "trackUri": "spotify:track:5wPxwLf32K0HcT5fSIpAAK"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "2002",
+            "artistName": "Sido",
+            "albumName": "Ich & keine Maske",
+            "trackUri": "spotify:track:2u8AXJyk8pICzj2wyPBL0b"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Centre Court",
+            "artistName": "Bausa",
+            "albumName": "Centre Court",
+            "trackUri": "spotify:track:6Xlske5nAmkPb123IfyZ5S"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "MARiO KART",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:1aL20RqGQMVtGVDi7NowwU"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "MANCHESTER",
+            "artistName": "reezy",
+            "albumName": "MANCHESTER",
+            "trackUri": "spotify:track:1e2dv35yQh0yNKyZ6Nmw4h"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "ALLES DOPE",
+            "artistName": "CRO",
+            "albumName": "ALLES DOPE",
+            "trackUri": "spotify:track:7HZMdCSq7oUYmn6OHU6kSB"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Leave The Door Open",
+            "artistName": "Bruno Mars",
+            "albumName": "Leave The Door Open",
+            "trackUri": "spotify:track:7MAibcTli4IisCtbHKrGMh"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "ACH KOMM",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:0lv8ZgOhJ6iRxXzsvC7zfk"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Niemand bringt Marten um",
+            "artistName": "Marteria",
+            "albumName": "Niemand bringt Marten um",
+            "trackUri": "spotify:track:0nYSnbFVX5ghrERjwVZgwZ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "dich",
+            "artistName": "CRO",
+            "albumName": "dich",
+            "trackUri": "spotify:track:0t2DyOvZHXBTIHu4ZPXYk6"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Nimm's leicht",
+            "artistName": "Die Orsons",
+            "albumName": "Orsons Island",
+            "trackUri": "spotify:track:3m4ixqg1Rm6hjJTlIM0siE"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "WEREGARURUMON",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:0bk0HD6PubZKppbtvQz2H8"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Killa - JuliensBlogContest",
+            "artistName": "SpongeBOZZ",
+            "albumName": "Killa",
+            "trackUri": "spotify:track:1pCAKwC2Lh6nD87DGiwmPR"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "SYGL (feat. Shindy)",
+            "artistName": "CRO",
+            "albumName": "SYGL (feat. Shindy)",
+            "trackUri": "spotify:track:1tUF7dEhqmV2Z1pTsGAGnD"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "INDUSTRY BABY (feat. Jack Harlow)",
+            "artistName": "Lil Nas X",
+            "albumName": "INDUSTRY BABY (feat. Jack Harlow)",
+            "trackUri": "spotify:track:27NovPIUIRrOZoCHxABJwK"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Writing's On The Wall - From \"Spectre\" Soundtrack",
+            "artistName": "Sam Smith",
+            "albumName": "Writing's On The Wall",
+            "trackUri": "spotify:track:1PWnAEQcbwQwK759otUbta"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "This Love",
+            "artistName": "Maroon 5",
+            "albumName": "Songs About Jane: 10th Anniversary Edition",
+            "trackUri": "spotify:track:6ECp64rv50XVz93WvxXMGF"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "BiG BRAiNS",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:0cN6SaIIh1J9q2VLlXNjKk"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Get Into It (Yuh)",
+            "artistName": "Doja Cat",
+            "albumName": "Planet Her",
+            "trackUri": "spotify:track:0W6I02J9xcqK8MtSeosEXb"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "STAY (with Justin Bieber)",
+            "artistName": "The Kid LAROI",
+            "albumName": "STAY (with Justin Bieber)",
+            "trackUri": "spotify:track:5HCyWlXZPP0y6Gqq8TgA20"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Fightclub",
+            "artistName": "Capital Bra",
+            "albumName": "Allein",
+            "trackUri": "spotify:track:4XU2K2Tkt2RNwF1KrofcoP"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "YOUNG, WiLD & TRiLL",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:72r7f0emed68E6xqe3rU4w"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Bundles (feat. Taylor Girlz)",
+            "artistName": "Kayla Nicole",
+            "albumName": "Bundles (feat. Taylor Girlz)",
+            "trackUri": "spotify:track:3QqYZWQLn0evKMIRlGJeeR"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "xD",
+            "artistName": "DAT ADAM",
+            "albumName": "HOW TO FLEX & TROLL A SCENE",
+            "trackUri": "spotify:track:0P7CwiO5v0qVCKqYPrc8q2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "WHOLE LOTTA MONEY (feat. Nicki Minaj) - Remix",
+            "artistName": "BIA",
+            "albumName": "WHOLE LOTTA MONEY (feat. Nicki Minaj)",
+            "trackUri": "spotify:track:67G6iaOw8DZqp1z8STR89R"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "FRiDAY NiGHT",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:70dtxHm5psJw6qalQpQ9za"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Woman",
+            "artistName": "Doja Cat",
+            "albumName": "Planet Her",
+            "trackUri": "spotify:track:6Uj1ctrBOjOas8xZXGqKk4"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Thot Shit",
+            "artistName": "Megan Thee Stallion",
+            "albumName": "Thot Shit",
+            "trackUri": "spotify:track:5zNW5ARjYhJQJz1AChP33n"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "MONTERO (Call Me By Your Name)",
+            "artistName": "Lil Nas X",
+            "albumName": "MONTERO (Call Me By Your Name)",
+            "trackUri": "spotify:track:67BtfxlNbhBmCDR2L2l8qd"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "CRiNGY",
+            "artistName": "TJ_beastboy",
+            "albumName": "CRiNGY",
+            "trackUri": "spotify:track:6dWkO9sHwKa8pwJfuXUK2d"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Kiss Me More (feat. SZA)",
+            "artistName": "Doja Cat",
+            "albumName": "Kiss Me More (feat. SZA)",
+            "trackUri": "spotify:track:748mdHapucXQri7IAO8yFK"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "seaside_demo",
+            "artistName": "SEB",
+            "albumName": "seaside_demo",
+            "trackUri": "spotify:track:1SgUjGzbmmMOsGFTVwQ59L"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Dirty South",
+            "artistName": "RIN",
+            "albumName": "Dirty South",
+            "trackUri": "spotify:track:51Gj7QV1S482b5g9jRU4zc"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "WEEE",
+            "artistName": "Scorpion Gang",
+            "albumName": "WEEE",
+            "trackUri": "spotify:track:5R2HaFZUDpMNo9RslRAkSf"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Ain't Shit",
+            "artistName": "Doja Cat",
+            "albumName": "Planet Her",
+            "trackUri": "spotify:track:5lAnYvAIkSDNXqfo7DyFUm"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Reckless",
+            "artistName": "Madison Beer",
+            "albumName": "Reckless",
+            "trackUri": "spotify:track:5ajjAnNRh8bxFvaVHzpPjh"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Sweater Weather",
+            "artistName": "The Neighbourhood",
+            "albumName": "I Love You.",
+            "trackUri": "spotify:track:2QjOHCTQ1Jl3zawyYOpxh6"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Running Away",
+            "artistName": "VANO 3000",
+            "albumName": "Running Away",
+            "trackUri": "spotify:track:3tfunfsqPIYl0uV9OztFQu"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Dick (feat. Doja Cat)",
+            "artistName": "StarBoi3",
+            "albumName": "Dick (feat. Doja Cat)",
+            "trackUri": "spotify:track:3nY8AqaMNNHHLYV4380ol0"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "DODI",
+            "artistName": "Shindy",
+            "albumName": "DODI",
+            "trackUri": "spotify:track:63THFs9ovzO3WQsz4lzh0H"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "SATELLiT",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:0tiyU101s6L5JdNP2XczBD"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": null,
+          "episode": {
+            "episodeName": "Måneskin",
+            "showName": "2021 Wrapped",
+            "episodeUri": "spotify:episode:3cfaXEDUDEdlE0E9gvBHYg"
+          },
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Beggin'",
+            "artistName": "Måneskin",
+            "albumName": "Chosen",
+            "trackUri": "spotify:track:3Wrjm47oTz2sjIgck11l5e"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Avirex",
+            "artistName": "RIN",
+            "albumName": "Planet Megatron",
+            "trackUri": "spotify:track:76hTV1J1bMqLtLLSaT0oUt"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Tamam Tamam",
+            "artistName": "Summer Cem",
+            "albumName": "Endstufe",
+            "trackUri": "spotify:track:2eRq2jwsZtb0uGH4qUsvT1"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "2055",
+            "artistName": "Sleepy Hallow",
+            "albumName": "2055",
+            "trackUri": "spotify:track:0mG6igzxbH55XRyq3ygEh8"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "His & Hers (feat. Don Toliver, Lil Uzi Vert & Gunna)",
+            "artistName": "Internet Money",
+            "albumName": "His & Hers (feat. Don Toliver, Lil Uzi Vert & Gunna)",
+            "trackUri": "spotify:track:2IePEfMAtqWS6rLXXFZIgI"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "BLESSED (feat. Capital Bra)",
+            "artistName": "CRO",
+            "albumName": "trip",
+            "trackUri": "spotify:track:6kxErsVgalFeBlxRfHCuUv"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Nice Schwanz Bro",
+            "artistName": "Ron Bielecki",
+            "albumName": "Nice Schwanz Bro",
+            "trackUri": "spotify:track:6fw45bqb39WNbn3mHsFqHf"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "I Feel It Coming",
+            "artistName": "The Weeknd",
+            "albumName": "Starboy",
+            "trackUri": "spotify:track:3dhjNA0jGA8vHBQ1VdD6vV"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Poppin (feat. Lil Pump & Smokepurpp)",
+            "artistName": "KSI",
+            "albumName": "Poppin (feat. Lil Pump & Smokepurpp)",
+            "trackUri": "spotify:track:7x6t40pKRU1h9fFx7124wf"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "SMOOTH",
+            "artistName": "CRO",
+            "albumName": "SMOOTH",
+            "trackUri": "spotify:track:3uDFDOXT7dCpmtB1yUvNFk"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "40K",
+            "artistName": "Ufo361",
+            "albumName": "40K",
+            "trackUri": "spotify:track:5al97HZnNQz1JNmYlHqiAa"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Casanova",
+            "artistName": "Summer Cem",
+            "albumName": "Endstufe",
+            "trackUri": "spotify:track:0jB0RNZIfaihaDKNmdrI40"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Need to Know",
+            "artistName": "Doja Cat",
+            "albumName": "Planet Her",
+            "trackUri": "spotify:track:3Vi5XqYrmQgOYBajMWSvCi"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "oneway",
+            "artistName": "CRO",
+            "albumName": "oneway",
+            "trackUri": "spotify:track:2ikN7VZRuWAkxWaKtk2hYU"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Power",
+            "artistName": "Ufo361",
+            "albumName": "Power",
+            "trackUri": "spotify:track:4xAWQ2iRnQy35YRKgwBjES"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "that way",
+            "artistName": "Tate McRae",
+            "albumName": "all the things i never said",
+            "trackUri": "spotify:track:7l97ElWmIdVHWUaOeeU5ZC"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Raffaello",
+            "artistName": "Shindy",
+            "albumName": "Drama",
+            "trackUri": "spotify:track:7GGhY0m7PZ408BYVXgXtjt"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Baum",
+            "artistName": "CRO",
+            "albumName": "Baum",
+            "trackUri": "spotify:track:2DLG3LOPVDw0fP53tWGfm2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Circles",
+            "artistName": "Post Malone",
+            "albumName": "Hollywood's Bleeding",
+            "trackUri": "spotify:track:21jGcNKet2qwijlDFuPiPb"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Purple Lamborghini (with Rick Ross)",
+            "artistName": "Skrillex",
+            "albumName": "Purple Lamborghini (with Rick Ross)",
+            "trackUri": "spotify:track:6JyuJFedEvPmdWQW0PkbGJ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Alphagenetik",
+            "artistName": "Kollegah",
+            "albumName": "Alphagenetik",
+            "trackUri": "spotify:track:41mcqIrCMHnA6YuusaqPLc"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "5% TINT",
+            "artistName": "Travis Scott",
+            "albumName": "ASTROWORLD",
+            "trackUri": "spotify:track:11kDth1aKUEUMq9r1pqyds"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Heat Waves",
+            "artistName": "Glass Animals",
+            "albumName": "Heat Waves",
+            "trackUri": "spotify:track:6CDzDgIUqeDY5g8ujExx2f"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "noch da",
+            "artistName": "CRO",
+            "albumName": "tru. (Deluxe Edition)",
+            "trackUri": "spotify:track:78caEl4OqEJtKkuF1q164K"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Penthouse",
+            "artistName": "Eno",
+            "albumName": "Penthouse",
+            "trackUri": "spotify:track:43aHoeHvYOBBvzZdopsA4e"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Mask Off",
+            "artistName": "Future",
+            "albumName": "FUTURE",
+            "trackUri": "spotify:track:0VgkVdmE4gld66l8iyGjgx"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": null,
+          "episode": {
+            "episodeName": "Dua Lipa",
+            "showName": "2021 Wrapped",
+            "episodeUri": "spotify:episode:5In9wJ7E5acQOYziK06lnh"
+          },
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Levitating (feat. DaBaby)",
+            "artistName": "Dua Lipa",
+            "albumName": "Future Nostalgia",
+            "trackUri": "spotify:track:49gruEYzuJZoy4R2q5xVlT"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Victoria's Secret",
+            "artistName": "CRO",
+            "albumName": "Victoria's Secret",
+            "trackUri": "spotify:track:2Sf5Eytm17LJNjkW1Qynbl"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Verde",
+            "artistName": "Marsimoto",
+            "albumName": "Verde",
+            "trackUri": "spotify:track:7t5JQfqAYOgrS9iccB8dy5"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Vibe",
+            "artistName": "KS",
+            "albumName": "Vibe",
+            "trackUri": "spotify:track:7avivRos1r7tqx2CXIffxP"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "$W4G",
+            "artistName": "TJ_beastboy",
+            "albumName": "PARANORMAL-FLOWMACHINE",
+            "trackUri": "spotify:track:4UZXAa8mWRr2rSWUDPPXhV"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Habibo",
+            "artistName": "Veysel",
+            "albumName": "Habibo",
+            "trackUri": "spotify:track:194IS9NnPN3clG6v3BakTR"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Can't Feel My Face",
+            "artistName": "The Weeknd",
+            "albumName": "Beauty Behind The Madness",
+            "trackUri": "spotify:track:22VdIZQfgXJea34mQxlt81"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "200 km/h",
+            "artistName": "Apache 207",
+            "albumName": "200 km/h",
+            "trackUri": "spotify:track:2wvLtM25eMpHK7hkidqte2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Ballin",
+            "artistName": "Luciano",
+            "albumName": "Ballin",
+            "trackUri": "spotify:track:1ZxBGZ7pxkh0VwFRp6biXk"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "UFF",
+            "artistName": "Veysel",
+            "albumName": "UFF",
+            "trackUri": "spotify:track:6XjEOPgbgHKcaHcunEHSJJ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "VVS",
+            "artistName": "Ufo361",
+            "albumName": "VVS",
+            "trackUri": "spotify:track:1BIz5sdpxais2KjO6KiWqI"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Bros",
+            "artistName": "RIN",
+            "albumName": "EROS (2018)",
+            "trackUri": "spotify:track:4e50dVimJDgOVLIvnWvpMT"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Sure Thing",
+            "artistName": "Miguel",
+            "albumName": "All I Want Is You",
+            "trackUri": "spotify:track:0JXXNGljqupsJaZsgSbMZV"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Santorini (feat. Veysel)",
+            "artistName": "Summer Cem",
+            "albumName": "Endstufe",
+            "trackUri": "spotify:track:1ZQhnmtZ2tq1t3TzguTciR"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": null,
+          "episode": {
+            "episodeName": "Billie Eilish",
+            "showName": "2021 Wrapped",
+            "episodeUri": "spotify:episode:0IHfQwQxI4MOn0Pe18fyQ0"
+          },
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Happier Than Ever",
+            "artistName": "Billie Eilish",
+            "albumName": "Happier Than Ever",
+            "trackUri": "spotify:track:4RVwu0g32PAqgUiJoXsdF8"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Fabergé",
+            "artistName": "RIN",
+            "albumName": "Fabergé",
+            "trackUri": "spotify:track:7lnQCEtaDJeMZN75siSxLc"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Tiffany",
+            "artistName": "Shindy",
+            "albumName": "Tiffany",
+            "trackUri": "spotify:track:2L0H5LWEuIAvrzfzTruyCB"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Beverly Hills",
+            "artistName": "Ufo361",
+            "albumName": "Beverly Hills",
+            "trackUri": "spotify:track:0FJeo3KAJ5on89PXmo3FiG"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Noticed",
+            "artistName": "Lil Mosey",
+            "albumName": "Northsbest",
+            "trackUri": "spotify:track:7zLYKWcXnYeHHWidalz7rj"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Bayram (feat. Elias)",
+            "artistName": "Summer Cem",
+            "albumName": "Nur Noch Nice",
+            "trackUri": "spotify:track:3pY2pUwjPDMCCfIHR711kg"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Addicted",
+            "artistName": "Gucci Mane",
+            "albumName": "WOPTOBER",
+            "trackUri": "spotify:track:6yuraIBlY8JGTVSwt2QSoB"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Iko Iko (My Bestie)",
+            "artistName": "Justin Wellington",
+            "albumName": "Iko Iko (My Bestie)",
+            "trackUri": "spotify:track:7MC4XR9M9amdmKQr2iDF7i"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Nike",
+            "artistName": "RIN",
+            "albumName": "Planet Megatron",
+            "trackUri": "spotify:track:3HQTtYbM9wVzxheE6Gp8zX"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Pain",
+            "artistName": "PinkPantheress",
+            "albumName": "Pain",
+            "trackUri": "spotify:track:7CIERzyqIwLVKGp00YbHRO"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Tell Em",
+            "artistName": "Cochise",
+            "albumName": "Tell Em",
+            "trackUri": "spotify:track:7nc7mlSdWYeFom84zZ8Wr8"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "OK (feat. Summer Cem, Nimo & JAY1)",
+            "artistName": "DJ JEEZY",
+            "albumName": "OK (feat. Summer Cem, Nimo & JAY1)",
+            "trackUri": "spotify:track:1hpzB1BMURqy30tHpLkQfp"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Apple",
+            "artistName": "RIN",
+            "albumName": "Apple",
+            "trackUri": "spotify:track:1SVV2YIx9ouyD2WwQqBL61"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        },
+        {
+          "track": {
+            "trackName": "Subwoofer",
+            "artistName": "SHINSKY x DIMA",
+            "albumName": "Subwoofer",
+            "trackUri": "spotify:track:5zPT86unoFaNP2J348n1p0"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-02"
+        }
+      ],
+      "description": null,
+      "numberOfFollowers": 0
+    },
+    {
+      "name": "New Hits",
+      "lastModifiedDate": "2022-01-18",
+      "items": [
+        {
+          "track": {
+            "trackName": "goosebumps",
+            "artistName": "Travis Scott",
+            "albumName": "Birds In The Trap Sing McKnight",
+            "trackUri": "spotify:track:6gBFPUFcJLzWGx4lenP6h2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-02-06"
+        },
+        {
+          "track": {
+            "trackName": "ALLES DOPE",
+            "artistName": "CRO",
+            "albumName": "ALLES DOPE",
+            "trackUri": "spotify:track:7HZMdCSq7oUYmn6OHU6kSB"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-02-06"
+        },
+        {
+          "track": {
+            "trackName": "2002",
+            "artistName": "Sido",
+            "albumName": "Ich & keine Maske",
+            "trackUri": "spotify:track:2u8AXJyk8pICzj2wyPBL0b"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-02-06"
+        },
+        {
+          "track": {
+            "trackName": "Centre Court",
+            "artistName": "Bausa",
+            "albumName": "Centre Court",
+            "trackUri": "spotify:track:6Xlske5nAmkPb123IfyZ5S"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-02-06"
+        },
+        {
+          "track": {
+            "trackName": "dich",
+            "artistName": "CRO",
+            "albumName": "dich",
+            "trackUri": "spotify:track:0t2DyOvZHXBTIHu4ZPXYk6"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-02-06"
+        },
+        {
+          "track": {
+            "trackName": "SYGL (feat. Shindy)",
+            "artistName": "CRO",
+            "albumName": "SYGL (feat. Shindy)",
+            "trackUri": "spotify:track:1tUF7dEhqmV2Z1pTsGAGnD"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-03-13"
+        },
+        {
+          "track": {
+            "trackName": "Leave The Door Open",
+            "artistName": "Bruno Mars",
+            "albumName": "Leave The Door Open",
+            "trackUri": "spotify:track:7MAibcTli4IisCtbHKrGMh"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-03-13"
+        },
+        {
+          "track": {
+            "trackName": "Niemand bringt Marten um",
+            "artistName": "Marteria",
+            "albumName": "Niemand bringt Marten um",
+            "trackUri": "spotify:track:0nYSnbFVX5ghrERjwVZgwZ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-03-18"
+        },
+        {
+          "track": {
+            "trackName": "KEiNE CHAiN",
+            "artistName": "TJ_beastboy",
+            "albumName": "KEiNE CHAiN",
+            "trackUri": "spotify:track:2N4Gpu7k9hwU0hPceMCfji"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-04-04"
+        },
+        {
+          "track": {
+            "trackName": "BÖS",
+            "artistName": "Jay Jiggy",
+            "albumName": "BÖS",
+            "trackUri": "spotify:track:5wPxwLf32K0HcT5fSIpAAK"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-05-19"
+        },
+        {
+          "track": {
+            "trackName": "MANCHESTER",
+            "artistName": "reezy",
+            "albumName": "MANCHESTER",
+            "trackUri": "spotify:track:1e2dv35yQh0yNKyZ6Nmw4h"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-05-19"
+        },
+        {
+          "track": {
+            "trackName": "Rotlichtsonate",
+            "artistName": "Kollegah",
+            "albumName": "Rotlichtsonate",
+            "trackUri": "spotify:track:1wxnA0kd9ywcsxG2YABWwm"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-06-15"
+        },
+        {
+          "track": {
+            "trackName": "MARiO KART",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:1aL20RqGQMVtGVDi7NowwU"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-07-26"
+        },
+        {
+          "track": {
+            "trackName": "HELLA SEXY",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:3oaqo6x6PFU9Sz91WccfbE"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-07-26"
+        },
+        {
+          "track": {
+            "trackName": "ACH KOMM",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:0lv8ZgOhJ6iRxXzsvC7zfk"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-07-29"
+        },
+        {
+          "track": {
+            "trackName": "WEREGARURUMON",
+            "artistName": "TJ_beastboy",
+            "albumName": "SUPERSONIC-WORKAHOLIC",
+            "trackUri": "spotify:track:0bk0HD6PubZKppbtvQz2H8"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-07-29"
+        },
+        {
+          "track": {
+            "trackName": "Im Schatten der Feigenbäume",
+            "artistName": "Shindy",
+            "albumName": "Im Schatten der Feigenbäume",
+            "trackUri": "spotify:track:4RXaGSgu3taiAD1ZjZtnF2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-08-16"
+        },
+        {
+          "track": {
+            "trackName": "This Love",
+            "artistName": "Maroon 5",
+            "albumName": "Songs About Jane: 10th Anniversary Edition",
+            "trackUri": "spotify:track:6ECp64rv50XVz93WvxXMGF"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-08-16"
+        },
+        {
+          "track": {
+            "trackName": "Sunflower - Spider-Man: Into the Spider-Verse",
+            "artistName": "Post Malone",
+            "albumName": "Spider-Man: Into the Spider-Verse",
+            "trackUri": "spotify:track:3KkXRkHbMCARz0aVfEt68P"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-08-16"
+        },
+        {
+          "track": {
+            "trackName": "Writing's On The Wall - From \"Spectre\" Soundtrack",
+            "artistName": "Sam Smith",
+            "albumName": "Writing's On The Wall",
+            "trackUri": "spotify:track:1PWnAEQcbwQwK759otUbta"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-08-16"
+        },
+        {
+          "track": {
+            "trackName": "Nimm's leicht",
+            "artistName": "Die Orsons",
+            "albumName": "Orsons Island",
+            "trackUri": "spotify:track:3m4ixqg1Rm6hjJTlIM0siE"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-08-20"
+        },
+        {
+          "track": {
+            "trackName": "Hurt",
+            "artistName": "Oliver Tree",
+            "albumName": "Ugly is Beautiful",
+            "trackUri": "spotify:track:6Ph8QwsRfZunN5e1GGBIqa"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-09-14"
+        },
+        {
+          "track": {
+            "trackName": "GOD BLESS",
+            "artistName": "badchieff",
+            "albumName": "CHIEFF LOVES YOU",
+            "trackUri": "spotify:track:3niPPVsI6rsnqrXC5V4xPX"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-09-27"
+        },
+        {
+          "track": {
+            "trackName": "Laugh Now Cry Later (feat. Lil Durk)",
+            "artistName": "Drake",
+            "albumName": "Laugh Now Cry Later (feat. Lil Durk)",
+            "trackUri": "spotify:track:2SAqBLGA283SUiwJ3xOUVI"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-10-20"
+        },
+        {
+          "track": {
+            "trackName": "Apple",
+            "artistName": "RIN",
+            "albumName": "Apple",
+            "trackUri": "spotify:track:1SVV2YIx9ouyD2WwQqBL61"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-10-26"
+        },
+        {
+          "track": {
+            "trackName": "Life Goes On",
+            "artistName": "Oliver Tree",
+            "albumName": "Ugly is Beautiful: Shorter, Thicker & Uglier",
+            "trackUri": "spotify:track:0eu4C55hL6x29mmeAjytzC"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-10-26"
+        },
+        {
+          "track": {
+            "trackName": "My Oh My (feat. DaBaby)",
+            "artistName": "Camila Cabello",
+            "albumName": "Romance",
+            "trackUri": "spotify:track:3yOlyBJuViE2YSGn3nVE1K"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-10-26"
+        },
+        {
+          "track": {
+            "trackName": "1976",
+            "artistName": "RIN",
+            "albumName": "1976",
+            "trackUri": "spotify:track:0jTWSs2OyxzYIk1sF7sUsO"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-11-03"
+        },
+        {
+          "track": {
+            "trackName": "San Andreas",
+            "artistName": "RIN",
+            "albumName": "San Andreas",
+            "trackUri": "spotify:track:1VuBab65w8vPFeFvREDA32"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-11-08"
+        },
+        {
+          "track": {
+            "trackName": "Hurricane",
+            "artistName": "Kanye West",
+            "albumName": "Hurricane",
+            "trackUri": "spotify:track:44I7sqKYCAa7bQdVywkShO"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-11-27"
+        },
+        {
+          "track": {
+            "trackName": "Trance",
+            "artistName": "RIN",
+            "albumName": "Kleinstadt",
+            "trackUri": "spotify:track:6CWXM1T57DAsBAiWKg376m"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2021-12-12"
+        },
+        {
+          "track": {
+            "trackName": "Life Is Good (feat. Drake)",
+            "artistName": "Future",
+            "albumName": "Life Is Good (feat. Drake)",
+            "trackUri": "spotify:track:5yY9lUy8nbvjM1Uyo1Uqoc"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-01-17"
+        },
+        {
+          "track": {
+            "trackName": "GUT<BESSER<ICH",
+            "artistName": "TJ_beastboy",
+            "albumName": "HUMANOID-FLAMETHROWER",
+            "trackUri": "spotify:track:66n8tQ7bFeNRrDXG5sGS7x"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2022-01-18"
+        }
+      ],
+      "description": null,
+      "numberOfFollowers": 0
+    },
+    {
+      "name": "Carlo Rinderer",
+      "lastModifiedDate": "2020-12-19",
+      "items": [
+        {
+          "track": {
+            "trackName": "Avirex",
+            "artistName": "RIN",
+            "albumName": "Planet Megatron",
+            "trackUri": "spotify:track:3xryS066YnE2uleCd18LbQ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-07-12"
+        },
+        {
+          "track": {
+            "trackName": "Berlin lebt",
+            "artistName": "Capital Bra",
+            "albumName": "Berlin lebt",
+            "trackUri": "spotify:track:1uJ7IQJdeAvmUDpIyZb0be"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-07-12"
+        },
+        {
+          "track": {
+            "trackName": "Chinchilla (feat. KC Rebell & Capital Bra)",
+            "artistName": "Summer Cem",
+            "albumName": "Chinchilla (feat. KC Rebell & Capital Bra)",
+            "trackUri": "spotify:track:1A5nTDzLS8ckYOLiQMgtmG"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-07-12"
+        },
+        {
+          "track": {
+            "trackName": "Tamam Tamam",
+            "artistName": "Summer Cem",
+            "albumName": "Tamam Tamam",
+            "trackUri": "spotify:track:0Ch40WfKG9UfWmyPVEWxow"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-07-12"
+        },
+        {
+          "track": {
+            "trackName": "Casanova",
+            "artistName": "Summer Cem",
+            "albumName": "Casanova",
+            "trackUri": "spotify:track:35lIK2q78MSgv3Abb4qAjk"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-07-12"
+        },
+        {
+          "track": {
+            "trackName": "Penthouse",
+            "artistName": "Eno",
+            "albumName": "Penthouse",
+            "trackUri": "spotify:track:43aHoeHvYOBBvzZdopsA4e"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-08-17"
+        },
+        {
+          "track": {
+            "trackName": "Habibo",
+            "artistName": "Veysel",
+            "albumName": "Habibo",
+            "trackUri": "spotify:track:194IS9NnPN3clG6v3BakTR"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-08-17"
+        },
+        {
+          "track": {
+            "trackName": "Santorini (feat. Veysel)",
+            "artistName": "Summer Cem",
+            "albumName": "Endstufe",
+            "trackUri": "spotify:track:1ZQhnmtZ2tq1t3TzguTciR"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-08-17"
+        },
+        {
+          "track": {
+            "trackName": "40K",
+            "artistName": "Ufo361",
+            "albumName": "40K",
+            "trackUri": "spotify:track:5al97HZnNQz1JNmYlHqiAa"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-08-18"
+        },
+        {
+          "track": {
+            "trackName": "Ballin",
+            "artistName": "Luciano",
+            "albumName": "Ballin",
+            "trackUri": "spotify:track:1ZxBGZ7pxkh0VwFRp6biXk"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-08-18"
+        },
+        {
+          "track": {
+            "trackName": "Alles vorbei",
+            "artistName": "Summer Cem",
+            "albumName": "Endstufe",
+            "trackUri": "spotify:track:4YIXoTRoTF30XBLw5eBL2k"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-08-18"
+        },
+        {
+          "track": {
+            "trackName": "xD",
+            "artistName": "DAT ADAM",
+            "albumName": "HOW TO FLEX & TROLL A SCENE",
+            "trackUri": "spotify:track:0P7CwiO5v0qVCKqYPrc8q2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-10-17"
+        },
+        {
+          "track": {
+            "trackName": "Fightclub (feat. Samra & AK Ausserkontrolle)",
+            "artistName": "Capital Bra",
+            "albumName": "Fightclub (feat. Samra & AK Ausserkontrolle)",
+            "trackUri": "spotify:track:3eMwf7uAEn1VJcmd12gMmi"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-10-18"
+        },
+        {
+          "track": {
+            "trackName": "Noticed",
+            "artistName": "Lil Mosey",
+            "albumName": "Northsbest",
+            "trackUri": "spotify:track:6JQvHMSaR8flFsN53ypOfP"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-10-29"
+        },
+        {
+          "track": {
+            "trackName": "Benzema",
+            "artistName": "Capital Bra",
+            "albumName": "Benzema",
+            "trackUri": "spotify:track:7KPGeiXWDsGEvFK62wzU8E"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2018-12-25"
+        },
+        {
+          "track": {
+            "trackName": "Jackie Chan",
+            "artistName": "Tiësto",
+            "albumName": "Jackie Chan",
+            "trackUri": "spotify:track:4kWO6O1BUXcZmaxitpVUwp"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-01-07"
+        },
+        {
+          "track": {
+            "trackName": "Congratulations",
+            "artistName": "Post Malone",
+            "albumName": "Stoney",
+            "trackUri": "spotify:track:3a1lNhkSLSkpJE4MSHpDu9"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-01-07"
+        },
+        {
+          "track": {
+            "trackName": "DODI",
+            "artistName": "Shindy",
+            "albumName": "DODI",
+            "trackUri": "spotify:track:63THFs9ovzO3WQsz4lzh0H"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "UFF",
+            "artistName": "Veysel",
+            "albumName": "UFF",
+            "trackUri": "spotify:track:6XjEOPgbgHKcaHcunEHSJJ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "TGV",
+            "artistName": "Veysel",
+            "albumName": "TGV",
+            "trackUri": "spotify:track:6znV0VSQjAuP2WaIpC6YEz"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "Kokain",
+            "artistName": "Bonez MC",
+            "albumName": "Palmen aus Plastik 2",
+            "trackUri": "spotify:track:4Bj3usjRTckEJARO0dLbDf"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "Nummer unterdrückt",
+            "artistName": "Bonez MC",
+            "albumName": "Palmen aus Plastik 2",
+            "trackUri": "spotify:track:2SRVj6ceeIffVEm9NFyRHI"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "Balenciaga",
+            "artistName": "Ufo361",
+            "albumName": "Balenciaga",
+            "trackUri": "spotify:track:3H8n2CHfv2tV1UYsIO0OwG"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "Beverly Hills",
+            "artistName": "Ufo361",
+            "albumName": "Beverly Hills",
+            "trackUri": "spotify:track:0FJeo3KAJ5on89PXmo3FiG"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "VVS",
+            "artistName": "Ufo361",
+            "albumName": "VVS",
+            "trackUri": "spotify:track:1BIz5sdpxais2KjO6KiWqI"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "Power",
+            "artistName": "Ufo361",
+            "albumName": "Power",
+            "trackUri": "spotify:track:4xAWQ2iRnQy35YRKgwBjES"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "Feuer",
+            "artistName": "Capital Bra",
+            "albumName": "Feuer",
+            "trackUri": "spotify:track:3yuMTMJQ2gkvLhMVZLrcRV"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "Bros",
+            "artistName": "RIN",
+            "albumName": "EROS (2018)",
+            "trackUri": "spotify:track:0mG6upCcUF0Qvq08FnjRDZ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "Nike",
+            "artistName": "RIN",
+            "albumName": "Planet Megatron",
+            "trackUri": "spotify:track:194KhoVqJIxrJy7ZsFtG9f"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "Blackout",
+            "artistName": "RIN",
+            "albumName": "EROS (2018)",
+            "trackUri": "spotify:track:7s2s2QBaO8cRhyBssmjI1q"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-06"
+        },
+        {
+          "track": {
+            "trackName": "Purple Lamborghini (with Rick Ross)",
+            "artistName": "Skrillex",
+            "albumName": "Purple Lamborghini (with Rick Ross)",
+            "trackUri": "spotify:track:6JyuJFedEvPmdWQW0PkbGJ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-08"
+        },
+        {
+          "track": {
+            "trackName": "oneway",
+            "artistName": "CRO",
+            "albumName": "oneway",
+            "trackUri": "spotify:track:2ikN7VZRuWAkxWaKtk2hYU"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-19"
+        },
+        {
+          "track": {
+            "trackName": "Victoria's Secret",
+            "artistName": "CRO",
+            "albumName": "Victoria's Secret",
+            "trackUri": "spotify:track:2Sf5Eytm17LJNjkW1Qynbl"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-19"
+        },
+        {
+          "track": {
+            "trackName": "Teuer",
+            "artistName": "Capital Bra",
+            "albumName": "Teuer",
+            "trackUri": "spotify:track:6AbspsVyuPCNVogs9xzfpu"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-02-20"
+        },
+        {
+          "track": {
+            "trackName": "Migos",
+            "artistName": "Ufo361",
+            "albumName": "Ich bin 3 Berliner",
+            "trackUri": "spotify:track:0WcpJc0w9ENQh4LULJPGIX"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-03-09"
+        },
+        {
+          "track": {
+            "trackName": "Shot Clock",
+            "artistName": "Elias",
+            "albumName": "Shot Clock",
+            "trackUri": "spotify:track:49BoudZZ07V6J0RtTTKedY"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-03-31"
+        },
+        {
+          "track": {
+            "trackName": "King",
+            "artistName": "Kollegah",
+            "albumName": "King",
+            "trackUri": "spotify:track:5a5OTgYsFlDqeyTOjLL53L"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-04-16"
+        },
+        {
+          "track": {
+            "trackName": "Nicht jetzt",
+            "artistName": "KC Rebell",
+            "albumName": "Maximum",
+            "trackUri": "spotify:track:0RCSckg7PFBBfwG73ydbOG"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-04-19"
+        },
+        {
+          "track": {
+            "trackName": "Crew",
+            "artistName": "Summer Cem",
+            "albumName": "Endstufe",
+            "trackUri": "spotify:track:0yTONcHCSCMOSMH4rClGiR"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-04-19"
+        },
+        {
+          "track": {
+            "trackName": "Sterne (feat. Bushido)",
+            "artistName": "Shindy",
+            "albumName": "FVCKB!TCHE$GETMONE¥",
+            "trackUri": "spotify:track:0E5Okmh4EJ2M6w4H9EZdnz"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-04-28"
+        },
+        {
+          "track": {
+            "trackName": "Guadalajara (feat. Summer Cem)",
+            "artistName": "Bausa",
+            "albumName": "Guadalajara (feat. Summer Cem)",
+            "trackUri": "spotify:track:0UtKZM25fa8kqy1k3sCiXG"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-04-28"
+        },
+        {
+          "track": {
+            "trackName": "Gib Gas",
+            "artistName": "Ufo361",
+            "albumName": "Gib Gas",
+            "trackUri": "spotify:track:7MqL7uh6zGd8x0B9srz3r0"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-05-18"
+        },
+        {
+          "track": {
+            "trackName": "Vintage",
+            "artistName": "RIN",
+            "albumName": "Vintage",
+            "trackUri": "spotify:track:6xwI9R3ZHT9nWtSYvffYQm"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-05-24"
+        },
+        {
+          "track": {
+            "trackName": "B4LLER",
+            "artistName": "TJ_beastboy",
+            "albumName": "B4LLER",
+            "trackUri": "spotify:track:6BTxJjxA9P1PuHxbJqKipv"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-05-27"
+        },
+        {
+          "track": {
+            "trackName": "Murcielago",
+            "artistName": "KC Rebell",
+            "albumName": "Maximum",
+            "trackUri": "spotify:track:39qlqpwVzRkQP6WsILfIB5"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-05-29"
+        },
+        {
+          "track": {
+            "trackName": "Alles auf Rot",
+            "artistName": "CAPO",
+            "albumName": "Alles auf Rot",
+            "trackUri": "spotify:track:7G7xvFVMNFpCo3c3CF6km8"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-05-29"
+        },
+        {
+          "track": {
+            "trackName": "Lambo Diablo GT (feat. Nimo & Juju) - Remix",
+            "artistName": "CAPO",
+            "albumName": "Lambo Diablo GT (feat. Nimo & Juju)",
+            "trackUri": "spotify:track:3TMW1GOB1lsmvf8er2dE8g"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-05-29"
+        },
+        {
+          "track": {
+            "trackName": "1975",
+            "artistName": "MAJAN",
+            "albumName": "1975",
+            "trackUri": "spotify:track:6mf2YhtRwQUdnORRrRQ3hP"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-05-29"
+        },
+        {
+          "track": {
+            "trackName": "Baum",
+            "artistName": "CRO",
+            "albumName": "Baum",
+            "trackUri": "spotify:track:2DLG3LOPVDw0fP53tWGfm2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-05-30"
+        },
+        {
+          "track": {
+            "trackName": "The Hills",
+            "artistName": "The Weeknd",
+            "albumName": "Beauty Behind The Madness",
+            "trackUri": "spotify:track:7fBv7CLKzipRk6EC6TWHOB"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-06-21"
+        },
+        {
+          "track": {
+            "trackName": "Can't Feel My Face",
+            "artistName": "The Weeknd",
+            "albumName": "Beauty Behind The Madness",
+            "trackUri": "spotify:track:22VdIZQfgXJea34mQxlt81"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-06-21"
+        },
+        {
+          "track": {
+            "trackName": "I Feel It Coming",
+            "artistName": "The Weeknd",
+            "albumName": "Starboy",
+            "trackUri": "spotify:track:3dhjNA0jGA8vHBQ1VdD6vV"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-06-21"
+        },
+        {
+          "track": {
+            "trackName": "Fightclub (feat. Samra & AK Ausserkontrolle)",
+            "artistName": "Capital Bra",
+            "albumName": "Allein",
+            "trackUri": "spotify:track:3lr7xUKPIBRmOWwGY2JNSH"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-07-07"
+        },
+        {
+          "track": {
+            "trackName": "Der Pate",
+            "artistName": "Ufo361",
+            "albumName": "Ich bin 3 Berliner",
+            "trackUri": "spotify:track:1iPTSLcoezNpFMaXK29EsG"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-07-12"
+        },
+        {
+          "track": {
+            "trackName": "Lecker Lecker",
+            "artistName": "Joker Bra",
+            "albumName": "Lecker Lecker",
+            "trackUri": "spotify:track:2F3eoulTgRcTzPjVnRKOSh"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-07-12"
+        },
+        {
+          "track": {
+            "trackName": "Für die Gang",
+            "artistName": "Ufo361",
+            "albumName": "Ich bin 3 Berliner",
+            "trackUri": "spotify:track:5TKIutymE7YA4mTcLa9eAQ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-07-16"
+        },
+        {
+          "track": {
+            "trackName": "10419",
+            "artistName": "CRO",
+            "albumName": "10419",
+            "trackUri": "spotify:track:3irKuchN2iCEcFQKPGOBNx"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-07-25"
+        },
+        {
+          "track": {
+            "trackName": "noch da",
+            "artistName": "CRO",
+            "albumName": "tru. (Deluxe Edition)",
+            "trackUri": "spotify:track:78caEl4OqEJtKkuF1q164K"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-07-25"
+        },
+        {
+          "track": {
+            "trackName": "Vibe",
+            "artistName": "KS",
+            "albumName": "Vibe",
+            "trackUri": "spotify:track:7avivRos1r7tqx2CXIffxP"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-08-27"
+        },
+        {
+          "track": {
+            "trackName": "Raffaello",
+            "artistName": "Shindy",
+            "albumName": "Drama",
+            "trackUri": "spotify:track:7GGhY0m7PZ408BYVXgXtjt"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-09-04"
+        },
+        {
+          "track": {
+            "trackName": "Nautilus",
+            "artistName": "Shindy",
+            "albumName": "Drama",
+            "trackUri": "spotify:track:4qOTcNt9fUBA1PhA2VFg8W"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-09-04"
+        },
+        {
+          "track": {
+            "trackName": "EFH",
+            "artistName": "Shindy",
+            "albumName": "Drama",
+            "trackUri": "spotify:track:1IvCUpJdrwikHTRCtIw9s9"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-09-04"
+        },
+        {
+          "track": {
+            "trackName": "Affalterbach",
+            "artistName": "Shindy",
+            "albumName": "Drama",
+            "trackUri": "spotify:track:2e3bkN2QCScPUnUQiA9ZA4"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-09-04"
+        },
+        {
+          "track": {
+            "trackName": "Lalala",
+            "artistName": "Y2K",
+            "albumName": "Lalala",
+            "trackUri": "spotify:track:51Fjme0JiitpyXKuyQiCDo"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-09-08"
+        },
+        {
+          "track": {
+            "trackName": "24K Magic",
+            "artistName": "Bruno Mars",
+            "albumName": "24K Magic",
+            "trackUri": "spotify:track:6b8Be6ljOzmkOmFslEb23P"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-09-17"
+        },
+        {
+          "track": {
+            "trackName": "fiji*",
+            "artistName": "Data Luv",
+            "albumName": "fiji*",
+            "trackUri": "spotify:track:5pwD2ohJAN7byIBQczbFyE"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-09-17"
+        },
+        {
+          "track": {
+            "trackName": "200 km/h",
+            "artistName": "Apache 207",
+            "albumName": "200 km/h",
+            "trackUri": "spotify:track:2wvLtM25eMpHK7hkidqte2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-09-30"
+        },
+        {
+          "track": {
+            "trackName": "Fabergé",
+            "artistName": "RIN",
+            "albumName": "Fabergé",
+            "trackUri": "spotify:track:7lnQCEtaDJeMZN75siSxLc"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-09-30"
+        },
+        {
+          "track": {
+            "trackName": "Bayram (feat. Elias)",
+            "artistName": "Summer Cem",
+            "albumName": "Bayram (feat. Elias)",
+            "trackUri": "spotify:track:3FWRHYAN0C050cpvD67Sk2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-09-30"
+        },
+        {
+          "track": {
+            "trackName": "DNA.",
+            "artistName": "Kendrick Lamar",
+            "albumName": "DAMN.",
+            "trackUri": "spotify:track:6HZILIRieu8S0iqY8kIKhj"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-10-05"
+        },
+        {
+          "track": {
+            "trackName": "UP IN SMOKE",
+            "artistName": "RIN",
+            "albumName": "UP IN SMOKE",
+            "trackUri": "spotify:track:01vR5Z7AHinp9D2wu2BNQS"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-10-05"
+        },
+        {
+          "track": {
+            "trackName": "Keine Liebe",
+            "artistName": "RIN",
+            "albumName": "Keine Liebe",
+            "trackUri": "spotify:track:41wZE5FpxbPaZqXtlmBhPG"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-10-21"
+        },
+        {
+          "track": {
+            "trackName": "1000x COOLER",
+            "artistName": "TJ_beastboy",
+            "albumName": "HYPERREAL-RAVELORD",
+            "trackUri": "spotify:track:5ZtRzAXZG81zaFY2DRwAgk"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-10-23"
+        },
+        {
+          "track": {
+            "trackName": "W1NNER",
+            "artistName": "TJ_beastboy",
+            "albumName": "HYPERREAL-RAVELORD",
+            "trackUri": "spotify:track:63cglibvqH3jreIaVMQa4p"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-10-23"
+        },
+        {
+          "track": {
+            "trackName": "1000 Hits",
+            "artistName": "Jamule",
+            "albumName": "1000 Hits",
+            "trackUri": "spotify:track:22XKrkW2HeaLlxNDQs14iG"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-11-12"
+        },
+        {
+          "track": {
+            "trackName": "Alphagenetik",
+            "artistName": "Kollegah",
+            "albumName": "Alphagenetik",
+            "trackUri": "spotify:track:41mcqIrCMHnA6YuusaqPLc"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-11-12"
+        },
+        {
+          "track": {
+            "trackName": "Tiffany",
+            "artistName": "Shindy",
+            "albumName": "Tiffany",
+            "trackUri": "spotify:track:2L0H5LWEuIAvrzfzTruyCB"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-12-16"
+        },
+        {
+          "track": {
+            "trackName": "Circles",
+            "artistName": "Post Malone",
+            "albumName": "Hollywood's Bleeding",
+            "trackUri": "spotify:track:21jGcNKet2qwijlDFuPiPb"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-12-18"
+        },
+        {
+          "track": {
+            "trackName": "Good Morning",
+            "artistName": "TJ_beastboy",
+            "albumName": "CY-BEAST lvl1",
+            "trackUri": "spotify:track:1fcIMSHfedfVp1saA88FRj"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-12-18"
+        },
+        {
+          "track": {
+            "trackName": "Nur zur Info",
+            "artistName": "Ufo361",
+            "albumName": "Nur zur Info",
+            "trackUri": "spotify:track:6Y7ZEVr7lgO8FKGk2vZ2hi"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2019-12-21"
+        },
+        {
+          "track": {
+            "trackName": "Verde",
+            "artistName": "Marsimoto",
+            "albumName": "Verde",
+            "trackUri": "spotify:track:7t5JQfqAYOgrS9iccB8dy5"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-01-12"
+        },
+        {
+          "track": {
+            "trackName": "Wer Sagt Denn Das?",
+            "artistName": "Deichkind",
+            "albumName": "Wer Sagt Denn Das?",
+            "trackUri": "spotify:track:4t9kYSMtQUtyyWGDZWmedj"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-01-17"
+        },
+        {
+          "track": {
+            "trackName": "Godzilla (feat. Juice WRLD)",
+            "artistName": "Eminem",
+            "albumName": "Music To Be Murdered By",
+            "trackUri": "spotify:track:7FIWs0pqAYbP91WWM0vlTQ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-02-28"
+        },
+        {
+          "track": {
+            "trackName": "Blinding Lights",
+            "artistName": "The Weeknd",
+            "albumName": "Blinding Lights",
+            "trackUri": "spotify:track:0sf12qNH5qcw8qpgymFOqD"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-03-04"
+        },
+        {
+          "track": {
+            "trackName": "Rich Rich",
+            "artistName": "Ufo361",
+            "albumName": "Rich Rich",
+            "trackUri": "spotify:track:3VFT90E0yYjdHSFoGv02us"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-03-04"
+        },
+        {
+          "track": {
+            "trackName": "Big Drip",
+            "artistName": "Ufo361",
+            "albumName": "Big Drip",
+            "trackUri": "spotify:track:4qOesAYiMiMFiZrn2wfkl6"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-03-25"
+        },
+        {
+          "track": {
+            "trackName": "Bad Girls, Good Vibes",
+            "artistName": "Ufo361",
+            "albumName": "Bad Girls, Good Vibes",
+            "trackUri": "spotify:track:7IxGslFZA5QhgXbUsDmcjf"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-03-25"
+        },
+        {
+          "track": {
+            "trackName": "Down Like That (feat. Rick Ross, Lil Baby & S-X)",
+            "artistName": "KSI",
+            "albumName": "Down Like That (feat. Rick Ross, Lil Baby & S-X)",
+            "trackUri": "spotify:track:4etKC4ngPKsQDHUMnYgV3A"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-09"
+        },
+        {
+          "track": {
+            "trackName": "Poppin (feat. Lil Pump & Smokepurpp)",
+            "artistName": "KSI",
+            "albumName": "Poppin (feat. Lil Pump & Smokepurpp)",
+            "trackUri": "spotify:track:7x6t40pKRU1h9fFx7124wf"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-09"
+        },
+        {
+          "track": {
+            "trackName": "Allein sein",
+            "artistName": "Ufo361",
+            "albumName": "Allein sein",
+            "trackUri": "spotify:track:2TrhpvxwuF6hrboTdRXwnS"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-09"
+        },
+        {
+          "track": {
+            "trackName": "Hood",
+            "artistName": "AK AUSSERKONTROLLE",
+            "albumName": "Hood",
+            "trackUri": "spotify:track:6xMBPfgaEQKshwp7oYrtP4"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-09"
+        },
+        {
+          "track": {
+            "trackName": "Ausgehen",
+            "artistName": "AnnenMayKantereit",
+            "albumName": "Ausgehen",
+            "trackUri": "spotify:track:3Ve0ag71EeiQalsl7Ha4Dw"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-09"
+        },
+        {
+          "track": {
+            "trackName": "Ich geh heut nicht mehr tanzen",
+            "artistName": "AnnenMayKantereit",
+            "albumName": "Schlagschatten",
+            "trackUri": "spotify:track:13Fo5bvBmmDDaMGtLlAqB5"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-09"
+        },
+        {
+          "track": {
+            "trackName": "5 Minuten (feat. Cro, AnnenMayKantereit & Trettmann)",
+            "artistName": "KITSCHKRIEG",
+            "albumName": "5 Minuten (feat. Cro, AnnenMayKantereit & Trettmann)",
+            "trackUri": "spotify:track:1rciHe0jRJnF3J6CuAwOH0"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-09"
+        },
+        {
+          "track": {
+            "trackName": "Vielleicht Vielleicht",
+            "artistName": "AnnenMayKantereit",
+            "albumName": "Schlagschatten",
+            "trackUri": "spotify:track:17lu3VOOdnuf6fvtj6TDL5"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-09"
+        },
+        {
+          "track": {
+            "trackName": "Sip",
+            "artistName": "Luciano",
+            "albumName": "Sip",
+            "trackUri": "spotify:track:4D4tA2ara3ihoOvjupr8cG"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-09"
+        },
+        {
+          "track": {
+            "trackName": "Tuyo (Narcos Theme) - A Netflix Original Series Soundtrack",
+            "artistName": "Rodrigo Amarante",
+            "albumName": "Tuyo (Narcos Theme)",
+            "trackUri": "spotify:track:6Dc2tCivms1s2X9myWe4ni"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-12"
+        },
+        {
+          "track": {
+            "trackName": "Final Fantasy",
+            "artistName": "Ufo361",
+            "albumName": "Final Fantasy",
+            "trackUri": "spotify:track:4P2LXwm4QA4l7NwUvDAuMu"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-18"
+        },
+        {
+          "track": {
+            "trackName": "Houdini (feat. Swarmz & Tion Wayne)",
+            "artistName": "KSI",
+            "albumName": "Houdini (feat. Swarmz & Tion Wayne)",
+            "trackUri": "spotify:track:3lay6f81Lhy0qp2Uvp4cNJ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-30"
+        },
+        {
+          "track": {
+            "trackName": "Hydra 3D",
+            "artistName": "DAT ADAM",
+            "albumName": "HYDRA 3D",
+            "trackUri": "spotify:track:2bC1VctQoncLAZVjissfzI"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-04-30"
+        },
+        {
+          "track": {
+            "trackName": "EXCEL",
+            "artistName": "reezy",
+            "albumName": "EXCEL",
+            "trackUri": "spotify:track:3wDY34Vq5mOfTA9PPPvS0B"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-05-07"
+        },
+        {
+          "track": {
+            "trackName": "GOOBA",
+            "artistName": "6ix9ine",
+            "albumName": "GOOBA",
+            "trackUri": "spotify:track:4NhDYoQTYCdWHTvlbGVgwo"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-05-15"
+        },
+        {
+          "track": {
+            "trackName": "KK",
+            "artistName": "KASIMIR1441",
+            "albumName": "KK",
+            "trackUri": "spotify:track:6IwbgA2lca6IZZvo2wCL6Q"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-05-29"
+        },
+        {
+          "track": {
+            "trackName": "KICKDOWN",
+            "artistName": "KASIMIR1441",
+            "albumName": "KICKDOWN",
+            "trackUri": "spotify:track:5MGwvgh1hqUah3nrjLsNh2"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-05-29"
+        },
+        {
+          "track": {
+            "trackName": "FLY",
+            "artistName": "KC Rebell",
+            "albumName": "FLY",
+            "trackUri": "spotify:track:1WoM4mof0Nl1xPtwf6h6ow"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-06-05"
+        },
+        {
+          "track": {
+            "trackName": "VALLA NEIN (feat. Luciano)",
+            "artistName": "KC Rebell",
+            "albumName": "VALLA NEIN (feat. Luciano)",
+            "trackUri": "spotify:track:2rxxXYtTIFKyrhJpofeoIX"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-06-05"
+        },
+        {
+          "track": {
+            "trackName": "DAS RENNEN",
+            "artistName": "RIN",
+            "albumName": "DAS RENNEN",
+            "trackUri": "spotify:track:3qT2eKpWNq5cze7kGGORDZ"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-06-05"
+        },
+        {
+          "track": {
+            "trackName": "WHATS POPPIN",
+            "artistName": "Jack Harlow",
+            "albumName": "Sweet Action",
+            "trackUri": "spotify:track:1jaTQ3nqY3oAAYyCTbIvnM"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-06-22"
+        },
+        {
+          "track": {
+            "trackName": "Heute mit mir",
+            "artistName": "Nimo",
+            "albumName": "K¡K¡",
+            "trackUri": "spotify:track:7fUWZUNj5qbEuoL6K9947g"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-07-09"
+        },
+        {
+          "track": {
+            "trackName": "LVL UP",
+            "artistName": "TJ_beastboy",
+            "albumName": "LVL UP",
+            "trackUri": "spotify:track:59I9TFQykq0vWFAiiRvkog"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-08-17"
+        },
+        {
+          "track": {
+            "trackName": "tru",
+            "artistName": "CRO",
+            "albumName": "tru. (Deluxe Edition)",
+            "trackUri": "spotify:track:3oTNeTXw2gk2y6iLUrYPO9"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-08-17"
+        },
+        {
+          "track": {
+            "trackName": "Fall Auf",
+            "artistName": "CRO",
+            "albumName": "Fall Auf",
+            "trackUri": "spotify:track:012iHyRvQQquWQGUTYvDxy"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-08-17"
+        },
+        {
+          "track": {
+            "trackName": "$W4G",
+            "artistName": "TJ_beastboy",
+            "albumName": "PARANORMAL-FLOWMACHINE",
+            "trackUri": "spotify:track:4UZXAa8mWRr2rSWUDPPXhV"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-08-23"
+        },
+        {
+          "track": {
+            "trackName": "DEMENTOR SWAGGER",
+            "artistName": "TJ_beastboy",
+            "albumName": "PARANORMAL-FLOWMACHINE",
+            "trackUri": "spotify:track:6lRLpBYTTLocNnuw9uugHf"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-09-03"
+        },
+        {
+          "track": {
+            "trackName": "PULL UP",
+            "artistName": "TJ_beastboy",
+            "albumName": "PARANORMAL-FLOWMACHINE",
+            "trackUri": "spotify:track:0oPp18ynh36TSeWTlSNSUF"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-09-06"
+        },
+        {
+          "track": {
+            "trackName": "GEiSTESKRA$$",
+            "artistName": "TJ_beastboy",
+            "albumName": "GEiSTESKRA$$",
+            "trackUri": "spotify:track:0Qyg68hbZrK20heZn3aAyR"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-09-06"
+        },
+        {
+          "track": {
+            "trackName": "TKN (feat. Travis Scott)",
+            "artistName": "ROSALÍA",
+            "albumName": "TKN (feat. Travis Scott)",
+            "trackUri": "spotify:track:4w47S36wQGBhGg073q3nt7"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-09-08"
+        },
+        {
+          "track": {
+            "trackName": "dich",
+            "artistName": "CRO",
+            "albumName": "dich",
+            "trackUri": "spotify:track:0t2DyOvZHXBTIHu4ZPXYk6"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-12-19"
+        },
+        {
+          "track": {
+            "trackName": "hoch",
+            "artistName": "CRO",
+            "albumName": "hoch",
+            "trackUri": "spotify:track:4AMgSVXCjXmbWbp8bGwKIX"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-12-19"
+        },
+        {
+          "track": {
+            "trackName": "Centre Court",
+            "artistName": "Bausa",
+            "albumName": "Centre Court",
+            "trackUri": "spotify:track:6Xlske5nAmkPb123IfyZ5S"
+          },
+          "episode": null,
+          "audiobook": null,
+          "localTrack": null,
+          "addedDate": "2020-12-19"
+        }
+      ],
+      "description": null,
+      "numberOfFollowers": 1
+    }
+  ]
+}
