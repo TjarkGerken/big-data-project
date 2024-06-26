@@ -1,17 +1,22 @@
-import pyspark
-from pyspark import SparkContext, SparkConf
-from pyspark.sql import SparkSession, SQLContext, functions as F
+from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-from pyspark.sql.types import StructType, IntegerType, StringType
-from pyspark.sql import Window
+from pyspark.sql.types import StructType, IntegerType, StringType, TimestampType
+
+windowDuration = '20 day'
+slidingDuration = '20 day'
+
+
+mongo_uri = "mongodb://admin:password@mongodb:27017"
+mongo_db = "spotify"
+mongo_collection = "track_data"
 
 # create a spark session
 spark = SparkSession \
     .builder \
     .master("local") \
     .appName("Spotify Wrapped") \
-    .config("spark.mongodb.read.connection.uri", "mongodb://admin:password@mongodb:27017/results?authSource=admin") \
-    .config("spark.mongodb.write.connection.uri", "mongodb://admin:password@mongodb:27017/results?authSource=admin") \
+    .config("spark.mongodb.read.connection.uri", "mongodb://admin:password@mongodb:27017/spotify?authSource=admin") \
+    .config("spark.mongodb.write.connection.uri", "mongodb://admin:password@mongodb:27017/spotify?authSource=admin") \
     .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector:10.0.2') \
     .getOrCreate()
 
@@ -36,27 +41,83 @@ kafkaMessages = spark \
     .load()
 
 # Parse the Kafka messages using the provided schema
-parsedMessages = kafkaMessages \
-    .select(from_json(col("value").cast("string"), messageSchema).alias("data")) \
-    .select("data.*")
+# Convert value: binary -> JSON -> fields + parsed timestamp
+parsedMessages = kafkaMessages.select(
+    # Extract 'value' from Kafka message (i.e., the tracking data)
+    from_json(
+        column("value").cast("string"),
+        messageSchema
+    ).alias("json")
+).select(
+    # Convert Unix timestamp to TimestampType
+    to_timestamp(column('json.endTime'), "yyyy-MM-dd HH:mm")
+    .cast(TimestampType())
+    .alias("parsed_timestamp"),
+    # Select all JSON fields
+    column("json.*")
+) \
+    .withColumnRenamed('json.trackName', 'trackName') \
+    .withColumnRenamed('json.UID', 'UID') \
+    .withWatermark("parsed_timestamp", windowDuration)
 
-# Convert endTime to timestamp type
-parsedMessages = parsedMessages.withColumn("endTime", col("endTime").cast("timestamp"))
+"""window(
+        column("parsed_timestamp"),
+        windowDuration,
+        slidingDuration
+    ),"""
 
-# Create a window specification
-windowSpec = Window.partitionBy("UID").orderBy(unix_timestamp(col("endTime")))
+# Compute most popular tracks
+popularTracks = parsedMessages.groupBy(
+    column("trackName"),
+    column("UID"),
+).agg(
+    sum("msPlayed").alias("total_msPlayed")
+) \
+    .withColumnRenamed('window.start', 'window_start') \
+    .withColumnRenamed('window.end', 'window_end') \
+    .orderBy(desc("total_msPlayed")) \
+    .limit(20)
 
-# Calculate total play time for each track and artist in each window
-totalPlayTime = parsedMessages \
-    .groupBy("UID", F.window("endTime", "7 days").alias("window"), "trackName", "artistName") \
-    .agg(sum("msPlayed").alias("totalPlayTime"))
+popularArtist = parsedMessages.groupBy(
+    column("artistName"),
+    column("UID"),
+).agg(
+    sum("msPlayed").alias("total_msPlayed")
+) \
+    .withColumnRenamed('window.start', 'window_start') \
+    .withColumnRenamed('window.end', 'window_end') \
+    .orderBy(desc("total_msPlayed")) \
+    .limit(20)
 
+"""
+consoleDump = kafkaMessages \
+    .writeStream \
+    .format("console") \
+    .start()
 
-windowSpecRank = Window.partitionBy("UID", "window.start").orderBy(col("totalPlayTime").desc())
+consoleDump.awaitTermination()
+"""
+# Start running the query; print running counts to the console
 
-# Rank tracks and artists by total play time within each window
-rankedTracksAndArtists = totalPlayTime.withColumn("rank", rank().over(windowSpecRank))
+consoleDump = popularTracks \
+    .writeStream \
+    .outputMode("complete") \
+    .format("console") \
+    .start()
 
+query = popularTracks \
+    .writeStream \
+    .format("mongodb") \
+    .option("spark.mongodb.output.uri", f"{mongo_uri}/{mongo_db}.popularTracks") \
+    .option("checkpointLocation", "/tmp/checkpoints") \
+    .outputMode("complete") \
+    .start()
 
-# Keep only the top 10 tracks and artists in each window
-top10TracksAndArtists = rankedTracksAndArtists.filter(col("rank") <= 10)
+consoleDumpArtist = popularArtist \
+    .writeStream \
+    .outputMode("complete") \
+    .format("console") \
+    .start()
+
+consoleDump.awaitTermination()
+consoleDumpArtist.awaitTermination()

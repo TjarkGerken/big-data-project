@@ -1,11 +1,11 @@
 # Read from MongoDB
 
 df = spark.read \
-.format("mongodb") \
-.option("uri", "mongodb://admin:password@mongodb:27017/results?authSource=admin") \
-.option("database", "results") \
-.option("collection", "result") \
-.load()
+    .format("mongodb") \
+    .option("uri", "mongodb://admin:password@mongodb:27017/results?authSource=admin") \
+    .option("database", "results") \
+    .option("collection", "result") \
+    .load()
 
 df = spark.read.format("mongo").option("uri", f"{mongo_uri}/{mongo_db}.{mongo_collection}").load()
 print("\n\n\n\n\test\n\n\n\n\n")

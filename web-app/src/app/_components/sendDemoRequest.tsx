@@ -35,7 +35,7 @@ export default function SendDemoRequest() {
       return "No token found";
     }
 
-    let url = `https://api.spotify.com/v1/me/player/recently-played?limit=10&time_range=long_term`;
+    let url = `https://api.spotify.com/v1/me/player/recently-played?limit=50&time_range=long_term`;
     
     const header = {
       headers: { Authorization: `Bearer ${token}` },
@@ -52,7 +52,7 @@ export default function SendDemoRequest() {
       await axios
       .get(url, header)
       .then((response) => {
-        // sendTracksToKafka(response.data);
+        sendTracksToKafka(response.data);
 
         if (response.data.next === null) {
             latestResponseDate = -2
