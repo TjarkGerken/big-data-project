@@ -60,14 +60,15 @@ parsedMessages = kafkaMessages.select(
     .withColumnRenamed('json.UID', 'UID') \
     .withWatermark("parsed_timestamp", windowDuration)
 
-"""window(
-        column("parsed_timestamp"),
-        windowDuration,
-        slidingDuration
-    ),"""
+""""""
 
 # Compute most popular tracks
 popularTracks = parsedMessages.groupBy(
+    window(
+        column("parsed_timestamp"),
+        windowDuration,
+        slidingDuration
+    ),
     column("trackName"),
     column("UID"),
 ).agg(
@@ -105,13 +106,13 @@ consoleDump = popularTracks \
     .format("console") \
     .start()
 
-query = popularTracks \
+"""query = popularTracks \
     .writeStream \
     .format("mongodb") \
     .option("spark.mongodb.output.uri", f"{mongo_uri}/{mongo_db}.popularTracks") \
     .option("checkpointLocation", "/tmp/checkpoints") \
     .outputMode("complete") \
-    .start()
+    .start()"""
 
 consoleDumpArtist = popularArtist \
     .writeStream \

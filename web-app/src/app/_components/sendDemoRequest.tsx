@@ -16,7 +16,7 @@ export default function SendDemoRequest() {
 
   async function sendReq() {
     try {
-        const authCode: AuthCode = JSON.parse(
+        let authCode: AuthCode = JSON.parse(
         localStorage.getItem("authCode") || "",
       );
       if (
@@ -26,6 +26,10 @@ export default function SendDemoRequest() {
 
         await getRefreshedToken(localStorage.getItem("refreshToken") || "");
       }
+
+      authCode = JSON.parse(
+            localStorage.getItem("authCode") || "",
+        );
       token = authCode.access_token;
     } catch (error) {
           console.log(error);
@@ -47,25 +51,16 @@ export default function SendDemoRequest() {
     const unixTimestamp = new Date().getTime() - threeDaysInMilliSeconds;
 
     while (latestResponseDate > unixTimestamp || latestResponseDate === -1) {
-      console.log("Hello");
-      // latestResponseDate = -2;
       await axios
       .get(url, header)
       .then((response) => {
         sendTracksToKafka(response.data);
-
         if (response.data.next === null) {
             latestResponseDate = -2
             return
         }
-            console.log(response.data.items[response.data.items.length-1].played_at);
         latestResponseDate = new Date(response.data.items[response.data.items.length-1].played_at).getTime();
-        console.log(header)
         url =  response.data.next + "&time_range=long_term"
-          console.log(url)
-        console.log(latestResponseDate)
-          console.log(unixTimestamp)
-
         setResponse(response.data);
         
       });

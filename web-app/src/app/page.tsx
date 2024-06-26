@@ -3,7 +3,8 @@
 import SpotifyAuthorization from "@/app/_components/spotifyAuthorization";
 import ResetSpotifyAuthorization from "./_components/ResetSpotifyAuthorization";
 import SendDemoRequest from "./_components/sendDemoRequest";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import FetchFromDB from "./_components/fetchFromDB";
 
 export default function Home() {
   const [authCode, setAuthCode] = useState<{} | null>(null);
@@ -21,6 +22,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col max-w-screen bg-spotify-black items-center justify-between p-24">
+      <FetchFromDB />
       <div className="z-10 w-full max-w-5xl items-center justify-between  text-sm flex flex-col space-y-4">
         {!authCode && (
           <div>

@@ -3,7 +3,8 @@ import * as mongoDB from "mongodb";
 
 export async function POST(request: Request) {
     const uid = await request.json()
-     const collections: { popularTracks?: mongoDB.Collection } = {}
+    console.log("ich auch hier")
+    const collections: { popularTracks?: mongoDB.Collection } = {}
 
     const DB_CONN_STRING = process.env.DB_CONN_STRING || ""
     const DB_NAME = process.env.DB_CONN_NAME || ""
@@ -24,5 +25,8 @@ export async function POST(request: Request) {
     }
 
     await connectToDatabase()
-
+    return Response.json(
+        { message: "Success" },
+        { status: 200 },
+    );
 }
