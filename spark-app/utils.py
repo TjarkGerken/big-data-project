@@ -53,3 +53,20 @@ query = parsedMessages \
      .start()
 
 query.awaitTermination()
+
+
+
+query = kafkaMessages \
+    .writeStream \
+    .outputMode("append") \
+    .format("console") \
+    .start()
+
+#query.awaitTermination()
+
+
+parsedMessages = kafkaMessages.select(from_json(col("value").cast("string"), messageSchema).alias("data")).select("data.*")
+
+parsedMessages = parsedMessages.withColumn("played_at", col("played_at").cast(TimestampType()))
+
+
