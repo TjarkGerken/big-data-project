@@ -94,9 +94,9 @@ COPY --chown=spark:spark *.py /app/
 ENTRYPOINT /opt/bitnami/spark/bin/spark-submit \
 	--master local \
 	--jars ${JDBC_JAR_FILE},${MONGO_SPARK_JAR_FILE} \
-	/app/spark-app.py
-
+	/app/spark-app.py \
+    --py-files /app/dependencies.zip
 #	--verbose \
-#	--py-files /app/dependencies.zip \
+#
 
 CMD [""]

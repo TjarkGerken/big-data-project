@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col max-w-screen bg-spotify-black items-center justify-between p-24">
       <FetchFromDB />
-      <div className="z-10 w-full max-w-5xl items-center justify-between  text-sm flex flex-col space-y-4">
+      <div className="z-10 w-full max-w-5xl items-center justify-between text-sm flex flex-col space-y-4">
         {!authCode && (
           <div>
             {" "}

@@ -3,7 +3,7 @@ import axios from "axios";
 export default function fetchFromDB() {
     async function fetchFromDB() {
         console.log("triggered")
-        axios.post("/api/fetch-db", "uid").then((response) => {console.log(response)});
+        axios.get("/api/fetch-db?uid=Tjark").then((response) => {console.log(response)});
     }
     return (
         <button   className={

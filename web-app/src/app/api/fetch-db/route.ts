@@ -1,8 +1,15 @@
 import * as mongoDB from "mongodb";
 
+export const dynamic = "force-dynamic";
 
-export async function POST(request: Request) {
-    const uid = await request.json()
+
+export async function GET(request: Request) {
+
+    const url = new URL(request.url);
+
+    // Get the username parameter from the query string
+    const uid = url.searchParams.get('uid');
+    console.log(uid)
     console.log("ich auch hier")
     const collections: { popularTracks?: mongoDB.Collection } = {}
 
@@ -25,8 +32,11 @@ export async function POST(request: Request) {
     }
 
     await connectToDatabase()
+
+    const popularTracks = await collections.popularTracks?.find({}).toArray()
+    console.log(popularTracks)
     return Response.json(
-        { message: "Success" },
+            popularTracks,
         { status: 200 },
     );
 }
