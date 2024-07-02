@@ -14,11 +14,11 @@ export default function Home() {
       const authCode = localStorage.getItem("authCode");
       if (authCode) {
         setAuthCode(JSON.parse(authCode));
-        setIsDisabled(false); // Enable form if authCode exists
+        setIsDisabled(false);
       } else {
-        setIsDisabled(true); // Disable form if authCode does not exist
+        setIsDisabled(true);
       }
-    }, 1000); // Check every 1000 milliseconds (1 second)
+    }, 1000);
 
     return () => {
       clearInterval(intervalId);
@@ -57,21 +57,3 @@ export default function Home() {
     </main>
   );
 }
-/*
- <FetchFromDB />
-      <div className="z-10 w-full max-w-5xl items-center justify-between text-sm flex flex-col space-y-4">
-        {!authCode && (
-          <div>
-            {" "}
-            <SpotifyAuthorization />{" "}
-          </div>
-        )}
-        {authCode && (
-          <div className={"flex flex-col space-y-4 max-w-5xl text-white"}>
-            <pre className={"text-balance w-full break-words max-w-full"}>Auth Code: {JSON.stringify(authCode)}</pre>
-            <ResetSpotifyAuthorization />
-            <SendDemoRequest />{" "}
-          </div>
-        )}
-      </div>
- */
