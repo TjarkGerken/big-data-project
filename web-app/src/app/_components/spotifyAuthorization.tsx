@@ -27,14 +27,13 @@ export default function SpotifyAuthorization() {
   }
 
   return (
-    <div
+    <button
+      onClick={initiateSpotifyAuthorization}
       className={
-        "bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-xl"
+        "bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-2xl"
       }
     >
-      <button onClick={initiateSpotifyAuthorization}>
-        Authorize with your Spotify Account
-      </button>
-    </div>
+      Login with your Spotify Account
+    </button>
   );
 }

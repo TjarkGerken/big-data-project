@@ -1,14 +1,14 @@
 export interface StreamingHistory {
-    tracks: Track[];
+  tracks: Track[];
 }
-export interface StreamingHistoryWithUID  extends StreamingHistory {
-    uid: string;
+export interface StreamingHistoryWithUID extends StreamingHistory {
+  uid: string;
 }
 
 export interface Track {
-    endTime: string;
-    artistName: string;
-    trackName: string;
-    UID?: string;
-    msPlayed: number;
+  endTime: string;
+  artistName: string;
+  trackName: string;
+  UID?: string;
+  msPlayed: number;
 }
