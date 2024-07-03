@@ -74,7 +74,7 @@ export default function DataRequestForm({ disabled = false }: DataRequestFormPro
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className={"text-xl"}>
-                    <SelectItem value="carlo">Carlo</SelectItem>
+                    <SelectItem value="carlos">Carlos</SelectItem>
                     <SelectItem value="niklas">Niklas</SelectItem>
                     <SelectItem value="david">David</SelectItem>
                     <SelectItem value="tjark">Tjark</SelectItem>
@@ -103,7 +103,7 @@ export default function DataRequestForm({ disabled = false }: DataRequestFormPro
       </Form>
       {!disabled &&
         <div className={"w-2/3"}>
-          <SendDemoRequest/>
+          <SendDemoRequest uid={form.getValues('spotifyUser')}/>
         </div>}
     </div>
   );

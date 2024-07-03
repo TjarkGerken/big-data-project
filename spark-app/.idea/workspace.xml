@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2b46487e-1e3c-4d75-8386-cec92199a682" name="Changes" comment="d">
       <change afterPath="$PROJECT_DIR$/../web-app/src/app/spotify/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +114,7 @@
       <updated>1719383386405</updated>
       <workItem from="1719383388729" duration="4540000" />
       <workItem from="1719390509725" duration="16016000" />
-      <workItem from="1719472013979" duration="4548000" />
+      <workItem from="1719472013979" duration="5381000" />
     </task>
     <task id="LOCAL-00001" summary="d">
       <option name="closed" value="true" />

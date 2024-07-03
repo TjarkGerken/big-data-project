@@ -5,14 +5,22 @@ import { useState } from "react";
 import { GetLastSongsResponse } from "../_interfaces/GetLastSongsResponse";
 import { Button } from "@/components/ui/button";
 
-export default function SendDemoRequest() {
-  async function sendTracksToKafka(tracks: GetLastSongsResponse) {
-    axios.post("/api/send-to-kafka", tracks).then((response) => {});
-    console.log(
-      tracks.items.map((track) => {
-        return { value: JSON.stringify(track) };
-      }),
-    );
+interface SendDemoRequestProps {
+  uid: string;
+}
+
+export default function SendDemoRequest({ uid }: SendDemoRequestProps) {
+  console.log("init");
+  console.log("uid: " + uid);
+  async function sendTracksToKafka() {
+    if (!uid || uid === "") {
+        return;
+    }
+    console.log("sending to kafka");
+    console.log("uid: " + uid);
+    axios.post("/api/send-to-kafka", { uid: uid}).then((response) => {
+
+    });
   }
   const [response, setResponse] = useState({} as GetLastSongsResponse);
   var token = null;
@@ -51,20 +59,21 @@ export default function SendDemoRequest() {
     const threeDaysInMilliSeconds = 3 * 24 * 60 * 60 * 1000;
     const unixTimestamp = new Date().getTime() - threeDaysInMilliSeconds;
 
-    while (latestResponseDate > unixTimestamp || latestResponseDate === -1) {
-      await axios.get(url, header).then((response) => {
-        sendTracksToKafka(response.data);
-        if (response.data.next === null) {
-          latestResponseDate = -2;
-          return;
-        }
-        latestResponseDate = new Date(
-          response.data.items[response.data.items.length - 1].played_at,
-        ).getTime();
-        url = response.data.next + "&time_range=long_term";
-        setResponse(response.data);
-      });
-    }
+      while (latestResponseDate > unixTimestamp || latestResponseDate === -1) {
+        await axios.get(url, header).then((response) => {
+          sendTracksToKafka();
+          if (response.data.next === null) {
+            latestResponseDate = -2;
+            return;
+          }
+          latestResponseDate = new Date(
+              response.data.items[response.data.items.length - 1].played_at,
+          ).getTime();
+          url = response.data.next + "&time_range=long_term";
+          setResponse(response.data);
+        });
+      }
+
   }
 
   return (
