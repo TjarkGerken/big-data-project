@@ -24,6 +24,12 @@ ENV MYSQL_DB_VERSION "8.4.0"
 RUN ${IVY_CMD} -dependency "com.mysql" "mysql-connector-j" "${MYSQL_DB_VERSION}"
 ENV JDBC_JAR_FILE "${EXTRA_JAR_PATH}/mysql-connector-j-${MYSQL_DB_VERSION}.jar"
 
+# Dependencies for MongoDB connection
+ENV MONGO_SPARK_VERSION "10.0.2"
+RUN ${IVY_CMD} -dependency "org.mongodb.spark" "mongo-spark-connector" "${MONGO_SPARK_VERSION}"
+ENV MONGO_SPARK_JAR_FILE "${EXTRA_JAR_PATH}/mongo-spark-connector-${MONGO_SPARK_VERSION}.jar"
+
+
 # Delete temp dir
 RUN rm -rf ${IVY_PACKAGE_DIR}
 
@@ -56,16 +62,16 @@ WORKDIR /app
 #	/tmp/empty.py ; rm -f /tmp/empty.py
 
 # Prepare the app's python dependencies
-#ADD --chown=spark:spark requirements.txt /app/
-#RUN pip install --no-cache-dir -t /app/dependencies -r requirements.txt
-#RUN echo -e "Contents of /app/dependencies:\n" ; find /app/dependencies
+ADD --chown=spark:spark requirements.txt /app/
+RUN pip install --no-cache-dir -t /app/dependencies -r requirements.txt
+RUN echo -e "Contents of /app/dependencies:\n" ; find /app/dependencies
 
 # Zip all dependencies
-#WORKDIR /app/dependencies
-#RUN zip -r /app/dependencies.zip .
+WORKDIR /app/dependencies
+RUN zip -r /app/dependencies.zip .
 
 #WORKDIR /app
-#RUN rm -rf /app/dependencies
+RUN rm -rf /app/dependencies
 
 #------------------------------------
 # Copy the application code into the container
@@ -87,10 +93,10 @@ COPY --chown=spark:spark *.py /app/
 
 ENTRYPOINT /opt/bitnami/spark/bin/spark-submit \
 	--master local \
-	--jars ${JDBC_JAR_FILE} \
-	/app/spark-app.py
-
+	--jars ${JDBC_JAR_FILE},${MONGO_SPARK_JAR_FILE} \
+	/app/spark-app.py \
+    --py-files /app/dependencies.zip
 #	--verbose \
-#	--py-files /app/dependencies.zip \
+#
 
 CMD [""]

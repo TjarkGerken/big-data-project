@@ -1,0 +1,19 @@
+{
+  "ratedShows": [
+    {
+      "showName": "Hobbylos",
+      "rating": 5,
+      "ratedAt": "2022-10-10T14:15:11.903653Z"
+    },
+    {
+      "showName": "Gemischtes Hack",
+      "rating": 5,
+      "ratedAt": "2022-10-10T14:18:46.702930Z"
+    },
+    {
+      "showName": "Offline + Ehrlich",
+      "rating": 5,
+      "ratedAt": "2022-10-10T14:14:52.224427Z"
+    }
+  ]
+}
