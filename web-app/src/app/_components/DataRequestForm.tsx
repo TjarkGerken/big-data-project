@@ -26,6 +26,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import axios from "axios";
+import SendDemoRequest from "@/app/_components/sendDemoRequest";
 
 const FormSchema = z.object({
   spotifyUser: z.string({
@@ -51,7 +52,7 @@ export default function DataRequestForm({ disabled = false }: DataRequestFormPro
     });
   }
   return (
-    <div className={"text-white w-full"}>
+    <div className={"text-white w-full flex flex-col space-y-4"}>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -100,6 +101,10 @@ export default function DataRequestForm({ disabled = false }: DataRequestFormPro
           </Button>
         </form>
       </Form>
+      {!disabled &&
+        <div className={"w-2/3"}>
+          <SendDemoRequest/>
+        </div>}
     </div>
   );
 }

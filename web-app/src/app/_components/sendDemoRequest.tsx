@@ -3,6 +3,7 @@ import { AuthCode } from "../_interfaces/AuthCode";
 import axios from "axios";
 import { useState } from "react";
 import { GetLastSongsResponse } from "../_interfaces/GetLastSongsResponse";
+import { Button } from "@/components/ui/button";
 
 export default function SendDemoRequest() {
   async function sendTracksToKafka(tracks: GetLastSongsResponse) {
@@ -67,26 +68,26 @@ export default function SendDemoRequest() {
   }
 
   return (
-    <div className={"bg-spotify-black h-full"}>
-      <button
-        className={
-          "bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-xl"
-        }
-        onClick={() =>
-          getRefreshedToken(localStorage.getItem("refreshToken") || "")
-        }
-      >
-        get refresh token
-      </button>
-      <div>
-        <button
+    <div className={"bg-spotify-black h-full w-full flex flex-col space-y-4"}>
+      {<Button
           className={
             "bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-xl"
+          }
+          onClick={() =>
+              getRefreshedToken(localStorage.getItem("refreshToken") || "")
+          }
+      >
+        get refresh token
+      </Button>}
+      <div>
+        <Button
+          className={
+            "bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-xl w-full"
           }
           onClick={sendReq}
         >
           Send Request
-        </button>
+        </Button>
       </div>
       {response.items && (
         <div className={"text-white"}>
