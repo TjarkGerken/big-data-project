@@ -4,14 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="different stuff i guess">
+    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="spotify api anbindung">
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/exampleResponse.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/songRespone.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/results/250ms silence.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/next.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <excluded-from-favorite>
@@ -38,19 +50,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;David__Frontend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/tjarkgerken/Coding101/big-data-project/web-app/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "David__Frontend",
+    "last_opened_file_path": "/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/results",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Users/tjarkgerken/Coding101/big-data-project/web-app/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web-app/src/app/results" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -85,6 +103,19 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="different stuff i guess" />
-    <option name="LAST_COMMIT_MESSAGE" value="different stuff i guess" />
+    <MESSAGE value="spotify api anbindung" />
+    <option name="LAST_COMMIT_MESSAGE" value="spotify api anbindung" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/web-app/src/app/api/get-track-data/songRespone.ts</url>
+          <line>1</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
