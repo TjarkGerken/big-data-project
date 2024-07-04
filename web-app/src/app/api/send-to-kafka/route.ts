@@ -2,19 +2,18 @@ import { Kafka, Partitioners } from "kafkajs";
 import { StreamingHistoryTjark } from "@/app/api/send-to-kafka/StreamingHistoryTjark";
 import { Track } from "@/app/api/send-to-kafka/StreamingHistoryType";
 import { StreamingHistoryDavid } from "./StreamingHistoryDavid";
-import {StreamingHistoryCarlos} from "@/app/api/send-to-kafka/StreamingHistoryCarlos";
+import { StreamingHistoryCarlos } from "@/app/api/send-to-kafka/StreamingHistoryCarlos";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
-
   const body = await request.json();
   console.log(body);
   console.log(body.uid);
   const datasets = {
-    "tjark": StreamingHistoryTjark,
-    "david": StreamingHistoryDavid,
-    "carlos": StreamingHistoryCarlos,
+    tjark: StreamingHistoryTjark,
+    david: StreamingHistoryDavid,
+    carlos: StreamingHistoryCarlos,
     // "niklas": "Niklas",
   };
 

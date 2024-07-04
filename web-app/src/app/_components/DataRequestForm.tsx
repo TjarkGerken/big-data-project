@@ -38,15 +38,15 @@ interface DataRequestFormProps {
   disabled?: boolean;
 }
 
-export default function DataRequestForm({ disabled = false }: DataRequestFormProps) {
+export default function DataRequestForm({
+  disabled = false,
+}: DataRequestFormProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    const uid = data.spotifyUser
-    console.log(data.spotifyUser);
-
+    const uid = data.spotifyUser;
     axios.get("/api/fetch-db?uid=" + uid).then((response) => {
       console.log(response);
     });
@@ -85,11 +85,11 @@ export default function DataRequestForm({ disabled = false }: DataRequestFormPro
               </FormItem>
             )}
           />
-          { disabled &&
+          {disabled && (
             <p>
               You must be authenticated with Spotify to access this feature.
             </p>
-          }
+          )}
           <Button
             type="submit"
             disabled={disabled || !form.formState.isValid}
@@ -101,10 +101,11 @@ export default function DataRequestForm({ disabled = false }: DataRequestFormPro
           </Button>
         </form>
       </Form>
-      {!disabled &&
+      {!disabled && (
         <div className={"w-2/3"}>
-          <SendDemoRequest uid={form.getValues('spotifyUser')}/>
-        </div>}
+          <SendDemoRequest uid={form.getValues("spotifyUser")} />
+        </div>
+      )}
     </div>
   );
 }
