@@ -69,16 +69,18 @@ export default function SendDemoRequest() {
 
   return (
     <div className={"bg-spotify-black h-full w-full flex flex-col space-y-4"}>
-      {<Button
+      {
+        <Button
           className={
             "bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-xl"
           }
           onClick={() =>
-              getRefreshedToken(localStorage.getItem("refreshToken") || "")
+            getRefreshedToken(localStorage.getItem("refreshToken") || "")
           }
-      >
-        get refresh token
-      </Button>}
+        >
+          get refresh token
+        </Button>
+      }
       <div>
         <Button
           className={
