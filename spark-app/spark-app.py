@@ -67,12 +67,12 @@ parsedMessages = kafkaMessages.select(
     .withColumnRenamed('json.trackName', 'trackName') \
     .withColumnRenamed('json.UID', 'UID') \
  \
-# .withWatermark("parsed_timestamp", windowDuration)
+.withWatermark("parsed_timestamp", windowDuration)
 
-watermarkedMessages = parsedMessages.withWatermark("parsed_timestamp", "1 year")
+
 
 # Compute most popular tracks
-"""popularTracks = watermarkedMessages.groupBy(
+popularTracks = watermarkedMessages.groupBy(
     column("trackName"),
     column("UID"),
 ).agg(
@@ -81,14 +81,8 @@ watermarkedMessages = parsedMessages.withWatermark("parsed_timestamp", "1 year")
     .withColumnRenamed('window.start', 'window_start') \
     .withColumnRenamed('window.end', 'window_end') \
     .orderBy(desc("total_msPlayed")) \
-    # .limit(20)
-"""
+    .limit(20)
 
-popularTracks = watermarkedMessages.groupBy(
-    "trackName", "UID"
-).agg(
-    sum("msPlayed").alias("total_msPlayed")
-)
 
 popularTracksWindow = parsedMessages.groupBy(
     window(
@@ -134,28 +128,12 @@ totalPlayedByUser = parsedMessages.groupBy(
     .awaitTermination()"""
 
 
-debugQuery = popularTracks \
-    .writeStream \
-    .outputMode("complete") \
-    .format("console") \
-    .start() \
-    .awaitTermination()
-
-#.option("spark.mongodb.output.uri", "mongodb://admin:password@mongodb:27017/spotify.popularTracks") \
-#.outputMode("update") \
-#.start()
-
-# .option("checkpointLocation", "/path/to/checkpoint/dir") \
-
-
-
 consoleDumpTotalPlayed = totalPlayedByUser \
     .writeStream \
     .outputMode("complete") \
     .format("console") \
     .start()
 
-"""
 consoleDumpPopularTracks = popularTracks \
     .writeStream \
     .outputMode("complete") \
@@ -178,4 +156,3 @@ consoleDumpTotalPlayed.awaitTermination()
 consoleDumpPopularTracks.awaitTermination()
 consoleDumpOPopularTracksWindow.awaitTermination()
 consoleDumpPopularArtist.awaitTermination()
-"""
