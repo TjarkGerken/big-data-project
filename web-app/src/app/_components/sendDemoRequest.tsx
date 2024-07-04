@@ -10,17 +10,13 @@ interface SendDemoRequestProps {
 }
 
 export default function SendDemoRequest({ uid }: SendDemoRequestProps) {
-  console.log("init");
-  console.log("uid: " + uid);
   async function sendTracksToKafka() {
     if (!uid || uid === "") {
-        return;
+      return;
     }
     console.log("sending to kafka");
     console.log("uid: " + uid);
-    axios.post("/api/send-to-kafka", { uid: uid}).then((response) => {
-
-    });
+    axios.post("/api/send-to-kafka", { uid: uid }).then((response) => {});
   }
   const [response, setResponse] = useState({} as GetLastSongsResponse);
   var token = null;
@@ -59,35 +55,36 @@ export default function SendDemoRequest({ uid }: SendDemoRequestProps) {
     const threeDaysInMilliSeconds = 3 * 24 * 60 * 60 * 1000;
     const unixTimestamp = new Date().getTime() - threeDaysInMilliSeconds;
 
-      while (latestResponseDate > unixTimestamp || latestResponseDate === -1) {
-        await axios.get(url, header).then((response) => {
-          sendTracksToKafka();
-          if (response.data.next === null) {
-            latestResponseDate = -2;
-            return;
-          }
-          latestResponseDate = new Date(
-              response.data.items[response.data.items.length - 1].played_at,
-          ).getTime();
-          url = response.data.next + "&time_range=long_term";
-          setResponse(response.data);
-        });
-      }
-
+    while (latestResponseDate > unixTimestamp || latestResponseDate === -1) {
+      await axios.get(url, header).then((response) => {
+        sendTracksToKafka();
+        if (response.data.next === null) {
+          latestResponseDate = -2;
+          return;
+        }
+        latestResponseDate = new Date(
+          response.data.items[response.data.items.length - 1].played_at,
+        ).getTime();
+        url = response.data.next + "&time_range=long_term";
+        setResponse(response.data);
+      });
+    }
   }
 
   return (
     <div className={"bg-spotify-black h-full w-full flex flex-col space-y-4"}>
-      {<Button
+      {
+        <Button
           className={
             "bg-spotify-green text-spotify-black rounded-full px-8 py-4 text-center font-bold text-xl"
           }
           onClick={() =>
-              getRefreshedToken(localStorage.getItem("refreshToken") || "")
+            getRefreshedToken(localStorage.getItem("refreshToken") || "")
           }
-      >
-        get refresh token
-      </Button>}
+        >
+          get refresh token
+        </Button>
+      }
       <div>
         <Button
           className={

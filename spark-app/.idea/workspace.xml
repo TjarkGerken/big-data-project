@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b46487e-1e3c-4d75-8386-cec92199a682" name="Changes" comment="d">
-      <change afterPath="$PROJECT_DIR$/../web-app/src/app/spotify/test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spark-app.py" beforeDir="false" afterPath="$PROJECT_DIR$/spark-app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-app/src/app/_components/DataRequestForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web-app/src/app/_components/DataRequestForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-app/src/app/_components/sendDemoRequest.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web-app/src/app/_components/sendDemoRequest.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/StreamingHistoryCarlos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/StreamingHistoryCarlos.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/StreamingHistoryDavid.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/StreamingHistoryDavid.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/route.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +56,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Python.de.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "Schbark",
     "node.js.detected.package.eslint": "true",
@@ -115,6 +128,7 @@
       <workItem from="1719383388729" duration="4540000" />
       <workItem from="1719390509725" duration="16016000" />
       <workItem from="1719472013979" duration="5381000" />
+      <workItem from="1720102000467" duration="4306000" />
     </task>
     <task id="LOCAL-00001" summary="d">
       <option name="closed" value="true" />

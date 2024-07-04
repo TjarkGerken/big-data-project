@@ -5,10 +5,8 @@ from pyspark.sql.types import StructType, IntegerType, StringType, TimestampType
 windowDuration = '7 days'
 slidingDuration = '7 days'
 
-
 mongo_uri = "mongodb://admin:password@mongodb:27017"
 mongo_db = "spotify"
-
 
 # create a spark session
 spark = SparkSession \
@@ -19,6 +17,16 @@ spark = SparkSession \
     .config("spark.mongodb.write.connection.uri", "mongodb://admin:password@mongodb:27017/spotify?authSource=admin") \
     .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector:10.0.2') \
     .getOrCreate()
+
+spark.conf.set("spark.sql.streaming.checkpointLocation", "/tmp/checkpoints")
+
+"""spark.mongodb.write.connection.uri=mongodb://127.0.0.1/
+spark.mongodb.write.database=myDB
+spark.mongodb.write.collection=myCollection
+spark.mongodb.write.convertJson=any
+
+spark.mongodb.write.connection.uri = "mongodb://127.0.0.1/myDB.myCollection?convertJson=any"
+"""
 
 messageSchema = StructType() \
     .add("endTime", StringType()) \
@@ -58,12 +66,13 @@ parsedMessages = kafkaMessages.select(
 ) \
     .withColumnRenamed('json.trackName', 'trackName') \
     .withColumnRenamed('json.UID', 'UID') \
-    .withWatermark("parsed_timestamp", windowDuration)
+ \
+# .withWatermark("parsed_timestamp", windowDuration)
 
-""""""
+watermarkedMessages = parsedMessages.withWatermark("parsed_timestamp", "1 year")
 
 # Compute most popular tracks
-popularTracks = parsedMessages.groupBy(
+"""popularTracks = watermarkedMessages.groupBy(
     column("trackName"),
     column("UID"),
 ).agg(
@@ -72,27 +81,31 @@ popularTracks = parsedMessages.groupBy(
     .withColumnRenamed('window.start', 'window_start') \
     .withColumnRenamed('window.end', 'window_end') \
     .orderBy(desc("total_msPlayed")) \
-    .limit(20)
+    # .limit(20)
+"""
 
+popularTracks = watermarkedMessages.groupBy(
+    "trackName", "UID"
+).agg(
+    sum("msPlayed").alias("total_msPlayed")
+)
 
 popularTracksWindow = parsedMessages.groupBy(
     window(
-        column("parsed_timestamp"),
+        col("parsed_timestamp"),
         windowDuration,
         slidingDuration
     ),
-    column("UID"),
+    col("UID"),
 ).agg(
     sum("msPlayed").alias("total_msPlayed")
 ) \
     .withColumnRenamed('window.start', 'window_start') \
-    .withColumnRenamed('window.end', 'window_end') \
-
-
+    .withColumnRenamed('window.end', 'window_end')
 
 popularArtist = parsedMessages.groupBy(
-    column("artistName"),
-    column("UID"),
+    col("artistName"),
+    col("UID"),
 ).agg(
     sum("msPlayed").alias("total_msPlayed")
 ) \
@@ -107,53 +120,62 @@ totalPlayedByUser = parsedMessages.groupBy(
     sum("msPlayed").alias("total_msPlayed")
 )
 
-query = totalPlayedByUser \
+"""mongoDumbPopularTracks = popularTracks.writeStream \
+    .format("mongodb") \
+    .option("spark.mongodb.connection.uri", "mongodb://admin:password@mongodb:27017") \
+    .option("spark.mongodb.database", "spotify") \
+    .option("spark.mongodb.collection", "popularTracks") \
+    .option("spark.mongodb.change.stream.publish.full.document.only", "true") \
+    .option("forceDeleteTempCheckpointLocation", "true") \
+    .option("checkpointLocation", "/tmp/mycheckpoint") \
+    .outputMode("update") \
+    .trigger(processingTime="1 second") \
+    .start() \
+    .awaitTermination()"""
+
+
+debugQuery = popularTracks \
+    .writeStream \
+    .outputMode("complete") \
+    .format("console") \
+    .start() \
+    .awaitTermination()
+
+#.option("spark.mongodb.output.uri", "mongodb://admin:password@mongodb:27017/spotify.popularTracks") \
+#.outputMode("update") \
+#.start()
+
+# .option("checkpointLocation", "/path/to/checkpoint/dir") \
+
+
+
+consoleDumpTotalPlayed = totalPlayedByUser \
     .writeStream \
     .outputMode("complete") \
     .format("console") \
     .start()
 
-
 """
-consoleDump = kafkaMessages \
-    .writeStream \
-    .format("console") \
-    .start()
-
-consoleDump.awaitTermination()
-"""
-# Start running the query; print running counts to the console
-
-consoleDump = popularTracks \
+consoleDumpPopularTracks = popularTracks \
     .writeStream \
     .outputMode("complete") \
     .format("console") \
     .start()
 
-consoleDump2 = popularTracksWindow \
+consoleDumpOPopularTracksWindow = popularTracksWindow \
     .writeStream \
     .outputMode("update") \
     .format("console") \
     .start()
 
-
-# popular_tracks_pd = popularTracks.toPandas()
-# popular_tracks_dict = popular_tracks_pd.to_dict()
-
-"""writeQuery = popularTracks \
-    .writeStream \
-    .format("mongodb") \
-    .option("spark.mongodb.output.uri", f"{mongo_uri}/{mongo_db}.popularTracks") \
-    .option("checkpointLocation", "/tmp/checkpoints") \
-    .outputMode("append") \
-    .start()
-"""
-consoleDumpArtist = popularArtist \
+consoleDumpPopularArtist = popularArtist \
     .writeStream \
     .outputMode("complete") \
     .format("console") \
     .start()
 
-# writeQuery.awaitTermination()
-consoleDump.awaitTermination()
-consoleDumpArtist.awaitTermination()
+consoleDumpTotalPlayed.awaitTermination()
+consoleDumpPopularTracks.awaitTermination()
+consoleDumpOPopularTracksWindow.awaitTermination()
+consoleDumpPopularArtist.awaitTermination()
+"""
