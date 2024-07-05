@@ -1,158 +1,109 @@
-from pyspark.sql import SparkSession
+from pyspark import SparkContext, SparkConf
+from pyspark.sql import SparkSession, SQLContext, functions as F
 from pyspark.sql.functions import *
-from pyspark.sql.types import StructType, IntegerType, StringType, TimestampType
+from pyspark.sql.types import StructType, StructField, StringType, LongType, MapType, IntegerType, ArrayType
+
 
 windowDuration = '7 days'
 slidingDuration = '7 days'
 
-mongo_uri = "mongodb://admin:password@mongodb:27017"
-mongo_db = "spotify"
+mongo_user = "admin"
+mongo_pwd = "password"
+mongo_uri = f"mongodb://{mongo_user}:{mongo_pwd}@mongodb:27017"
+mongo_db = "local"
+mongo_collection = "startup_log"
 
-# create a spark session
+
+
 spark = SparkSession \
     .builder \
     .master("local") \
     .appName("Spotify Wrapped") \
-    .config("spark.mongodb.read.connection.uri", "mongodb://admin:password@mongodb:27017/spotify?authSource=admin") \
-    .config("spark.mongodb.write.connection.uri", "mongodb://admin:password@mongodb:27017/spotify?authSource=admin") \
-    .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector:10.0.2') \
+    .config("spark.mongodb.read.connection.uri", mongo_uri) \
+    .config("spark.mongodb.write.connection.uri", mongo_uri) \
+    .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector_2.12:10.3.0') \
     .getOrCreate()
 
-spark.conf.set("spark.sql.streaming.checkpointLocation", "/tmp/checkpoints")
-
-"""spark.mongodb.write.connection.uri=mongodb://127.0.0.1/
-spark.mongodb.write.database=myDB
-spark.mongodb.write.collection=myCollection
-spark.mongodb.write.convertJson=any
-
-spark.mongodb.write.connection.uri = "mongodb://127.0.0.1/myDB.myCollection?convertJson=any"
-"""
-
-messageSchema = StructType() \
-    .add("endTime", StringType()) \
-    .add("artistName", StringType()) \
-    .add("trackName", StringType()) \
-    .add("UID", StringType()) \
-    .add("msPlayed", IntegerType())
-
-spark.sparkContext.setLogLevel('WARN')
-
-# Example Part 2
-# Read messages from Kafka
-kafkaMessages = spark \
-    .readStream \
-    .format("kafka") \
-    .option("kafka.bootstrap.servers",
-            "my-cluster-kafka-bootstrap:9092") \
-    .option("subscribe", "spotify-track-data") \
-    .option("startingOffsets", "earliest") \
-    .load()
-
-# Parse the Kafka messages using the provided schema
-# Convert value: binary -> JSON -> fields + parsed timestamp
-parsedMessages = kafkaMessages.select(
-    # Extract 'value' from Kafka message (i.e., the tracking data)
-    from_json(
-        column("value").cast("string"),
-        messageSchema
-    ).alias("json")
-).select(
-    # Convert Unix timestamp to TimestampType
-    to_timestamp(column('json.endTime'), "yyyy-MM-dd HH:mm")
-    .cast(TimestampType())
-    .alias("parsed_timestamp"),
-    # Select all JSON fields
-    column("json.*")
-) \
-    .withColumnRenamed('json.trackName', 'trackName') \
-    .withColumnRenamed('json.UID', 'UID') \
- \
-.withWatermark("parsed_timestamp", windowDuration)
+print(f'The PySpark {spark.version} version is running...\n\n\n\n\n\n\n')
 
 
+schema = StructType([
+    StructField("_id", StringType(), True),
+    StructField("hostname", StringType(), True),
+    StructField("startTime", StructType([
+        StructField("$date", StringType(), True)
+    ]), True),
+    StructField("startTimeLocal", StringType(), True),
+    StructField("cmdLine", StructType([
+        StructField("net", StructType([
+            StructField("bindIp", StringType(), True),
+            StructField("port", IntegerType(), True),
+            StructField("tls", StructType([
+                StructField("mode", StringType(), True)
+            ]), True)
+        ]), True),
+        StructField("processManagement", StructType([
+            StructField("fork", StringType(), True),
+            StructField("pidFilePath", StringType(), True)
+        ]), True),
+        StructField("systemLog", StructType([
+            StructField("destination", StringType(), True),
+            StructField("logAppend", StringType(), True),
+            StructField("path", StringType(), True)
+        ]), True)
+    ]), True),
+    StructField("pid", StructType([
+        StructField("$numberLong", StringType(), True)
+    ]), True),
+    StructField("buildinfo", StructType([
+        StructField("version", StringType(), True),
+        StructField("gitVersion", StringType(), True),
+        StructField("modules", ArrayType(StringType()), True),
+        StructField("allocator", StringType(), True),
+        StructField("javascriptEngine", StringType(), True),
+        StructField("sysInfo", StringType(), True),
+        StructField("versionArray", ArrayType(IntegerType()), True),
+        StructField("openssl", StructType([
+            StructField("running", StringType(), True),
+            StructField("compiled", StringType(), True)
+        ]), True),
+        StructField("buildEnvironment", StructType([
+            StructField("distmod", StringType(), True),
+            StructField("distarch", StringType(), True),
+            StructField("cc", StringType(), True),
+            StructField("ccflags", StringType(), True),
+            StructField("cxx", StringType(), True),
+            StructField("cxxflags", StringType(), True),
+            StructField("linkflags", StringType(), True),
+            StructField("target_arch", StringType(), True),
+            StructField("target_os", StringType(), True),
+            StructField("cppdefines", StringType(), True)
+        ]), True),
+        StructField("bits", IntegerType(), True),
+        StructField("debug", StringType(), True),
+        StructField("maxBsonObjectSize", IntegerType(), True),
+        StructField("storageEngines", ArrayType(StringType()), True)
+    ]), True)
+])
 
-# Compute most popular tracks
-popularTracks = watermarkedMessages.groupBy(
-    column("trackName"),
-    column("UID"),
-).agg(
-    sum("msPlayed").alias("total_msPlayed")
-) \
-    .withColumnRenamed('window.start', 'window_start') \
-    .withColumnRenamed('window.end', 'window_end') \
-    .orderBy(desc("total_msPlayed")) \
-    .limit(20)
 
+streamingDataFrame = (spark.readStream
+                      .format("mongodb")
+                      .option("database", mongo_db)
+                      .option("collection", mongo_collection)
+                      .schema(schema)
+                      .load()
+                      )
 
-popularTracksWindow = parsedMessages.groupBy(
-    window(
-        col("parsed_timestamp"),
-        windowDuration,
-        slidingDuration
-    ),
-    col("UID"),
-).agg(
-    sum("msPlayed").alias("total_msPlayed")
-) \
-    .withColumnRenamed('window.start', 'window_start') \
-    .withColumnRenamed('window.end', 'window_end')
+dataStreamWriter = (streamingDataFrame.writeStream
+                    .trigger(continuous="1 second")
+                    .format("memory")
+                    .queryName("spotifyWrappedQuery") 
+                    .outputMode("append")
+                    )
 
-popularArtist = parsedMessages.groupBy(
-    col("artistName"),
-    col("UID"),
-).agg(
-    sum("msPlayed").alias("total_msPlayed")
-) \
-    .withColumnRenamed('window.start', 'window_start') \
-    .withColumnRenamed('window.end', 'window_end') \
-    .orderBy(desc("total_msPlayed")) \
-    .limit(20)
-
-totalPlayedByUser = parsedMessages.groupBy(
-    column("UID"),
-).agg(
-    sum("msPlayed").alias("total_msPlayed")
-)
-
-"""mongoDumbPopularTracks = popularTracks.writeStream \
-    .format("mongodb") \
-    .option("spark.mongodb.connection.uri", "mongodb://admin:password@mongodb:27017") \
-    .option("spark.mongodb.database", "spotify") \
-    .option("spark.mongodb.collection", "popularTracks") \
-    .option("spark.mongodb.change.stream.publish.full.document.only", "true") \
-    .option("forceDeleteTempCheckpointLocation", "true") \
-    .option("checkpointLocation", "/tmp/mycheckpoint") \
-    .outputMode("update") \
-    .trigger(processingTime="1 second") \
-    .start() \
-    .awaitTermination()"""
-
-
-consoleDumpTotalPlayed = totalPlayedByUser \
-    .writeStream \
-    .outputMode("complete") \
-    .format("console") \
-    .start()
-
-consoleDumpPopularTracks = popularTracks \
-    .writeStream \
-    .outputMode("complete") \
-    .format("console") \
-    .start()
-
-consoleDumpOPopularTracksWindow = popularTracksWindow \
-    .writeStream \
-    .outputMode("update") \
-    .format("console") \
-    .start()
-
-consoleDumpPopularArtist = popularArtist \
-    .writeStream \
-    .outputMode("complete") \
-    .format("console") \
-    .start()
-
-consoleDumpTotalPlayed.awaitTermination()
-consoleDumpPopularTracks.awaitTermination()
-consoleDumpOPopularTracksWindow.awaitTermination()
-consoleDumpPopularArtist.awaitTermination()
+try:
+    query = dataStreamWriter.start()
+    query.awaitTermination()
+except Exception as e:
+    print("Error  occured during streaming: %s", e)
