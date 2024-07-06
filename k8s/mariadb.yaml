@@ -7,29 +7,20 @@ data:
   mariadb-init.sql: |
     SET GLOBAL sql_mode = 'ANSI_QUOTES';
 
-    CREATE TABLE `users` (
-      `spotify_user_id` VARCHAR(22) NOT NULL,
-      PRIMARY KEY (`spotify_user_id`)
-    );
-
     CREATE TABLE `top_songs` (
-      `id` INT NOT NULL AUTO_INCREMENT,
-      `spotify_user_id` VARCHAR(22) NOT NULL,
-      `song_name` VARCHAR(100) NOT NULL,
-      `ms_played` INT NOT NULL,
-      PRIMARY KEY (`id`),
-      FOREIGN KEY (`spotify_user_id`) REFERENCES `users`(`spotify_user_id`)
-        ON DELETE CASCADE
+      `UID` VARCHAR(22) NOT NULL,
+      `trackName` VARCHAR(100) NOT NULL,
+      `artistName` VARCHAR(100) NOT NULL,
+      `total_msPlayed` INT NOT NULL,
+      PRIMARY KEY (`UID`, `trackName`)
     );
 
     CREATE TABLE `top_artists` (
-      `id` INT NOT NULL AUTO_INCREMENT,
-      `spotify_user_id` VARCHAR(22) NOT NULL,
-      `artist_name` VARCHAR(100) NOT NULL,
-      `ms_played` INT NOT NULL,
-      PRIMARY KEY (`id`),
-      FOREIGN KEY (`spotify_user_id`) REFERENCES `users`(`spotify_user_id`)
-        ON DELETE CASCADE
+      `UID` VARCHAR(22) NOT NULL,
+      `artistName` VARCHAR(100) NOT NULL,
+      `total_msPlayed` INT NOT NULL,
+      `AlohaHejaHeAlohaHejaHe` VARCHAR(100),
+      PRIMARY KEY (`UID`, `artistName`)
     );
 
 

@@ -10,8 +10,11 @@ interface SendDemoRequestProps {
 }
 
 export default function SendDemoRequest({ uid }: SendDemoRequestProps) {
+  uid = "tjark"
   async function sendTracksToKafka() {
+    console.log("Hier bin ich")!
     if (!uid || uid === "") {
+      console.log("UID is null");
       return;
     }
     console.log("sending to kafka");
@@ -57,7 +60,10 @@ export default function SendDemoRequest({ uid }: SendDemoRequestProps) {
 
     while (latestResponseDate > unixTimestamp || latestResponseDate === -1) {
       await axios.get(url, header).then((response) => {
+        console.log(response)
+        console.log("Kurz vor Kafka")
         sendTracksToKafka();
+        console.log("Kurz nach Kafka")
         if (response.data.next === null) {
           latestResponseDate = -2;
           return;

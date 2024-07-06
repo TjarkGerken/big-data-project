@@ -2,134 +2,94 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import IntegerType, StringType, StructType, TimestampType
 
-dbUrl = 'jdbc:mysql://root:mysecretpw@my-app-mariadb-service:3306/spotify'
+dbUrl = 'jdbc:mysql://my-app-mariadb-service:3306/spotify'
 dbOptions = {"user": "root", "password": "mysecretpw"}
-dbTableSongs = 'top_songs'
-dbTableArtists = 'top_artists'
-dbTableUsers = 'users'  # Add <the users table
+dbSchema = 'spotify'
 
-windowDuration = '7 days'
-slidingDuration = '7 days'
+windowDuration = '1 minute'
+slidingDuration = '1 minute'
 
+# Example Part 1
 # Create a spark session
 spark = SparkSession.builder \
-    .appName("Spotify Wrapped") \
-    .getOrCreate()
+    .appName("Use Case").getOrCreate()
 
 # Set log level
 spark.sparkContext.setLogLevel('WARN')
 
+# Example Part 2
 # Read messages from Kafka
 kafkaMessages = spark \
     .readStream \
     .format("kafka") \
-    .option("kafka.bootstrap.servers", "my-cluster-kafka-bootstrap:9092") \
+    .option("kafka.bootstrap.servers",
+            "my-cluster-kafka-bootstrap:9092") \
     .option("subscribe", "spotify-track-data") \
     .option("startingOffsets", "earliest") \
     .load()
 
 # Define schema of tracking data
-messageSchema = StructType() \
+trackingMessageSchema = StructType() \
     .add("endTime", StringType()) \
     .add("artistName", StringType()) \
     .add("trackName", StringType()) \
     .add("UID", StringType()) \
     .add("msPlayed", IntegerType())
 
+# Example Part 3
 # Convert value: binary -> JSON -> fields + parsed timestamp
-parsedMessages = kafkaMessages.select(
+trackingMessages = kafkaMessages.select(
+    # Extract 'value' from Kafka message (i.e., the tracking data)
     from_json(
         column("value").cast("string"),
-        messageSchema
+        trackingMessageSchema
     ).alias("json")
 ).select(
-    to_timestamp(column('json.endTime'), "yyyy-MM-dd HH:mm").alias("parsed_timestamp"),
     column("json.*")
 )
 
-# Add watermark for handling late data
-parsedMessages = parsedMessages.withWatermark("parsed_timestamp", windowDuration)
-
-# Compute most popular tracks
-popularTracks = parsedMessages.groupBy(
-    window(col("parsed_timestamp"), windowDuration, slidingDuration),
-    col("trackName"),
-    col("artistName"),
-    col("UID")
+topSongs = trackingMessages.groupBy(
+    col("UID"), col("trackName"), col("artistName")
 ).agg(
-    sum("msPlayed").alias("total_msPlayed")
-).select(
-    col("trackName"),
-    col("artistName"),
-    col("UID").alias("spotify_user_id"),
-    col("total_msPlayed")
-)
+    {"msPlayed": "sum"}
+).withColumnRenamed("sum(msPlayed)", "total_msPlayed") \
+ .orderBy(col("total_msPlayed").desc()) \
+ .limit(10)
 
-# Start running the query; print running counts to the console without sorting
-consoleDump = popularTracks \
-    .writeStream \
-    .outputMode("update") \
-    .format("console") \
-    .start()
+topArtists = trackingMessages.groupBy(
+    col("UID"), col("artistName")
+).agg(
+    {"msPlayed": "sum"}
+).withColumnRenamed("sum(msPlayed)", "total_msPlayed") \
+    .orderBy(col("total_msPlayed").desc()) \
+    .limit(10)
 
-def saveToDatabase(batchDataframe, batchId):
-    global dbUrl, dbTableSongs, dbTableArtists, dbTableUsers, dbOptions
-    print(f"Writing batchID {batchId} to database @ {dbUrl}")
-    
-    # Read the current users from the database
-    usersDf = spark.read \
+print("\n\n\n\n\n\n\Write to MariaDB\n\n\n\n")
+
+
+def write_to_db(batch_df, batch_id, table_name):
+    batch_df.write \
         .format("jdbc") \
         .option("url", dbUrl) \
-        .option("dbtable", dbTableUsers) \
-        .load()
-    
-    # Select distinct users from the batch
-    newUsersDf = batchDataframe.select("spotify_user_id").distinct()
-    
-    # Find users that are not in the current users DataFrame
-    usersToAddDf = newUsersDf.join(usersDf, "spotify_user_id", "left_anti")
-    
-    # Write new users to the database
-    if usersToAddDf.count() > 0:
-        usersToAddDf.write \
-            .format("jdbc") \
-            .option("url", dbUrl) \
-            .option("dbtable", dbTableUsers) \
-            .mode("append") \
-            .save()
-    
-    # Write top songs
-    batchDataframe \
-        .select("spotify_user_id", "trackName", "total_msPlayed") \
-        .withColumnRenamed("trackName", "song_name") \
-        .withColumnRenamed("total_msPlayed", "ms_played") \
-        .write \
-        .format("jdbc") \
-        .option("url", dbUrl) \
-        .option("dbtable", dbTableSongs) \
-        .mode("append") \
-        .save()
-    
-    # Write top artists
-    batchDataframe \
-        .select("spotify_user_id", "artistName", "total_msPlayed") \
-        .withColumnRenamed("artistName", "artist_name") \
-        .withColumnRenamed("total_msPlayed", "ms_played") \
-        .write \
-        .format("jdbc") \
-        .option("url", dbUrl) \
-        .option("dbtable", dbTableArtists) \
+        .option("dbtable", table_name) \
+        .option("user", dbOptions["user"]) \
+        .option("password", dbOptions["password"]) \
         .mode("append") \
         .save()
 
-# Sort the popular tracks in complete mode before writing to database
-sortedPopularTracks = popularTracks.orderBy(desc("total_msPlayed"))
-
-dbInsertStream = sortedPopularTracks \
+query = topSongs \
     .writeStream \
     .outputMode("complete") \
-    .foreachBatch(saveToDatabase) \
+    .foreachBatch(lambda df, id: write_to_db(df, id, "top_songs")) \
     .start()
 
-# Wait for termination
-spark.streams.awaitAnyTermination()
+query2 = topArtists \
+    .writeStream \
+    .outputMode("complete") \
+    .foreachBatch(lambda df, id: write_to_db(df, id, "top_artists")) \
+    .start()
+
+query.awaitTermination()
+query2.awaitTermination()
+
+print("\n\n\n\n\nDone\n\n\n\n\n") # wird wsl nicht ausgeführt werden weil wir unendlich lange streams haben
