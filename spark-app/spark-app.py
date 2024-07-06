@@ -1,109 +1,135 @@
-from pyspark import SparkContext, SparkConf
-from pyspark.sql import SparkSession, SQLContext, functions as F
+from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-from pyspark.sql.types import StructType, StructField, StringType, LongType, MapType, IntegerType, ArrayType
+from pyspark.sql.types import IntegerType, StringType, StructType, TimestampType
 
+dbUrl = 'jdbc:mysql://root:mysecretpw@my-app-mariadb-service:3306/spotify'
+dbOptions = {"user": "root", "password": "mysecretpw"}
+dbTableSongs = 'top_songs'
+dbTableArtists = 'top_artists'
+dbTableUsers = 'users'  # Add <the users table
 
 windowDuration = '7 days'
 slidingDuration = '7 days'
 
-mongo_user = "admin"
-mongo_pwd = "password"
-mongo_uri = f"mongodb://{mongo_user}:{mongo_pwd}@mongodb:27017"
-mongo_db = "local"
-mongo_collection = "startup_log"
-
-
-
-spark = SparkSession \
-    .builder \
-    .master("local") \
+# Create a spark session
+spark = SparkSession.builder \
     .appName("Spotify Wrapped") \
-    .config("spark.mongodb.read.connection.uri", mongo_uri) \
-    .config("spark.mongodb.write.connection.uri", mongo_uri) \
-    .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector_2.12:10.3.0') \
     .getOrCreate()
 
-print(f'The PySpark {spark.version} version is running...\n\n\n\n\n\n\n')
+# Set log level
+spark.sparkContext.setLogLevel('WARN')
 
+# Read messages from Kafka
+kafkaMessages = spark \
+    .readStream \
+    .format("kafka") \
+    .option("kafka.bootstrap.servers", "my-cluster-kafka-bootstrap:9092") \
+    .option("subscribe", "spotify-track-data") \
+    .option("startingOffsets", "earliest") \
+    .load()
 
-schema = StructType([
-    StructField("_id", StringType(), True),
-    StructField("hostname", StringType(), True),
-    StructField("startTime", StructType([
-        StructField("$date", StringType(), True)
-    ]), True),
-    StructField("startTimeLocal", StringType(), True),
-    StructField("cmdLine", StructType([
-        StructField("net", StructType([
-            StructField("bindIp", StringType(), True),
-            StructField("port", IntegerType(), True),
-            StructField("tls", StructType([
-                StructField("mode", StringType(), True)
-            ]), True)
-        ]), True),
-        StructField("processManagement", StructType([
-            StructField("fork", StringType(), True),
-            StructField("pidFilePath", StringType(), True)
-        ]), True),
-        StructField("systemLog", StructType([
-            StructField("destination", StringType(), True),
-            StructField("logAppend", StringType(), True),
-            StructField("path", StringType(), True)
-        ]), True)
-    ]), True),
-    StructField("pid", StructType([
-        StructField("$numberLong", StringType(), True)
-    ]), True),
-    StructField("buildinfo", StructType([
-        StructField("version", StringType(), True),
-        StructField("gitVersion", StringType(), True),
-        StructField("modules", ArrayType(StringType()), True),
-        StructField("allocator", StringType(), True),
-        StructField("javascriptEngine", StringType(), True),
-        StructField("sysInfo", StringType(), True),
-        StructField("versionArray", ArrayType(IntegerType()), True),
-        StructField("openssl", StructType([
-            StructField("running", StringType(), True),
-            StructField("compiled", StringType(), True)
-        ]), True),
-        StructField("buildEnvironment", StructType([
-            StructField("distmod", StringType(), True),
-            StructField("distarch", StringType(), True),
-            StructField("cc", StringType(), True),
-            StructField("ccflags", StringType(), True),
-            StructField("cxx", StringType(), True),
-            StructField("cxxflags", StringType(), True),
-            StructField("linkflags", StringType(), True),
-            StructField("target_arch", StringType(), True),
-            StructField("target_os", StringType(), True),
-            StructField("cppdefines", StringType(), True)
-        ]), True),
-        StructField("bits", IntegerType(), True),
-        StructField("debug", StringType(), True),
-        StructField("maxBsonObjectSize", IntegerType(), True),
-        StructField("storageEngines", ArrayType(StringType()), True)
-    ]), True)
-])
+# Define schema of tracking data
+messageSchema = StructType() \
+    .add("endTime", StringType()) \
+    .add("artistName", StringType()) \
+    .add("trackName", StringType()) \
+    .add("UID", StringType()) \
+    .add("msPlayed", IntegerType())
 
+# Convert value: binary -> JSON -> fields + parsed timestamp
+parsedMessages = kafkaMessages.select(
+    from_json(
+        column("value").cast("string"),
+        messageSchema
+    ).alias("json")
+).select(
+    to_timestamp(column('json.endTime'), "yyyy-MM-dd HH:mm").alias("parsed_timestamp"),
+    column("json.*")
+)
 
-streamingDataFrame = (spark.readStream
-                      .format("mongodb")
-                      .option("database", mongo_db)
-                      .option("collection", mongo_collection)
-                      .schema(schema)
-                      .load()
-                      )
+# Add watermark for handling late data
+parsedMessages = parsedMessages.withWatermark("parsed_timestamp", windowDuration)
 
-dataStreamWriter = (streamingDataFrame.writeStream
-                    .trigger(continuous="1 second")
-                    .format("memory")
-                    .queryName("spotifyWrappedQuery") 
-                    .outputMode("append")
-                    )
+# Compute most popular tracks
+popularTracks = parsedMessages.groupBy(
+    window(col("parsed_timestamp"), windowDuration, slidingDuration),
+    col("trackName"),
+    col("artistName"),
+    col("UID")
+).agg(
+    sum("msPlayed").alias("total_msPlayed")
+).select(
+    col("trackName"),
+    col("artistName"),
+    col("UID").alias("spotify_user_id"),
+    col("total_msPlayed")
+)
 
-try:
-    query = dataStreamWriter.start()
-    query.awaitTermination()
-except Exception as e:
-    print("Error  occured during streaming: %s", e)
+# Start running the query; print running counts to the console without sorting
+consoleDump = popularTracks \
+    .writeStream \
+    .outputMode("update") \
+    .format("console") \
+    .start()
+
+def saveToDatabase(batchDataframe, batchId):
+    global dbUrl, dbTableSongs, dbTableArtists, dbTableUsers, dbOptions
+    print(f"Writing batchID {batchId} to database @ {dbUrl}")
+    
+    # Read the current users from the database
+    usersDf = spark.read \
+        .format("jdbc") \
+        .option("url", dbUrl) \
+        .option("dbtable", dbTableUsers) \
+        .load()
+    
+    # Select distinct users from the batch
+    newUsersDf = batchDataframe.select("spotify_user_id").distinct()
+    
+    # Find users that are not in the current users DataFrame
+    usersToAddDf = newUsersDf.join(usersDf, "spotify_user_id", "left_anti")
+    
+    # Write new users to the database
+    if usersToAddDf.count() > 0:
+        usersToAddDf.write \
+            .format("jdbc") \
+            .option("url", dbUrl) \
+            .option("dbtable", dbTableUsers) \
+            .mode("append") \
+            .save()
+    
+    # Write top songs
+    batchDataframe \
+        .select("spotify_user_id", "trackName", "total_msPlayed") \
+        .withColumnRenamed("trackName", "song_name") \
+        .withColumnRenamed("total_msPlayed", "ms_played") \
+        .write \
+        .format("jdbc") \
+        .option("url", dbUrl) \
+        .option("dbtable", dbTableSongs) \
+        .mode("append") \
+        .save()
+    
+    # Write top artists
+    batchDataframe \
+        .select("spotify_user_id", "artistName", "total_msPlayed") \
+        .withColumnRenamed("artistName", "artist_name") \
+        .withColumnRenamed("total_msPlayed", "ms_played") \
+        .write \
+        .format("jdbc") \
+        .option("url", dbUrl) \
+        .option("dbtable", dbTableArtists) \
+        .mode("append") \
+        .save()
+
+# Sort the popular tracks in complete mode before writing to database
+sortedPopularTracks = popularTracks.orderBy(desc("total_msPlayed"))
+
+dbInsertStream = sortedPopularTracks \
+    .writeStream \
+    .outputMode("complete") \
+    .foreachBatch(saveToDatabase) \
+    .start()
+
+# Wait for termination
+spark.streams.awaitAnyTermination()
