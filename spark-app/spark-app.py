@@ -54,15 +54,13 @@ topSongs = trackingMessages.groupBy(
     {"msPlayed": "sum"}
 ).withColumnRenamed("sum(msPlayed)", "total_msPlayed") \
  .orderBy(col("total_msPlayed").desc()) \
- .limit(10)
 
 topArtists = trackingMessages.groupBy(
     col("UID"), col("artistName")
 ).agg(
     {"msPlayed": "sum"}
 ).withColumnRenamed("sum(msPlayed)", "total_msPlayed") \
-    .orderBy(col("total_msPlayed").desc()) \
-    .limit(10)
+    .orderBy(col("total_msPlayed").desc())\
 
 print("\n\n\n\n\n\n\Write to MariaDB\n\n\n\n")
 
@@ -91,5 +89,3 @@ query2 = topArtists \
 
 query.awaitTermination()
 query2.awaitTermination()
-
-print("\n\n\n\n\nDone\n\n\n\n\n") # wird wsl nicht ausgeführt werden weil wir unendlich lange streams haben
