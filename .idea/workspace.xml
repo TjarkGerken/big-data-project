@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="spotify api anbindung">
+    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="grammar fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/Spotify.png" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/public/Spotify.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/spotifyAuthorization.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/_components/spotifyAuthorization.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -116,7 +116,23 @@
       <option name="project" value="LOCAL" />
       <updated>1720351038179</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="some quick fixes">
+      <option name="closed" value="true" />
+      <created>1720391094438</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720391094438</updated>
+    </task>
+    <task id="LOCAL-00005" summary="grammar fix">
+      <option name="closed" value="true" />
+      <created>1720391368493</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720391368493</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,7 +152,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="different stuff i guess" />
     <MESSAGE value="spotify api anbindung" />
-    <option name="LAST_COMMIT_MESSAGE" value="spotify api anbindung" />
+    <MESSAGE value="some quick fixes" />
+    <MESSAGE value="grammar fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="grammar fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

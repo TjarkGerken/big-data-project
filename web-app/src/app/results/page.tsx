@@ -87,23 +87,24 @@ const Page = () => {
 
   useEffect(() => {
     findFavorites();
+
   }, []);
 
   useEffect(() => {
-    if (favoriteTrack) {
+    if (favoriteTrack && favoriteTrack.track_name !== "") {
       getTrackData(favoriteTrack);
+      getUserID();
     }
   }, [favoriteTrack]);
 
+
+
   useEffect(() => {
-    if (favoriteArtist.artist_name) {
+    if (favoriteArtist && favoriteArtist.artist_name !== "") {
       getArtistData(favoriteArtist.artist_name);
     }
   }, [favoriteArtist]);
 
-  useEffect(() => {
-    getUserID();
-  }, []);
 
   async function getTrackData(track: { track_name: string; ms_played: number }) {
     try {
@@ -127,7 +128,7 @@ const Page = () => {
 
   async function getUserID() {
     try {
-      const response = await axios.get("/api/get-user-id", {
+      const response = await axios.post("/api/get-user-id", {},{
         headers: {
           Authorization: JSON.parse(localStorage.getItem("authCode") || "").access_token,
         },
