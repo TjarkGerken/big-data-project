@@ -196,7 +196,7 @@ const Page = () => {
           <div className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center mb-20 w-4/10"> {/* Anpassung der Breite */}
             <div className="flex items-center">
               <div className="mr-6">
-                <p className="text-2xl text-spotify-green">Your most favourite Artist is:</p>
+                <p className="text-2xl text-spotify-green">Your favourite Artist is:</p>
                 <p className="text-2xl font-bold text-white text-center">{favoriteArtistDisplayData.name}</p>
               </div>
               {favoriteArtistDisplayData.images[0].url && (
@@ -219,7 +219,7 @@ const Page = () => {
           <div className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center w-4/10"> {/* Anpassung der Breite */}
             <div className="flex items-center">
               <div className="mr-6">
-                <p className="text-2xl text-spotify-green text-center">Your most favourite track is:</p>
+                <p className="text-2xl text-spotify-green text-center">Your favourite track is:</p>
                 <p className="text-2xl font-bold text-white text-center">{favoriteTrackDisplayData.name}</p>
                 {favoriteTrackDisplayData.artists.map((artist, i) => (
                   <p key={i} className="text-xl text-center">{artist.name}</p>
