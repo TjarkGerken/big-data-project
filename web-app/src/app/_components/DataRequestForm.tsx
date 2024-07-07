@@ -47,6 +47,7 @@ export default function DataRequestForm({
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const uid = data.spotifyUser;
+    console.log(uid)
     axios.get("/api/fetch-db?uid=" + uid).then((response) => {
       console.log(response);
     });
@@ -99,11 +100,13 @@ export default function DataRequestForm({
           >
             Analyse Data
           </Button>
+          {!disabled && (
+          <SendDemoRequest uid={form.getValues("spotifyUser")} />)}
         </form>
       </Form>
       {!disabled && (
         <div className={"w-2/3"}>
-          <SendDemoRequest uid={form.getValues("spotifyUser")} />
+          hi
         </div>
       )}
     </div>

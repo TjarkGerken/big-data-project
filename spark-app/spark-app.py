@@ -12,7 +12,7 @@ slidingDuration = '1 minute'
 # Example Part 1
 # Create a spark session
 spark = SparkSession.builder \
-    .appName("Use Case").getOrCreate()
+    .appName("Mini Spotify").getOrCreate()
 
 # Set log level
 spark.sparkContext.setLogLevel('WARN')
@@ -36,31 +36,27 @@ trackingMessageSchema = StructType() \
     .add("UID", StringType()) \
     .add("msPlayed", IntegerType())
 
-# Example Part 3
-# Convert value: binary -> JSON -> fields + parsed timestamp
 trackingMessages = kafkaMessages.select(
-    # Extract 'value' from Kafka message (i.e., the tracking data)
     from_json(
         column("value").cast("string"),
         trackingMessageSchema
     ).alias("json")
 ).select(
-    column("json.*")
-)
+    column("json.*"),
+    to_timestamp(column("json.endTime"), "yyyy-MM-dd'T'HH:mm:ss").alias("endTimeTimestamp")
+).withWatermark("endTimeTimestamp", "1 year")
 
 topSongs = trackingMessages.groupBy(
     col("UID"), col("trackName"), col("artistName")
 ).agg(
     {"msPlayed": "sum"}
-).withColumnRenamed("sum(msPlayed)", "total_msPlayed") \
- .orderBy(col("total_msPlayed").desc()) \
+).withColumnRenamed("sum(msPlayed)", "total_msPlayed")
 
 topArtists = trackingMessages.groupBy(
     col("UID"), col("artistName")
 ).agg(
     {"msPlayed": "sum"}
-).withColumnRenamed("sum(msPlayed)", "total_msPlayed") \
-    .orderBy(col("total_msPlayed").desc())\
+).withColumnRenamed("sum(msPlayed)", "total_msPlayed")
 
 print("\n\n\n\n\n\n\Write to MariaDB\n\n\n\n")
 
@@ -72,8 +68,9 @@ def write_to_db(batch_df, batch_id, table_name):
         .option("dbtable", table_name) \
         .option("user", dbOptions["user"]) \
         .option("password", dbOptions["password"]) \
-        .mode("append") \
+        .mode("overwrite") \
         .save()
+
 
 query = topSongs \
     .writeStream \

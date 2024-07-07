@@ -5,18 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b46487e-1e3c-4d75-8386-cec92199a682" name="Changes" comment="d">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/spark-app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../k8s/mariadb.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../k8s/mariadb.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../k8s/mongodb-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ExampleData/mongodb-deployment.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spark-app.py" beforeDir="false" afterPath="$PROJECT_DIR$/spark-app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-app/src/app/_components/DataRequestForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web-app/src/app/_components/DataRequestForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web-app/src/app/_components/sendDemoRequest.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../web-app/src/app/_components/sendDemoRequest.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/StreamingHistoryCarlos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/StreamingHistoryCarlos.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/StreamingHistoryDavid.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/StreamingHistoryDavid.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../web-app/src/app/api/send-to-kafka/route.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +44,10 @@
     &quot;accountId&quot;: &quot;cafba018-04c9-442f-85af-ba4670449916&quot;
   }
 }</component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
@@ -61,54 +64,17 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "Schbark",
+    "git-widget-placeholder": "DuMongo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "bigdataide_conn_settings",
     "ts.external.directory.path": "/Users/tjarkgerken/Applications/PyCharm Professional Edition.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="tests" factoryName="Autodetect">
-      <module name="spark-app" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <module name="spark-app" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method v="2" />
-    </configuration>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -129,6 +95,7 @@
       <workItem from="1719390509725" duration="16016000" />
       <workItem from="1719472013979" duration="5381000" />
       <workItem from="1720102000467" duration="4306000" />
+      <workItem from="1720365217399" duration="6931000" />
     </task>
     <task id="LOCAL-00001" summary="d">
       <option name="closed" value="true" />

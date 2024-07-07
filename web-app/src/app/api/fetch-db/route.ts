@@ -1,40 +1,102 @@
-import * as mongoDB from "mongodb";
+import * as mariadb from "mariadb";
 
 export const dynamic = "force-dynamic";
+
+interface TrackData {
+  UID: string;
+  trackName: string;
+  artistName: string;
+  total_msPlayed: bigint;
+}
+interface ArtistData {
+  UID: string;
+  artistName: string;
+  total_msPlayed: bigint;
+}
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
 
   // Get the username parameter from the query string
   const uid = url.searchParams.get("uid");
-  console.log(uid);
-  console.log("ich auch hier");
-  const collections: { popularTracks?: mongoDB.Collection } = {};
 
-  const DB_CONN_STRING = process.env.DB_CONN_STRING || "";
-  const DB_NAME = process.env.DB_CONN_NAME || "";
-  const COLLECTION_NAME = "popularTracks";
+  const pool = mariadb.createPool({
+    host: 'my-app-mariadb-service',
+    port: 3306,
+    user:'root',
+    password: 'mysecretpw',
+    connectionLimit: 5,
+    acquireTimeout: 20000,
+    database: "spotify"
+  });
 
-  async function connectToDatabase() {
-    const client: mongoDB.MongoClient = new mongoDB.MongoClient(DB_CONN_STRING);
-
-    await client.connect();
-
-    const db: mongoDB.Db = client.db(DB_NAME);
-
-    const popularTrackCollection: mongoDB.Collection =
-      db.collection(COLLECTION_NAME);
-
-    collections.popularTracks = popularTrackCollection;
-
-    console.log(
-      `Successfully connected to database: ${db.databaseName} and collection: ${popularTrackCollection.collectionName}`,
-    );
+  async function queryTopArtists() {
+    let conn;
+    try {
+      conn = await pool.getConnection();
+      const rows : ArtistData[] = await conn.query("SELECT * FROM top_artists WHERE UID = ?", [uid]);
+      return rows
+    } catch (err) {
+      console.error(err);
+      throw new Error("something went wrong");
+    } finally {
+      if (conn) await conn.release();
+    }
+  }
+  async function queryTopSongs() {
+    let conn;
+    try {
+      conn = await pool.getConnection();
+      const rows : TrackData[] = await conn.query("SELECT * FROM top_songs WHERE UID = ?", [uid]);
+      return rows
+    } catch (err) {
+      console.error(err);
+      throw new Error("something went wrong");
+    } finally {
+      if (conn) await conn.release();
+    }
   }
 
-  await connectToDatabase();
+  const top_songs = await queryTopSongs();
+  const top_artist = await queryTopArtists();
 
-  const popularTracks = await collections.popularTracks?.find({}).toArray();
-  console.log(popularTracks);
-  return Response.json(popularTracks, { status: 200 });
-}
+  // console.log(top_songs);
+  // console.log(top_artist);
+
+  function convertBigIntToNumber(bigintValue: bigint) {
+    if (bigintValue < Number.MIN_SAFE_INTEGER || bigintValue > Number.MAX_SAFE_INTEGER) {
+      throw new RangeError('The BigInt value is out of the safe range for conversion to Number.');
+    }
+    return Number(bigintValue);
+  }
+  // Define a replacer function for JSON.stringify
+  function bigintReplacer(key: string, value: any) {
+    if (typeof value === 'bigint') {
+      return convertBigIntToNumber(value);
+    } else {
+      return value;
+    }
+  }
+
+  const sortedTopSongs = top_songs.sort((a, b) => {
+    const totalMsPlayedA = BigInt(a.total_msPlayed);
+    const totalMsPlayedB = BigInt(b.total_msPlayed);
+    return Number(totalMsPlayedB - totalMsPlayedA);
+  });
+
+  const sortedTopArtist = top_artist.sort((a, b) => {
+    const totalMsPlayedA = BigInt(a.total_msPlayed);
+    const totalMsPlayedB = BigInt(b.total_msPlayed);
+    return Number(totalMsPlayedB - totalMsPlayedA);
+  });
+  const response = {
+    spotify_uid: uid,
+    top_songs : sortedTopSongs.slice(0, 10),
+    top_artist : sortedTopArtist.slice(0, 10)
+  }
+
+  const jsonString = JSON.stringify(response, bigintReplacer);
+
+  const exampleResponse = 
+
+  return new Response(jsonString, { status: 200, headers: { 'Content-Type': 'application/json' } });}

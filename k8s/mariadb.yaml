@@ -19,7 +19,6 @@ data:
       `UID` VARCHAR(22) NOT NULL,
       `artistName` VARCHAR(100) NOT NULL,
       `total_msPlayed` INT NOT NULL,
-      `AlohaHejaHeAlohaHejaHe` VARCHAR(100),
       PRIMARY KEY (`UID`, `artistName`)
     );
 
