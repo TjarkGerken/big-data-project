@@ -27,8 +27,10 @@ const Page = () => {
     name: null,
     images: [{ url: null, width: 0, height: 0 }],
     genres: [],
-    ms_played : 0,
+    ms_played: 0,
   });
+
+  const [userName, setUserName] = useState("");
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
@@ -60,7 +62,7 @@ const Page = () => {
     topTracks: [
       { track_name: "Turandot", ms_played: 420000 },
       { track_name: "Bibi Blocksberg Lied", ms_played: 410000 },
-      { track_name: "Was ist los", ms_played: 370000 },
+      { track_name: "Was ist los", ms_played: 450000 },
     ],
     total_minutes_played_track: 30,
     topArtists: [
@@ -84,20 +86,24 @@ const Page = () => {
   };
 
   useEffect(() => {
-  findFavorites();
-}, []);
+    findFavorites();
+  }, []);
 
-useEffect(() => {
-  if (favoriteTrack) {
-    getTrackData(favoriteTrack);
-  }
-}, [favoriteTrack]);
+  useEffect(() => {
+    if (favoriteTrack) {
+      getTrackData(favoriteTrack);
+    }
+  }, [favoriteTrack]);
 
   useEffect(() => {
     if (favoriteArtist.artist_name) {
       getArtistData(favoriteArtist.artist_name);
     }
   }, [favoriteArtist]);
+
+  useEffect(() => {
+    getUserID();
+  }, []);
 
   async function getTrackData(track: { track_name: string; ms_played: number }) {
     try {
@@ -116,6 +122,21 @@ useEffect(() => {
       setFavoriteTrackDisplayData(trackData);
     } catch (error) {
       console.error("Error fetching track data:", error);
+    }
+  }
+
+  async function getUserID() {
+    try {
+      const response = await axios.get("/api/get-user-id", {
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem("authCode") || "").access_token,
+        },
+      });
+  
+      const userData = response.data;
+      setUserName(userData.displayName || userData.userId);
+    } catch (error) {
+      console.error("Error fetching user ID:", error);
     }
   }
 
@@ -148,47 +169,80 @@ useEffect(() => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-2xl font-bold mt-10 mb-4 bg-spotify-green rounded-full box-border">
-        Your favourite Artist
-      </h1>
-      {favoriteArtistDisplayData.name && (
-        <div>
-          <p className="text-xl mt-5">{favoriteArtistDisplayData.name}</p>
-          {favoriteArtistDisplayData.images[0].url && (
-            <Image
-              src={favoriteArtistDisplayData.images[0].url}
-              alt="Artist image"
-              width={favoriteArtistDisplayData.images[0].width}
-              height={favoriteArtistDisplayData.images[0].height}
-            />
-          )}
-          <p className="text-xl mt-5">Genres: {favoriteArtistDisplayData.genres.join(", ")}</p>
+    <div className="flex flex-col items-center w-full">
+      <nav className="w-full fixed top-0 bg-black text-white shadow-md z-10 flex items-center justify-between px-4 h-16">
+        <div className="flex items-center">
+          <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7m-9 5v6m4 0v-6m-4 0h4"></path>
+          </svg>
+          <span>Home</span>
         </div>
-      )}
-      <h1 className="text-2xl font-bold mt-80 mb-4 bg-spotify-green rounded-full">
-        Your most listened track
-      </h1>
-      {favoriteTrackDisplayData.name && (
+        <div className="text-center text-lg">
+          <p>Hey {userName},</p>
+          <p className="text-spotify-green">This is Your Personal Spotify Recap</p>
+        </div>
         <div>
-          <p className="text-xl mt-5">{favoriteTrackDisplayData.name}</p>
-          {favoriteTrackDisplayData.artists.map((artist, i) => (
-            <p key={i} className="text-xl mt-5">{artist.name}</p>
-          ))}
-          <Image
-            src={favoriteTrackDisplayData.album.images[0].url || ""}
-            alt="Album cover"
-            width={favoriteTrackDisplayData.album.images[0].width}
-            height={favoriteTrackDisplayData.album.images[0].height}
-          />
-          <div className="flex flex-col items-center">
-            <audio ref={audioRef} src={favoriteTrackDisplayData.preview_url || ""} autoPlay={true} controls />
-            <button onClick={togglePlayPause}>
-              {isPlaying ? 'Pause' : 'Play'}
-            </button>
+          <img src="/path/to/spotify-logo.png" alt="Spotify" className="h-8" />
+        </div>
+        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white"></div>
+      </nav>
+      <div className="flex text-2xl font-bold flex-col items-center mt-24">
+        <h1>Top Artist</h1>
+      </div>
+      <div className="flex flex-col items-center mt-6 w-full"> {/* Anpassung der Breite */}
+        {favoriteArtistDisplayData.name && (
+          <div className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center mb-20 w-4/10"> {/* Anpassung der Breite */}
+            <div className="flex items-center">
+              <div className="mr-6">
+                <p className="text-2xl text-spotify-green">Your most favourite Artist is:</p>
+                <p className="text-2xl font-bold text-white text-center">{favoriteArtistDisplayData.name}</p>
+              </div>
+              {favoriteArtistDisplayData.images[0].url && (
+                <div className="border-2 border-white p-1 ">
+                  <Image
+                    src={favoriteArtistDisplayData.images[0].url}
+                    alt="Artist image"
+                    width={150}
+                    height={150}
+                  />
+                </div>
+              )}
+            </div>
           </div>
+        )}
+        <div className="flex text-2xl font-bold flex-col items-center mt-50 mb-7">
+          <h1>Top Track</h1>
         </div>
-      )}
+        {favoriteTrackDisplayData.name && (
+          <div className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center w-4/10"> {/* Anpassung der Breite */}
+            <div className="flex items-center">
+              <div className="mr-6">
+                <p className="text-2xl text-spotify-green text-center">Your most favourite track is:</p>
+                <p className="text-2xl font-bold text-white text-center">{favoriteTrackDisplayData.name}</p>
+                {favoriteTrackDisplayData.artists.map((artist, i) => (
+                  <p key={i} className="text-xl text-center">{artist.name}</p>
+                ))}
+              </div>
+              <div className="border-2 border-white p-1">
+                <Image
+                  src={favoriteTrackDisplayData.album.images[0].url || ""}
+                  alt="Album cover"
+                  width={150}
+                  height={150}
+                />
+              </div>
+            </div>
+            {favoriteTrackDisplayData.preview_url && (
+              <div className="flex flex-col items-center mt-5 mr-40">
+                <audio ref={audioRef} src={favoriteTrackDisplayData.preview_url} autoPlay={true} controls />
+                <button onClick={togglePlayPause} className="mt-2">
+                  {isPlaying ? 'Pause' : 'Play'}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
