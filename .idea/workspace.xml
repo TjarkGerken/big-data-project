@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="spotify api anbindung">
-      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/exampleResponse.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/songRespone.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-app/src/app/results/250ms silence.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/next.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,20 +47,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "David__Frontend",
-    "last_opened_file_path": "/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/results",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/Users/tjarkgerken/Coding101/big-data-project/web-app/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;David__Frontend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/results&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/tjarkgerken/Coding101/big-data-project/web-app/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/web-app/src/app/results" />
@@ -95,7 +92,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720131977456</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="spotify api anbindung">
+      <option name="closed" value="true" />
+      <created>1720136284862</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1720136284862</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -58,7 +58,7 @@ const Page = () => {
   const user = {
     spotifyUserId: "your_spotify_user_id",
     topTracks: [
-      { track_name: "Rap über Hass", ms_played: 420000 },
+      { track_name: "Turandot", ms_played: 420000 },
       { track_name: "Bibi Blocksberg Lied", ms_played: 410000 },
       { track_name: "Was ist los", ms_played: 370000 },
     ],
@@ -84,14 +84,17 @@ const Page = () => {
   };
 
   useEffect(() => {
-    findFavorites();
-  }, []);
+  findFavorites();
+  // Since findFavorites updates favoriteTrack,
+  // you should call getTrackData in a separate useEffect
+  // that depends on favoriteTrack to ensure it has the updated value.
+}, []); // This runs only once on component mount
 
-  useEffect(() => {
-    if (favoriteTrack.track_name) {
-      getTrackData(favoriteTrack);
-    }
-  }, [favoriteTrack]);
+useEffect(() => {
+  if (favoriteTrack) {
+    getTrackData(favoriteTrack);
+  }
+}, [favoriteTrack]); // This runs whenever favoriteTrack changes
 
   useEffect(() => {
     if (favoriteArtist.artist_name) {
