@@ -85,16 +85,13 @@ const Page = () => {
 
   useEffect(() => {
   findFavorites();
-  // Since findFavorites updates favoriteTrack,
-  // you should call getTrackData in a separate useEffect
-  // that depends on favoriteTrack to ensure it has the updated value.
-}, []); // This runs only once on component mount
+}, []);
 
 useEffect(() => {
   if (favoriteTrack) {
     getTrackData(favoriteTrack);
   }
-}, [favoriteTrack]); // This runs whenever favoriteTrack changes
+}, [favoriteTrack]);
 
   useEffect(() => {
     if (favoriteArtist.artist_name) {
