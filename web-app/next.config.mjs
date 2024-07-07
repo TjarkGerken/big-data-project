@@ -2,7 +2,7 @@
 const nextConfig = {
   output: "standalone",
   images: {
-    domains: ['i.scdn.co'],
+    domains: ["i.scdn.co"],
   },
 };
 

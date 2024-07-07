@@ -1,11 +1,14 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import Image from 'next/image'
+import Image from "next/image";
 
 const Page = () => {
   const [result, setResult] = useState("");
-  const [favoriteTrack, setFavoriteTrack] = useState<{ track_name: string; ms_played: number }>({
+  const [favoriteTrack, setFavoriteTrack] = useState<{
+    track_name: string;
+    ms_played: number;
+  }>({
     track_name: "",
     ms_played: 0,
   });
@@ -52,7 +55,10 @@ const Page = () => {
     }
   }, [favoriteTrackDisplayData.preview_url]);
 
-  const [favoriteArtist, setFavoriteArtist] = useState<{ artist_name: string; ms_played: number }>({
+  const [favoriteArtist, setFavoriteArtist] = useState<{
+    artist_name: string;
+    ms_played: number;
+  }>({
     artist_name: "",
     ms_played: 0,
   });
@@ -87,7 +93,6 @@ const Page = () => {
 
   useEffect(() => {
     findFavorites();
-
   }, []);
 
   useEffect(() => {
@@ -97,25 +102,26 @@ const Page = () => {
     }
   }, [favoriteTrack]);
 
-
-
   useEffect(() => {
     if (favoriteArtist && favoriteArtist.artist_name !== "") {
       getArtistData(favoriteArtist.artist_name);
     }
   }, [favoriteArtist]);
 
-
-  async function getTrackData(track: { track_name: string; ms_played: number }) {
+  async function getTrackData(track: {
+    track_name: string;
+    ms_played: number;
+  }) {
     try {
       const response = await axios.post(
         `/api/get-track-data`,
         { track_name: track.track_name },
         {
           headers: {
-            Authorization: JSON.parse(localStorage.getItem("authCode") || "").access_token,
+            Authorization: JSON.parse(localStorage.getItem("authCode") || "")
+              .access_token,
           },
-        }
+        },
       );
 
       const trackData = response.data;
@@ -128,12 +134,17 @@ const Page = () => {
 
   async function getUserID() {
     try {
-      const response = await axios.post("/api/get-user-id", {},{
-        headers: {
-          Authorization: JSON.parse(localStorage.getItem("authCode") || "").access_token,
+      const response = await axios.post(
+        "/api/get-user-id",
+        {},
+        {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem("authCode") || "")
+              .access_token,
+          },
         },
-      });
-  
+      );
+
       const userData = response.data;
       setUserName(userData.displayName || userData.userId);
     } catch (error) {
@@ -148,9 +159,10 @@ const Page = () => {
         { artist_name },
         {
           headers: {
-            Authorization: JSON.parse(localStorage.getItem("authCode") || "").access_token,
+            Authorization: JSON.parse(localStorage.getItem("authCode") || "")
+              .access_token,
           },
-        }
+        },
       );
 
       const artistData = response.data;
@@ -173,32 +185,57 @@ const Page = () => {
     <div className="flex flex-col items-center w-full">
       <nav className="w-full fixed top-0 bg-black text-white shadow-md z-10 flex items-center justify-between px-4 h-16">
         <div className="flex items-center space-x-2">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-               stroke="currentColor" className="size-6">
-            <path strokeLinecap="round" strokeLinejoin="round"
-                  d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            />
           </svg>
           <span>Home</span>
         </div>
         <div className="text-center text-lg">
           <p>Hey {userName},</p>
-          <p className="text-spotify-green">This is Your Personal Spotify Recap</p>
+          <p className="text-spotify-green">
+            This is Your Personal Spotify Recap
+          </p>
         </div>
         <div>
-          <Image src="/Spotify.png" alt="Spotify" className="h-14 w-full object-cover" width={300} height={168}/>
+          <Image
+            src="/Spotify.png"
+            alt="Spotify"
+            className="h-14 w-full object-cover"
+            width={300}
+            height={168}
+          />
         </div>
         <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white"></div>
       </nav>
       <div className="flex text-2xl font-bold flex-col items-center mt-24">
         <h1>Top Artist</h1>
       </div>
-      <div className="flex flex-col items-center mt-6 w-full"> {/* Anpassung der Breite */}
+      <div className="flex flex-col items-center mt-6 w-full">
+        {" "}
+        {/* Anpassung der Breite */}
         {favoriteArtistDisplayData.name && (
-          <div className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center mb-20 w-4/10"> {/* Anpassung der Breite */}
+          <div className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center mb-20 w-4/10">
+            {" "}
+            {/* Anpassung der Breite */}
             <div className="flex items-center">
               <div className="mr-6">
-                <p className="text-2xl text-spotify-green">Your favourite Artist is:</p>
-                <p className="text-2xl font-bold text-white text-center">{favoriteArtistDisplayData.name}</p>
+                <p className="text-2xl text-spotify-green">
+                  Your favourite Artist is:
+                </p>
+                <p className="text-2xl font-bold text-white text-center">
+                  {favoriteArtistDisplayData.name}
+                </p>
               </div>
               {favoriteArtistDisplayData.images[0].url && (
                 <div className="border-2 border-white p-1 ">
@@ -217,13 +254,21 @@ const Page = () => {
           <h1>Top Track</h1>
         </div>
         {favoriteTrackDisplayData.name && (
-          <div className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center w-4/10"> {/* Anpassung der Breite */}
+          <div className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center w-4/10">
+            {" "}
+            {/* Anpassung der Breite */}
             <div className="flex items-center">
               <div className="mr-6">
-                <p className="text-2xl text-spotify-green text-center">Your favourite track is:</p>
-                <p className="text-2xl font-bold text-white text-center">{favoriteTrackDisplayData.name}</p>
+                <p className="text-2xl text-spotify-green text-center">
+                  Your favourite track is:
+                </p>
+                <p className="text-2xl font-bold text-white text-center">
+                  {favoriteTrackDisplayData.name}
+                </p>
                 {favoriteTrackDisplayData.artists.map((artist, i) => (
-                  <p key={i} className="text-xl text-center">{artist.name}</p>
+                  <p key={i} className="text-xl text-center">
+                    {artist.name}
+                  </p>
                 ))}
               </div>
               <div className="border-2 border-white p-1">
@@ -237,9 +282,14 @@ const Page = () => {
             </div>
             {favoriteTrackDisplayData.preview_url && (
               <div className="flex flex-col items-center mt-5 mr-40">
-                <audio ref={audioRef} src={favoriteTrackDisplayData.preview_url} autoPlay={true} controls />
+                <audio
+                  ref={audioRef}
+                  src={favoriteTrackDisplayData.preview_url}
+                  autoPlay={true}
+                  controls
+                />
                 <button onClick={togglePlayPause} className="mt-2">
-                  {isPlaying ? 'Pause' : 'Play'}
+                  {isPlaying ? "Pause" : "Play"}
                 </button>
               </div>
             )}

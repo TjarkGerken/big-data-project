@@ -24,7 +24,9 @@ export async function POST(request: Request) {
     console.log("Display Name:", displayName);
 
     // Return the user ID and display name
-    return new Response(JSON.stringify({ userId, displayName }), { status: 200 });
+    return new Response(JSON.stringify({ userId, displayName }), {
+      status: 200,
+    });
   } catch (error) {
     console.error(error);
     // Adjust the error handling logic as needed
