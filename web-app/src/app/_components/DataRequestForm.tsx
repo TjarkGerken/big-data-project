@@ -3,15 +3,12 @@
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import React from "react";
 import { z } from "zod";
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -19,7 +16,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -47,7 +43,7 @@ export default function DataRequestForm({
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const uid = data.spotifyUser;
-    console.log(uid)
+    console.log(uid);
     axios.get("/api/fetch-db?uid=" + uid).then((response) => {
       console.log(response);
     });
@@ -100,15 +96,10 @@ export default function DataRequestForm({
           >
             Analyse Data
           </Button>
-          {!disabled && (
-          <SendDemoRequest uid={form.getValues("spotifyUser")} />)}
+          {!disabled && <SendDemoRequest uid={form.getValues("spotifyUser")} />}
         </form>
       </Form>
-      {!disabled && (
-        <div className={"w-2/3"}>
-          hi
-        </div>
-      )}
+      {!disabled && <div className={"w-2/3"}>hi</div>}
     </div>
   );
 }

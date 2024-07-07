@@ -4,23 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="spotify api anbindung">
-      <change afterPath="$PROJECT_DIR$/spark-app/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spark-app/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spark-app/.idea/spark-app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spark-app/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/mariadb.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/mariadb.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/memcached.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/memcached.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/mongodb-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ExampleData/mongodb-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spark-app/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/spark-app.py" beforeDir="false" afterPath="$PROJECT_DIR$/spark-app/spark-app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/package.json" afterDir="false" />
+    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="db to fe">
       <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/DataRequestForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/_components/DataRequestForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/sendDemoRequest.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/_components/sendDemoRequest.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/StreamingHistoryTjark.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/StreamingHistoryTjark.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +84,7 @@
       <workItem from="1720035659952" duration="8505000" />
       <workItem from="1720099744264" duration="2949000" />
       <workItem from="1720383232499" duration="28000" />
-      <workItem from="1720383316531" duration="6454000" />
+      <workItem from="1720383316531" duration="6800000" />
     </task>
     <task id="LOCAL-00001" summary="d">
       <option name="closed" value="true" />
@@ -132,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720043139281</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="db to fe">
+      <option name="closed" value="true" />
+      <created>1720390082695</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720390082695</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,6 +146,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="d" />
     <MESSAGE value="different stuff i guess" />
-    <option name="LAST_COMMIT_MESSAGE" value="different stuff i guess" />
+    <MESSAGE value="db to fe" />
+    <option name="LAST_COMMIT_MESSAGE" value="db to fe" />
   </component>
 </project>

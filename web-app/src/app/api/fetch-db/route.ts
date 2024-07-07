@@ -21,21 +21,24 @@ export async function GET(request: Request) {
   const uid = url.searchParams.get("uid");
 
   const pool = mariadb.createPool({
-    host: 'my-app-mariadb-service',
+    host: "my-app-mariadb-service",
     port: 3306,
-    user:'root',
-    password: 'mysecretpw',
+    user: "root",
+    password: "mysecretpw",
     connectionLimit: 5,
     acquireTimeout: 20000,
-    database: "spotify"
+    database: "spotify",
   });
 
   async function queryTopArtists() {
     let conn;
     try {
       conn = await pool.getConnection();
-      const rows : ArtistData[] = await conn.query("SELECT * FROM top_artists WHERE UID = ?", [uid]);
-      return rows
+      const rows: ArtistData[] = await conn.query(
+        "SELECT * FROM top_artists WHERE UID = ?",
+        [uid],
+      );
+      return rows;
     } catch (err) {
       console.error(err);
       throw new Error("something went wrong");
@@ -47,8 +50,11 @@ export async function GET(request: Request) {
     let conn;
     try {
       conn = await pool.getConnection();
-      const rows : TrackData[] = await conn.query("SELECT * FROM top_songs WHERE UID = ?", [uid]);
-      return rows
+      const rows: TrackData[] = await conn.query(
+        "SELECT * FROM top_songs WHERE UID = ?",
+        [uid],
+      );
+      return rows;
     } catch (err) {
       console.error(err);
       throw new Error("something went wrong");
@@ -64,14 +70,19 @@ export async function GET(request: Request) {
   // console.log(top_artist);
 
   function convertBigIntToNumber(bigintValue: bigint) {
-    if (bigintValue < Number.MIN_SAFE_INTEGER || bigintValue > Number.MAX_SAFE_INTEGER) {
-      throw new RangeError('The BigInt value is out of the safe range for conversion to Number.');
+    if (
+      bigintValue < Number.MIN_SAFE_INTEGER ||
+      bigintValue > Number.MAX_SAFE_INTEGER
+    ) {
+      throw new RangeError(
+        "The BigInt value is out of the safe range for conversion to Number.",
+      );
     }
     return Number(bigintValue);
   }
   // Define a replacer function for JSON.stringify
   function bigintReplacer(key: string, value: any) {
-    if (typeof value === 'bigint') {
+    if (typeof value === "bigint") {
       return convertBigIntToNumber(value);
     } else {
       return value;
@@ -91,12 +102,14 @@ export async function GET(request: Request) {
   });
   const response = {
     spotify_uid: uid,
-    top_songs : sortedTopSongs.slice(0, 10),
-    top_artist : sortedTopArtist.slice(0, 10)
-  }
+    top_songs: sortedTopSongs.slice(0, 10),
+    top_artist: sortedTopArtist.slice(0, 10),
+  };
 
   const jsonString = JSON.stringify(response, bigintReplacer);
 
-  const exampleResponse = 
-
-  return new Response(jsonString, { status: 200, headers: { 'Content-Type': 'application/json' } });}
+  return new Response(jsonString, {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
+}
