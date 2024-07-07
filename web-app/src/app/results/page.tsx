@@ -60,13 +60,13 @@ const Page = () => {
   const user = {
     spotifyUserId: "your_spotify_user_id",
     topTracks: [
-      { track_name: "Turandot", ms_played: 420000 },
-      { track_name: "Bibi Blocksberg Lied", ms_played: 410000 },
+      { track_name: "Turandot", ms_played: 460000 },
+      { track_name: "Bibi Blocksberg Lied", ms_played: 490000 },
       { track_name: "Was ist los", ms_played: 450000 },
     ],
     total_minutes_played_track: 30,
     topArtists: [
-      { artist_name: "Vega", ms_played: 300000 },
+      { artist_name: "Trettmann", ms_played: 300000 },
       { artist_name: "Haftbefehl", ms_played: 240000 },
     ],
     total_minutes_played_artist: 30,
@@ -171,9 +171,11 @@ const Page = () => {
   return (
     <div className="flex flex-col items-center w-full">
       <nav className="w-full fixed top-0 bg-black text-white shadow-md z-10 flex items-center justify-between px-4 h-16">
-        <div className="flex items-center">
-          <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7m-9 5v6m4 0v-6m-4 0h4"></path>
+        <div className="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+               stroke="currentColor" className="size-6">
+            <path strokeLinecap="round" strokeLinejoin="round"
+                  d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
           </svg>
           <span>Home</span>
         </div>
@@ -182,7 +184,7 @@ const Page = () => {
           <p className="text-spotify-green">This is Your Personal Spotify Recap</p>
         </div>
         <div>
-          <img src="/path/to/spotify-logo.png" alt="Spotify" className="h-8" />
+          <Image src="/Spotify.png" alt="Spotify" className="h-14 w-full object-cover" width={300} height={168}/>
         </div>
         <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white"></div>
       </nav>
