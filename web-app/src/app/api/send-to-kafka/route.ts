@@ -1,11 +1,23 @@
 import { Kafka, Partitioners } from "kafkajs";
-import { StreamingHistoryTjark } from "@/app/api/send-to-kafka/StreamingHistory_music";
+import { StreamingHistoryTjark } from "@/app/api/send-to-kafka/StreamingHistoryTjark";
 import { Track } from "@/app/api/send-to-kafka/StreamingHistoryType";
+import { StreamingHistoryDavid } from "./StreamingHistoryDavid";
+import { StreamingHistoryCarlos } from "@/app/api/send-to-kafka/StreamingHistoryCarlos";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
-  const tracks: Track[] = StreamingHistoryTjark;
+  const body = await request.json();
+  console.log(body);
+  console.log(body.uid);
+  const datasets = {
+    tjark: StreamingHistoryTjark,
+    david: StreamingHistoryDavid,
+    carlos: StreamingHistoryCarlos,
+    // "niklas": "Niklas",
+  };
+
+  const tracks: Track[] = datasets[body.uid as keyof typeof datasets];
 
   const kafka = new Kafka({
     clientId: "client-" + Math.floor(Math.random() * 100000),
@@ -34,7 +46,7 @@ export async function POST(request: Request) {
 
   for (const trackChunk of trackChunks) {
     const messages = trackChunk.map((track) => {
-      track.UID = "Spotify-UID-TJARK";
+      track.UID = body.uid;
       return { value: JSON.stringify(track) };
     });
 

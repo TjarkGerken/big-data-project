@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="grammar fix">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/spotifyAuthorization.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/_components/spotifyAuthorization.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" afterDir="false" />
+    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="db to fe">
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/DataRequestForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/_components/DataRequestForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,30 +17,22 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <excluded-from-favorite>
-      <branch-storage>
-        <map>
-          <entry type="LOCAL">
-            <value>
-              <list>
-                <branch-info repo="$PROJECT_DIR$" source="master" />
-              </list>
-            </value>
-          </entry>
-        </map>
-      </branch-storage>
-    </excluded-from-favorite>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="DuMongo" />
+        <entry key="$PROJECT_DIR$" value="David_Frontend" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -55,8 +45,8 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;David__Frontend&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/results&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;DuMongo&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/api/send-to-kafka&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -68,10 +58,10 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/web-app/src/app/results" />
+      <recent name="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/web-app/public" />
+      <recent name="$PROJECT_DIR$/ExampleData" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -90,47 +80,51 @@
       <option name="presentableId" value="Default" />
       <updated>1719992560636</updated>
       <workItem from="1719992564192" duration="739000" />
-      <workItem from="1720130957357" duration="1042000" />
+      <workItem from="1720032951173" duration="1713000" />
+      <workItem from="1720035659952" duration="8505000" />
+      <workItem from="1720099744264" duration="2949000" />
+      <workItem from="1720383232499" duration="28000" />
+      <workItem from="1720383316531" duration="6800000" />
     </task>
-    <task id="LOCAL-00001" summary="different stuff i guess">
+    <task id="LOCAL-00001" summary="d">
       <option name="closed" value="true" />
-      <created>1720131977456</created>
+      <created>1720033031919</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1720131977456</updated>
+      <updated>1720033031919</updated>
     </task>
-    <task id="LOCAL-00002" summary="spotify api anbindung">
+    <task id="LOCAL-00002" summary="d">
       <option name="closed" value="true" />
-      <created>1720136284862</created>
+      <created>1720033056654</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1720136284862</updated>
+      <updated>1720033056654</updated>
     </task>
-    <task id="LOCAL-00003" summary="spotify api anbindung">
+    <task id="LOCAL-00003" summary="different stuff i guess">
       <option name="closed" value="true" />
-      <created>1720351038179</created>
+      <created>1720043059863</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1720351038179</updated>
+      <updated>1720043059863</updated>
     </task>
-    <task id="LOCAL-00004" summary="some quick fixes">
+    <task id="LOCAL-00004" summary="different stuff i guess">
       <option name="closed" value="true" />
-      <created>1720391094438</created>
+      <created>1720043139281</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1720391094438</updated>
+      <updated>1720043139281</updated>
     </task>
-    <task id="LOCAL-00005" summary="grammar fix">
+    <task id="LOCAL-00005" summary="db to fe">
       <option name="closed" value="true" />
-      <created>1720391368493</created>
+      <created>1720390082695</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1720391368493</updated>
+      <updated>1720390082695</updated>
     </task>
     <option name="localTasksCounter" value="6" />
     <servers />
@@ -150,21 +144,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="d" />
     <MESSAGE value="different stuff i guess" />
-    <MESSAGE value="spotify api anbindung" />
-    <MESSAGE value="some quick fixes" />
-    <MESSAGE value="grammar fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="grammar fix" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/web-app/src/app/api/get-track-data/songRespone.ts</url>
-          <line>1</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="db to fe" />
+    <option name="LAST_COMMIT_MESSAGE" value="db to fe" />
   </component>
 </project>

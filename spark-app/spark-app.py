@@ -1,32 +1,20 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-from pyspark.sql.types import StructType, IntegerType, StringType, TimestampType
+from pyspark.sql.types import IntegerType, StringType, StructType, TimestampType
 
-windowDuration = '7 days'
-slidingDuration = '7 days'
+dbUrl = 'jdbc:mysql://my-app-mariadb-service:3306/spotify'
+dbOptions = {"user": "root", "password": "mysecretpw"}
+dbSchema = 'spotify'
 
+windowDuration = '1 minute'
+slidingDuration = '1 minute'
 
-mongo_uri = "mongodb://admin:password@mongodb:27017"
-mongo_db = "spotify"
+# Example Part 1
+# Create a spark session
+spark = SparkSession.builder \
+    .appName("Mini Spotify").getOrCreate()
 
-
-# create a spark session
-spark = SparkSession \
-    .builder \
-    .master("local") \
-    .appName("Spotify Wrapped") \
-    .config("spark.mongodb.read.connection.uri", "mongodb://admin:password@mongodb:27017/spotify?authSource=admin") \
-    .config("spark.mongodb.write.connection.uri", "mongodb://admin:password@mongodb:27017/spotify?authSource=admin") \
-    .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector:10.0.2') \
-    .getOrCreate()
-
-messageSchema = StructType() \
-    .add("endTime", StringType()) \
-    .add("artistName", StringType()) \
-    .add("trackName", StringType()) \
-    .add("UID", StringType()) \
-    .add("msPlayed", IntegerType())
-
+# Set log level
 spark.sparkContext.setLogLevel('WARN')
 
 # Example Part 2
@@ -40,120 +28,61 @@ kafkaMessages = spark \
     .option("startingOffsets", "earliest") \
     .load()
 
-# Parse the Kafka messages using the provided schema
-# Convert value: binary -> JSON -> fields + parsed timestamp
-parsedMessages = kafkaMessages.select(
-    # Extract 'value' from Kafka message (i.e., the tracking data)
+# Define schema of tracking data
+trackingMessageSchema = StructType() \
+    .add("endTime", StringType()) \
+    .add("artistName", StringType()) \
+    .add("trackName", StringType()) \
+    .add("UID", StringType()) \
+    .add("msPlayed", IntegerType())
+
+trackingMessages = kafkaMessages.select(
     from_json(
         column("value").cast("string"),
-        messageSchema
+        trackingMessageSchema
     ).alias("json")
 ).select(
-    # Convert Unix timestamp to TimestampType
-    to_timestamp(column('json.endTime'), "yyyy-MM-dd HH:mm")
-    .cast(TimestampType())
-    .alias("parsed_timestamp"),
-    # Select all JSON fields
-    column("json.*")
-) \
-    .withColumnRenamed('json.trackName', 'trackName') \
-    .withColumnRenamed('json.UID', 'UID') \
-    .withWatermark("parsed_timestamp", windowDuration)
+    column("json.*"),
+    to_timestamp(column("json.endTime"), "yyyy-MM-dd'T'HH:mm:ss").alias("endTimeTimestamp")
+).withWatermark("endTimeTimestamp", "1 year")
 
-""""""
-
-# Compute most popular tracks
-popularTracks = parsedMessages.groupBy(
-    column("trackName"),
-    column("UID"),
+topSongs = trackingMessages.groupBy(
+    col("UID"), col("trackName"), col("artistName")
 ).agg(
-    sum("msPlayed").alias("total_msPlayed")
-) \
-    .withColumnRenamed('window.start', 'window_start') \
-    .withColumnRenamed('window.end', 'window_end') \
-    .orderBy(desc("total_msPlayed")) \
-    .limit(20)
+    {"msPlayed": "sum"}
+).withColumnRenamed("sum(msPlayed)", "total_msPlayed")
 
-
-popularTracksWindow = parsedMessages.groupBy(
-    window(
-        column("parsed_timestamp"),
-        windowDuration,
-        slidingDuration
-    ),
-    column("UID"),
+topArtists = trackingMessages.groupBy(
+    col("UID"), col("artistName")
 ).agg(
-    sum("msPlayed").alias("total_msPlayed")
-) \
-    .withColumnRenamed('window.start', 'window_start') \
-    .withColumnRenamed('window.end', 'window_end') \
+    {"msPlayed": "sum"}
+).withColumnRenamed("sum(msPlayed)", "total_msPlayed")
+
+print("\n\n\n\n\n\n\Write to MariaDB\n\n\n\n")
 
 
+def write_to_db(batch_df, batch_id, table_name):
+    batch_df.write \
+        .format("jdbc") \
+        .option("url", dbUrl) \
+        .option("dbtable", table_name) \
+        .option("user", dbOptions["user"]) \
+        .option("password", dbOptions["password"]) \
+        .mode("overwrite") \
+        .save()
 
-popularArtist = parsedMessages.groupBy(
-    column("artistName"),
-    column("UID"),
-).agg(
-    sum("msPlayed").alias("total_msPlayed")
-) \
-    .withColumnRenamed('window.start', 'window_start') \
-    .withColumnRenamed('window.end', 'window_end') \
-    .orderBy(desc("total_msPlayed")) \
-    .limit(20)
 
-totalPlayedByUser = parsedMessages.groupBy(
-    column("UID"),
-).agg(
-    sum("msPlayed").alias("total_msPlayed")
-)
-
-query = totalPlayedByUser \
+query = topSongs \
     .writeStream \
     .outputMode("complete") \
-    .format("console") \
+    .foreachBatch(lambda df, id: write_to_db(df, id, "top_songs")) \
     .start()
 
-
-"""
-consoleDump = kafkaMessages \
-    .writeStream \
-    .format("console") \
-    .start()
-
-consoleDump.awaitTermination()
-"""
-# Start running the query; print running counts to the console
-
-consoleDump = popularTracks \
+query2 = topArtists \
     .writeStream \
     .outputMode("complete") \
-    .format("console") \
+    .foreachBatch(lambda df, id: write_to_db(df, id, "top_artists")) \
     .start()
 
-consoleDump2 = popularTracksWindow \
-    .writeStream \
-    .outputMode("update") \
-    .format("console") \
-    .start()
-
-
-# popular_tracks_pd = popularTracks.toPandas()
-# popular_tracks_dict = popular_tracks_pd.to_dict()
-
-"""writeQuery = popularTracks \
-    .writeStream \
-    .format("mongodb") \
-    .option("spark.mongodb.output.uri", f"{mongo_uri}/{mongo_db}.popularTracks") \
-    .option("checkpointLocation", "/tmp/checkpoints") \
-    .outputMode("append") \
-    .start()
-"""
-consoleDumpArtist = popularArtist \
-    .writeStream \
-    .outputMode("complete") \
-    .format("console") \
-    .start()
-
-# writeQuery.awaitTermination()
-consoleDump.awaitTermination()
-consoleDumpArtist.awaitTermination()
+query.awaitTermination()
+query2.awaitTermination()

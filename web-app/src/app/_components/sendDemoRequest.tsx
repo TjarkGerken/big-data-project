@@ -5,17 +5,19 @@ import { useState } from "react";
 import { GetLastSongsResponse } from "../_interfaces/GetLastSongsResponse";
 import { Button } from "@/components/ui/button";
 
-export default function SendDemoRequest() {
-  async function sendTracksToKafka(tracks: GetLastSongsResponse) {
-    axios.post("/api/send-to-kafka", tracks).then((response) => {});
-    console.log(
-      tracks.items.map((track) => {
-        return { value: JSON.stringify(track) };
-      }),
-    );
+interface SendDemoRequestProps {
+  uid: string;
+}
+
+export default function SendDemoRequest({ uid }: SendDemoRequestProps) {
+  async function sendTracksToKafka() {
+    if (!uid || uid === "") {
+      return;
+    }
+    axios.post("/api/send-to-kafka", { uid: uid }).then((response) => {});
   }
   const [response, setResponse] = useState({} as GetLastSongsResponse);
-  var token = null;
+  let token = null;
 
   async function sendReq() {
     try {
@@ -33,7 +35,7 @@ export default function SendDemoRequest() {
       authCode = JSON.parse(localStorage.getItem("authCode") || "");
       token = authCode.access_token;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return error;
     }
     if (!token) {
@@ -53,7 +55,7 @@ export default function SendDemoRequest() {
 
     while (latestResponseDate > unixTimestamp || latestResponseDate === -1) {
       await axios.get(url, header).then((response) => {
-        sendTracksToKafka(response.data);
+        sendTracksToKafka();
         if (response.data.next === null) {
           latestResponseDate = -2;
           return;
@@ -93,7 +95,6 @@ export default function SendDemoRequest() {
       </div>
       {response.items && (
         <div className={"text-white"}>
-          <h1>Spotify Response</h1>
           {response.items?.map((item, i) => {
             return <div key={i}>{item.track.name}</div>;
           })}

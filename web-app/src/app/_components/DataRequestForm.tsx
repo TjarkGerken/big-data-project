@@ -3,15 +3,12 @@
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import React from "react";
 import { z } from "zod";
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -19,7 +16,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -76,7 +72,7 @@ export default function DataRequestForm({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className={"text-xl"}>
-                    <SelectItem value="carlo">Carlo</SelectItem>
+                    <SelectItem value="carlos">Carlos</SelectItem>
                     <SelectItem value="niklas">Niklas</SelectItem>
                     <SelectItem value="david">David</SelectItem>
                     <SelectItem value="tjark">Tjark</SelectItem>
@@ -101,13 +97,10 @@ export default function DataRequestForm({
           >
             Analyse Data
           </Button>
+          {!disabled && <SendDemoRequest uid={form.getValues("spotifyUser")} />}
         </form>
       </Form>
-      {!disabled && (
-        <div className={"w-2/3"}>
-          <SendDemoRequest />
-        </div>
-      )}
+      {!disabled && <div className={"w-2/3"}>hi</div>}
     </div>
   );
 }
