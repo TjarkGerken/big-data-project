@@ -58,8 +58,13 @@ topArtists = trackingMessages.groupBy(
     {"msPlayed": "sum"}
 ).withColumnRenamed("sum(msPlayed)", "total_msPlayed")
 
-print("\n\n\n\n\n\n\Write to MariaDB\n\n\n\n")
+totalPlaytime = trackingMessages.groupBy(
+    col("UID")
+).agg(
+    {"msPlayed": "sum"}
+).withColumnRenamed("sum(msPlayed)", "total_msPlayed")
 
+print("\n\n\n\n\n\n\Write to MariaDB\n\n\n\n")
 
 def write_to_db(batch_df, batch_id, table_name):
     batch_df.write \
@@ -84,5 +89,12 @@ query2 = topArtists \
     .foreachBatch(lambda df, id: write_to_db(df, id, "top_artists")) \
     .start()
 
+query3 = totalPlaytime \
+    .writeStream \
+    .outputMode("complete") \
+    .foreachBatch(lambda df, id: write_to_db(df, id, "total_playtime")) \
+    .start()
+
 query.awaitTermination()
 query2.awaitTermination()
+query3.awaitTermination()
