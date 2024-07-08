@@ -23,6 +23,12 @@ data:
       PRIMARY KEY (`UID`, `artistName`)
     );
 
+    CREATE TABLE `total_playtime` (
+      `UID` VARCHAR(22) NOT NULL,
+      `total_msPlayed` INT NOT NULL,
+      PRIMARY KEY (`UID`)
+    );
+
 
 ---
 apiVersion: apps/v1
