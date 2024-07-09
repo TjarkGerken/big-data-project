@@ -18,7 +18,7 @@ spark = SparkSession.builder \
 spark.sparkContext.setLogLevel('WARN')
 
 # Set checkpoint directory
-checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/checkpoints"
+checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/cp"
 spark.sparkContext.setCheckpointDir(checkpoint_dir)
 
 # Example Part 2
@@ -30,6 +30,7 @@ kafkaMessages = spark \
             "my-cluster-kafka-bootstrap:9092") \
     .option("subscribe", "spotify-track-data") \
     .option("startingOffsets", "earliest") \
+    .option("auto.offset.reset", "earliest") \
     .load()
 
 # Define schema of tracking data
@@ -79,14 +80,17 @@ def write_to_db(batch_df, batch_id, table_name):
     - batch_id (int): The identifier for the current batch.
     - table_name (str): The name of the database table to write to.
     """
-    batch_df.write \
-        .format("jdbc") \
-        .option("url", dbUrl) \
-        .option("dbtable", table_name) \
-        .option("user", dbOptions["user"]) \
-        .option("password", dbOptions["password"]) \
-        .mode("overwrite") \
-        .save()
+    try:
+        batch_df.write \
+            .format("jdbc") \
+            .option("url", dbUrl) \
+            .option("dbtable", table_name) \
+            .option("user", dbOptions["user"]) \
+            .option("password", dbOptions["password"]) \
+            .mode("overwrite") \
+            .save()
+    except Exception as e:
+        print(f"Error writing batch {batch_id} to database: {e}")
 
 
 query = topSongs \
