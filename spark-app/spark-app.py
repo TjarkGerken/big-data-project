@@ -71,6 +71,14 @@ totalPlaytime = trackingMessages.groupBy(
 print("\n\n\n\n\n\n\Write to MariaDB\n\n\n\n")
 
 def write_to_db(batch_df, batch_id, table_name):
+    """
+    Writes a batch of DataFrame to the specified database table.
+
+    Parameters:
+    - batch_df (DataFrame): The DataFrame to write to the database.
+    - batch_id (int): The identifier for the current batch.
+    - table_name (str): The name of the database table to write to.
+    """
     batch_df.write \
         .format("jdbc") \
         .option("url", dbUrl) \

@@ -20,6 +20,7 @@ spec:
           image: farberg/popular-slides
           ports:
             - containerPort: 3000
+#End: Deployment
 
 ---
 #Begin: Service
@@ -55,3 +56,4 @@ spec:
                 name: popular-slides-service
                 port:
                   number: 3000
+#End: Ingress
