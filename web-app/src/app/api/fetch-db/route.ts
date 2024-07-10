@@ -142,7 +142,6 @@ export async function GET(request: Request) {
   };
 
   const jsonString = JSON.stringify(response, bigintReplacer);
-  console.log(jsonString);
 
   return new Response(jsonString, {
     status: 200,

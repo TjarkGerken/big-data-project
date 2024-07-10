@@ -17,7 +17,6 @@ function HandleAuth() {
   async function sendAuthRequest(
     setFetchError: React.Dispatch<React.SetStateAction<boolean>>,
   ) {
-    console.log("About to send request...");
     await axios
       .post("/api/auth-request", { code: code })
       .then((response) => {

@@ -18,7 +18,6 @@ const AVAILABLE_DATASETS = {
 };
 
 async function sendToKafka(tracks: Track[], uid: string) {
-  console.log("===== Sending data to Kafka =====");
   const kafka = new Kafka({
     clientId: "client-" + Math.floor(Math.random() * 100000),
     brokers: ["my-cluster-kafka-bootstrap:9092"],
@@ -62,7 +61,6 @@ async function sendToKafka(tracks: Track[], uid: string) {
 
 export async function POST(request: Request) {
   const body: RequestBody = await request.json();
-  console.log(body.uid);
 
   if (!AVAILABLE_DATASETS[body.uid as keyof typeof AVAILABLE_DATASETS]) {
     return new Response(

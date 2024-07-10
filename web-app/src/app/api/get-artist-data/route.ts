@@ -19,7 +19,6 @@ export async function POST(request: Request) {
     };
 
     const response = await axios.get(url, { params, headers });
-    console.log(response.data.artists.items[0].uri);
     const artistResponse = await axios.get(
       "https://api.spotify.com/v1/artists/" + response.data.artists.items[0].id,
       { headers },

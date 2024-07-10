@@ -3,21 +3,61 @@ import { Suspense, useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import DisplayArtists from "@/app/results/components/displayArtists";
+import DisplayTracks from "@/app/results/components/displayTracks";
+import Link from "next/link";
+import DisplayTotalTime from "@/app/results/components/displayTotalTime";
 
-interface TrackData {
+export interface UserDisplayData {
+  country:          string;
+  display_name:     string;
+  email:            string;
+  explicit_content?: ExplicitContent;
+  external_urls?:    ExternalUrls;
+  followers?:        Followers;
+  href:             string;
+  id:               string;
+  images:           Image[];
+  product:          string;
+  type:             string;
+  uri:              string;
+}
+
+export interface ExplicitContent {
+  filter_enabled: boolean;
+  filter_locked:  boolean;
+}
+
+export interface ExternalUrls {
+  spotify: string;
+}
+
+export interface Followers {
+  href:  string;
+  total: number;
+}
+
+export interface Image {
+  url:    string;
+  height: number;
+  width:  number;
+}
+
+
+export interface TrackData {
   UID: string;
   trackName: string;
   artistName: string;
   total_msPlayed: number;
 }
 
-interface ArtistData {
+export interface ArtistData {
   UID: string;
   artistName: string;
   total_msPlayed: number;
 }
 
-interface TotalPlayTime {
+export interface TotalPlayTime {
   UID: string;
   total_msPlayed: number;
 }
@@ -26,8 +66,127 @@ export interface JSONResponseData {
   spotify_uid: string;
   top_songs: TrackData[];
   top_artist: ArtistData[];
-  total_ms_played?: TotalPlayTime[];
+  total_ms_played: TotalPlayTime[];
 }
+
+const mockJSONResponseData: JSONResponseData = {
+  spotify_uid: "user12345",
+  top_songs: [
+    {
+      UID: "track002",
+      trackName: "Skyline",
+      artistName: "Harry Styles",
+      total_msPlayed: 2100000,
+    },{
+      UID: "track002",
+      trackName: "So Lang",
+      artistName: "Harry Styles",
+      total_msPlayed: 2100000,
+    },{
+      UID: "track002",
+      trackName: "Knöcheltief",
+      artistName: "Harry Styles",
+      total_msPlayed: 2100000,
+    },{
+      UID: "track002",
+      trackName: "Standard",
+      artistName: "Harry Styles",
+      total_msPlayed: 2100000,
+    },
+    {
+      UID: "track001",
+      trackName: "Was ist los?",
+      artistName: "The Weeknd",
+      total_msPlayed: 2400000,
+    },
+    {
+      UID: "track002",
+      trackName: "069",
+      artistName: "Harry Styles",
+      total_msPlayed: 2100000,
+    },{
+      UID: "track002",
+      trackName: "Kalash",
+      artistName: "Harry Styles",
+      total_msPlayed: 2100000,
+    },{
+      UID: "track002",
+      trackName: "Morgenstern",
+      artistName: "Harry Styles",
+      total_msPlayed: 2100000,
+    },
+    {
+      UID: "track002",
+      trackName: "Turandot",
+      artistName: "Harry Styles",
+      total_msPlayed: 21000000,
+    },
+    {
+      UID: "track002",
+      trackName: "Watermelon Sugar",
+      artistName: "Harry Styles",
+      total_msPlayed: 2100000,
+    },
+  ],
+  top_artist: [
+    {
+      UID: "artist002",
+      artistName: "Trettmann",
+      total_msPlayed: 50000000,
+    },
+    {
+      UID: "artist001",
+      artistName: "KIZ",
+      total_msPlayed: 48000000,
+    },
+    {
+      UID: "artist002",
+      artistName: "Pavarotti",
+      total_msPlayed: 50000000,
+    },
+    {
+      UID: "artist002",
+      artistName: "Pavarotti",
+      total_msPlayed: 50000000,
+    },
+    {
+      UID: "artist002",
+      artistName: "Pavarotti",
+      total_msPlayed: 50000000,
+    },
+    {
+      UID: "artist002",
+      artistName: "Pavarotti",
+      total_msPlayed: 50000000,
+    },
+    {
+      UID: "artist002",
+      artistName: "Pavarotti",
+      total_msPlayed: 50000000,
+    },
+    {
+      UID: "artist002",
+      artistName: "Pavarotti",
+      total_msPlayed: 50000000,
+    },
+    {
+      UID: "artist002",
+      artistName: "Pavarotti",
+      total_msPlayed: 50000000,
+    },
+    {
+      UID: "artist002",
+      artistName: "Pavarotti",
+      total_msPlayed: 50000000,
+    },
+  ],
+  total_ms_played: [
+    {
+      UID: "total001",
+      total_msPlayed: 900000,
+    },
+  ],
+};
 
 function RenderResults() {
   const searchParams = useSearchParams();
@@ -41,7 +200,17 @@ function RenderResults() {
   });
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>("");
+  const [userName, setUserName] = useState<UserDisplayData>({
+    country: "",
+    display_name: "",
+    email: "",
+    href: "",
+    id: "",
+    images: [],
+    product: "",
+    type: "",
+    uri: ""
+  });
 
   async function getUserID() {
     try {
@@ -57,7 +226,7 @@ function RenderResults() {
       );
 
       const userData = response.data;
-      setUserName(userData.displayName || userData.userId);
+      setUserName(response.data);
     } catch (error) {
       console.error("Error fetching user ID:", error);
     }
@@ -66,11 +235,16 @@ function RenderResults() {
   async function getFromCache(uid: string) {
     try {
       const response = await axios.post<JSONResponseData>(
-        "/api/get-from-cache", { uid: uid },
+        "/api/get-from-cache",
+        { uid: uid },
       );
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response && error.response.status === 404) {
+      if (
+        axios.isAxiosError(error) &&
+        error.response &&
+        error.response.status === 404
+      ) {
         return null;
       }
       console.error("Error checking cache:", error);
@@ -113,7 +287,17 @@ function RenderResults() {
     maxAttempts = 60,
   ): Promise<JSONResponseData> {
     const data = await fetchData(uid);
-    if (data && data.top_artist && data.top_artist.length > 0 && data.total_ms_played && data.total_ms_played.length > 0 && data.top_songs && data.top_songs.length > 0 && attempt > 10) {      return data;
+    if (
+      data &&
+      data.top_artist &&
+      data.top_artist.length > 0 &&
+      data.total_ms_played &&
+      data.total_ms_played.length > 0 &&
+      data.top_songs &&
+      data.top_songs.length > 0 &&
+      attempt > 10
+    ) {
+      return data;
     } else if (attempt < maxAttempts) {
       return new Promise((resolve) =>
         setTimeout(
@@ -160,7 +344,10 @@ function RenderResults() {
       }
     };
 
-    getData();
+    getData(); // comment for mockdata
+    //setResult(mockJSONResponseData); // uncomment for mockdata
+    //  getUserID();
+    // setIsLoading(false);
   }, [uid]);
 
   if (isLoading && !error) {
@@ -184,99 +371,24 @@ function RenderResults() {
   }
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <nav className="w-full fixed top-0 bg-black text-white shadow-md z-10 flex items-center justify-between px-4 h-16">
-        <div className="flex items-center space-x-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-            />
-          </svg>
-          <span>Home</span>
+    <div className="flex flex-col bg-spotify-black items-center h-full w-full pb-12">
+        <div className="flex flex-col items-center w-full mt-6">
+            <p className="text-3xl font-bold text-white">
+            Hey <span className={"text-spotify-green"}>{userName.display_name}</span>, here are your results!
+            </p>
         </div>
-        <div className="text-center text-lg">
-          <p>Hey {userName},</p>
-          <p className="text-spotify-green">
-            This is Your Personal Spotify Recap
-          </p>
-        </div>
-        <div>
-          <Image
-            src="/Spotify.png"
-            alt="Spotify"
-            className="h-14 w-full object-cover"
-            width={300}
-            height={168}
-          />
-        </div>
-        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-white"></div>
-      </nav>
-      <div className="flex text-2xl font-bold flex-col items-center mt-24">
-        <h1>Top Artist</h1>
-      </div>
-      <div className="flex flex-col items-center mt-6 w-full">
-        {" "}
-        {/* Anpassung der Breite */}
-        {result.top_artist.map((artist, i) => (
-          <div key={i} className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center mb-20 w-4/10">
-            {" "}
-            <div className="flex items-center">
-                <div className="mr-6">
-                    <p className="text-2xl text-spotify-green">
-                    Your favourite Artist is:
-                    </p>
-                    <p className="text-2xl font-bold text-white text-center">
-                    {artist.artistName}
-                    </p>
-                  </div>
-            </div>
-            </div>
-              ))}
-        Artist
-        <div className="flex text-2xl font-bold flex-col items-center mt-50 mb-7">
-          <h1>Top Track</h1>
-          {result.top_songs.map((track, i) => (
-            <div key={i} className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center mb-20 w-4/10">
-                {" "}
-                <div className="flex items-center">
-                    <div className="mr-6">
-                    <p className="text-2xl text-spotify-green">
-                        Your favourite Track is:
-                    </p>
-                    <p className="text-2xl font-bold text-white text-center">
-                        {track.trackName}
-                    </p>
-                    <p className="text-xl text-center">{track.artistName}</p>
-                    </div>
-                    <div className="border-2 border-white p-1">
-                    <Image
-                        src="/Spotify.png"
-                        alt="Album cover"
-                        width={150}
-                        height={150}
-                    />
-                    </div>
-                </div>
-                <div className="flex flex-col items-center mt-5 mr-40">
-                    <audio
-                    src="https://p.scdn.co/mp3-preview/0b3e1b1e3b1c6f2d4e7e4d6f1f0e1f0e1f0e1f0"
-                    autoPlay={true}
-                    controls
-                    />
-                </div>
-            </div>))
-          }
-        </div>
-        Top Track
+      <div className="flex flex-col items-center mt-6 w-2/3 space-y-8">
+        <DisplayArtists artistData={result.top_artist}/>
+        <DisplayTracks trackData={result.top_songs}/>
+        <DisplayTotalTime totalTime={result.total_ms_played[0]}/>
+        <Link
+            href={"/"}
+            className={
+              "bg-spotify-green text-spotify-black rounded-full px-4 py-2 text-center font-bold text-xl"
+            }
+        >
+          Go Home
+        </Link>
       </div>
     </div>
   );
@@ -284,10 +396,10 @@ function RenderResults() {
 
 export default function Results() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="flex flex-col items-center w-full">
-        <RenderResults />
-      </div>
-    </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <div className="flex flex-col items-center w-full">
+          <RenderResults/>
+        </div>
+      </Suspense>
   );
 }

@@ -29,23 +29,22 @@ export async function POST(request: Request) {
     top_artist: [],
     total_ms_played: [],
   };
-  try{
-  const cachedData = await checkCache(body)
-    .then((data) => {
-      return data
-    })
-    .catch((err) => {
-      console.error(err);
-      return new Response(JSON.stringify({ error: err }), {
-        status: 500,
+  try {
+    const cachedData = await checkCache(body)
+      .then((data) => {
+        return data;
+      })
+      .catch((err) => {
+        console.error(err);
+        return new Response(JSON.stringify({ error: err }), {
+          status: 500,
+        });
       });
-    });
 
-  if (cachedData === emptyResponse || cachedData === null) {
-    return new Response(null, { status: 204 });
-  }
-  return new Response(JSON.stringify(cachedData), { status: 200 });
-
+    if (cachedData === emptyResponse || cachedData === null) {
+      return new Response(null, { status: 204 });
+    }
+    return new Response(JSON.stringify(cachedData), { status: 200 });
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ error: "An error occurred" }), {

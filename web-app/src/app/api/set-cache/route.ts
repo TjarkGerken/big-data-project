@@ -23,17 +23,16 @@ async function setCache(key: string, data: string, ttl: number): Promise<void> {
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request): Promise<Response> {
-    const body: SetCacheRequestBody = await request.json();
-    try {
-        await setCache(body.uid, body.data, 60);
-        return new Response(
-            JSON.stringify({ message: "Cache set successfully" }),
-            { status: 201 },
-        );
-    } catch (error) {
-        console.error(error);
-        return new Response(JSON.stringify({ error: "An error occurred" }), {
-            status: 500,
-        });
-    }
+  const body: SetCacheRequestBody = await request.json();
+  try {
+    await setCache(body.uid, body.data, 60);
+    return new Response(JSON.stringify({ message: "Cache set successfully" }), {
+      status: 201,
+    });
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ error: "An error occurred" }), {
+      status: 500,
+    });
+  }
 }

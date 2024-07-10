@@ -16,15 +16,11 @@ export async function POST(request: Request) {
 
     // Fetch user profile to get user ID and display name
     const userProfileResponse = await axios.get(userProfileUrl, { headers });
-    const userId = userProfileResponse.data.id;
-    const displayName = userProfileResponse.data.display_name;
 
-    // Log user ID and display name
-    console.log("User ID:", userId);
-    console.log("Display Name:", displayName);
+
 
     // Return the user ID and display name
-    return new Response(JSON.stringify({ userId, displayName }), {
+    return new Response(JSON.stringify(userProfileResponse.data), {
       status: 200,
     });
   } catch (error) {

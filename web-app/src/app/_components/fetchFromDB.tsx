@@ -2,9 +2,7 @@ import axios from "axios";
 
 export default function fetchFromDB() {
   async function fetchFromDB() {
-    console.log("triggered");
-    axios.get("/api/fetch-db?uid=Tjark").then((response) => {
-      console.log(response);
+    axios.get("/api/fetch-db?uid=Tjark").then(() => {
     });
   }
   return (
