@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";

@@ -1,5 +1,4 @@
 import Memcached from "memcached";
-import { ResponseData } from "@/app/api/fetch-db/route";
 
 interface SetCacheRequestBody {
   uid: string;
