@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: popular-slides
+  name: wrapped-web-app
   labels:
-    app: popular-slides
+    app: wrapped-web-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: popular-slides-web
+      app: wrapped-web-app
   template:
     metadata:
       labels:
-        app: popular-slides-web
+        app: wrapped-web-app
     spec:
       containers:
-        - name: popular-slides-web
-          image: farberg/popular-slides
+        - name: wrapped-web-app
+          image: bigdata/spotify-web-app
           ports:
             - containerPort: 3000
 #End: Deployment
@@ -27,10 +27,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: popular-slides-service
+  name: wrapped-web-app-service
 spec:
   selector:
-    app: popular-slides-web
+    app: wrapped-web-app
   ports:
     - protocol: TCP
       port: 3000
@@ -42,7 +42,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: popular-slides-ingress
+  name: wrapped-web-app-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -53,7 +53,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: popular-slides-service
+                name: wrapped-web-app-service
                 port:
                   number: 3000
 #End: Ingress

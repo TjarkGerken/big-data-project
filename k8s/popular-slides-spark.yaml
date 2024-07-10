@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: popular-slides-spark-hadoop-conf
+  name: spotify-wrapped-spark-hadoop-conf
 data:
   # https://stackoverflow.com/questions/38482779/spark-submit-yarn-mode-hadoop-conf-dir-contents/38483127
   core-site.xml: |
@@ -164,22 +164,22 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: popular-slides-spark
+  name: spotify-wrapped-spark
   labels:
-    app: popular-slides-spark
+    app: spotify-wrapped-spark
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: popular-slides-spark
+      app: spotify-wrapped-spark
   template:
     metadata:
       labels:
-        app: popular-slides-spark
+        app: spotify-wrapped-spark
     spec:
       containers:
-        - name: popular-slides-spark
-          image: farberg/popular-slides-spark
+        - name: spotify-wrapped-spark
+          image: bigdata/spark-app
           # Mount the volume that has been populated by the init container
           env:
             - name: HADOOP_CONF_DIR
@@ -188,11 +188,10 @@ spec:
               value: "root"
             - name: HADOOP_JAAS_DEBUG
               value: "true"
-
           volumeMounts:
             - name: hadoop-conf-volume
               mountPath: /hadoop-config
       volumes:
         - name: hadoop-conf-volume
           configMap:
-            name: popular-slides-spark-hadoop-conf
+            name: spotify-wrapped-spark-hadoop-conf

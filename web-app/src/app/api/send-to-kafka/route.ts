@@ -127,8 +127,6 @@ export async function POST(request: Request) {
 
   const tracks: Track[] = AVAILABLE_DATASETS[body.uid as keyof typeof AVAILABLE_DATASETS];
   await sendToKafka(tracks, body.uid);
-  await getFromDB(body.uid);
-
   return new Response(
     JSON.stringify({ message: "Data sent to Kafka" }),
     { status: 200 },

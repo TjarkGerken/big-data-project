@@ -6,10 +6,10 @@ metadata:
 
 build:
   artifacts:
-    - image: farberg/popular-slides
+    - image: bigdata/spotify-web-app
       context: web-app
 
-    - image: farberg/popular-slides-spark
+    - image: bigdata/spark-app
       context: spark-app
 
 deploy:
