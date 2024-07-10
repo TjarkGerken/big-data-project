@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="try except und reset">
+    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="bisschen grundlage">
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/get-from-cache/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/set-cache/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayArtists.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayTotalTime.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayTracks.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/spark-app.py" beforeDir="false" afterPath="$PROJECT_DIR$/spark-app/spark-app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/popular-slides-spark.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/spotify-spark-app.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/DataRequestForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/_components/DataRequestForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/250ms silence.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -46,22 +52,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Niklas__Stuff&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/api/send-to-kafka&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/tjarkgerken/Coding101/big-data-project/web-app/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Niklas__Stuff",
+    "last_opened_file_path": "/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/api",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Users/tjarkgerken/Coding101/big-data-project/web-app/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/web-app/src/app/api" />
+      <recent name="$PROJECT_DIR$/web-app/src/app/results/components" />
       <recent name="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -90,7 +98,8 @@
       <workItem from="1720383232499" duration="28000" />
       <workItem from="1720383316531" duration="6800000" />
       <workItem from="1720424421220" duration="9842000" />
-      <workItem from="1720561204136" duration="8417000" />
+      <workItem from="1720561204136" duration="8571000" />
+      <workItem from="1720609835257" duration="13508000" />
     </task>
     <task id="LOCAL-00001" summary="d">
       <option name="closed" value="true" />
@@ -148,7 +157,23 @@
       <option name="project" value="LOCAL" />
       <updated>1720562068790</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="bisschen grundlage">
+      <option name="closed" value="true" />
+      <created>1720571062267</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1720571062267</updated>
+    </task>
+    <task id="LOCAL-00009" summary="bisschen grundlage">
+      <option name="closed" value="true" />
+      <created>1720612947130</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1720612947131</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,6 +196,7 @@
     <MESSAGE value="db to fe" />
     <MESSAGE value="prettier" />
     <MESSAGE value="try except und reset" />
-    <option name="LAST_COMMIT_MESSAGE" value="try except und reset" />
+    <MESSAGE value="bisschen grundlage" />
+    <option name="LAST_COMMIT_MESSAGE" value="bisschen grundlage" />
   </component>
 </project>

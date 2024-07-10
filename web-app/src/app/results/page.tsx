@@ -1,136 +1,47 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
-const Page = () => {
-  const [result, setResult] = useState("");
-  const [favoriteTrack, setFavoriteTrack] = useState<{
-    track_name: string;
-    ms_played: number;
-  }>({
-    track_name: "",
-    ms_played: 0,
+interface TrackData {
+  UID: string;
+  trackName: string;
+  artistName: string;
+  total_msPlayed: number;
+}
+
+interface ArtistData {
+  UID: string;
+  artistName: string;
+  total_msPlayed: number;
+}
+
+interface TotalPlayTime {
+  UID: string;
+  total_msPlayed: number;
+}
+
+export interface JSONResponseData {
+  spotify_uid: string;
+  top_songs: TrackData[];
+  top_artist: ArtistData[];
+  total_ms_played?: TotalPlayTime[];
+}
+
+function RenderResults() {
+  const searchParams = useSearchParams();
+  const uid = searchParams.get("uid") || "";
+
+  const [result, setResult] = useState<JSONResponseData>({
+    spotify_uid: uid,
+    top_songs: [],
+    top_artist: [],
+    total_ms_played: [],
   });
-
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  const [favoriteTrackDisplayData, setFavoriteTrackDisplayData] = useState({
-    preview_url: null,
-    artists: [{ name: null }],
-    album_name: null,
-    album: { images: [{ url: null, width: 0, height: 0 }], name: null },
-    name: null,
-    image_url: null,
-    ms_played: 0,
-  });
-
-  const [favoriteArtistDisplayData, setFavoriteArtistDisplayData] = useState({
-    name: null,
-    images: [{ url: null, width: 0, height: 0 }],
-    genres: [],
-    ms_played: 0,
-  });
-
-  const [userName, setUserName] = useState("");
-
-  const togglePlayPause = () => {
-    const audio = audioRef.current;
-    if (audio) {
-      if (isPlaying) {
-        audio.pause();
-      } else {
-        audio.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  useEffect(() => {
-    // Ensure audio is paused when the favorite track changes
-    setIsPlaying(false);
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-  }, [favoriteTrackDisplayData.preview_url]);
-
-  const [favoriteArtist, setFavoriteArtist] = useState<{
-    artist_name: string;
-    ms_played: number;
-  }>({
-    artist_name: "",
-    ms_played: 0,
-  });
-
-  const user = {
-    spotifyUserId: "your_spotify_user_id",
-    topTracks: [
-      { track_name: "Turandot", ms_played: 460000 },
-      { track_name: "Bibi Blocksberg Lied", ms_played: 490000 },
-      { track_name: "Was ist los", ms_played: 450000 },
-    ],
-    total_minutes_played_track: 30,
-    topArtists: [
-      { artist_name: "Trettmann", ms_played: 300000 },
-      { artist_name: "Haftbefehl", ms_played: 240000 },
-    ],
-    total_minutes_played_artist: 30,
-  };
-
-  const findFavorites = () => {
-    const favoriteTrack = user.topTracks.reduce((prev, current) => {
-      return prev.ms_played > current.ms_played ? prev : current;
-    });
-
-    const favoriteArtist = user.topArtists.reduce((prev, current) => {
-      return prev.ms_played > current.ms_played ? prev : current;
-    });
-
-    setFavoriteTrack(favoriteTrack);
-    setFavoriteArtist(favoriteArtist);
-  };
-
-  useEffect(() => {
-    findFavorites();
-  }, []);
-
-  useEffect(() => {
-    if (favoriteTrack && favoriteTrack.track_name !== "") {
-      getTrackData(favoriteTrack);
-      getUserID();
-    }
-  }, [favoriteTrack]);
-
-  useEffect(() => {
-    if (favoriteArtist && favoriteArtist.artist_name !== "") {
-      getArtistData(favoriteArtist.artist_name);
-    }
-  }, [favoriteArtist]);
-
-  async function getTrackData(track: {
-    track_name: string;
-    ms_played: number;
-  }) {
-    try {
-      const response = await axios.post(
-        `/api/get-track-data`,
-        { track_name: track.track_name },
-        {
-          headers: {
-            Authorization: JSON.parse(localStorage.getItem("authCode") || "")
-              .access_token,
-          },
-        },
-      );
-
-      const trackData = response.data;
-      trackData.ms_played = track.ms_played;
-      setFavoriteTrackDisplayData(trackData);
-    } catch (error) {
-      console.error("Error fetching track data:", error);
-    }
-  }
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>("");
 
   async function getUserID() {
     try {
@@ -152,34 +63,123 @@ const Page = () => {
     }
   }
 
-  async function getArtistData(artist_name: string) {
+  async function getFromCache(uid: string) {
     try {
-      const response = await axios.post(
-        `/api/get-artist-data`,
-        { artist_name },
-        {
-          headers: {
-            Authorization: JSON.parse(localStorage.getItem("authCode") || "")
-              .access_token,
-          },
-        },
+      const response = await axios.get<JSONResponseData>(
+        "/api/check-cache?uid=" + uid,
       );
-
-      const artistData = response.data;
-      setFavoriteArtistDisplayData(artistData);
+      return response.data;
     } catch (error) {
-      console.error("Error fetching artist data:", error);
+      console.error("Error checking cache:", error);
+      return null;
     }
   }
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("/api/analyzed-data");
-      setResult(response.data);
-    } catch (error) {
-      console.error("Error fetching analyzed data:", error);
+  async function fetchData(uid: string) {
+    const response = await axios
+      .get<JSONResponseData>("/api/fetch-db?uid=" + uid)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        console.error("Error fetching analyzed data:", error);
+      });
+    if (response) {
+      return response;
     }
-  };
+  }
+
+  async function sendTracksToKafka(uid: string) {
+    if (!uid || uid === "") {
+      return;
+    }
+    axios.post("/api/send-to-kafka", { uid: uid }).then((response) => {});
+  }
+
+  async function setCache(uid: string, data: JSONResponseData) {
+    try {
+      await axios.post("/api/set-cache", { uid: uid, data: data });
+    } catch (error) {
+      console.error("Error setting cache:", error);
+    }
+  }
+
+  async function fetchDataLoop(
+    uid: string,
+    attempt = 0,
+    maxAttempts = 60,
+  ): Promise<JSONResponseData> {
+    const data = await fetchData(uid);
+    if (data && data.top_artist && data.total_ms_played && data.top_songs) {
+      return data;
+    } else if (attempt < maxAttempts) {
+      return new Promise((resolve) =>
+        setTimeout(
+          () => resolve(fetchDataLoop(uid, attempt + 1, maxAttempts)),
+          5000,
+        ),
+      );
+    } else {
+      throw new Error("Maximum attempts reached, data could not be fetched.");
+    }
+  }
+
+  async function sortArrays() {
+    const topSongs = result.top_songs.sort(
+      (a, b) => b.total_msPlayed - a.total_msPlayed,
+    );
+    const topArtists = result.top_artist.sort(
+      (a, b) => b.total_msPlayed - a.total_msPlayed,
+    );
+    setResult({ ...result, top_songs: topSongs, top_artist: topArtists });
+  }
+
+  useEffect(() => {
+    const getData = async () => {
+      const cachedData = await getFromCache(uid);
+      if (cachedData) {
+        setResult(cachedData);
+        setIsLoading(false);
+      } else {
+        await sendTracksToKafka(uid);
+        await fetchDataLoop(uid)
+          .then((r) => {
+            if (r) {
+              setResult(r);
+              setCache(uid, r);
+              sortArrays();
+              getUserID();
+              setIsLoading(false);
+            }
+          })
+          .catch((error) => {
+            setError(true);
+          });
+      }
+    };
+
+    getData();
+  }, [uid]);
+
+  if (isLoading || !error) {
+    return (
+      <Suspense fallback={<div>Loading...</div>}>
+        <div className="flex justify-center items-center h-screen">
+          <p>Loading...</p>
+        </div>
+      </Suspense>
+    );
+  }
+
+  if (error) {
+    return (
+      <Suspense fallback={<div>Loading...</div>}>
+        <div className="flex justify-center items-center h-screen">
+          <p>Error fetching data</p>
+        </div>
+      </Suspense>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center w-full">
@@ -224,80 +224,22 @@ const Page = () => {
       <div className="flex flex-col items-center mt-6 w-full">
         {" "}
         {/* Anpassung der Breite */}
-        {favoriteArtistDisplayData.name && (
-          <div className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center mb-20 w-4/10">
-            {" "}
-            {/* Anpassung der Breite */}
-            <div className="flex items-center">
-              <div className="mr-6">
-                <p className="text-2xl text-spotify-green">
-                  Your favourite Artist is:
-                </p>
-                <p className="text-2xl font-bold text-white text-center">
-                  {favoriteArtistDisplayData.name}
-                </p>
-              </div>
-              {favoriteArtistDisplayData.images[0].url && (
-                <div className="border-2 border-white p-1 ">
-                  <Image
-                    src={favoriteArtistDisplayData.images[0].url}
-                    alt="Artist image"
-                    width={150}
-                    height={150}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+        Artist
         <div className="flex text-2xl font-bold flex-col items-center mt-50 mb-7">
           <h1>Top Track</h1>
         </div>
-        {favoriteTrackDisplayData.name && (
-          <div className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center w-4/10">
-            {" "}
-            {/* Anpassung der Breite */}
-            <div className="flex items-center">
-              <div className="mr-6">
-                <p className="text-2xl text-spotify-green text-center">
-                  Your favourite track is:
-                </p>
-                <p className="text-2xl font-bold text-white text-center">
-                  {favoriteTrackDisplayData.name}
-                </p>
-                {favoriteTrackDisplayData.artists.map((artist, i) => (
-                  <p key={i} className="text-xl text-center">
-                    {artist.name}
-                  </p>
-                ))}
-              </div>
-              <div className="border-2 border-white p-1">
-                <Image
-                  src={favoriteTrackDisplayData.album.images[0].url || ""}
-                  alt="Album cover"
-                  width={150}
-                  height={150}
-                />
-              </div>
-            </div>
-            {favoriteTrackDisplayData.preview_url && (
-              <div className="flex flex-col items-center mt-5 mr-40">
-                <audio
-                  ref={audioRef}
-                  src={favoriteTrackDisplayData.preview_url}
-                  autoPlay={true}
-                  controls
-                />
-                <button onClick={togglePlayPause} className="mt-2">
-                  {isPlaying ? "Pause" : "Play"}
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+        Top Track
       </div>
     </div>
   );
-};
+}
 
-export default Page;
+export default function Results() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="flex flex-col items-center w-full">
+        <RenderResults />
+      </div>
+    </Suspense>
+  );
+}

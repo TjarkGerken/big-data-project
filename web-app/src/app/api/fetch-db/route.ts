@@ -1,5 +1,4 @@
 import * as mariadb from "mariadb";
-import {checkCache, setCache} from "@/app/api/send-to-kafka/route";
 
 export const dynamic = "force-dynamic";
 
@@ -20,11 +19,11 @@ interface TotalPlayTime {
   total_msPlayed: bigint;
 }
 
-interface ResponseData {
-    spotify_uid: string;
-    top_songs: TrackData[];
-    top_artist: ArtistData[];
-    total_ms_played?: TotalPlayTime;
+export interface ResponseData {
+  spotify_uid: string;
+  top_songs: TrackData[];
+  top_artist: ArtistData[];
+  total_ms_played?: TotalPlayTime[];
 }
 
 export async function GET(request: Request) {
@@ -34,9 +33,9 @@ export async function GET(request: Request) {
   const uid = url.searchParams.get("uid");
 
   if (!uid) {
-      return new Response("Please provide a uid", {
+    return new Response("Please provide a uid", {
       status: 400,
-      });
+    });
   }
 
   const pool = mariadb.createPool({
@@ -86,7 +85,7 @@ export async function GET(request: Request) {
     let conn;
     try {
       conn = await pool.getConnection();
-      const rows: TotalPlayTime = await conn.query(
+      const rows: TotalPlayTime[] = await conn.query(
         "SELECT * FROM total_playtime WHERE UID = ? LIMIT 1",
         [uid],
       );
@@ -102,9 +101,6 @@ export async function GET(request: Request) {
   const top_songs = await queryTopSongs();
   const top_artist = await queryTopArtists();
   const total_ms_played = await queryTotalPlayTime();
-
-  // console.log(top_songs);
-  // console.log(top_artist);
 
   function convertBigIntToNumber(bigintValue: bigint) {
     if (
@@ -145,15 +141,9 @@ export async function GET(request: Request) {
     total_ms_played: total_ms_played,
   };
 
-
-
   const jsonString = JSON.stringify(response, bigintReplacer);
-  console.log(jsonString)
+  console.log(jsonString);
 
-  await setCache({uid: uid}, jsonString, 60);
-  console.log("==== CACHE ====")
-  console.log(await checkCache({uid: uid}))
-  console.log("==== CACHE END ====")
   return new Response(jsonString, {
     status: 200,
     headers: { "Content-Type": "application/json" },

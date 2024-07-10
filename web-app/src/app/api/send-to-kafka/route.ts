@@ -3,13 +3,10 @@ import { StreamingHistoryTjark } from "@/app/api/send-to-kafka/StreamingHistoryT
 import { Track } from "@/app/api/send-to-kafka/StreamingHistoryType";
 import { StreamingHistoryDavid } from "./StreamingHistoryDavid";
 import { StreamingHistoryCarlos } from "@/app/api/send-to-kafka/StreamingHistoryCarlos";
-import Memcached from "memcached";
 
 export const dynamic = "force-dynamic";
 
-const memcached = new Memcached("my-memcached-service");
-
-type RequestBody = {
+export interface RequestBody {
   uid: string;
 }
 
@@ -20,8 +17,8 @@ const AVAILABLE_DATASETS = {
   // "niklas": "Niklas",
 };
 
-
 async function sendToKafka(tracks: Track[], uid: string) {
+  console.log("===== Sending data to Kafka =====");
   const kafka = new Kafka({
     clientId: "client-" + Math.floor(Math.random() * 100000),
     brokers: ["my-cluster-kafka-bootstrap:9092"],
@@ -63,77 +60,20 @@ async function sendToKafka(tracks: Track[], uid: string) {
   return true;
 }
 
-async function getFromDB(uid: string) {
-  console.log("Getting data from DB");
-}
-
-
-export async function checkCache(request: RequestBody) {
-  const cacheKey = request.uid || "";
-  return new Promise((resolve, reject) => {
-    memcached.get(cacheKey, (err: any, data: any) => {
-      memcached.end();
-      if (err) {
-        reject(err);
-      } else if (data === undefined || data === null) {
-        resolve(null);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-}
-
-export async function setCache(request: RequestBody, data: string, ttl: number): Promise<void> {
-  const cacheKey = request.uid || '';
-
-  return new Promise((resolve, reject) => {
-    memcached.set(cacheKey, data, ttl, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-  });
-}
-
-
 export async function POST(request: Request) {
-  const body : RequestBody = await request.json();
+  const body: RequestBody = await request.json();
   console.log(body.uid);
-
-  const cacheData = await checkCache(body).catch((err) => {
-    console.error(err);
-  });
-
-  console.log("↓↓↓↓↓↓ Cached Data before Sending to Kafka ↓↓↓↓↓↓");
-  console.log(cacheData);
-  console.log("↑↑↑↑↑↑ Cached Data before Sending to Kafka ↑↑↑↑↑↑");
-
-  if (cacheData && JSON.stringify(cacheData) !== JSON.stringify({"spotify_uid":body.uid,"top_songs":[],"top_artist":[],"total_ms_played":[]})) {
-      return new Response(
-      JSON.stringify(cacheData),
-      { status: 200 },
-      );
-  }
 
   if (!AVAILABLE_DATASETS[body.uid as keyof typeof AVAILABLE_DATASETS]) {
     return new Response(
-        JSON.stringify({ message: "No data found for this user" }),
-        { status: 404 },
+      JSON.stringify({ message: "No data found for this user" }),
+      { status: 404 },
     );
   }
-
-  const tracks: Track[] = AVAILABLE_DATASETS[body.uid as keyof typeof AVAILABLE_DATASETS];
+  const tracks: Track[] =
+    AVAILABLE_DATASETS[body.uid as keyof typeof AVAILABLE_DATASETS];
   await sendToKafka(tracks, body.uid);
-  return new Response(
-    JSON.stringify({ message: "Data sent to Kafka" }),
-    { status: 200 },
-  );
-
-
-
-
-
+  return new Response(JSON.stringify({ message: "Data sent to Kafka" }), {
+    status: 200,
+  });
 }
