@@ -1,4 +1,5 @@
 import * as mariadb from "mariadb";
+import {checkCache, setCache} from "@/app/api/send-to-kafka/route";
 
 export const dynamic = "force-dynamic";
 
@@ -14,11 +15,29 @@ interface ArtistData {
   total_msPlayed: bigint;
 }
 
+interface TotalPlayTime {
+  UID: string;
+  total_msPlayed: bigint;
+}
+
+interface ResponseData {
+    spotify_uid: string;
+    top_songs: TrackData[];
+    top_artist: ArtistData[];
+    total_ms_played?: TotalPlayTime;
+}
+
 export async function GET(request: Request) {
   const url = new URL(request.url);
 
   // Get the username parameter from the query string
   const uid = url.searchParams.get("uid");
+
+  if (!uid) {
+      return new Response("Please provide a uid", {
+      status: 400,
+      });
+  }
 
   const pool = mariadb.createPool({
     host: "my-app-mariadb-service",
@@ -63,8 +82,26 @@ export async function GET(request: Request) {
     }
   }
 
+  async function queryTotalPlayTime() {
+    let conn;
+    try {
+      conn = await pool.getConnection();
+      const rows: TotalPlayTime = await conn.query(
+        "SELECT * FROM total_playtime WHERE UID = ? LIMIT 1",
+        [uid],
+      );
+      return rows;
+    } catch (err) {
+      console.error(err);
+      throw new Error("something went wrong");
+    } finally {
+      if (conn) await conn.release();
+    }
+  }
+
   const top_songs = await queryTopSongs();
   const top_artist = await queryTopArtists();
+  const total_ms_played = await queryTotalPlayTime();
 
   // console.log(top_songs);
   // console.log(top_artist);
@@ -100,14 +137,23 @@ export async function GET(request: Request) {
     const totalMsPlayedB = BigInt(b.total_msPlayed);
     return Number(totalMsPlayedB - totalMsPlayedA);
   });
-  const response = {
+
+  const response: ResponseData = {
     spotify_uid: uid,
     top_songs: sortedTopSongs.slice(0, 10),
     top_artist: sortedTopArtist.slice(0, 10),
+    total_ms_played: total_ms_played,
   };
 
-  const jsonString = JSON.stringify(response, bigintReplacer);
 
+
+  const jsonString = JSON.stringify(response, bigintReplacer);
+  console.log(jsonString)
+
+  await setCache({uid: uid}, jsonString, 60);
+  console.log("==== CACHE ====")
+  console.log(await checkCache({uid: uid}))
+  console.log("==== CACHE END ====")
   return new Response(jsonString, {
     status: 200,
     headers: { "Content-Type": "application/json" },

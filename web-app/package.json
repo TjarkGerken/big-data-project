@@ -25,6 +25,7 @@
     "install": "^0.13.0",
     "kafkajs": "^2.2.4",
     "mariadb": "^3.3.1",
+    "memcached": "^2.2.2",
     "mongodb": "^6.7.0",
     "net": "^1.0.2",
     "next": "14.2.3",
@@ -42,6 +43,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/memcached": "^2.2.10",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -51,5 +53,6 @@
     "prettier": "3.3.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "yarn@3.5.0+sha512.2dc70be5fce9f66756d25b00a888f3ca66f86b502b76750e72ba54cec89da767b938c54124595e26f868825688e0fe3552c26c76a330673343057acadd5cfcf2"
 }

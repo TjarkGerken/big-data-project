@@ -4,27 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="prettier">
+    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="try except und reset">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/popular-slides-app.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/popular-slides-app.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/material_theme_project_new.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/shelf/Uncommitted_changes_before_Update_at_03_07_24,_20_54_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/shelf/Uncommitted_changes_before_Update_at_03_07_24__20_54__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/spark-app.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/ivy-settings-offline.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/spark-app/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spark-app/spark-app.py" beforeDir="false" afterPath="$PROJECT_DIR$/spark-app/spark-app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/spark-app.py.bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spark-app/utils.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/route.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="David_Frontend" />
+        <entry key="$PROJECT_DIR$" value="DuMongo" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,7 +49,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;David__Frontend&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Niklas__Stuff&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/api/send-to-kafka&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -105,6 +90,7 @@
       <workItem from="1720383232499" duration="28000" />
       <workItem from="1720383316531" duration="6800000" />
       <workItem from="1720424421220" duration="9842000" />
+      <workItem from="1720561204136" duration="8417000" />
     </task>
     <task id="LOCAL-00001" summary="d">
       <option name="closed" value="true" />
@@ -154,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720392809824</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="try except und reset">
+      <option name="closed" value="true" />
+      <created>1720562068790</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1720562068790</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,6 +170,7 @@
     <MESSAGE value="different stuff i guess" />
     <MESSAGE value="db to fe" />
     <MESSAGE value="prettier" />
-    <option name="LAST_COMMIT_MESSAGE" value="prettier" />
+    <MESSAGE value="try except und reset" />
+    <option name="LAST_COMMIT_MESSAGE" value="try except und reset" />
   </component>
 </project>
