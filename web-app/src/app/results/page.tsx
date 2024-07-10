@@ -9,23 +9,23 @@ import Link from "next/link";
 import DisplayTotalTime from "@/app/results/components/displayTotalTime";
 
 export interface UserDisplayData {
-  country:          string;
-  display_name:     string;
-  email:            string;
+  country: string;
+  display_name: string;
+  email: string;
   explicit_content?: ExplicitContent;
-  external_urls?:    ExternalUrls;
-  followers?:        Followers;
-  href:             string;
-  id:               string;
-  images:           Image[];
-  product:          string;
-  type:             string;
-  uri:              string;
+  external_urls?: ExternalUrls;
+  followers?: Followers;
+  href: string;
+  id: string;
+  images: Image[];
+  product: string;
+  type: string;
+  uri: string;
 }
 
 export interface ExplicitContent {
   filter_enabled: boolean;
-  filter_locked:  boolean;
+  filter_locked: boolean;
 }
 
 export interface ExternalUrls {
@@ -33,16 +33,15 @@ export interface ExternalUrls {
 }
 
 export interface Followers {
-  href:  string;
+  href: string;
   total: number;
 }
 
 export interface Image {
-  url:    string;
+  url: string;
   height: number;
-  width:  number;
+  width: number;
 }
-
 
 export interface TrackData {
   UID: string;
@@ -77,17 +76,20 @@ const mockJSONResponseData: JSONResponseData = {
       trackName: "Skyline",
       artistName: "Harry Styles",
       total_msPlayed: 2100000,
-    },{
+    },
+    {
       UID: "track002",
       trackName: "So Lang",
       artistName: "Harry Styles",
       total_msPlayed: 2100000,
-    },{
+    },
+    {
       UID: "track002",
       trackName: "Knöcheltief",
       artistName: "Harry Styles",
       total_msPlayed: 2100000,
-    },{
+    },
+    {
       UID: "track002",
       trackName: "Standard",
       artistName: "Harry Styles",
@@ -104,12 +106,14 @@ const mockJSONResponseData: JSONResponseData = {
       trackName: "069",
       artistName: "Harry Styles",
       total_msPlayed: 2100000,
-    },{
+    },
+    {
       UID: "track002",
       trackName: "Kalash",
       artistName: "Harry Styles",
       total_msPlayed: 2100000,
-    },{
+    },
+    {
       UID: "track002",
       trackName: "Morgenstern",
       artistName: "Harry Styles",
@@ -209,7 +213,7 @@ function RenderResults() {
     images: [],
     product: "",
     type: "",
-    uri: ""
+    uri: "",
   });
 
   async function getUserID() {
@@ -372,20 +376,22 @@ function RenderResults() {
 
   return (
     <div className="flex flex-col bg-spotify-black items-center h-full w-full pb-12">
-        <div className="flex flex-col items-center w-full mt-6">
-            <p className="text-3xl font-bold text-white">
-            Hey <span className={"text-spotify-green"}>{userName.display_name}</span>, here are your results!
-            </p>
-        </div>
+      <div className="flex flex-col items-center w-full mt-6">
+        <p className="text-3xl font-bold text-white">
+          Hey{" "}
+          <span className={"text-spotify-green"}>{userName.display_name}</span>,
+          here are your results!
+        </p>
+      </div>
       <div className="flex flex-col items-center mt-6 w-2/3 space-y-8">
-        <DisplayArtists artistData={result.top_artist}/>
-        <DisplayTracks trackData={result.top_songs}/>
-        <DisplayTotalTime totalTime={result.total_ms_played[0]}/>
+        <DisplayArtists artistData={result.top_artist} />
+        <DisplayTracks trackData={result.top_songs} />
+        <DisplayTotalTime totalTime={result.total_ms_played[0]} />
         <Link
-            href={"/"}
-            className={
-              "bg-spotify-green text-spotify-black rounded-full px-4 py-2 text-center font-bold text-xl"
-            }
+          href={"/"}
+          className={
+            "bg-spotify-green text-spotify-black rounded-full px-4 py-2 text-center font-bold text-xl"
+          }
         >
           Go Home
         </Link>
@@ -396,10 +402,10 @@ function RenderResults() {
 
 export default function Results() {
   return (
-      <Suspense fallback={<div>Loading...</div>}>
-        <div className="flex flex-col items-center w-full">
-          <RenderResults/>
-        </div>
-      </Suspense>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="flex flex-col items-center w-full">
+        <RenderResults />
+      </div>
+    </Suspense>
   );
 }

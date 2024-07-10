@@ -17,8 +17,6 @@ export async function POST(request: Request) {
     // Fetch user profile to get user ID and display name
     const userProfileResponse = await axios.get(userProfileUrl, { headers });
 
-
-
     // Return the user ID and display name
     return new Response(JSON.stringify(userProfileResponse.data), {
       status: 200,

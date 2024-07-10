@@ -2,8 +2,7 @@ import axios from "axios";
 
 export default function fetchFromDB() {
   async function fetchFromDB() {
-    axios.get("/api/fetch-db?uid=Tjark").then(() => {
-    });
+    axios.get("/api/fetch-db?uid=Tjark").then(() => {});
   }
   return (
     <button
