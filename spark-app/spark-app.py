@@ -18,7 +18,7 @@ spark = SparkSession.builder \
 spark.sparkContext.setLogLevel('WARN')
 
 # Set checkpoint directory
-checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/cp2"
+checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/cp12456"
 spark.sparkContext.setCheckpointDir(checkpoint_dir)
 
 # Example Part 2
@@ -32,6 +32,8 @@ kafkaMessages = spark \
     .option("startingOffsets", "earliest") \
     .option("auto.offset.reset", "earliest") \
     .load()
+    # .option("failOnDataLoss", "false") \
+
 
 # Define schema of tracking data
 trackingMessageSchema = StructType() \

@@ -29,20 +29,27 @@ export async function POST(request: Request) {
     top_artist: [],
     total_ms_played: [],
   };
-  checkCache(body)
+  try{
+  const cachedData = await checkCache(body)
     .then((data) => {
-      if (data === emptyResponse || data === null) {
-        return new Response(null, { status: 204 });
-      }
-      return new Response(JSON.stringify(data), { status: 200 });
+      return data
     })
     .catch((err) => {
       console.error(err);
-      return new Response(JSON.stringify({ error: "An error occurred" }), {
+      return new Response(JSON.stringify({ error: err }), {
         status: 500,
       });
     });
-  return new Response(JSON.stringify({ error: "An error occurred" }), {
-    status: 500,
-  });
+
+  if (cachedData === emptyResponse || cachedData === null) {
+    return new Response(null, { status: 204 });
+  }
+  return new Response(JSON.stringify(cachedData), { status: 200 });
+
+  } catch (error) {
+    console.error(error);
+    return new Response(JSON.stringify({ error: "An error occurred" }), {
+      status: 500,
+    });
+  }
 }

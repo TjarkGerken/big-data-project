@@ -3,7 +3,7 @@ import { ResponseData } from "@/app/api/fetch-db/route";
 
 interface SetCacheRequestBody {
   uid: string;
-  data: ResponseData;
+  data: string;
 }
 
 async function setCache(key: string, data: string, ttl: number): Promise<void> {
@@ -23,24 +23,18 @@ async function setCache(key: string, data: string, ttl: number): Promise<void> {
 
 export const dynamic = "force-dynamic";
 
-export async function POST(request: Request) {
-  const body: SetCacheRequestBody = await request.json();
-
-  setCache(body.uid, JSON.stringify(body.data), 3600)
-    .then(() => {
-      return new Response(
-        JSON.stringify({ message: "Cache set successfully" }),
-        { status: 201 },
-      );
-    })
-    .catch((err) => {
-      console.error(err);
-      return new Response(JSON.stringify({ error: "An error occurred" }), {
-        status: 500,
-      });
-    });
-
-  return new Response(JSON.stringify({ error: "An error occurred" }), {
-    status: 500,
-  });
+export async function POST(request: Request): Promise<Response> {
+    const body: SetCacheRequestBody = await request.json();
+    try {
+        await setCache(body.uid, body.data, 60);
+        return new Response(
+            JSON.stringify({ message: "Cache set successfully" }),
+            { status: 201 },
+        );
+    } catch (error) {
+        console.error(error);
+        return new Response(JSON.stringify({ error: "An error occurred" }), {
+            status: 500,
+        });
+    }
 }

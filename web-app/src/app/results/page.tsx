@@ -65,11 +65,14 @@ function RenderResults() {
 
   async function getFromCache(uid: string) {
     try {
-      const response = await axios.get<JSONResponseData>(
-        "/api/check-cache?uid=" + uid,
+      const response = await axios.post<JSONResponseData>(
+        "/api/get-from-cache", { uid: uid },
       );
       return response.data;
     } catch (error) {
+      if (axios.isAxiosError(error) && error.response && error.response.status === 404) {
+        return null;
+      }
       console.error("Error checking cache:", error);
       return null;
     }
@@ -110,13 +113,12 @@ function RenderResults() {
     maxAttempts = 60,
   ): Promise<JSONResponseData> {
     const data = await fetchData(uid);
-    if (data && data.top_artist && data.total_ms_played && data.top_songs) {
-      return data;
+    if (data && data.top_artist && data.top_artist.length > 0 && data.total_ms_played && data.total_ms_played.length > 0 && data.top_songs && data.top_songs.length > 0 && attempt > 10) {      return data;
     } else if (attempt < maxAttempts) {
       return new Promise((resolve) =>
         setTimeout(
           () => resolve(fetchDataLoop(uid, attempt + 1, maxAttempts)),
-          5000,
+          6000,
         ),
       );
     } else {
@@ -161,7 +163,7 @@ function RenderResults() {
     getData();
   }, [uid]);
 
-  if (isLoading || !error) {
+  if (isLoading && !error) {
     return (
       <Suspense fallback={<div>Loading...</div>}>
         <div className="flex justify-center items-center h-screen">
@@ -224,9 +226,55 @@ function RenderResults() {
       <div className="flex flex-col items-center mt-6 w-full">
         {" "}
         {/* Anpassung der Breite */}
+        {result.top_artist.map((artist, i) => (
+          <div key={i} className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center mb-20 w-4/10">
+            {" "}
+            <div className="flex items-center">
+                <div className="mr-6">
+                    <p className="text-2xl text-spotify-green">
+                    Your favourite Artist is:
+                    </p>
+                    <p className="text-2xl font-bold text-white text-center">
+                    {artist.artistName}
+                    </p>
+                  </div>
+            </div>
+            </div>
+              ))}
         Artist
         <div className="flex text-2xl font-bold flex-col items-center mt-50 mb-7">
           <h1>Top Track</h1>
+          {result.top_songs.map((track, i) => (
+            <div key={i} className="bg-neutral-800 p-6 rounded-lg flex flex-col items-center mb-20 w-4/10">
+                {" "}
+                <div className="flex items-center">
+                    <div className="mr-6">
+                    <p className="text-2xl text-spotify-green">
+                        Your favourite Track is:
+                    </p>
+                    <p className="text-2xl font-bold text-white text-center">
+                        {track.trackName}
+                    </p>
+                    <p className="text-xl text-center">{track.artistName}</p>
+                    </div>
+                    <div className="border-2 border-white p-1">
+                    <Image
+                        src="/Spotify.png"
+                        alt="Album cover"
+                        width={150}
+                        height={150}
+                    />
+                    </div>
+                </div>
+                <div className="flex flex-col items-center mt-5 mr-40">
+                    <audio
+                    src="https://p.scdn.co/mp3-preview/0b3e1b1e3b1c6f2d4e7e4d6f1f0e1f0e1f0e1f0"
+                    autoPlay={true}
+                    controls
+                    />
+                </div>
+            </div>))
+          }
         </div>
         Top Track
       </div>
