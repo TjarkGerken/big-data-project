@@ -17,8 +17,10 @@ spark = SparkSession.builder \
 # Set log level
 spark.sparkContext.setLogLevel('WARN')
 
+
+
 # Set checkpoint directory
-checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/cp12456"
+checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/cpsaassssdsads"
 spark.sparkContext.setCheckpointDir(checkpoint_dir)
 
 # Example Part 2

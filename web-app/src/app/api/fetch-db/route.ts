@@ -2,6 +2,9 @@ import * as mariadb from "mariadb";
 
 export const dynamic = "force-dynamic";
 
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 interface TrackData {
   UID: string;
   trackName: string;
@@ -64,6 +67,7 @@ export async function GET(request: Request) {
       if (conn) await conn.release();
     }
   }
+
   async function queryTopSongs() {
     let conn;
     try {
@@ -98,9 +102,95 @@ export async function GET(request: Request) {
     }
   }
 
-  const top_songs = await queryTopSongs();
-  const top_artist = await queryTopArtists();
-  const total_ms_played = await queryTotalPlayTime();
+  const BUFFER_TIME = 10000
+  const LOOK_BACK = 5
+  
+  async function loopQueryTopArtists(){
+    let responseArray:ArtistData[][] = []
+    let currentResponse:ArtistData[] = []
+    
+    let i = 0;
+    while(i < LOOK_BACK){
+      currentResponse = await queryTopArtists()
+      responseArray.push(currentResponse)
+      i += 1;
+      await sleep(BUFFER_TIME)
+    }
+    
+    do{
+      let newResponse = await queryTopArtists()
+        if (currentResponse.length !==0 && newResponse.length === 0){
+          break;
+        }
+        currentResponse = newResponse
+        console.log(currentResponse)
+        responseArray.push(currentResponse)
+        await sleep(BUFFER_TIME)
+      } while (currentResponse !== responseArray.at(responseArray.length- (LOOK_BACK-1)))
+    console.log("====STOPPED QUERY TOP ARTISTS ====\n\n\n\n\n\n\n\n")
+    return currentResponse
+  }
+  async function loopQueryTopSongs(){
+    let responseArray:TrackData[][] = []
+    let currentResponse:TrackData[] = []
+    
+    let i = 0;
+    while(i < LOOK_BACK){
+      currentResponse = await queryTopSongs()
+      responseArray.push(currentResponse)
+      i += 1;
+      await sleep(BUFFER_TIME)
+    }
+    
+    do{
+      let newResponse = await queryTopSongs()
+        if (currentResponse.length !==0 && newResponse.length === 0){
+          break;
+        }
+        currentResponse = newResponse
+        console.log("======= SONGS RESPONSE =======")
+        console.log(currentResponse.slice(0,2))
+        responseArray.push(currentResponse)
+        await sleep(BUFFER_TIME)
+      } while (currentResponse !== responseArray.at(responseArray.length- (LOOK_BACK-1)))
+        console.log("====STOPPED QUERY TOP SONGs ====\n\n\n\n\n\n\n\n")
+    return currentResponse
+  }
+  async function loopQueryTotalPlaytime(){
+    let responseArray:TotalPlayTime[][] = []
+    let currentResponse:TotalPlayTime[] = []
+    
+    let i = 0;
+    while(i < LOOK_BACK){
+      currentResponse = await queryTotalPlayTime()
+      responseArray.push(currentResponse)
+      i += 1;
+      await sleep(BUFFER_TIME)
+    }
+    
+    do{
+      let newResponse = await queryTotalPlayTime()
+        if (currentResponse.length !==0 && newResponse.length === 0){
+          break;
+        }
+        currentResponse = newResponse
+        console.log("======= ARTIST RESPONSE =======")
+        responseArray.push(currentResponse)
+        await sleep(BUFFER_TIME)
+      } while (currentResponse !== responseArray.at(responseArray.length- (LOOK_BACK-1)))
+        console.log("====STOPPED QUERY TOTAL PLAY TIME ====\n\n\n\n\n\n\n\n")
+        return currentResponse
+  }
+
+  async function getAllData() {
+    return await Promise.all([
+      loopQueryTopSongs(),
+      loopQueryTopArtists(),
+      loopQueryTotalPlaytime()
+    ]);
+  }
+
+  const [top_songs,top_artist, total_ms_played] = await getAllData()
 
   function convertBigIntToNumber(bigintValue: bigint) {
     if (

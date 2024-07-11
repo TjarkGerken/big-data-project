@@ -285,34 +285,6 @@ function RenderResults() {
     }
   }
 
-  async function fetchDataLoop(
-    uid: string,
-    attempt = 0,
-    maxAttempts = 60,
-  ): Promise<JSONResponseData> {
-    const data = await fetchData(uid);
-    if (
-      data &&
-      data.top_artist &&
-      data.top_artist.length > 0 &&
-      data.total_ms_played &&
-      data.total_ms_played.length > 0 &&
-      data.top_songs &&
-      data.top_songs.length > 0 &&
-      attempt > 10
-    ) {
-      return data;
-    } else if (attempt < maxAttempts) {
-      return new Promise((resolve) =>
-        setTimeout(
-          () => resolve(fetchDataLoop(uid, attempt + 1, maxAttempts)),
-          6000,
-        ),
-      );
-    } else {
-      throw new Error("Maximum attempts reached, data could not be fetched.");
-    }
-  }
 
   async function sortArrays() {
     const topSongs = result.top_songs.sort(
@@ -332,7 +304,7 @@ function RenderResults() {
         setIsLoading(false);
       } else {
         await sendTracksToKafka(uid);
-        await fetchDataLoop(uid)
+        await fetchData(uid)
           .then((r) => {
             if (r) {
               setResult(r);
