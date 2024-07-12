@@ -132,8 +132,8 @@ profile picture of the artists in order to offer the genuine Spotify experience 
 ### Serving Layer => Maria DB
 ### Frontend
 ---- Get Data Mechanismus => Erst Cache => Dann Kafka => Dann MariaDB in einer Loop Abfragen => Dann in Cache speichern.
-## Systemarchitektur
-### Architektur
+## System Architecture
+### Overview
 The system includes a frontend application developed with NextJS and a backend application, also based on NextJS, which 
 handles central control and data processing. Users log into the web app with their Spotify accounts to access detailed 
 analyses. This authentication is done through the Spotify API, which is also used to provide album covers, song previews,
@@ -157,7 +157,8 @@ Each of the components is described in more detail within the following sections
 
 ### Components
 #### Kafka (Data Ingestion)
-
+Kafka serves as a message queue system, enabling live data streaming. In this architecture, Kafka is used to capture 
+song play activities and forward them to Spark for processing.
 
 #### Spark (Batch + Stream Processing)
 The Spark application is designed to process and analyse streaming data from a Kafka topic, simulating song play
@@ -175,7 +176,18 @@ MariaDB database. Continuous streaming queries are used to process data live wit
 ensuring data consistency and recovery from potential failures.
 
 #### MariaDB (Serving Layer)
+MariaDB functions as a relational database where the aggregated results from Spark are stored. It acts as the serving 
+layer from which the backend application retrieves the required data.
+
 #### NextJS Frontend
+The frontend application, developed with NextJS, provides the user interface through which users can access the analyses.
+It communicates with the backend application to retrieve and display the necessary data.
+
+#### NextJS Backend
+The backend application, also developed with NextJS, serves as the central control and data processing layer. It retrieves
+the data from MariaDB, caches it via Memcached, and provides it to the frontend application. The backend application also
+handles the authentication process with the Spotify API.
+
 #### Spotify API
 
 Die Benutzerdaten für die in der Web-App dargestellten Analysen stammen zwar direkt von Spotify, werden aber nicht über die Spotify-API abgefragt (mehr dazu im Kapitel "Herausforderungen"). Die Spotify-API wird daher vor allem für die folgenden beiden Funktionen genutzt. 
