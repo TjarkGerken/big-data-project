@@ -320,10 +320,12 @@ function RenderResults() {
       }
     };
 
-    getData(); // comment for mockdata
-    //setResult(mockJSONResponseData); // uncomment for mockdata
-    //  getUserID();
-    // setIsLoading(false);
+    //getData(); // comment for mockdata
+    setTimeout(() => {
+      setResult(mockJSONResponseData); // uncomment for mockdata
+    }, 2000);
+    getUserID();
+    setIsLoading(false);
   }, [uid]);
 
   if (isLoading && !error) {
@@ -349,11 +351,11 @@ function RenderResults() {
   return (
     <div className="flex flex-col bg-spotify-black items-center h-full w-full pb-12">
       <div className="flex flex-col items-center w-full mt-6">
-        <p className="text-3xl font-bold text-white">
+        {userName && userName.display_name &&(<p className="text-3xl font-bold text-white">
           Hey{" "}
           <span className={"text-spotify-green"}>{userName.display_name}</span>,
           here are your results!
-        </p>
+        </p>)}
       </div>
       <div className="flex flex-col items-center mt-6 w-2/3 space-y-8">
         <DisplayArtists artistData={result.top_artist} />
