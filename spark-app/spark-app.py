@@ -20,8 +20,8 @@ spark.sparkContext.setLogLevel('WARN')
 
 
 # Set checkpoint directory
-checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/cpsaassssdsads"
-spark.sparkContext.setCheckpointDir(checkpoint_dir)
+#checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/krise1"
+#spark.sparkContext.setCheckpointDir(checkpoint_dir)
 
 # Example Part 2
 # Read messages from Kafka
@@ -100,22 +100,19 @@ def write_to_db(batch_df, batch_id, table_name):
 query = topSongs \
     .writeStream \
     .outputMode("complete") \
-    .option("checkpointLocation", checkpoint_dir + "/top_songs") \
     .foreachBatch(lambda df, id: write_to_db(df, id, "top_songs")) \
     .start()
-
+#.option("checkpointLocation", checkpoint_dir + "/top_songs") \
 query2 = topArtists \
     .writeStream \
     .outputMode("complete") \
-    .option("checkpointLocation", checkpoint_dir + "/top_artists") \
     .foreachBatch(lambda df, id: write_to_db(df, id, "top_artists")) \
     .start()
-
+#.option("checkpointLocation", checkpoint_dir + "/top_artists") \
 query3 = totalPlaytime \
     .writeStream \
     .outputMode("complete") \
-    .option("checkpointLocation", checkpoint_dir + "/total_playtime") \
     .foreachBatch(lambda df, id: write_to_db(df, id, "total_playtime")) \
     .start()
-
+#.option("checkpointLocation", checkpoint_dir + "/total_playtime") \
 spark.streams.awaitAnyTermination()

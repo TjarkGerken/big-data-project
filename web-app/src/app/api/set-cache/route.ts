@@ -24,8 +24,9 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: Request): Promise<Response> {
   const body: SetCacheRequestBody = await request.json();
+  const TTL = 60*10
   try {
-    await setCache(body.uid, body.data, 60);
+    await setCache(body.uid, body.data, TTL);
     return new Response(JSON.stringify({ message: "Cache set successfully" }), {
       status: 201,
     });

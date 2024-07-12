@@ -3,6 +3,7 @@ import { StreamingHistoryTjark } from "@/app/api/send-to-kafka/StreamingHistoryT
 import { Track } from "@/app/api/send-to-kafka/StreamingHistoryType";
 import { StreamingHistoryDavid } from "./StreamingHistoryDavid";
 import { StreamingHistoryCarlos } from "@/app/api/send-to-kafka/StreamingHistoryCarlos";
+import { StreamingHistoryNiklasHommie } from "@/app/api/send-to-kafka/StreamingHistoryNiklas";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +15,7 @@ const AVAILABLE_DATASETS = {
   tjark: StreamingHistoryTjark,
   david: StreamingHistoryDavid,
   carlos: StreamingHistoryCarlos,
-  // "niklas": "Niklas",
+  niklas: StreamingHistoryNiklasHommie,
 };
 
 async function sendToKafka(tracks: Track[], uid: string) {

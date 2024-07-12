@@ -107,64 +107,89 @@ export async function GET(request: Request) {
     if (arr1.length !== arr2.length) {
       return false;
     }
-    return Md5.hashStr(JSON.stringify(arr1)) === Md5.hashStr(JSON.stringify(arr2));
+    return Md5.hashStr(JSON.stringify(arr1,bigintReplacer)) === Md5.hashStr(JSON.stringify(arr2,bigintReplacer));
   }
 
   const BUFFER_TIME = 10000
-  const LOOK_BACK = 2
-  
+  const LOOK_BACK = 6
+  const NEXT_RESPONSE_EMTPY_BREAK = 4
+
+
   async function loopQueryTopSongs(){
     let responseArray:TrackData[][] = []
     let currentResponse:TrackData[] = []
-
+    let nextReponseEmptyCounter:number = 0
     let i = 0;
+
     while(i < LOOK_BACK){
       currentResponse = await queryTopSongs()
       responseArray.push(currentResponse)
+      console.log(i)
       i += 1;
       await sleep(BUFFER_TIME)
     }
 
     while (true) {
       let newResponse = await queryTopSongs();
-      if (currentResponse.length !==0 && newResponse.length === 0){
+      console.log("New Response Length Song" + String(newResponse.length))
+      if (currentResponse.length !== 0 && newResponse.length === 0){
+                nextReponseEmptyCounter +=1
+      }
+     
+      if (nextReponseEmptyCounter > NEXT_RESPONSE_EMTPY_BREAK) {
+        console.log("==== BREAK SONG QUERY RESPONSE LENGTH ====")
+        nextReponseEmptyCounter +=1
         break;
       }
-      if (compareArrays(newResponse, responseArray[responseArray.length - 1])) {
+
+      if (compareArrays(newResponse, responseArray[responseArray.length - LOOK_BACK])&& newResponse.length !== 0) {
+        console.log("==== BREAK SONG QUERY ARRAY COMPARISON ====")
         break;
       }
+
+      console.log("==== ARTIST SENDING REQUEST ====")
       currentResponse = newResponse;
       responseArray.push(currentResponse);
       await sleep(BUFFER_TIME);
     }
-    console.log("====STOPPED QUERY TOP SONGS====");
-    return currentResponse;
+
+    console.log("====FULL STOPPED QUERY TOP SONGS ====\n\n\n\n\n\n\n\n")
+    return currentResponse
   }
+
   async function loopQueryTopArtists(){
     let responseArray:ArtistData[][] = []
     let currentResponse:ArtistData[] = []
-
+    let nextReponseEmptyCounter:number = 0
     let i = 0;
+
     while(i < LOOK_BACK){
       currentResponse = await queryTopArtists()
       responseArray.push(currentResponse)
+      console.log(i)
       i += 1;
       await sleep(BUFFER_TIME)
     }
 
     while (true) {
       let newResponse = await queryTopArtists();
+      console.log("New Response Length" + String(newResponse.length))
       if (currentResponse.length !== 0 && newResponse.length === 0){
+                nextReponseEmptyCounter +=1
+      }
+     
+      if (nextReponseEmptyCounter > NEXT_RESPONSE_EMTPY_BREAK) {
         console.log("==== BREAK ARTIST QUERY RESPONSE LENGTH ====")
+        nextReponseEmptyCounter +=1
         break;
       }
 
-      if (compareArrays(newResponse, responseArray[responseArray.length - 3])) {
+      if (compareArrays(newResponse, responseArray[responseArray.length - LOOK_BACK])&& newResponse.length !== 0) {
         console.log("==== BREAK ARTIST QUERY ARRAY COMPARISON ====")
         break;
       }
 
-      console.log("==== BREAK ARTIST SENDING REQUEST ====")
+      console.log("==== ARTIST SENDING REQUEST ====")
       currentResponse = newResponse;
       responseArray.push(currentResponse);
       await sleep(BUFFER_TIME);
@@ -173,31 +198,46 @@ export async function GET(request: Request) {
     console.log("====FULL STOPPED QUERY TOP ARTISTS ====\n\n\n\n\n\n\n\n")
     return currentResponse
   }
+
   async function loopQueryTotalPlaytime(){
     let responseArray:TotalPlayTime[][] = []
     let currentResponse:TotalPlayTime[] = []
-    
+    let nextReponseEmptyCounter:number = 0
     let i = 0;
+
     while(i < LOOK_BACK){
       currentResponse = await queryTotalPlayTime()
       responseArray.push(currentResponse)
+      console.log(i)
       i += 1;
       await sleep(BUFFER_TIME)
     }
 
     while (true) {
       let newResponse = await queryTotalPlayTime();
-      if (currentResponse.length !==0 && newResponse.length === 0){
+      console.log("New Response Length PLAYTIME" + String(newResponse.length))
+      if (currentResponse.length !== 0 && newResponse.length === 0){
+                nextReponseEmptyCounter +=1
+      }
+     
+      if (nextReponseEmptyCounter > NEXT_RESPONSE_EMTPY_BREAK) {
+        console.log("==== BREAK PLAYTIME QUERY RESPONSE LENGTH ====")
+        nextReponseEmptyCounter +=1
         break;
       }
-      if (compareArrays(newResponse, responseArray[responseArray.length - 1])) {
+
+      if (compareArrays(newResponse, responseArray[responseArray.length - LOOK_BACK])&& newResponse.length !== 0) {
+        console.log("==== BREAK PLAYTIME QUERY ARRAY COMPARISON ====")
         break;
       }
+
+      console.log("==== PLAYTIME SENDING REQUEST ====")
       currentResponse = newResponse;
       responseArray.push(currentResponse);
       await sleep(BUFFER_TIME);
     }
-    console.log("====STOPPED QUERY TOTAL PLAY TIME ====\n\n\n\n\n\n\n\n")
+
+    console.log("====FULL STOPPED QUERY PLAYTIME ====\n\n\n\n\n\n\n\n")
     return currentResponse
   }
 
