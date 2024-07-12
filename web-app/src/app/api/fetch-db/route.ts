@@ -1,48 +1,34 @@
 import * as mariadb from "mariadb";
-import {Md5} from 'ts-md5';
+import {
+  bigintReplacer,
+  compareArrays,
+  getUID,
+  sleep,
+} from "@/app/api/fetch-db/utils";
+import {
+  ArtistData,
+  ResponseData,
+  TotalPlayTime,
+  TrackData,
+} from "@/app/api/fetch-db/types";
 
 export const dynamic = "force-dynamic";
 
-
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-interface TrackData {
-  UID: string;
-  trackName: string;
-  artistName: string;
-  total_msPlayed: bigint;
-}
-interface ArtistData {
-  UID: string;
-  artistName: string;
-  total_msPlayed: bigint;
-}
-
-interface TotalPlayTime {
-  UID: string;
-  total_msPlayed: bigint;
-}
-
-export interface ResponseData {
-  spotify_uid: string;
-  top_songs: TrackData[];
-  top_artist: ArtistData[];
-  total_ms_played?: TotalPlayTime[];
-}
-
 export async function GET(request: Request) {
-  const url = new URL(request.url);
-
-  // Get the username parameter from the query string
-  const uid = url.searchParams.get("uid");
-
-  if (!uid) {
-    return new Response("Please provide a uid", {
-      status: 400,
-    });
+  const uidOrResponse = getUID(request);
+  if (uidOrResponse instanceof Response) {
+    return uidOrResponse;
   }
+  /**
+   * The UID of the user that is requested.
+   */
+  const uid = uidOrResponse;
 
-  const pool = mariadb.createPool({
+  /**
+   * A connection pool to the MariaDB.
+   * @type {mariadb.Pool}
+   */
+  const pool: mariadb.Pool = mariadb.createPool({
     host: "my-app-mariadb-service",
     port: 3306,
     user: "root",
@@ -52,7 +38,12 @@ export async function GET(request: Request) {
     database: "spotify",
   });
 
-  async function queryTopArtists() {
+  /**
+   * Query all the artists from the database for the requested UID.
+   * @returns {Promise<ArtistData[]>} - All artists from the database, that are currently available in the MariaDB.
+   * @throws {Error} - Throws an error if the connection to the Database fails-
+   */
+  async function queryTopArtists(): Promise<ArtistData[]> {
     let conn;
     try {
       conn = await pool.getConnection();
@@ -69,7 +60,12 @@ export async function GET(request: Request) {
     }
   }
 
-  async function queryTopSongs() {
+  /**
+   * Query all the songs from the database for the requested UID.
+   * @returns {Promise<TrackData[]>} - All songs from the database, that are currently available in the MariaDB.
+   * @throws {Error} - Throws an error if the connection to the Database fails-
+   */
+  async function queryTopSongs(): Promise<TrackData[]> {
     let conn;
     try {
       conn = await pool.getConnection();
@@ -86,7 +82,12 @@ export async function GET(request: Request) {
     }
   }
 
-  async function queryTotalPlayTime() {
+  /**
+   * Query the total playtime for the requested UID.
+   * @returns {Promise<TotalPlayTime[]>} - The total playtime for the requested UID that is currently available in the MariaDB.
+   * @throws {Error} - Throws an error if the connection to the Database fails-
+   */
+  async function queryTotalPlayTime(): Promise<TotalPlayTime[]> {
     let conn;
     try {
       conn = await pool.getConnection();
@@ -103,173 +104,191 @@ export async function GET(request: Request) {
     }
   }
 
-  function compareArrays(arr1:any[], arr2:any[]): boolean {
-    if (arr1.length !== arr2.length) {
-      return false;
-    }
-    return Md5.hashStr(JSON.stringify(arr1,bigintReplacer)) === Md5.hashStr(JSON.stringify(arr2,bigintReplacer));
-  }
+  /**
+   * The time between each request to the database.
+   */
+  const BUFFER_TIME = 10000;
+  /**
+   * The number of postions the loop should look back to compare the arrays. If the response from the database is
+   * consistent for the last X requests it is assumed that Spark finished the processing and the loop can be stopped.
+   */
+  const LOOK_BACK = 6;
+  /**
+   * The number of empty responses that should be received before the loop is stopped, when a valid response has already
+   * been received. This ensures that the loop is stopped when spark overwrites the table with an empty table, after
+   * the response has been received.
+   */
+  const NEXT_RESPONSE_EMPTY_BREAK = 4;
 
-  const BUFFER_TIME = 10000
-  const LOOK_BACK = 6
-  const NEXT_RESPONSE_EMTPY_BREAK = 4
-
-
-  async function loopQueryTopSongs(){
-    let responseArray:TrackData[][] = []
-    let currentResponse:TrackData[] = []
-    let nextReponseEmptyCounter:number = 0
+  /**
+   * Loop the query for all songs. The function ensures that the data processing by Spark is finished by comparing
+   * the responses from the database over the <LOOK_BACK> Intervall and stopping the loop if the response is consistent.
+   * Additionally, the loop will stop when it received a valid response and the next <NEXT_RESPONSE_EMPTY_BREAK> responses
+   * are empty.
+   * @returns {Promise<TrackData[]>} - The aggregated results of the songs for the requested UID, that have been processed by Spark and stored in the Maria DB.
+   */
+  async function loopQueryTopSongs(): Promise<TrackData[]> {
+    let responseArray: TrackData[][] = [];
+    let currentResponse: TrackData[] = [];
+    let nextReponseEmptyCounter: number = 0;
     let i = 0;
 
-    while(i < LOOK_BACK){
-      currentResponse = await queryTopSongs()
-      responseArray.push(currentResponse)
-      console.log(i)
+    // Establishes the foundation for the array to be able to compare backwards
+    while (i < LOOK_BACK) {
+      currentResponse = await queryTopSongs();
+      responseArray.push(currentResponse);
+      console.log(i);
       i += 1;
-      await sleep(BUFFER_TIME)
+      await sleep(BUFFER_TIME);
     }
-
+    // Compares the Arrays and checks if the function should stop
     while (true) {
       let newResponse = await queryTopSongs();
-      console.log("New Response Length Song" + String(newResponse.length))
-      if (currentResponse.length !== 0 && newResponse.length === 0){
-                nextReponseEmptyCounter +=1
+      if (currentResponse.length !== 0 && newResponse.length === 0) {
+        nextReponseEmptyCounter += 1;
       }
-     
-      if (nextReponseEmptyCounter > NEXT_RESPONSE_EMTPY_BREAK) {
-        console.log("==== BREAK SONG QUERY RESPONSE LENGTH ====")
-        nextReponseEmptyCounter +=1
+
+      if (nextReponseEmptyCounter > NEXT_RESPONSE_EMPTY_BREAK) {
+        nextReponseEmptyCounter += 1;
         break;
       }
 
-      if (compareArrays(newResponse, responseArray[responseArray.length - LOOK_BACK])&& newResponse.length !== 0) {
-        console.log("==== BREAK SONG QUERY ARRAY COMPARISON ====")
+      if (
+        compareArrays(
+          newResponse,
+          responseArray[responseArray.length - LOOK_BACK],
+        ) &&
+        newResponse.length !== 0
+      ) {
         break;
       }
 
-      console.log("==== ARTIST SENDING REQUEST ====")
       currentResponse = newResponse;
       responseArray.push(currentResponse);
       await sleep(BUFFER_TIME);
     }
 
-    console.log("====FULL STOPPED QUERY TOP SONGS ====\n\n\n\n\n\n\n\n")
-    return currentResponse
+    return currentResponse;
   }
 
-  async function loopQueryTopArtists(){
-    let responseArray:ArtistData[][] = []
-    let currentResponse:ArtistData[] = []
-    let nextReponseEmptyCounter:number = 0
+  /**
+   * Loop the query for all artist data. The function ensures that the data processing by Spark is finished by comparing
+   * the responses from the database over the <LOOK_BACK> Intervall and stopping the loop if the response is consistent.
+   * Additionally, the loop will stop when it received a valid response and the next <NEXT_RESPONSE_EMPTY_BREAK> responses
+   * are empty.
+   * @returns {Promise<ArtistData[]>} - The aggregated results of the artists for the requested UID, that have been processed by Spark and stored in the Maria DB.
+   */
+  async function loopQueryTopArtists(): Promise<ArtistData[]> {
+    let responseArray: ArtistData[][] = [];
+    let currentResponse: ArtistData[] = [];
+    let nextResponseEmptyCounter: number = 0;
     let i = 0;
 
-    while(i < LOOK_BACK){
-      currentResponse = await queryTopArtists()
-      responseArray.push(currentResponse)
-      console.log(i)
+    // Establishes the foundation for the array to be able to compare backwards
+    while (i < LOOK_BACK) {
+      currentResponse = await queryTopArtists();
+      responseArray.push(currentResponse);
+      console.log(i);
       i += 1;
-      await sleep(BUFFER_TIME)
+      await sleep(BUFFER_TIME);
     }
-
+    // Compares the Arrays and checks if the function should stop
     while (true) {
       let newResponse = await queryTopArtists();
-      console.log("New Response Length" + String(newResponse.length))
-      if (currentResponse.length !== 0 && newResponse.length === 0){
-                nextReponseEmptyCounter +=1
+      if (currentResponse.length !== 0 && newResponse.length === 0) {
+        nextResponseEmptyCounter += 1;
       }
-     
-      if (nextReponseEmptyCounter > NEXT_RESPONSE_EMTPY_BREAK) {
-        console.log("==== BREAK ARTIST QUERY RESPONSE LENGTH ====")
-        nextReponseEmptyCounter +=1
+
+      if (nextResponseEmptyCounter > NEXT_RESPONSE_EMPTY_BREAK) {
+        nextResponseEmptyCounter += 1;
         break;
       }
 
-      if (compareArrays(newResponse, responseArray[responseArray.length - LOOK_BACK])&& newResponse.length !== 0) {
-        console.log("==== BREAK ARTIST QUERY ARRAY COMPARISON ====")
+      if (
+        compareArrays(
+          newResponse,
+          responseArray[responseArray.length - LOOK_BACK],
+        ) &&
+        newResponse.length !== 0
+      ) {
         break;
       }
 
-      console.log("==== ARTIST SENDING REQUEST ====")
       currentResponse = newResponse;
       responseArray.push(currentResponse);
       await sleep(BUFFER_TIME);
     }
-
-    console.log("====FULL STOPPED QUERY TOP ARTISTS ====\n\n\n\n\n\n\n\n")
-    return currentResponse
+    return currentResponse;
   }
 
-  async function loopQueryTotalPlaytime(){
-    let responseArray:TotalPlayTime[][] = []
-    let currentResponse:TotalPlayTime[] = []
-    let nextReponseEmptyCounter:number = 0
+  /**
+   * Loop the query for the total playtime. The function ensures that the data processing by Spark is finished by comparing
+   * the responses from the database over the <LOOK_BACK> Intervall and stopping the loop if the response is consistent.
+   * Additionally, the loop will stop when it received a valid response and the next <NEXT_RESPONSE_EMPTY_BREAK> responses
+   * are empty.
+   * @returns {Promise<TotalPlayTime[]>} - The aggregated results of the total playtime for the requested UID, that have been processed by Spark and stored in the Maria DB.
+   */
+  async function loopQueryTotalPlaytime(): Promise<TotalPlayTime[]> {
+    let responseArray: TotalPlayTime[][] = [];
+    let currentResponse: TotalPlayTime[] = [];
+    let nextReponseEmptyCounter: number = 0;
     let i = 0;
 
-    while(i < LOOK_BACK){
-      currentResponse = await queryTotalPlayTime()
-      responseArray.push(currentResponse)
-      console.log(i)
+    // Establishes the foundation for the array to be able to compare backwards
+    while (i < LOOK_BACK) {
+      currentResponse = await queryTotalPlayTime();
+      responseArray.push(currentResponse);
+      console.log(i);
       i += 1;
-      await sleep(BUFFER_TIME)
+      await sleep(BUFFER_TIME);
     }
-
+    // Compares the Arrays and checks if the function should stop
     while (true) {
       let newResponse = await queryTotalPlayTime();
-      console.log("New Response Length PLAYTIME" + String(newResponse.length))
-      if (currentResponse.length !== 0 && newResponse.length === 0){
-                nextReponseEmptyCounter +=1
+      if (currentResponse.length !== 0 && newResponse.length === 0) {
+        nextReponseEmptyCounter += 1;
       }
-     
-      if (nextReponseEmptyCounter > NEXT_RESPONSE_EMTPY_BREAK) {
-        console.log("==== BREAK PLAYTIME QUERY RESPONSE LENGTH ====")
-        nextReponseEmptyCounter +=1
+
+      if (nextReponseEmptyCounter > NEXT_RESPONSE_EMPTY_BREAK) {
+        nextReponseEmptyCounter += 1;
         break;
       }
 
-      if (compareArrays(newResponse, responseArray[responseArray.length - LOOK_BACK])&& newResponse.length !== 0) {
-        console.log("==== BREAK PLAYTIME QUERY ARRAY COMPARISON ====")
+      if (
+        compareArrays(
+          newResponse,
+          responseArray[responseArray.length - LOOK_BACK],
+        ) &&
+        newResponse.length !== 0
+      ) {
         break;
       }
-
-      console.log("==== PLAYTIME SENDING REQUEST ====")
       currentResponse = newResponse;
       responseArray.push(currentResponse);
       await sleep(BUFFER_TIME);
     }
-
-    console.log("====FULL STOPPED QUERY PLAYTIME ====\n\n\n\n\n\n\n\n")
-    return currentResponse
+    return currentResponse;
   }
 
-  async function getAllData() {
+  /**
+   * Executes multiple queries in parallel to fetch data related to top songs, top artists, and total playtime for a specific user.
+   *
+   * @returns {Promise<[TrackData[], ArtistData[], TotalPlayTime[]]>} A promise that contains the data for the user in the following format:
+   * - The first array contains `TrackData` objects for the songs of the user.
+   * - The second array contains `ArtistData` objects for the artists of the user.
+   * - The third array contains `TotalPlayTime` objects for the total playtime of the user.
+   */
+  async function getAllData(): Promise<
+    [TrackData[], ArtistData[], TotalPlayTime[]]
+  > {
     return await Promise.all([
       loopQueryTopSongs(),
       loopQueryTopArtists(),
-      loopQueryTotalPlaytime()
+      loopQueryTotalPlaytime(),
     ]);
   }
 
-  const [top_songs,top_artist, total_ms_played] = await getAllData()
-
-  function convertBigIntToNumber(bigintValue: bigint) {
-    if (
-      bigintValue < Number.MIN_SAFE_INTEGER ||
-      bigintValue > Number.MAX_SAFE_INTEGER
-    ) {
-      throw new RangeError(
-        "The BigInt value is out of the safe range for conversion to Number.",
-      );
-    }
-    return Number(bigintValue);
-  }
-  // Define a replacer function for JSON.stringify
-  function bigintReplacer(key: string, value: any) {
-    if (typeof value === "bigint") {
-      return convertBigIntToNumber(value);
-    } else {
-      return value;
-    }
-  }
+  const [top_songs, top_artist, total_ms_played] = await getAllData();
 
   const sortedTopSongs = top_songs.sort((a, b) => {
     const totalMsPlayedA = BigInt(a.total_msPlayed);
@@ -283,6 +302,9 @@ export async function GET(request: Request) {
     return Number(totalMsPlayedB - totalMsPlayedA);
   });
 
+  /**
+   * Returns the response for the get request, with the top 10 songs, top 10 artists, and the total playtime for the requested UID.
+   */
   const response: ResponseData = {
     spotify_uid: uid,
     top_songs: sortedTopSongs.slice(0, 10),

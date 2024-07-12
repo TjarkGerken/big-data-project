@@ -4,16 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="joaaaa">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_07_2024_12_43_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_07_2024_12_43__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_07_2024_12_46_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_07_2024_12_46__Changes_.xml" afterDir="false" />
+    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="added svgs">
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/utils.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-from-cache/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/get-from-cache/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/StreamingHistoryNiklas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/StreamingHistoryNiklas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/set-cache/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/set-cache/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayArtists.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayArtists.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayTotalTime.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayTotalTime.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayTracks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayTracks.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,12 +52,12 @@
     }
   ]
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/TjarkGerken/big-data-project.git&quot;,
-    &quot;accountId&quot;: &quot;75c79272-7965-44b2-abe1-cf1cd65ee593&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/TjarkGerken/big-data-project.git",
+    "accountId": "75c79272-7965-44b2-abe1-cf1cd65ee593"
   }
-}</component>
+}]]></component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -73,7 +75,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;#5 on Niklas__Stuff&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/api&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tjark.gerken/Coding Folder/KickstartII/big-data-project/imgs&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -85,13 +87,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\imgs" />
       <recent name="$PROJECT_DIR$/web-app/src/app/api" />
       <recent name="$PROJECT_DIR$/web-app/src/app/results/components" />
       <recent name="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app" />
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\imgs" />
       <recent name="$PROJECT_DIR$/ExampleData" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\api\fetch-db\types.ts" />
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\api\fetch-db\utils.ts" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -120,6 +127,7 @@
       <workItem from="1720609835257" duration="14028000" />
       <workItem from="1720625192568" duration="134000" />
       <workItem from="1720625629292" duration="3976000" />
+      <workItem from="1720817907193" duration="1934000" />
     </task>
     <task id="LOCAL-00001" summary="d">
       <option name="closed" value="true" />
@@ -201,23 +209,63 @@
       <option name="project" value="LOCAL" />
       <updated>1720625058897</updated>
     </task>
-    <task id="LOCAL-00011" summary="frontend design">
+    <task id="LOCAL-00011" summary="First darft">
       <option name="closed" value="true" />
-      <created>1720784432724</created>
+      <created>1720801640541</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1720784432724</updated>
+      <updated>1720801640541</updated>
     </task>
-    <task id="LOCAL-00012" summary="joaaaa">
+    <task id="LOCAL-00012" summary="Added white background to system-architecture image">
       <option name="closed" value="true" />
-      <created>1720786657807</created>
+      <created>1720802323848</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1720786657807</updated>
+      <updated>1720802323848</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added documentation for spark">
+      <option name="closed" value="true" />
+      <created>1720804992605</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1720804992605</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added documentation for system architecture">
+      <option name="closed" value="true" />
+      <created>1720806301046</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1720806301046</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Added documentation for system architecture">
+      <option name="closed" value="true" />
+      <created>1720806557464</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1720806557464</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added drafts for rest of the system architecture components">
+      <option name="closed" value="true" />
+      <created>1720807015035</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1720807015035</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added svgs">
+      <option name="closed" value="true" />
+      <created>1720808643797</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1720808643797</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,7 +291,12 @@
     <MESSAGE value="bisschen grundlage" />
     <MESSAGE value="kompletter brain rot" />
     <MESSAGE value="frontend design" />
-    <MESSAGE value="joaaaa" />
-    <option name="LAST_COMMIT_MESSAGE" value="joaaaa" />
+    <MESSAGE value="First darft" />
+    <MESSAGE value="Added white background to system-architecture image" />
+    <MESSAGE value="Added documentation for spark" />
+    <MESSAGE value="Added documentation for system architecture" />
+    <MESSAGE value="Added drafts for rest of the system architecture components" />
+    <MESSAGE value="added svgs" />
+    <option name="LAST_COMMIT_MESSAGE" value="added svgs" />
   </component>
 </project>

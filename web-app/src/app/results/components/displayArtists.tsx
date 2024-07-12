@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ArtistData } from "@/app/results/page";
@@ -90,15 +90,21 @@ export default function DisplayArtists(props: { artistData: ArtistData[] }) {
             key={0}
             className="flex w-full h-full bg-spotify-black-light rounded-md items-center"
           >
-            {artistsDisplayData && artistsDisplayData[0] && artistsDisplayData[0].images && artistsDisplayData[0].images[0] && (
+            {artistsDisplayData &&
+              artistsDisplayData[0] &&
+              artistsDisplayData[0].images &&
+              artistsDisplayData[0].images[0] && (
                 <Image
-                    className="h-96 w-96 object-cover rounded-l-md"
-                    src={artistsDisplayData[0].images[0]?.url ?? '/default-image-url.jpg'}
-                    alt={artistsDisplayData[0]?.name ?? 'Default Artist Name'}
-                    width={artistsDisplayData[0].images[0]?.width ?? 300}
-                    height={artistsDisplayData[0].images[0]?.height ?? 300}
+                  className="h-96 w-96 object-cover rounded-l-md"
+                  src={
+                    artistsDisplayData[0].images[0]?.url ??
+                    "/default-image-url.jpg"
+                  }
+                  alt={artistsDisplayData[0]?.name ?? "Default Artist Name"}
+                  width={artistsDisplayData[0].images[0]?.width ?? 300}
+                  height={artistsDisplayData[0].images[0]?.height ?? 300}
                 />
-            )}
+              )}
             <div className={"flex flex-col px-4"}>
               <div className={"flex items-center justify-center"}>
                 <div
@@ -109,83 +115,101 @@ export default function DisplayArtists(props: { artistData: ArtistData[] }) {
                   #1
                 </div>
                 <div className={"flex flex-col justify-between h-max px-4"}>
-                  {artistsDisplayData[0]&&
-                      artistsDisplayData[0].name
-                      && <p className={"text-5xl font-bold self-start"}>
-                    {artistsDisplayData[0].name}
-                  </p>}
+                  {artistsDisplayData[0] && artistsDisplayData[0].name && (
+                    <p className={"text-5xl font-bold self-start"}>
+                      {artistsDisplayData[0].name}
+                    </p>
+                  )}
                   <p className={"self-end"}>
-                    {artistsDisplayData&& artistsDisplayData[0] && artistsDisplayData[0].genres &&
-                    (
-                        artistsDisplayData[0].genres
-                            .map((genre) => capitalizeWords(genre))
-                            .join(", ")
-                      )}
+                    {artistsDisplayData &&
+                      artistsDisplayData[0] &&
+                      artistsDisplayData[0].genres &&
+                      artistsDisplayData[0].genres
+                        .map((genre) => capitalizeWords(genre))
+                        .join(", ")}
                   </p>
                 </div>
               </div>
-              <div className={"py-8 flex flex-col justify-center"}>{artistsDisplayData[0]&&artistsDisplayData[0].name&&(
-                <p className={"text-xl text-left"}>
-                  You listened to {artistsDisplayData[0].name} for a total of:
-                </p>)}
-                {artistsDisplayData && artistsDisplayData[0] && artistsDisplayData[0].total_msPlayed &&
-                  (<p
+              <div className={"py-8 flex flex-col justify-center"}>
+                {artistsDisplayData[0] && artistsDisplayData[0].name && (
+                  <p className={"text-xl text-left"}>
+                    You listened to {artistsDisplayData[0].name} for a total of:
+                  </p>
+                )}
+                {artistsDisplayData &&
+                  artistsDisplayData[0] &&
+                  artistsDisplayData[0].total_msPlayed && (
+                    <p
                       className={
                         "font-bold text-7xl text-spotify-green text-center"
                       }
-                  >
-                    {Math.round(artistsDisplayData[0].total_msPlayed / 3600000)}{" "}
-                    <span className={"text-white"}>
-                    {Math.round(
+                    >
+                      {Math.round(
                         artistsDisplayData[0].total_msPlayed / 3600000,
-                    ) === 1
-                        ? "hour"
-                        : "hours"}
-                  </span>
-                  </p>)}
+                      )}{" "}
+                      <span className={"text-white"}>
+                        {Math.round(
+                          artistsDisplayData[0].total_msPlayed / 3600000,
+                        ) === 1
+                          ? "hour"
+                          : "hours"}
+                      </span>
+                    </p>
+                  )}
               </div>
             </div>
           </div>
 
-          {artistsDisplayData.length > 0 &&artistsDisplayData.slice(1, count).map((artist, index) => (
-            <div
-              className={
-                "flex w-full bg-spotify-black-light rounded-md justify-between items-center"
-              }
-              key={index + 1}
-            >
-              <div className={"h-24 w-28 pr-5 min-w-28"}>
-                {artist && artist.images && artist.images[0] && artist.name && <Image
-                    className={"h-24 w-28 object-cover rounded-l-md"}
-                    src={artist.images[0]?.url}
-                    alt={artist.name}
-                    width={artist.images[0].width}
-                    height={artist.images[0].height}
-                />}
-              </div>
-              <div className={"w-full flex flex-shrink"}>
-                {artist && artist.name && <p className={"text-left w-full text-3xl font-bold"}>
-                  <span className={"text-spotify-green"}> #{index + 2}</span>{" "}
-                  {artist.name}
-                </p>}
-              </div>
-              {artist && artist.total_msPlayed&&<p
-                  className={
-                    "font-bold text-3xl text-spotify-green text-center w-1/3"
-                  }
+          {artistsDisplayData.length > 0 &&
+            artistsDisplayData.slice(1, count).map((artist, index) => (
+              <div
+                className={
+                  "flex w-full bg-spotify-black-light rounded-md justify-between items-center"
+                }
+                key={index + 1}
               >
-                {" "}
-                {Math.round(artist.total_msPlayed / 3600000)}{" "}
-                <span className={"text-white"}>
-                  {Math.round(artist.total_msPlayed / 3600000) === 1
-                      ? "hour"
-                      : "hours"}
-                </span>
-              </p>}
-            </div>
-          ))}
-
-
+                <div className={"h-24 w-28 pr-5 min-w-28"}>
+                  {artist &&
+                    artist.images &&
+                    artist.images[0] &&
+                    artist.name && (
+                      <Image
+                        className={"h-24 w-28 object-cover rounded-l-md"}
+                        src={artist.images[0]?.url}
+                        alt={artist.name}
+                        width={artist.images[0].width}
+                        height={artist.images[0].height}
+                      />
+                    )}
+                </div>
+                <div className={"w-full flex flex-shrink"}>
+                  {artist && artist.name && (
+                    <p className={"text-left w-full text-3xl font-bold"}>
+                      <span className={"text-spotify-green"}>
+                        {" "}
+                        #{index + 2}
+                      </span>{" "}
+                      {artist.name}
+                    </p>
+                  )}
+                </div>
+                {artist && artist.total_msPlayed && (
+                  <p
+                    className={
+                      "font-bold text-3xl text-spotify-green text-center w-1/3"
+                    }
+                  >
+                    {" "}
+                    {Math.round(artist.total_msPlayed / 3600000)}{" "}
+                    <span className={"text-white"}>
+                      {Math.round(artist.total_msPlayed / 3600000) === 1
+                        ? "hour"
+                        : "hours"}
+                    </span>
+                  </p>
+                )}
+              </div>
+            ))}
 
           {count < artistsDisplayData.length && (
             <button

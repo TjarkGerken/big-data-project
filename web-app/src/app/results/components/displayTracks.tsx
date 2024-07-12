@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { TrackData } from "@/app/results/page";
@@ -116,14 +116,19 @@ export default function DisplayTracks(props: { trackData: TrackData[] }) {
             key={0}
             className="flex w-full h-full bg-spotify-black-light rounded-md items-center"
           >
-            {trackDisplayData&& trackDisplayData[0] && trackDisplayData[0].name && trackDisplayData[0].album && trackDisplayData[0].artists &&
+            {trackDisplayData &&
+              trackDisplayData[0] &&
+              trackDisplayData[0].name &&
+              trackDisplayData[0].album &&
+              trackDisplayData[0].artists && (
                 <Image
-                className={"h-96 w-96 object-cover rounded-l-md"}
-                src={trackDisplayData[0].album.images[0]?.url}
-                alt={trackDisplayData[0].name}
-                width={trackDisplayData[0].album.images[0]?.width}
-                height={trackDisplayData[0].album.images[0]?.height}
-            />}
+                  className={"h-96 w-96 object-cover rounded-l-md"}
+                  src={trackDisplayData[0].album.images[0]?.url}
+                  alt={trackDisplayData[0].name}
+                  width={trackDisplayData[0].album.images[0]?.width}
+                  height={trackDisplayData[0].album.images[0]?.height}
+                />
+              )}
             <div className={"flex flex-col w-full px-4"}>
               <div className={"flex items-center justify-center self-start"}>
                 <div
@@ -137,38 +142,43 @@ export default function DisplayTracks(props: { trackData: TrackData[] }) {
                   <p className={"text-5xl font-bold self-start"}>
                     {trackDisplayData[0].name}
                   </p>
-                  { trackDisplayData[0] && trackDisplayData[0].artists &&
-                  <p className={"self-end"}>
-                    {trackDisplayData[0].artists
+                  {trackDisplayData[0] && trackDisplayData[0].artists && (
+                    <p className={"self-end"}>
+                      {trackDisplayData[0].artists
                         .map((artist) => artist.name)
                         .join(", ")}
-                  </p>}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className={"py-8 flex flex-col justify-center"}>
-                { trackDisplayData[0] && trackDisplayData[0].name &&
-                <p className={"text-xl text-left"}>
-                  You listened to &quot;{trackDisplayData[0].name}&quot; for a
-                  total of:
-                </p>}
+                {trackDisplayData[0] && trackDisplayData[0].name && (
+                  <p className={"text-xl text-left"}>
+                    You listened to &quot;{trackDisplayData[0].name}&quot; for a
+                    total of:
+                  </p>
+                )}
                 <p
                   className={
                     "font-bold text-7xl text-spotify-green text-center"
                   }
                 >
-                  {
-                      trackDisplayData[0] && trackDisplayData[0].total_msPlayed && (
-                          <>
-                            {Math.round(trackDisplayData[0].total_msPlayed / 3600000)}
-                            <span className={"text-white"}>
-        {" "}
-                              {Math.round(trackDisplayData[0].total_msPlayed / 3600000) === 1
-                                  ? " hour"
-                                  : " hours"}
-      </span>
-                          </>
-                      )
-                  }
+                  {trackDisplayData[0] &&
+                    trackDisplayData[0].total_msPlayed && (
+                      <>
+                        {Math.round(
+                          trackDisplayData[0].total_msPlayed / 3600000,
+                        )}
+                        <span className={"text-white"}>
+                          {" "}
+                          {Math.round(
+                            trackDisplayData[0].total_msPlayed / 3600000,
+                          ) === 1
+                            ? " hour"
+                            : " hours"}
+                        </span>
+                      </>
+                    )}
                 </p>
               </div>
             </div>
@@ -182,14 +192,18 @@ export default function DisplayTracks(props: { trackData: TrackData[] }) {
               key={index + 1}
             >
               <div className={"h-24 w-28 pr-5 min-w-28"}>
-                {artist && artist.album && artist.album.images && artist.name &&
-                <Image
-                    className={"h-24 w-28 object-cover rounded-l-md"}
-                    src={artist.album.images[0]?.url}
-                    alt={artist.name}
-                    width={artist.album.images[0].width}
-                    height={artist.album.images[0].height}
-                />}
+                {artist &&
+                  artist.album &&
+                  artist.album.images &&
+                  artist.name && (
+                    <Image
+                      className={"h-24 w-28 object-cover rounded-l-md"}
+                      src={artist.album.images[0]?.url}
+                      alt={artist.name}
+                      width={artist.album.images[0].width}
+                      height={artist.album.images[0].height}
+                    />
+                  )}
               </div>
               <div className={"w-full flex flex-shrink"}>
                 <p className={"text-left w-full text-3xl font-bold"}>
@@ -197,18 +211,20 @@ export default function DisplayTracks(props: { trackData: TrackData[] }) {
                   {artist.name}
                 </p>
               </div>
-              {artist && artist.total_msPlayed && (<p
+              {artist && artist.total_msPlayed && (
+                <p
                   className={
                     "font-bold text-3xl text-spotify-green text-center w-1/3"
                   }
-              >
-                {Math.round(artist.total_msPlayed / 3600000)}{" "}
-                <span className={"text-white"}>
-                  {Math.round(artist.total_msPlayed / 3600000) === 1
+                >
+                  {Math.round(artist.total_msPlayed / 3600000)}{" "}
+                  <span className={"text-white"}>
+                    {Math.round(artist.total_msPlayed / 3600000) === 1
                       ? "hour"
                       : "hours"}
-                </span>
-              </p>)}
+                  </span>
+                </p>
+              )}
             </div>
           ))}
           {count < trackDisplayData.length && (

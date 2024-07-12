@@ -285,7 +285,6 @@ function RenderResults() {
     }
   }
 
-
   async function sortArrays() {
     const topSongs = result.top_songs.sort(
       (a, b) => b.total_msPlayed - a.total_msPlayed,
@@ -326,7 +325,7 @@ function RenderResults() {
     // }, 2000);
     // getUserID();
     // setIsLoading(false);
-    }, [uid]);
+  }, [uid]);
 
   if (isLoading && !error) {
     return (
@@ -374,11 +373,15 @@ function RenderResults() {
   return (
     <div className="flex flex-col bg-spotify-black items-center h-full w-full pb-12">
       <div className="flex flex-col items-center w-full mt-6">
-        {userName && userName.display_name &&(<p className="text-3xl font-bold text-white">
-          Hey{" "}
-          <span className={"text-spotify-green"}>{userName.display_name}</span>,
-          here are your results!
-        </p>)}
+        {userName && userName.display_name && (
+          <p className="text-3xl font-bold text-white">
+            Hey{" "}
+            <span className={"text-spotify-green"}>
+              {userName.display_name}
+            </span>
+            , here are your results!
+          </p>
+        )}
       </div>
       <div className="flex flex-col items-center mt-6 w-2/3 space-y-8">
         <DisplayArtists artistData={result.top_artist} />
