@@ -1,4 +1,5 @@
 import * as mariadb from "mariadb";
+import {Md5} from 'ts-md5';
 
 export const dynamic = "force-dynamic";
 
@@ -102,38 +103,20 @@ export async function GET(request: Request) {
     }
   }
 
-  const BUFFER_TIME = 10000
-  const LOOK_BACK = 5
-  
-  async function loopQueryTopArtists(){
-    let responseArray:ArtistData[][] = []
-    let currentResponse:ArtistData[] = []
-    
-    let i = 0;
-    while(i < LOOK_BACK){
-      currentResponse = await queryTopArtists()
-      responseArray.push(currentResponse)
-      i += 1;
-      await sleep(BUFFER_TIME)
+  function compareArrays(arr1:any[], arr2:any[]): boolean {
+    if (arr1.length !== arr2.length) {
+      return false;
     }
-    
-    do{
-      let newResponse = await queryTopArtists()
-        if (currentResponse.length !==0 && newResponse.length === 0){
-          break;
-        }
-        currentResponse = newResponse
-        console.log(currentResponse)
-        responseArray.push(currentResponse)
-        await sleep(BUFFER_TIME)
-      } while (currentResponse !== responseArray.at(responseArray.length- (LOOK_BACK-1)))
-    console.log("====STOPPED QUERY TOP ARTISTS ====\n\n\n\n\n\n\n\n")
-    return currentResponse
+    return Md5.hashStr(JSON.stringify(arr1)) === Md5.hashStr(JSON.stringify(arr2));
   }
+
+  const BUFFER_TIME = 10000
+  const LOOK_BACK = 2
+  
   async function loopQueryTopSongs(){
     let responseArray:TrackData[][] = []
     let currentResponse:TrackData[] = []
-    
+
     let i = 0;
     while(i < LOOK_BACK){
       currentResponse = await queryTopSongs()
@@ -141,19 +124,48 @@ export async function GET(request: Request) {
       i += 1;
       await sleep(BUFFER_TIME)
     }
-    
-    do{
-      let newResponse = await queryTopSongs()
-        if (currentResponse.length !==0 && newResponse.length === 0){
-          break;
-        }
-        currentResponse = newResponse
-        console.log("======= SONGS RESPONSE =======")
-        console.log(currentResponse.slice(0,2))
-        responseArray.push(currentResponse)
-        await sleep(BUFFER_TIME)
-      } while (currentResponse !== responseArray.at(responseArray.length- (LOOK_BACK-1)))
-        console.log("====STOPPED QUERY TOP SONGs ====\n\n\n\n\n\n\n\n")
+
+    while (true) {
+      let newResponse = await queryTopSongs();
+      if (currentResponse.length !==0 && newResponse.length === 0){
+        break;
+      }
+      if (compareArrays(newResponse, responseArray[responseArray.length - 1])) {
+        break;
+      }
+      currentResponse = newResponse;
+      responseArray.push(currentResponse);
+      await sleep(BUFFER_TIME);
+    }
+    console.log("====STOPPED QUERY TOP SONGS====");
+    return currentResponse;
+  }
+  async function loopQueryTopArtists(){
+    let responseArray:ArtistData[][] = []
+    let currentResponse:ArtistData[] = []
+
+    let i = 0;
+    while(i < LOOK_BACK){
+      currentResponse = await queryTopArtists()
+      responseArray.push(currentResponse)
+      i += 1;
+      await sleep(BUFFER_TIME)
+    }
+
+    while (true) {
+      let newResponse = await queryTopArtists();
+      if (currentResponse.length !==0 && newResponse.length === 0){
+        break;
+      }
+      if (compareArrays(newResponse, responseArray[responseArray.length - 1])) {
+        break;
+      }
+      currentResponse = newResponse;
+      responseArray.push(currentResponse);
+      await sleep(BUFFER_TIME);
+    }
+
+    console.log("====STOPPED QUERY TOP ARTISTS ====\n\n\n\n\n\n\n\n")
     return currentResponse
   }
   async function loopQueryTotalPlaytime(){
@@ -167,19 +179,21 @@ export async function GET(request: Request) {
       i += 1;
       await sleep(BUFFER_TIME)
     }
-    
-    do{
-      let newResponse = await queryTotalPlayTime()
-        if (currentResponse.length !==0 && newResponse.length === 0){
-          break;
-        }
-        currentResponse = newResponse
-        console.log("======= ARTIST RESPONSE =======")
-        responseArray.push(currentResponse)
-        await sleep(BUFFER_TIME)
-      } while (currentResponse !== responseArray.at(responseArray.length- (LOOK_BACK-1)))
-        console.log("====STOPPED QUERY TOTAL PLAY TIME ====\n\n\n\n\n\n\n\n")
-        return currentResponse
+
+    while (true) {
+      let newResponse = await queryTotalPlayTime();
+      if (currentResponse.length !==0 && newResponse.length === 0){
+        break;
+      }
+      if (compareArrays(newResponse, responseArray[responseArray.length - 1])) {
+        break;
+      }
+      currentResponse = newResponse;
+      responseArray.push(currentResponse);
+      await sleep(BUFFER_TIME);
+    }
+    console.log("====STOPPED QUERY TOTAL PLAY TIME ====\n\n\n\n\n\n\n\n")
+    return currentResponse
   }
 
   async function getAllData() {

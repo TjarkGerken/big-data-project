@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="frontend design">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_07_2024_12_43_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_07_2024_12_43__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_07_2024_12_46_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_07_2024_12_46__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayArtists.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayArtists.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayTotalTime.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayTotalTime.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayTracks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayTracks.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720625058897</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="frontend design">
+      <option name="closed" value="true" />
+      <created>1720784432724</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1720784432724</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
