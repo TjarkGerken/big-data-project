@@ -320,13 +320,13 @@ function RenderResults() {
       }
     };
 
-    //getData(); // comment for mockdata
-    setTimeout(() => {
-      setResult(mockJSONResponseData); // uncomment for mockdata
-    }, 2000);
-    getUserID();
-    setIsLoading(false);
-  }, [uid]);
+    getData(); // comment for mockdata
+    // setTimeout(() => {
+    //      setResult(mockJSONResponseData);
+    // }, 2000);
+    // getUserID();
+    // setIsLoading(false);
+    }, [uid]);
 
   if (isLoading && !error) {
     return (
