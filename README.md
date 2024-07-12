@@ -1,47 +1,137 @@
-# Use Case: Spotify Wrapped
+# DHBW Mannheim - Big Data
+
+## Contributor
+- Yanick Bedel (8424886)
+- Tjark Gerken (8692717)
+- Carlo Rinderer (1902925)
+- Niklas Seither (4253802)
+- David Simon (1893552)
+
+
+## Tech Stack
+- [Kubernetes](https://kubernetes.io/)
+- [NextJS](https://nextjs.org/)
+- [MariaDB](https://mariadb.org/)
+- [Memcached](https://memcached.org/)
+- [Apache Spark (PySpark)](https://spark.apache.org/)
+
 
 ## Prerequisites
+
+To run the project locally you need the following tools installed:
+- [Docker](https://docs.docker.com/get-docker/)
+- [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+
+Furthermore, you need a running Kubernetes cluster with both a Strimzi.io Kafka operator 
+and a Hadoop cluster with YARN for checkpointing.
+
+In the following we provide a step-by-step guide to set up the project locally.
+
+```bash
 
 A running Strimzi.io Kafka operator and a running Hadoop cluster with YARN (for checkpointing)
 
 ```bash
-minikube start --addons=ingress --memory 7000 --cpus 2
+# Install Docker
+## Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+## Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+## Install Docker
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+## Allow user to use docker as non-root
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker # INFO: maybe you need to reboot the system so changes take effect
 
 
+# Install Minikube
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+  && chmod +x minikube
+
+sudo cp minikube /usr/local/bin && rm minikube
+
+minikube start --addons=ingress --cpus=4 --memory=8000
+
+
+# Set up Kubernetes for big data project
+## Kafka
 helm repo add strimzi http://strimzi.io/charts/
 helm install my-kafka-operator strimzi/strimzi-kafka-operator
 kubectl apply -f https://raw.githubusercontent.com/strimzi/strimzi-kafka-operator/0.41.0/examples/kafka/kafka-ephemeral-single.yaml
 
+## Hadoop
+helm repo add pfisterer-hadoop \
+    https://pfisterer.github.io/apache-hadoop-helm/
 
-helm install --wait --timeout 10 \
+helm repo update 
+
+helm status my-hadoop-cluster 2>&1 >>/dev/null 2>&1 || \
+    helm install --wait --timeout 10m0s \
         my-hadoop-cluster pfisterer-hadoop/hadoop \
         --set hdfs.dataNode.replicas=3  \
         --set yarn.nodeManager.replicas=3
+
+
+# Install NodeJS
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+nvm install v18.20.3
+
+cd web-app
+npm install 
+npm run build
+
+# Install Skaffold
+curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
+sudo install skaffold /usr/local/bin/
+
+skaffold dev
 ```
+
 
 ## Use Case Beschreibung
 
-Die Applikation ermöglicht die Analyse der individuellen Nutzerdaten der Musikstreamingplattform Spotify. Hierbei werden die Daten des letzten Jahres des jeweiligen Benutzers angefragt und daraufhin informationsschöpfend aufgearbeitet, um diese anschließend ansehnlich zu präsentieren. 
+The application makes it possible to analyse individual user data from the Spotify Music streaming platform. 
+The data from the last year of the respective user is requested and then analysed in order to present it in
+an appealing way.
 
-Der Hintergrund ist hierbei einen tieferen und ausführlicheren Einblick in den eigenen Musikgeschmack und das damit einhergehende Konsumverhalten zu erhalten, um in Zukunft noch bessere Entscheidungen bei der Songauswahl oder auch -suche treffen zu können und ältere Schätze nicht zu vergessen. 
+The background to this is to gain a deeper and more detailed insight into the user's taste in music and the 
+associated consumer behaviour in order to be able to make even better decisions when selecting or searching for 
+songs in the future and not to forget older treasures
 
-Auch wenn Spotify selbst eine ähnliche Funktion anbietet ist diese insofern nicht ausreichend, dass sie lediglich einmal am Ende jeden Jahres für den Nutzer erstellt wird und diesem so die Möglichkeit nimmt auch unter dem Jahr eine ausführliche Einsicht in diese wertvollen Informationen zu bekommen.
+Even though Spotify itself offers a similar function, it is not sufficient in that it is only created for the user once
+at the end of each year.
 
-Mit dieser Applikation möchten wir folgende Analysen bereitstellen:
-- Lieblingssong (längste aggregierte Spielzeit des Songs über den vorliegenden Zeitraum)
-- Lieblingskünstler (längste aggregierte Spielzeit der Songs eine Künstlers über den vorliegenden Zeitraum)
-- Gesamte Streamingzeit (addierte Spieltzeit aller Songs über den vorliegenden Zeitraum)
+With this application we would like to provide the following analyses:
+- Favourite song (longest aggregated playing time of the song over the period)
+- Favourite artist (longest aggregated playing time of the songs of an artist over the period)
+- Total streaming time (summed playing time of all songs over the period)
 
-Diese Funktionen werden mit den passenden Titelbildern und Höhrproben der Songs sowie den Profilbildern der Künstler ergänzt, um die echte Spotify-Erfahrung zu bieten und den Wiedererkennungswert zu wahren.
+These functions are supplemented with the matching title images and audio samples of the songs as well as the 
+profile picture of the artists in order to offer the genuine Spotify experience and maintain the recognition value.
+
 
 ## Implementierung
 ### Data Ingestion => Kafka
 ### Batch + Stream Processing
 ### Serving Layer => Maria DB
 ### Frontend
----- Get Data Mechanismus => Erst Cache => Dann Kafka => Dann MariaDB in einer Loop ABfragen => Dann in Cache speichern.
+---- Get Data Mechanismus => Erst Cache => Dann Kafka => Dann MariaDB in einer Loop Abfragen => Dann in Cache speichern.
 ## Systemarchitektur
-Hier hätte ich gerne das Architektur Bild
+![System Architecture](imgs/system-architecture.svg "Systemarchitektur")
 ### Architektur
 ### Technologien
 #### Kafka (Data Ingestion)

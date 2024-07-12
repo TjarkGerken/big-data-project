@@ -5,22 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="frontend design">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/imgs/system-architecture.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/fetchFromDB.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/_components/fetchFromDB.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-artist-data/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/get-artist-data/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-from-cache/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/get-from-cache/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-user-id/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/get-user-id/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/set-cache/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/set-cache/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayArtists.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayArtists.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayTotalTime.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayTotalTime.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayTracks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayTracks.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/spotify/callback/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/spotify/callback/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/tailwind.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,20 +30,20 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {}
-}]]></component>
-  <component name="GitHubPullRequestState"><![CDATA[{
-  "prStates": [
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {}
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
     {
-      "id": {
-        "id": "PR_kwDOMH1o8850_qtp",
-        "number": 5
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOMH1o8850_qtp&quot;,
+        &quot;number&quot;: 5
       },
-      "lastSeen": 1720634877209
+      &quot;lastSeen&quot;: 1720634877209
     }
   ]
-}]]></component>
+}</component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -73,14 +60,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "#5 on Niklas__Stuff",
+    "git-widget-placeholder": "Dokumentation",
     "last_opened_file_path": "/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/api",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/Users/tjarkgerken/uni_projects/big-data-project/web-app/node_modules/typescript/lib",
+    "ts.external.directory.path": "C:\\Users\\tjark.gerken\\Coding Folder\\KickstartII\\big-data-project\\web-app\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -91,6 +78,7 @@
       <recent name="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\imgs" />
       <recent name="$PROJECT_DIR$/ExampleData" />
     </key>
   </component>
