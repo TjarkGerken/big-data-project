@@ -60002,7 +60002,6 @@ export const StreamingHistoryNiklasHommie: Track[] = [
       "trackName" : "Thrill",
       "msPlayed" : 163404
     },
-    [
     {
       "endTime" : "2023-07-09 13:00",
       "artistName" : "Darci",
@@ -120003,6 +120002,5 @@ export const StreamingHistoryNiklasHommie: Track[] = [
       "trackName" : "Thrill",
       "msPlayed" : 163404
     }
-  ]
-  ]
+]
   

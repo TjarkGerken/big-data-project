@@ -1,3 +1,4 @@
+"use client"
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { TrackData } from "@/app/results/page";
