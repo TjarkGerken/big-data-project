@@ -20,6 +20,8 @@ music streaming data of individuals.
 
 ## Prerequisites
 
+# TODO: Spotify App @Tjark
+
 To run the project locally you need the following tools installed:
 - [Docker](https://docs.docker.com/get-docker/)
 - [Minikube](https://minikube.sigs.k8s.io/docs/start/)
@@ -151,6 +153,7 @@ The data flow begins with the Kafka component, which acts as the data ingestion 
 real-time and stores it in the database. The results are then retrieved by the backend application and passed to the 
 frontend application, where they are presented to the users.
 
+![System Architecture](imgs/Alte-Architekur.svg "Systemarchitektur")
 ![System Architecture](imgs/system-architecture.svg "Systemarchitektur")
 
 Each of the components is described in more detail within the following sections.
@@ -179,6 +182,9 @@ ensuring data consistency and recovery from potential failures.
 MariaDB functions as a relational database where the aggregated results from Spark are stored. It acts as the serving 
 layer from which the backend application retrieves the required data.
 
+#### Memcached
+
+
 #### NextJS Frontend
 The frontend application, developed with NextJS, provides the user interface through which users can access the analyses.
 It communicates with the backend application to retrieve and display the necessary data.
@@ -189,21 +195,22 @@ the data from MariaDB, caches it via Memcached, and provides it to the frontend 
 handles the authentication process with the Spotify API.
 
 #### Spotify API
+The Spotify API is used for authentication and retrieval of album covers, song previews, and artist profile pictures.
+Users log into the web app with their Spotify accounts to access the analyses. Authentication is carried out via an OAuth 
+flow, where users log in with their Spotify accounts and grant the application access to their account data. However, 
+the actual data used for the analyses is not retrieved from the Spotify API (more on this in the "Challenges" section).
 
-Die Benutzerdaten für die in der Web-App dargestellten Analysen stammen zwar direkt von Spotify, werden aber nicht über die Spotify-API abgefragt (mehr dazu im Kapitel "Herausforderungen"). Die Spotify-API wird daher vor allem für die folgenden beiden Funktionen genutzt. 
+The Spotify API is used for the following functions:
+- Registering the application to obtain the Client ID and Client Secret.
+- Sending a request to the Spotify endpoint with parameters such as client_id, response_type, redirect_uri, scope, and state.
+- User login with their Spotify account, theoretically granting access to account data.
+- Redirecting to the web app.
+- Sending the authorization code to Spotify to obtain the access token, which needs to be refreshed every hour.
+- Fetching album covers, song previews, and artist profile pictures using the access token.
 
-Dazu gehört einmal die Authentifizierung, welche mit einem Spotify-Account erfolgen muss, um auf die Analysen zugreifen zu können.
-- Applikation registrieren für ClientID und Client Secret
-- Request an den Spotify-Endpunkt mit den Parametern client_id, response_type, redirect_uri, scope, state
-- Log-In durch User mit echtem Spotify-Konto (in der Theorie dadurch Erlaubnis für Zugriff auf Kontodaten)
-- Redirect auf die Webapp
-- Authorization Code an Spotify senden um Access Token zu erhalten
-- Dieser Token muss dann nach einer Stunde neu angefragt werden
+This detailed description of the system architecture and its individual components provides a comprehensive overview 
+of the entire system and the interactions of various technologies.
 
-Zum zweiten werden durch die Authentifizierung und den dadurch ermöglichten Zugriff auf allgemeine Spotify-Inhalte Titelbilder sowie Hörproben der Songs und Profilbilder der Künstler von Spotify abgefragt.
-
-- ID der Top-Songs/Künstler
-- Mit dieser dann API get-request auf die einzelnen Ressourcen
 
 ##### Authentifizierung
 ##### Datenabfrage 
