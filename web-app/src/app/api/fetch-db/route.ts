@@ -154,18 +154,23 @@ export async function GET(request: Request) {
 
     while (true) {
       let newResponse = await queryTopArtists();
-      if (currentResponse.length !==0 && newResponse.length === 0){
+      if (currentResponse.length !== 0 && newResponse.length === 0){
+        console.log("==== BREAK ARTIST QUERY RESPONSE LENGTH ====")
         break;
       }
-      if (compareArrays(newResponse, responseArray[responseArray.length - 1])) {
+
+      if (compareArrays(newResponse, responseArray[responseArray.length - 3])) {
+        console.log("==== BREAK ARTIST QUERY ARRAY COMPARISON ====")
         break;
       }
+
+      console.log("==== BREAK ARTIST SENDING REQUEST ====")
       currentResponse = newResponse;
       responseArray.push(currentResponse);
       await sleep(BUFFER_TIME);
     }
 
-    console.log("====STOPPED QUERY TOP ARTISTS ====\n\n\n\n\n\n\n\n")
+    console.log("====FULL STOPPED QUERY TOP ARTISTS ====\n\n\n\n\n\n\n\n")
     return currentResponse
   }
   async function loopQueryTotalPlaytime(){
