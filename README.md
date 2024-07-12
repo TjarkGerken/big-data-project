@@ -23,12 +23,11 @@ To run the project locally you need the following tools installed:
 - [Minikube](https://minikube.sigs.k8s.io/docs/start/)
 
 Furthermore, you need a running Kubernetes cluster with both a Strimzi.io Kafka operator 
-and a Hadoop cluster with YARN for checkpointing.
+and a Hadoop cluster with YARN for checkpointing before you can deploy the app.
 
 In the following we provide a step-by-step guide to set up the project locally.
 
 ```bash
-
 A running Strimzi.io Kafka operator and a running Hadoop cluster with YARN (for checkpointing)
 
 ```bash
@@ -103,7 +102,7 @@ skaffold dev
 ```
 
 
-## Use Case Beschreibung
+## Use Case Description
 
 The application makes it possible to analyse individual user data from the Spotify Music streaming platform. 
 The data from the last year of the respective user is requested and then analysed in order to present it in
@@ -137,6 +136,20 @@ profile picture of the artists in order to offer the genuine Spotify experience 
 ### Technologien
 #### Kafka (Data Ingestion)
 #### Spark (Batch + Stream Processing)
+The Spark application is designed to process and analyse streaming data from a Kafka topic, simulating song play
+activities. The processed results are then stored in a MariaDB database. The application follows an ETL 
+(Extract, Transform, Load) pipeline:
+
+First, it extracts data from a Kafka topic names `spotify-track-data`. This data includes details about song plays, such
+as the user id, artist name, track name and milliseconds played. The data is then transformed by parsing the JSON messages
+and adding timestamps to facilitate time-based operations. Late-arriving data is handled through watermarking, ensuring 
+the application process out-of-order events effectively.
+
+Next, the data is aggregated to compute key metrics, such as total playtime for each song per user, total playtime for 
+each artist per user and the total playtime for each user. The results are then loaded into corresponding tables in a 
+MariaDB database. Continuous streaming queries are used to process data live with checkpoints (saved in the hadoop cluster) 
+ensuring data consistency and recovery from potential failures.
+
 #### MariaDB (Serving Layer)
 #### NextJS Frontend
 #### Spotify API
