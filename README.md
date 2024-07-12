@@ -1,4 +1,6 @@
 # DHBW Mannheim - Big Data
+This repository contains the code for the project of the course Big Data at the DHBW Mannheim. The aim was to analyze the 
+music streaming data of individuals.
 
 ## Contributor
 - Yanick Bedel (8424886)
@@ -131,10 +133,32 @@ profile picture of the artists in order to offer the genuine Spotify experience 
 ### Frontend
 ---- Get Data Mechanismus => Erst Cache => Dann Kafka => Dann MariaDB in einer Loop Abfragen => Dann in Cache speichern.
 ## Systemarchitektur
-![System Architecture](imgs/system-architecture.svg "Systemarchitektur")
 ### Architektur
-### Technologien
+The system includes a frontend application developed with NextJS and a backend application, also based on NextJS, which 
+handles central control and data processing. Users log into the web app with their Spotify accounts to access detailed 
+analyses. This authentication is done through the Spotify API, which is also used to provide album covers, song previews,
+and artist profile pictures.
+
+Data processing is handled by Apache Spark (PySpark). Spark extracts data from a Kafka topic, transforms it, and loads 
+the aggregated results into a MariaDB database. Spark uses watermarking to ensure the processing of late-arriving data 
+and stores checkpoints in Hadoop HDFS to maintain data consistency and recoverability.
+
+The data stored in MariaDB is retrieved by the backend application and cached via Memcached to optimize performance. 
+The entire data pipeline follows an ETL (Extract, Transform, Load) approach, where data is continuously extracted, 
+transformed, and loaded into the database.
+
+The data flow begins with the Kafka component, which acts as the data ingestion layer. Spark processes this data in
+real-time and stores it in the database. The results are then retrieved by the backend application and passed to the 
+frontend application, where they are presented to the users.
+
+![System Architecture](imgs/system-architecture.svg "Systemarchitektur")
+
+Each of the components is described in more detail within the following sections.
+
+### Components
 #### Kafka (Data Ingestion)
+
+
 #### Spark (Batch + Stream Processing)
 The Spark application is designed to process and analyse streaming data from a Kafka topic, simulating song play
 activities. The processed results are then stored in a MariaDB database. The application follows an ETL 
