@@ -86,10 +86,10 @@ helm status my-hadoop-cluster 2>&1 >>/dev/null 2>&1 || \
         --set yarn.nodeManager.replicas=3
 
 
-# Install NodeJS
+# Install NodeJS through Node Version Manager
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install v18.20.3
 
 cd web-app

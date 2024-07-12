@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="Added documentation for spark">
+    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="Added documentation for system architecture">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -212,7 +212,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720804992605</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Added documentation for system architecture">
+      <option name="closed" value="true" />
+      <created>1720806301046</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1720806301046</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,6 +249,7 @@
     <MESSAGE value="First darft" />
     <MESSAGE value="Added white background to system-architecture image" />
     <MESSAGE value="Added documentation for spark" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added documentation for spark" />
+    <MESSAGE value="Added documentation for system architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added documentation for system architecture" />
   </component>
 </project>
