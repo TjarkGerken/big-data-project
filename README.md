@@ -53,7 +53,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ## Allow user to use docker as non-root
 sudo groupadd docker
 sudo usermod -aG docker $USER
-newgrp docker # INFO: maybe you need to reboot the system so changes take effect
+newgrp docker
+# INFO: maybe you need to reboot the system so changes take effect
 
 
 # Install Minikube
