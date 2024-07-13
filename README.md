@@ -213,6 +213,8 @@ of the entire system and the interactions of various technologies.
 
 
 ##### Authentifizierung
+To make the application work an authorization on spotify is needed. This step is necesarry to request and analyse data. Furthermore,  
+
 ##### Datenabfrage 
 --- Endpoints listen => Wie ist der Prozess => Wir bekommen Track Title => Wir suchen auf dem Search Endpoint => Wir fragen dann die Daten an.
 ### Daten Modell
