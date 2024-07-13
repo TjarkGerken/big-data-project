@@ -304,8 +304,8 @@ export async function GET(request: Request) {
    */
   const response: ResponseData = {
     spotify_uid: uid,
-    top_songs: sortedTopSongs.slice(0, 50),
-    top_artist: sortedTopArtist.slice(0, 50),
+    top_songs: sortedTopSongs.slice(0, 20),
+    top_artist: sortedTopArtist.slice(0, 20),
     total_ms_played: total_ms_played,
   };
 
