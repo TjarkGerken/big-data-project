@@ -137,7 +137,6 @@ export async function GET(request: Request) {
     while (i < LOOK_BACK) {
       currentResponse = await queryTopSongs();
       responseArray.push(currentResponse);
-      console.log(i);
       i += 1;
       await sleep(BUFFER_TIME);
     }
@@ -188,7 +187,6 @@ export async function GET(request: Request) {
     while (i < LOOK_BACK) {
       currentResponse = await queryTopArtists();
       responseArray.push(currentResponse);
-      console.log(i);
       i += 1;
       await sleep(BUFFER_TIME);
     }
@@ -238,7 +236,6 @@ export async function GET(request: Request) {
     while (i < LOOK_BACK) {
       currentResponse = await queryTotalPlayTime();
       responseArray.push(currentResponse);
-      console.log(i);
       i += 1;
       await sleep(BUFFER_TIME);
     }
