@@ -30,7 +30,7 @@ function chunkArray(array: any[], chunkSize: number): any[][] {
   return tempArray;
 }
 
-async function sendToKafka(tracks: Track[], uid: string, attempts=1) {
+async function sendToKafka(tracks: Track[], uid: string, attempts = 1) {
   if (attempts >= 10) {
     return false;
   }
@@ -48,15 +48,14 @@ async function sendToKafka(tracks: Track[], uid: string, attempts=1) {
     const trackChunks = chunkArray(tracks, 10);
 
     for (const trackChunk of trackChunks) {
-
       const messages = trackChunk.map((track) => {
         track.UID = uid;
         return { value: JSON.stringify(track) };
       });
 
       await producer.send({
-          topic: "spotify-track-data",
-          messages: messages,
+        topic: "spotify-track-data",
+        messages: messages,
       });
     }
 
@@ -79,12 +78,15 @@ export async function POST(request: Request) {
   const tracks: Track[] =
     AVAILABLE_DATASETS[body.uid as keyof typeof AVAILABLE_DATASETS];
   const status = await sendToKafka(tracks, body.uid);
-  if (status){
-    return new Response(JSON.stringify({message: "Data sent to Kafka"}), {
+  if (status) {
+    return new Response(JSON.stringify({ message: "Data sent to Kafka" }), {
       status: 200,
     });
   }
-  return new Response(JSON.stringify({message: "Data could not be sent to Kafka"}), {
+  return new Response(
+    JSON.stringify({ message: "Data could not be sent to Kafka" }),
+    {
       status: 500,
-  });
+    },
+  );
 }

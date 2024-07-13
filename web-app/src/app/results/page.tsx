@@ -7,6 +7,7 @@ import DisplayArtists from "@/app/results/components/displayArtists";
 import DisplayTracks from "@/app/results/components/displayTracks";
 import Link from "next/link";
 import DisplayTotalTime from "@/app/results/components/displayTotalTime";
+import { boolean } from "zod";
 
 export interface UserDisplayData {
   country: string;
@@ -270,11 +271,16 @@ function RenderResults() {
     }
   }
 
-  async function sendTracksToKafka(uid: string) {
+  async function sendTracksToKafka(uid: string): Promise<boolean> {
     if (!uid || uid === "") {
-      return;
+      return false;
     }
-    axios.post("/api/send-to-kafka", { uid: uid }).then((response) => {});
+    await axios
+      .post("/api/send-to-kafka", { uid: uid })
+      .catch((error) => {
+        return false;
+      });
+    return true;
   }
 
   async function setCache(uid: string, data: JSONResponseData) {
@@ -302,22 +308,29 @@ function RenderResults() {
         setResult(cachedData);
         setIsLoading(false);
       } else {
-        await sendTracksToKafka(uid).then(async () => {
-          await fetchData(uid)
-              .then((r) => {
-                if (r) {
-                  setResult(r);
-                  setCache(uid, r);
-                  // sortArrays();
-                  setIsLoading(false);
-                  getUserID();
-                }
-              })
-              .catch((error) => {
-                setError(true);
-              });
-        });
-
+        await sendTracksToKafka(uid)
+          .then(async (r: boolean) => {
+            if (r) {
+              await fetchData(uid)
+                .then((r) => {
+                  if (r) {
+                    setResult(r);
+                    setCache(uid, r);
+                    // sortArrays();
+                    setIsLoading(false);
+                    getUserID();
+                  }
+                })
+                .catch((error) => {
+                  setError(true);
+                });
+            } else {
+              setError(true);
+            }
+          })
+          .catch((error) => {
+            setError(true);
+          });
       }
     };
 

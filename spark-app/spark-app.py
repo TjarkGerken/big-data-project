@@ -18,8 +18,8 @@ spark = SparkSession.builder \
 spark.sparkContext.setLogLevel('WARN')
 
 # Set checkpoint directory
-#checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/krise1"
-#spark.sparkContext.setCheckpointDir(checkpoint_dir)
+checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/krise10"
+spark.sparkContext.setCheckpointDir(checkpoint_dir)
 
 # Example Part 2
 # Read messages from Kafka
