@@ -18,46 +18,53 @@ const AVAILABLE_DATASETS = {
   niklas: StreamingHistoryNiklasHommie,
 };
 
-async function sendToKafka(tracks: Track[], uid: string) {
-  const kafka = new Kafka({
-    clientId: "client-" + Math.floor(Math.random() * 100000),
-    brokers: ["my-cluster-kafka-bootstrap:9092"],
-  });
+function chunkArray(array: any[], chunkSize: number): any[][] {
+  let index = 0;
+  let arrayLength = array.length;
+  let tempArray = [];
 
-  const producer = kafka.producer({
-    createPartitioner: Partitioners.DefaultPartitioner,
-  });
+  for (index = 0; index < arrayLength; index += chunkSize) {
+    let chunk = array.slice(index, index + chunkSize);
+    tempArray.push(chunk);
+  }
+  return tempArray;
+}
 
-  await producer.connect();
-  function chunkArray(array: any[], chunkSize: number): any[][] {
-    let index = 0;
-    let arrayLength = array.length;
-    let tempArray = [];
+async function sendToKafka(tracks: Track[], uid: string, attempts=1) {
+  if (attempts >= 10) {
+    return false;
+  }
+  try {
+    const kafka = new Kafka({
+      clientId: "client-" + Math.floor(Math.random() * 100000),
+      brokers: ["my-cluster-kafka-bootstrap:9092"],
+    });
 
-    for (index = 0; index < arrayLength; index += chunkSize) {
-      let chunk = array.slice(index, index + chunkSize);
-      tempArray.push(chunk);
+    const producer = kafka.producer({
+      createPartitioner: Partitioners.DefaultPartitioner,
+    });
+
+    await producer.connect();
+    const trackChunks = chunkArray(tracks, 10);
+
+    for (const trackChunk of trackChunks) {
+
+      const messages = trackChunk.map((track) => {
+        track.UID = uid;
+        return { value: JSON.stringify(track) };
+      });
+
+      await producer.send({
+          topic: "spotify-track-data",
+          messages: messages,
+      });
     }
-    return tempArray;
+
+    await producer.disconnect();
+    return true;
+  } catch (error) {
+    await sendToKafka(tracks, uid, attempts + 1);
   }
-
-  const trackChunks = chunkArray(tracks, 10);
-
-  for (const trackChunk of trackChunks) {
-    const messages = trackChunk.map((track) => {
-      track.UID = uid;
-      return { value: JSON.stringify(track) };
-    });
-
-    // Send messages
-    await producer.send({
-      topic: "spotify-track-data",
-      messages: messages,
-    });
-  }
-
-  await producer.disconnect();
-  return true;
 }
 
 export async function POST(request: Request) {
@@ -71,8 +78,13 @@ export async function POST(request: Request) {
   }
   const tracks: Track[] =
     AVAILABLE_DATASETS[body.uid as keyof typeof AVAILABLE_DATASETS];
-  await sendToKafka(tracks, body.uid);
-  return new Response(JSON.stringify({ message: "Data sent to Kafka" }), {
-    status: 200,
+  const status = await sendToKafka(tracks, body.uid);
+  if (status){
+    return new Response(JSON.stringify({message: "Data sent to Kafka"}), {
+      status: 200,
+    });
+  }
+  return new Response(JSON.stringify({message: "Data could not be sent to Kafka"}), {
+      status: 500,
   });
 }

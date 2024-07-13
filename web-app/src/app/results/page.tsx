@@ -302,20 +302,22 @@ function RenderResults() {
         setResult(cachedData);
         setIsLoading(false);
       } else {
-        await sendTracksToKafka(uid);
-        await fetchData(uid)
-          .then((r) => {
-            if (r) {
-              setResult(r);
-              setCache(uid, r);
-              // sortArrays();
-              setIsLoading(false);
-              getUserID();
-            }
-          })
-          .catch((error) => {
-            setError(true);
-          });
+        await sendTracksToKafka(uid).then(async () => {
+          await fetchData(uid)
+              .then((r) => {
+                if (r) {
+                  setResult(r);
+                  setCache(uid, r);
+                  // sortArrays();
+                  setIsLoading(false);
+                  getUserID();
+                }
+              })
+              .catch((error) => {
+                setError(true);
+              });
+        });
+
       }
     };
 
