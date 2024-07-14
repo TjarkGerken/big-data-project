@@ -1,42 +1,23 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ArtistData } from "@/app/results/page";
 import Image from "next/image";
-export interface ArtistDisplayData {
-  external_urls?: ExternalUrls;
-  followers?: Followers;
-  genres?: string[];
-  href?: string;
-  id?: string;
-  images?: Image[];
-  name?: string;
-  popularity?: number;
-  type?: string;
-  uri?: string;
-  total_msPlayed?: number;
-}
-
-export interface ExternalUrls {
-  spotify: string;
-}
-
-export interface Followers {
-  href: null;
-  total: number;
-}
-
-export interface Image {
-  url: string;
-  height: number;
-  width: number;
-}
+import { ArtistDisplayData } from "@/app/results/components/interfaces/artistDisplayData";
+import { capitalizeWords } from "@/app/results/components/utils/capitalizeWords";
+import { ArtistData } from "@/app/results/interfaces/interfaces";
 
 export default function DisplayArtists(props: { artistData: ArtistData[] }) {
+  const artistData = props.artistData;
+
   const [artistsDisplayData, setArtistsDisplayData] = useState<
     ArtistDisplayData[]
   >([]);
   const [count, setCount] = useState(5);
+
+  /**
+   * Fetches artist data by artist name from the backend.
+   * @param artist_name
+   */
   async function getArtistData(artist_name: string) {
     try {
       const response = await axios.post(
@@ -58,26 +39,21 @@ export default function DisplayArtists(props: { artistData: ArtistData[] }) {
   }
 
   useEffect(() => {
+    // Fetches artist data for each artist in the artistData array
     const fetchArtistsData = async () => {
-      const artistsDataPromises = props.artistData.map(async (artist) => {
+      const artistsDataPromises = artistData.map(async (artist) => {
         const artistData = await getArtistData(artist.artistName);
         return { ...artistData, total_msPlayed: artist.total_msPlayed };
       });
-      const artistsData = await Promise.all(artistsDataPromises);
+      const fullArtistsData = await Promise.all(artistsDataPromises);
       setArtistsDisplayData(
-        artistsData.filter(
+        fullArtistsData.filter(
           (data): data is ArtistDisplayData => data !== undefined,
         ),
       );
     };
     fetchArtistsData();
-  }, [props.artistData]);
-
-  const capitalizeWords = (s: string) =>
-    s
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(" ");
+  }, [artistData]);
 
   return (
     <div className={"w-full"}>
@@ -221,7 +197,7 @@ export default function DisplayArtists(props: { artistData: ArtistData[] }) {
               Show more
             </button>
           )}
-          {count >= artistsDisplayData.length && (
+          {count > 5 && (
             <button
               onClick={() => setCount((prevCount) => prevCount - 5)}
               className={

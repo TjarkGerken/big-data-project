@@ -1,36 +1,29 @@
 import { Kafka, Partitioners } from "kafkajs";
-import { StreamingHistoryTjark } from "@/app/api/send-to-kafka/StreamingHistoryTjark";
-import { Track } from "@/app/api/send-to-kafka/StreamingHistoryType";
-import { StreamingHistoryDavid } from "./StreamingHistoryDavid";
-import { StreamingHistoryCarlos } from "@/app/api/send-to-kafka/StreamingHistoryCarlos";
-import { StreamingHistoryNiklasHommie } from "@/app/api/send-to-kafka/StreamingHistoryNiklas";
+import { AVAILABLE_DATASETS } from "@/app/api/send-to-kafka/constants/AvailableDatasets";
+import { chunkArray } from "@/app/api/send-to-kafka/utils/chunkArray";
+import { RequestBody } from "@/app/api/send-to-kafka/interfaces/requestBody";
+import { Track } from "@/app/api/send-to-kafka/interfaces/StreamingHistoryType";
 
 export const dynamic = "force-dynamic";
 
-export interface RequestBody {
-  uid: string;
-}
-
-const AVAILABLE_DATASETS = {
-  tjark: StreamingHistoryTjark,
-  david: StreamingHistoryDavid,
-  carlos: StreamingHistoryCarlos,
-  niklas: StreamingHistoryNiklasHommie,
-};
-
-function chunkArray(array: any[], chunkSize: number): any[][] {
-  let index = 0;
-  let arrayLength = array.length;
-  let tempArray = [];
-
-  for (index = 0; index < arrayLength; index += chunkSize) {
-    let chunk = array.slice(index, index + chunkSize);
-    tempArray.push(chunk);
-  }
-  return tempArray;
-}
-
-async function sendToKafka(tracks: Track[], uid: string, attempts = 1) {
+/**
+ * Sends an array of track data to a Kafka topic.
+ *
+ * Splits the message array into smaller chunks and send them to the Kafka topic. If this fails it retries for an additional
+ * 10 attempts before giving up. If the data is successfully sent, the promise resolves to `true`, otherwise it resolves to `false`.
+ *
+ *
+ * @param {Track[]} tracks - An array of track data to be sent.
+ * @param {string} uid - The uid for the user, to be added to each track data.
+ * @param {number} [attempts=0] - The current attempt count, used for recursive retries.
+ * @returns {Promise<boolean>} A promise that resolves to `true` if the data is successfully sent, or `false`
+ *                            if it fails after the maximum number of attempts.
+ */
+async function sendToKafka(
+  tracks: Track[],
+  uid: string,
+  attempts: number = 0,
+): Promise<boolean> {
   if (attempts >= 10) {
     return false;
   }
@@ -62,10 +55,15 @@ async function sendToKafka(tracks: Track[], uid: string, attempts = 1) {
     await producer.disconnect();
     return true;
   } catch (error) {
-    await sendToKafka(tracks, uid, attempts + 1);
+    return await sendToKafka(tracks, uid, attempts + 1);
   }
 }
 
+/**
+ * Handles the POST request to send user's track data to a Kafka topic.
+ *
+ * @returns {Promise<Response>} A HTTP Response with either the status code 200, 404 if the uid is not available or 500 if the data could not be sent to Kafka.
+ */
 export async function POST(request: Request) {
   const body: RequestBody = await request.json();
 

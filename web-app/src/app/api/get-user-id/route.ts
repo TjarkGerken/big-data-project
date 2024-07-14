@@ -23,7 +23,6 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error(error);
-    // Adjust the error handling logic as needed
     return new Response(JSON.stringify({ error: "An error occurred" }), {
       status: 500,
     });

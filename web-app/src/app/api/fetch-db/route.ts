@@ -10,7 +10,7 @@ import {
   ResponseData,
   TotalPlayTime,
   TrackData,
-} from "@/app/api/fetch-db/types";
+} from "@/app/api/fetch-db/interfaces";
 
 export const dynamic = "force-dynamic";
 

@@ -1,5 +1,6 @@
 "use client";
-import { TotalPlayTime } from "@/app/results/page";
+
+import { TotalPlayTime } from "@/app/results/interfaces/interfaces";
 
 export default function DisplayTotalTime(props: { totalTime: TotalPlayTime }) {
   const totalTime = props.totalTime;

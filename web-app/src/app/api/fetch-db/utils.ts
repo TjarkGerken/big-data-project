@@ -1,7 +1,15 @@
 import { Md5 } from "ts-md5";
 
+/**
+ * Sleep for a given amount of time.
+ * @param ms
+ */
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+/**
+ * Convert a BigInt value to a Number value.
+ * @param bigintValue
+ */
 function convertBigIntToNumber(bigintValue: bigint) {
   if (
     bigintValue < Number.MIN_SAFE_INTEGER ||
@@ -14,7 +22,12 @@ function convertBigIntToNumber(bigintValue: bigint) {
   return Number(bigintValue);
 }
 
-// Define a replacer function for JSON.stringify
+/**
+ * Replacer function for the JSON.stringify method to convert BigInt values to Number values.
+ * Usage: JSON.stringify(obj, bigintReplacer)
+ *  @param key of the JSON object
+ * @param value of the JSON object
+ */
 export function bigintReplacer(key: string, value: any) {
   if (typeof value === "bigint") {
     return convertBigIntToNumber(value);

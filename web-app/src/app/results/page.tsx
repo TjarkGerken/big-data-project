@@ -1,198 +1,20 @@
 "use client";
 import { Suspense, useEffect, useState } from "react";
 import axios from "axios";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import DisplayArtists from "@/app/results/components/displayArtists";
 import DisplayTracks from "@/app/results/components/displayTracks";
 import Link from "next/link";
 import DisplayTotalTime from "@/app/results/components/displayTotalTime";
-import { boolean } from "zod";
+import {
+  JSONResponseData,
+  UserDisplayData,
+} from "@/app/results/interfaces/interfaces";
 
-export interface UserDisplayData {
-  country: string;
-  display_name: string;
-  email: string;
-  explicit_content?: ExplicitContent;
-  external_urls?: ExternalUrls;
-  followers?: Followers;
-  href: string;
-  id: string;
-  images: Image[];
-  product: string;
-  type: string;
-  uri: string;
-}
-
-export interface ExplicitContent {
-  filter_enabled: boolean;
-  filter_locked: boolean;
-}
-
-export interface ExternalUrls {
-  spotify: string;
-}
-
-export interface Followers {
-  href: string;
-  total: number;
-}
-
-export interface Image {
-  url: string;
-  height: number;
-  width: number;
-}
-
-export interface TrackData {
-  UID: string;
-  trackName: string;
-  artistName: string;
-  total_msPlayed: number;
-}
-
-export interface ArtistData {
-  UID: string;
-  artistName: string;
-  total_msPlayed: number;
-}
-
-export interface TotalPlayTime {
-  UID: string;
-  total_msPlayed: number;
-}
-
-export interface JSONResponseData {
-  spotify_uid: string;
-  top_songs: TrackData[];
-  top_artist: ArtistData[];
-  total_ms_played: TotalPlayTime[];
-}
-
-const mockJSONResponseData: JSONResponseData = {
-  spotify_uid: "user12345",
-  top_songs: [
-    {
-      UID: "track002",
-      trackName: "Skyline",
-      artistName: "Harry Styles",
-      total_msPlayed: 2100000,
-    },
-    {
-      UID: "track002",
-      trackName: "So Lang",
-      artistName: "Harry Styles",
-      total_msPlayed: 2100000,
-    },
-    {
-      UID: "track002",
-      trackName: "Knöcheltief",
-      artistName: "Harry Styles",
-      total_msPlayed: 2100000,
-    },
-    {
-      UID: "track002",
-      trackName: "Standard",
-      artistName: "Harry Styles",
-      total_msPlayed: 2100000,
-    },
-    {
-      UID: "track001",
-      trackName: "Was ist los?",
-      artistName: "The Weeknd",
-      total_msPlayed: 2400000,
-    },
-    {
-      UID: "track002",
-      trackName: "069",
-      artistName: "Harry Styles",
-      total_msPlayed: 2100000,
-    },
-    {
-      UID: "track002",
-      trackName: "Kalash",
-      artistName: "Harry Styles",
-      total_msPlayed: 2100000,
-    },
-    {
-      UID: "track002",
-      trackName: "Morgenstern",
-      artistName: "Harry Styles",
-      total_msPlayed: 2100000,
-    },
-    {
-      UID: "track002",
-      trackName: "Turandot",
-      artistName: "Harry Styles",
-      total_msPlayed: 21000000,
-    },
-    {
-      UID: "track002",
-      trackName: "Watermelon Sugar",
-      artistName: "Harry Styles",
-      total_msPlayed: 2100000,
-    },
-  ],
-  top_artist: [
-    {
-      UID: "artist002",
-      artistName: "Trettmann",
-      total_msPlayed: 50000000,
-    },
-    {
-      UID: "artist001",
-      artistName: "KIZ",
-      total_msPlayed: 48000000,
-    },
-    {
-      UID: "artist002",
-      artistName: "Pavarotti",
-      total_msPlayed: 50000000,
-    },
-    {
-      UID: "artist002",
-      artistName: "Pavarotti",
-      total_msPlayed: 50000000,
-    },
-    {
-      UID: "artist002",
-      artistName: "Pavarotti",
-      total_msPlayed: 50000000,
-    },
-    {
-      UID: "artist002",
-      artistName: "Pavarotti",
-      total_msPlayed: 50000000,
-    },
-    {
-      UID: "artist002",
-      artistName: "Pavarotti",
-      total_msPlayed: 50000000,
-    },
-    {
-      UID: "artist002",
-      artistName: "Pavarotti",
-      total_msPlayed: 50000000,
-    },
-    {
-      UID: "artist002",
-      artistName: "Pavarotti",
-      total_msPlayed: 50000000,
-    },
-    {
-      UID: "artist002",
-      artistName: "Pavarotti",
-      total_msPlayed: 50000000,
-    },
-  ],
-  total_ms_played: [
-    {
-      UID: "total001",
-      total_msPlayed: 900000,
-    },
-  ],
-};
-
+/**
+ * Function to render the results page and be used within the suspense.
+ * @constructor
+ */
 function RenderResults() {
   const searchParams = useSearchParams();
   const uid = searchParams.get("uid") || "";
@@ -217,6 +39,9 @@ function RenderResults() {
     uri: "",
   });
 
+  /**
+   * Function to get the user ID from the backend.
+   */
   async function getUserID() {
     try {
       const response = await axios.post(
@@ -237,6 +62,10 @@ function RenderResults() {
     }
   }
 
+  /**
+   * Function to get data from the cache.
+   * @param uid Requested UID from the URL Parameters
+   */
   async function getFromCache(uid: string) {
     try {
       const response = await axios.post<JSONResponseData>(
@@ -257,7 +86,12 @@ function RenderResults() {
     }
   }
 
-  async function fetchData(uid: string) {
+  /**
+   * Function to fetch data from the backend.
+   * @param uid
+   * @returns {Promise<JSONResponseData | undefined>}
+   */
+  async function fetchData(uid: string): Promise<JSONResponseData | undefined> {
     const response = await axios
       .get<JSONResponseData>("/api/fetch-db?uid=" + uid)
       .then((response) => {
@@ -271,37 +105,38 @@ function RenderResults() {
     }
   }
 
+  /**
+   * Function to send the userdata to Kafka via the backend.
+   * @param uid {string}
+   * @returns {Promise<boolean>}
+   */
   async function sendTracksToKafka(uid: string): Promise<boolean> {
     if (!uid || uid === "") {
       return false;
     }
-    await axios
-      .post("/api/send-to-kafka", { uid: uid })
-      .catch((error) => {
-        return false;
-      });
+    await axios.post("/api/send-to-kafka", { uid: uid }).catch((error) => {
+      return false;
+    });
     return true;
   }
 
-  async function setCache(uid: string, data: JSONResponseData) {
+  /**
+   *
+   * @param uid
+   * @param data
+   * @returns {Promise<void>} A promises that resolves
+   */
+  async function setCache(uid: string, data: JSONResponseData): Promise<void> {
     try {
       await axios.post("/api/set-cache", { uid: uid, data: data });
-    } catch (error) {
-      console.error("Error setting cache:", error);
-    }
+    } catch (error) {}
   }
-
-  async function sortArrays() {
-    const topSongs = result.top_songs.sort(
-      (a, b) => b.total_msPlayed - a.total_msPlayed,
-    );
-    const topArtists = result.top_artist.sort(
-      (a, b) => b.total_msPlayed - a.total_msPlayed,
-    );
-    setResult({ ...result, top_songs: topSongs, top_artist: topArtists });
-  }
-
   useEffect(() => {
+    /**
+     * Function to get the appropriate Data. First the Cache is checked. If there is no data in the cache the user data
+     * is sent to Kafka and then written to the cache. After loading the users personal data (name) is
+     * fetched from the Spotify API.
+     */
     const getData = async () => {
       const cachedData = await getFromCache(uid);
       if (cachedData) {
@@ -316,7 +151,6 @@ function RenderResults() {
                   if (r) {
                     setResult(r);
                     setCache(uid, r);
-                    // sortArrays();
                     setIsLoading(false);
                     getUserID();
                   }
@@ -334,12 +168,7 @@ function RenderResults() {
       }
     };
 
-    getData(); // comment for mockdata
-    // setTimeout(() => {
-    //      setResult(mockJSONResponseData);
-    // }, 2000);
-    // getUserID();
-    // setIsLoading(false);
+    getData();
   }, [uid]);
 
   if (isLoading && !error) {
@@ -347,11 +176,8 @@ function RenderResults() {
       <Suspense fallback={<div>Loading...</div>}>
         <div
           role="status"
-          className={"flex flex-col py-24 justify-center items-center w-full"}
+          className={"flex flex-col py-24 justify-center items-center w-full space-y-5"}
         >
-          <p className={"text-2xl font-bold text-white py-12"}>
-            Your favourite Artists
-          </p>
           <svg
             aria-hidden="true"
             className="w-24 h-24 text-spotify-green animate-spin dark:text-gray-600 fill-spotify-green"

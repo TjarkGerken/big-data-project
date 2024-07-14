@@ -4,18 +4,101 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="added svgs">
-      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/utils.ts" afterDir="false" />
+    <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="documentation">
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/constants/AvailableDatasets.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/interfaces/requestBody.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/utils/chunkArray.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/api/set-cache/interfaces/setCacheRequestBody.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/results/components/interfaces/artistDisplayData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/results/components/interfaces/trackDisplayData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/results/components/utils/capitalizeWords.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-app/src/app/results/interfaces/interfaces.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Daten_David/StreamingDavid.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Daten_David/StreamingHistory_music_0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Daten_David/StreamingHistory_music_1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Daten_David/StreamingHistory_music_2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Daten_David/StreamingHistory_music_3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Daten_David/StreamingHistory_music_4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Daten_David/StreamingHistory_music_5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Daten_David/niggl/StreamingHistory_music_0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/Follow.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/Identifiers.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/Inferences.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/Marquee.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/Payments.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/Playlist1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/PodcastInteractivityRatedShow.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/PodcastInteractivityVotedPollOption.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/Read_Me_First.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/SearchQueries.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/StreamingHistory_music_0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/StreamingHistory_podcast_0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/Userdata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataCarlo/YourLibrary.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/Follow.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/Identifiers.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/Identity.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/Inferences.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/Marquee.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/Payments.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/Playlist1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/PodcastInteractivityRatedShow.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/Read_Me_First.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/SearchQueries.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/StreamingHistory_music.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/StreamingHistory_podcast_0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/Userdata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/SpotifyDataTjark/YourLibrary.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/getUserPlaylistData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/mockTrackData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/mongodb-deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/playlistData.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/recentlyPlayedTracks.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/singleTrackRequest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExampleData/topTracks.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/p.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/Spotify.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/skaffold" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/DataRequestForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/_components/DataRequestForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/ResetSpotifyAuthorization.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/_components/ResetSpotifyAuthorization.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/spotifyAuthorization.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/_components/spotifyAuthorization.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_interfaces/AuthCode.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_interfaces/GetLastSongsResponse.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_providers/theme-provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/_providers/theme-provider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/auth-request/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/auth-request/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/interfaces.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/fetch-db/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-artist-data/exampleResponse.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-artist-data/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/get-artist-data/route.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-from-cache/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/get-from-cache/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/StreamingHistoryNiklas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/StreamingHistoryNiklas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/exampleResponse.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-track-data/songRespone.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-user-id/exampleResponse.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/get-user-id/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/get-user-id/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/refresh-token/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/refresh-token/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/StreamingHistoryCarlos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/constants/StreamingHistoryCarlos.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/StreamingHistoryDavid.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/constants/StreamingHistoryDavid.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/StreamingHistoryNiklas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/constants/StreamingHistoryNiklas.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/StreamingHistoryTjark.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/constants/StreamingHistoryTjark.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/StreamingHistoryType.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/interfaces/StreamingHistoryType.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka/route.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/api/set-cache/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/set-cache/route.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayArtists.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayArtists.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayTotalTime.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayTotalTime.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/results/components/displayTracks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/components/displayTracks.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/results/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/results/space-background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/spotify/callback/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/spotify/callback/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/components/ui/alert-dialog.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/components/ui/alert.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/components/ui/button.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/components/ui/calendar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/components/ui/card.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/components/ui/dropdown-menu.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,12 +135,12 @@
     }
   ]
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/TjarkGerken/big-data-project.git",
-    "accountId": "75c79272-7965-44b2-abe1-cf1cd65ee593"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/TjarkGerken/big-data-project.git&quot;,
+    &quot;accountId&quot;: &quot;75c79272-7965-44b2-abe1-cf1cd65ee593&quot;
   }
-}]]></component>
+}</component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -71,20 +154,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#5 on Niklas__Stuff&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/tjark.gerken/Coding Folder/KickstartII/big-data-project/imgs&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\tjark.gerken\\Coding Folder\\KickstartII\\big-data-project\\web-app\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Niklas__Stuff",
+    "last_opened_file_path": "C:/Users/tjark.gerken/Coding Folder/KickstartII/big-data-project/imgs",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\tjark.gerken\\Coding Folder\\KickstartII\\big-data-project\\web-app\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\imgs" />
@@ -93,12 +176,18 @@
       <recent name="$PROJECT_DIR$/web-app/src/app/api/send-to-kafka" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\api\send-to-kafka\interfaces" />
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\api\utils\send-to-kafka" />
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\api\send-to-kafka\constants" />
       <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\imgs" />
       <recent name="$PROJECT_DIR$/ExampleData" />
     </key>
     <key name="es6.move.members.recent.items">
-      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\api\fetch-db\types.ts" />
-      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\api\fetch-db\utils.ts" />
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\results\interfaces\interfaces.ts" />
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\results\components\utils\capitalizeWords.tsx" />
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\results\components\interfaces\trackDisplayData.tsx" />
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\results\components\interfaces\artistDisplayData.ts" />
+      <recent name="C:\Users\tjark.gerken\Coding Folder\KickstartII\big-data-project\web-app\src\app\api\set-cache\interfaces\setCacheRequestBody.ts" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -297,6 +386,7 @@
     <MESSAGE value="Added documentation for system architecture" />
     <MESSAGE value="Added drafts for rest of the system architecture components" />
     <MESSAGE value="added svgs" />
-    <option name="LAST_COMMIT_MESSAGE" value="added svgs" />
+    <MESSAGE value="documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="documentation" />
   </component>
 </project>

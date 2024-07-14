@@ -21,8 +21,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import axios from "axios";
-import SendDemoRequest from "@/app/_components/sendDemoRequest";
 import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({

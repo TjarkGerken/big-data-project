@@ -1,68 +1,9 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { TrackData } from "@/app/results/page";
 import Image from "next/image";
-
-export interface TrackDisplayData {
-  album?: Album;
-  artists?: Artist[];
-  available_markets?: string[];
-  disc_number?: number;
-  duration_ms?: number;
-  explicit?: boolean;
-  external_ids?: ExternalIDS;
-  external_urls?: ExternalUrls;
-  href?: string;
-  id?: string;
-  is_local?: boolean;
-  name?: string;
-  popularity?: number;
-  preview_url?: string;
-  track_number?: number;
-  type?: string;
-  uri?: string;
-  total_msPlayed?: number;
-}
-
-export interface Album {
-  album_type: string;
-  artists: Artist[];
-  available_markets: string[];
-  external_urls: ExternalUrls;
-  href: string;
-  id: string;
-  images: Image[];
-  name: string;
-  release_date: Date;
-  release_date_precision: string;
-  total_tracks: number;
-  type: string;
-  uri: string;
-}
-
-export interface Artist {
-  external_urls: ExternalUrls;
-  href: string;
-  id: string;
-  name: string;
-  type: string;
-  uri: string;
-}
-
-export interface ExternalUrls {
-  spotify: string;
-}
-
-export interface Image {
-  url: string;
-  width: number;
-  height: number;
-}
-
-export interface ExternalIDS {
-  isrc: string;
-}
+import { TrackDisplayData } from "@/app/results/components/interfaces/trackDisplayData";
+import { TrackData } from "@/app/results/interfaces/interfaces";
 
 export default function DisplayTracks(props: { trackData: TrackData[] }) {
   const trackData = props.trackData;
@@ -70,6 +11,11 @@ export default function DisplayTracks(props: { trackData: TrackData[] }) {
     TrackDisplayData[]
   >([]);
   const [count, setCount] = useState(5);
+
+  /**
+   * Fetches track data by track name from the backend.
+   * @param track_name
+   */
   async function getTrackData(track_name: string) {
     try {
       const response = await axios.post(
@@ -90,20 +36,21 @@ export default function DisplayTracks(props: { trackData: TrackData[] }) {
   }
 
   useEffect(() => {
+    // Fetches track data for each track in the trackData array
     const fetchTrackData = async () => {
-      const trackDataPromises = props.trackData.map(async (track) => {
+      const trackDataPromises = trackData.map(async (track) => {
         const trackData = await getTrackData(track.trackName);
         return { ...trackData, total_msPlayed: track.total_msPlayed };
       });
-      const trackData = await Promise.all(trackDataPromises);
+      const allTrackData = await Promise.all(trackDataPromises);
       setArtistsDisplayData(
-        trackData.filter(
+        allTrackData.filter(
           (data): data is TrackDisplayData => data !== undefined,
         ),
       );
     };
     fetchTrackData();
-  }, [props.trackData]);
+  }, [trackData]);
 
   return (
     <div className={"w-full"}>
@@ -237,7 +184,7 @@ export default function DisplayTracks(props: { trackData: TrackData[] }) {
               Show more
             </button>
           )}
-          {count >= trackDisplayData.length && (
+          {5 < count && (
             <button
               onClick={() => setCount((prevCount) => prevCount - 5)}
               className={

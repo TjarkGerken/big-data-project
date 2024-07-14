@@ -13,6 +13,9 @@ function HandleAuth() {
   const state = searchParams.get("state");
   const hasSentRequest = useRef(false);
 
+  /**
+   * Function to send the auth request to the backend.
+   */
   const sendAuthRequest = useCallback(
     async (setFetchError: React.Dispatch<React.SetStateAction<boolean>>) => {
       try {
@@ -36,6 +39,7 @@ function HandleAuth() {
   }
 
   useEffect(() => {
+    // Only send one request to the backend, when a code exists.
     if (code && !hasSentRequest.current) {
       sendAuthRequest(setFetchError)
         .then(() => {

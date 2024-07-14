@@ -1,10 +1,13 @@
 import Memcached from "memcached";
+import { SetCacheRequestBody } from "@/app/api/set-cache/interfaces/setCacheRequestBody";
 
-interface SetCacheRequestBody {
-  uid: string;
-  data: string;
-}
-
+/**
+ * Connect to the Memcached service to set the cache with the given key and data
+ * @param key - The key to store the data under
+ * @param data - The data to be stored in the cache as a string
+ * @param ttl - Time to live in seconds
+ * @returns {Promise<void>} A promise that resolves when the cache is set or rejects if an error occurs
+ */
 async function setCache(key: string, data: string, ttl: number): Promise<void> {
   const memcached = new Memcached("my-memcached-service");
   return new Promise((resolve, reject) => {
@@ -22,6 +25,11 @@ async function setCache(key: string, data: string, ttl: number): Promise<void> {
 
 export const dynamic = "force-dynamic";
 
+/**
+ * Send a POST request to set the cache with the given key and data
+ * @param request
+ * @constructor
+ */
 export async function POST(request: Request): Promise<Response> {
   const body: SetCacheRequestBody = await request.json();
   const TTL = 60 * 10;
