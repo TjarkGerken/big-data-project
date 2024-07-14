@@ -165,6 +165,8 @@ With this application, we provide the following analysis:
 These functions are supplemented with the matching title and images of the songs as well as the 
 profile picture of the artists to offer the genuine Spotify experience and maintain the recognition value.
 
+A screencast of the working application and use case can be found [here](https://www.youtube.com/watch?v=krYY-QkP6G0).
+
 ## System Architecture
 
 ### Overview
