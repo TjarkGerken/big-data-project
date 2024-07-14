@@ -2,6 +2,13 @@ import axios from "axios";
 import querystring from "querystring";
 
 export const dynamic = "force-dynamic";
+
+/**
+ * This function is responsible for handling the authorization request to the Spotify API, after the user has already been redirected to the callback page.
+ * It will send a POST request to the Spotify API with the code received from the callback page and return the authorization token and the refresh token.
+ * @param request
+ * @constructor
+ */
 export async function POST(request: Request) {
   const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
   const client_secret = process.env.SPOTIFY_SECRET;

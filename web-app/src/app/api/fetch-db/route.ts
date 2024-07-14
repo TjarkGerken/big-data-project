@@ -1,30 +1,7 @@
 import * as mariadb from "mariadb";
+import {ArtistData, ResponseData, TotalPlayTime, TrackData} from "@/app/api/fetch-db/interfaces";
 
 export const dynamic = "force-dynamic";
-
-interface TrackData {
-  UID: string;
-  trackName: string;
-  artistName: string;
-  total_msPlayed: bigint;
-}
-interface ArtistData {
-  UID: string;
-  artistName: string;
-  total_msPlayed: bigint;
-}
-
-interface TotalPlayTime {
-  UID: string;
-  total_msPlayed: bigint;
-}
-
-export interface ResponseData {
-  spotify_uid: string;
-  top_songs: TrackData[];
-  top_artist: ArtistData[];
-  total_ms_played?: TotalPlayTime[];
-}
 
 export async function GET(request: Request) {
   const url = new URL(request.url);

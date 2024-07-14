@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="feae8eac-6287-4319-b103-bb20bc1f4be7" name="Changes" comment="Added drafts for rest of the system architecture components">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/buttons/Button.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/fetchFromDB.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/_components/sendDemoRequest.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/auth-request/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/auth-request/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/api/set-cache/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/api/set-cache/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/src/app/spotify/callback/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/src/app/spotify/callback/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/web-app/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="DuMongo" />
+        <entry key="$PROJECT_DIR$" value="Niklas_Stuff" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,20 +63,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Dokumentation",
-    "last_opened_file_path": "/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/api",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\tjark.gerken\\Coding Folder\\KickstartII\\big-data-project\\web-app\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Dokumentation&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tjarkgerken/Coding101/big-data-project/web-app/src/app/api&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\tjark.gerken\\Coding Folder\\KickstartII\\big-data-project\\web-app\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/web-app/src/app/api" />
@@ -84,7 +91,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.17890.13" />
       </set>
     </attachedChunks>
   </component>
@@ -107,6 +114,7 @@
       <workItem from="1720609835257" duration="14028000" />
       <workItem from="1720625192568" duration="134000" />
       <workItem from="1720625629292" duration="3976000" />
+      <workItem from="1720955358493" duration="1877000" />
     </task>
     <task id="LOCAL-00001" summary="d">
       <option name="closed" value="true" />

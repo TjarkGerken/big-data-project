@@ -1,6 +1,7 @@
 import Memcached from "memcached";
 import { RequestBody } from "@/app/api/send-to-kafka/route";
-import { ResponseData } from "@/app/api/fetch-db/route";
+
+import {ResponseData} from "@/app/api/fetch-db/interfaces";
 
 async function checkCache(request: RequestBody) {
   const memcached = new Memcached("my-memcached-service");
