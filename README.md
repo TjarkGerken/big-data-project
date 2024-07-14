@@ -211,17 +211,15 @@ of the entire system and the interactions of various technologies. A more compre
 
 To make the application work the user has to go through an authorization process with Spotify. This step is necesarry for the user to be able to select data he wants to analyse and therefore to access the features of the application as well as for the application to be able to fetch complementary and cosmetical data. For that case Spotify provides their own log in page to which the user is directed. After logging in with the users credentials successfully the application sends a request for access and as well as a token to Spotify in order to recieve a authentification token which is later used by the backend to make the requests for the cosmtical data.   
  
-### Data Model
-
 
 ## Learnings
 
 - Ensuring the functionality of individual components is way easier than keeping up a stable and functional conection between them
 - The biggest issues won't always come from the parts of the project that can be directly associated with the components of the application
 
-## Challenges
+# Challenges
 
-# Spotify API:
+## Spotify API:
 
 Initially, we pursued the idea of using the Spotify API to query the data of individual users in real time via the authentication of the Spotify user account in order to subsequently stream this data into the system, to enable the use of the application by anyone with a Spotify account and to ensure the maximum timeliness of the data and thus analyses.
 
