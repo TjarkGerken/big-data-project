@@ -1,8 +1,13 @@
-import { useRouter } from "next/navigation";
 import React from "react";
 
+/**
+ * Function that enables user to logout from Spotify.
+ * @constructor
+ */
 export default function ResetSpotifyAuthorization() {
-  const router = useRouter();
+  /**
+   * Remove the traces that the user has logged in to Spotify. And reload the page.
+   */
   function resetAuth() {
     localStorage.removeItem("authCode");
     localStorage.removeItem("refreshToken");

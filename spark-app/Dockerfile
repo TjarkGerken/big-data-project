@@ -25,9 +25,9 @@ RUN ${IVY_CMD} -dependency "com.mysql" "mysql-connector-j" "${MYSQL_DB_VERSION}"
 ENV JDBC_JAR_FILE "${EXTRA_JAR_PATH}/mysql-connector-j-${MYSQL_DB_VERSION}.jar"
 
 # Dependencies for MongoDB connection
-ENV MONGO_SPARK_VERSION "10.0.2"
-RUN ${IVY_CMD} -dependency "org.mongodb.spark" "mongo-spark-connector" "${MONGO_SPARK_VERSION}"
-ENV MONGO_SPARK_JAR_FILE "${EXTRA_JAR_PATH}/mongo-spark-connector-${MONGO_SPARK_VERSION}.jar"
+ENV MONGO_SPARK_VERSION "10.3.0"
+RUN ${IVY_CMD} -dependency "org.mongodb.spark" "mongo-spark-connector_2.12" "${MONGO_SPARK_VERSION}"
+ENV MONGO_SPARK_JAR_FILE "${EXTRA_JAR_PATH}/mongo-spark-connector_2.12-${MONGO_SPARK_VERSION}.jar"
 
 
 # Delete temp dir

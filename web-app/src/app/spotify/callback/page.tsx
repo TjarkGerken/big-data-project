@@ -1,46 +1,54 @@
 "use client";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 function HandleAuth() {
   const [fetchError, setFetchError] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
-
   const code = searchParams.get("code");
   const state = searchParams.get("state");
-  const isFirstRender = useRef(true);
+  const hasSentRequest = useRef(false);
 
-  async function sendAuthRequest(
-    setFetchError: React.Dispatch<React.SetStateAction<boolean>>,
-  ) {
-    console.log("About to send request...");
-    await axios
-      .post("/api/auth-request", { code: code })
-      .then((response) => {
+  /**
+   * Function to send the auth request to the backend.
+   */
+  const sendAuthRequest = useCallback(
+    async (setFetchError: React.Dispatch<React.SetStateAction<boolean>>) => {
+      try {
+        const response = await axios.post("/api/auth-request", { code: code });
         localStorage.setItem(
           "authCode",
           JSON.stringify({ ...response.data, issuedAt: new Date() }),
         );
         localStorage.setItem("refreshToken", response.data.refresh_token);
         router.push("/spotify/authorized");
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
         setFetchError(true);
-      });
-  }
+      }
+    },
+    [code, router],
+  );
 
   if (code == "access_denied") {
     setFetchError(true);
   }
 
   useEffect(() => {
-    if (code) {
-      sendAuthRequest(setFetchError);
+    // Only send one request to the backend, when a code exists.
+    if (code && !hasSentRequest.current) {
+      sendAuthRequest(setFetchError)
+        .then(() => {
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setFetchError(true);
+        });
+      hasSentRequest.current = true;
     }
   }, [code, sendAuthRequest]);
 
@@ -80,7 +88,7 @@ function HandleAuth() {
         </div>
       )}
 
-      {code && !fetchError && (
+      {code && !fetchError && isLoading && (
         <div role="status">
           <svg
             aria-hidden="true"

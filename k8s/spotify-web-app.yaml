@@ -1,0 +1,59 @@
+#Begin: Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wrapped-web-app
+  labels:
+    app: wrapped-web-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wrapped-web-app
+  template:
+    metadata:
+      labels:
+        app: wrapped-web-app
+    spec:
+      containers:
+        - name: wrapped-web-app
+          image: bigdata/spotify-web-app
+          ports:
+            - containerPort: 3000
+#End: Deployment
+
+---
+#Begin: Service
+kind: Service
+apiVersion: v1
+metadata:
+  name: wrapped-web-app-service
+spec:
+  selector:
+    app: wrapped-web-app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+#End: Service
+
+---
+#Begin: Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wrapped-web-app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wrapped-web-app-service
+                port:
+                  number: 3000
+#End: Ingress

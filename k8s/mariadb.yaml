@@ -1,0 +1,84 @@
+#Begin: Configmap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mariadb-deployment-init-configmap
+data:
+  mariadb-init.sql: |
+    SET GLOBAL sql_mode = 'ANSI_QUOTES';
+
+    CREATE TABLE `top_songs` (
+      `UID` VARCHAR(22) NOT NULL,
+      `trackName` VARCHAR(100) NOT NULL,
+      `artistName` VARCHAR(100) NOT NULL,
+      `total_msPlayed` INT NOT NULL,
+      PRIMARY KEY (`UID`, `trackName`)
+    );
+
+    CREATE TABLE `top_artists` (
+      `UID` VARCHAR(22) NOT NULL,
+      `artistName` VARCHAR(100) NOT NULL,
+      `total_msPlayed` INT NOT NULL,
+      PRIMARY KEY (`UID`, `artistName`)
+    );
+
+    CREATE TABLE `total_playtime` (
+      `UID` VARCHAR(22) NOT NULL,
+      `total_msPlayed` INT NOT NULL,
+      PRIMARY KEY (`UID`)
+    );
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb-deployment
+  labels:
+    app: my-mariadb-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-mariadb
+  template:
+    metadata:
+      labels:
+        app: my-mariadb
+    spec:
+      # Mount the configmap volume
+      # This is an excerpt of deployment.spec.template.spec
+      volumes:
+        - name: init-volume
+          configMap:
+            name: mariadb-deployment-init-configmap
+      containers:
+        - name: my-mariadb
+          image: mariadb
+          volumeMounts:
+            - name: init-volume
+              mountPath: /docker-entrypoint-initdb.d/
+          # Set required environment variables to initialize the container
+          env:
+            - name: MARIADB_ROOT_PASSWORD
+              value: "mysecretpw"
+            - name: MARIADB_DATABASE
+              value: "spotify"
+          ports:
+            - containerPort: 3306
+
+---
+#Begin: Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-mariadb-service
+spec:
+  selector:
+    app: my-mariadb
+  ports:
+    - name: mariadb-proto
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+#End: Service

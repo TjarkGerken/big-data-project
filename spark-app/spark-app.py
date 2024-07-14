@@ -1,41 +1,25 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-from pyspark.sql.types import StructType, IntegerType, StringType, TimestampType
+from pyspark.sql.types import IntegerType, StringType, StructType, TimestampType
 
-windowDuration = '7 days'
-slidingDuration = '7 days'
+dbUrl = 'jdbc:mysql://my-app-mariadb-service:3306/spotify'
+dbOptions = {"user": "root", "password": "mysecretpw"}
+dbSchema = 'spotify'
 
-mongo_uri = "mongodb://admin:password@mongodb:27017"
-mongo_db = "spotify"
+windowDuration = '1 minute'
+slidingDuration = '1 minute'
 
-# create a spark session
-spark = SparkSession \
-    .builder \
-    .master("local") \
-    .appName("Spotify Wrapped") \
-    .config("spark.mongodb.read.connection.uri", "mongodb://admin:password@mongodb:27017/spotify?authSource=admin") \
-    .config("spark.mongodb.write.connection.uri", "mongodb://admin:password@mongodb:27017/spotify?authSource=admin") \
-    .config('spark.jars.packages', 'org.mongodb.spark:mongo-spark-connector:10.0.2') \
-    .getOrCreate()
+# Example Part 1
+# Create a spark session
+spark = SparkSession.builder \
+    .appName("Mini Spotify").getOrCreate()
 
-spark.conf.set("spark.sql.streaming.checkpointLocation", "/tmp/checkpoints")
-
-"""spark.mongodb.write.connection.uri=mongodb://127.0.0.1/
-spark.mongodb.write.database=myDB
-spark.mongodb.write.collection=myCollection
-spark.mongodb.write.convertJson=any
-
-spark.mongodb.write.connection.uri = "mongodb://127.0.0.1/myDB.myCollection?convertJson=any"
-"""
-
-messageSchema = StructType() \
-    .add("endTime", StringType()) \
-    .add("artistName", StringType()) \
-    .add("trackName", StringType()) \
-    .add("UID", StringType()) \
-    .add("msPlayed", IntegerType())
-
+# Set log level
 spark.sparkContext.setLogLevel('WARN')
+
+# Set checkpoint directory
+checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/krise10"
+spark.sparkContext.setCheckpointDir(checkpoint_dir)
 
 # Example Part 2
 # Read messages from Kafka
@@ -46,113 +30,87 @@ kafkaMessages = spark \
             "my-cluster-kafka-bootstrap:9092") \
     .option("subscribe", "spotify-track-data") \
     .option("startingOffsets", "earliest") \
+    .option("auto.offset.reset", "earliest") \
     .load()
+    # .option("failOnDataLoss", "false") \
 
-# Parse the Kafka messages using the provided schema
-# Convert value: binary -> JSON -> fields + parsed timestamp
-parsedMessages = kafkaMessages.select(
-    # Extract 'value' from Kafka message (i.e., the tracking data)
+
+# Define schema of tracking data
+trackingMessageSchema = StructType() \
+    .add("endTime", StringType()) \
+    .add("artistName", StringType()) \
+    .add("trackName", StringType()) \
+    .add("UID", StringType()) \
+    .add("msPlayed", IntegerType())
+
+trackingMessages = kafkaMessages.select(
     from_json(
         column("value").cast("string"),
-        messageSchema
+        trackingMessageSchema
     ).alias("json")
 ).select(
-    # Convert Unix timestamp to TimestampType
-    to_timestamp(column('json.endTime'), "yyyy-MM-dd HH:mm")
-    .cast(TimestampType())
-    .alias("parsed_timestamp"),
-    # Select all JSON fields
-    column("json.*")
-) \
-    .withColumnRenamed('json.trackName', 'trackName') \
-    .withColumnRenamed('json.UID', 'UID') \
- \
-.withWatermark("parsed_timestamp", windowDuration)
+    column("json.*"),
+    to_timestamp(column("json.endTime"), "yyyy-MM-dd'T'HH:mm:ss").alias("endTimeTimestamp")
+).withWatermark("endTimeTimestamp", "1 year")
 
-
-
-# Compute most popular tracks
-popularTracks = watermarkedMessages.groupBy(
-    column("trackName"),
-    column("UID"),
+topSongs = trackingMessages.groupBy(
+    col("UID"), col("trackName"), col("artistName")
 ).agg(
-    sum("msPlayed").alias("total_msPlayed")
-) \
-    .withColumnRenamed('window.start', 'window_start') \
-    .withColumnRenamed('window.end', 'window_end') \
-    .orderBy(desc("total_msPlayed")) \
-    .limit(20)
+    {"msPlayed": "sum"}
+).withColumnRenamed("sum(msPlayed)", "total_msPlayed")
 
-
-popularTracksWindow = parsedMessages.groupBy(
-    window(
-        col("parsed_timestamp"),
-        windowDuration,
-        slidingDuration
-    ),
-    col("UID"),
+topArtists = trackingMessages.groupBy(
+    col("UID"), col("artistName")
 ).agg(
-    sum("msPlayed").alias("total_msPlayed")
-) \
-    .withColumnRenamed('window.start', 'window_start') \
-    .withColumnRenamed('window.end', 'window_end')
+    {"msPlayed": "sum"}
+).withColumnRenamed("sum(msPlayed)", "total_msPlayed")
 
-popularArtist = parsedMessages.groupBy(
-    col("artistName"),
-    col("UID"),
+totalPlaytime = trackingMessages.groupBy(
+    col("UID")
 ).agg(
-    sum("msPlayed").alias("total_msPlayed")
-) \
-    .withColumnRenamed('window.start', 'window_start') \
-    .withColumnRenamed('window.end', 'window_end') \
-    .orderBy(desc("total_msPlayed")) \
-    .limit(20)
+    {"msPlayed": "sum"}
+).withColumnRenamed("sum(msPlayed)", "total_msPlayed")
 
-totalPlayedByUser = parsedMessages.groupBy(
-    column("UID"),
-).agg(
-    sum("msPlayed").alias("total_msPlayed")
-)
+print("\n\n\n\n\n\n\Write to MariaDB\n\n\n\n")
 
-"""mongoDumbPopularTracks = popularTracks.writeStream \
-    .format("mongodb") \
-    .option("spark.mongodb.connection.uri", "mongodb://admin:password@mongodb:27017") \
-    .option("spark.mongodb.database", "spotify") \
-    .option("spark.mongodb.collection", "popularTracks") \
-    .option("spark.mongodb.change.stream.publish.full.document.only", "true") \
-    .option("forceDeleteTempCheckpointLocation", "true") \
-    .option("checkpointLocation", "/tmp/mycheckpoint") \
-    .outputMode("update") \
-    .trigger(processingTime="1 second") \
-    .start() \
-    .awaitTermination()"""
+def write_to_db(batch_df, batch_id, table_name):
+    """
+    Writes a batch of DataFrame to the specified database table.
+
+    Parameters:
+    - batch_df (DataFrame): The DataFrame to write to the database.
+    - batch_id (int): The identifier for the current batch.
+    - table_name (str): The name of the database table to write to.
+    """
+    try:
+        batch_df.write \
+            .format("jdbc") \
+            .option("url", dbUrl) \
+            .option("dbtable", table_name) \
+            .option("user", dbOptions["user"]) \
+            .option("password", dbOptions["password"]) \
+            .mode("overwrite") \
+            .save()
+    except Exception as e:
+        print(f"Error writing batch {batch_id} to database: {e}")
 
 
-consoleDumpTotalPlayed = totalPlayedByUser \
+query = topSongs \
     .writeStream \
     .outputMode("complete") \
-    .format("console") \
+    .foreachBatch(lambda df, id: write_to_db(df, id, "top_songs")) \
     .start()
-
-consoleDumpPopularTracks = popularTracks \
+#.option("checkpointLocation", checkpoint_dir + "/top_songs") \
+query2 = topArtists \
     .writeStream \
     .outputMode("complete") \
-    .format("console") \
+    .foreachBatch(lambda df, id: write_to_db(df, id, "top_artists")) \
     .start()
-
-consoleDumpOPopularTracksWindow = popularTracksWindow \
-    .writeStream \
-    .outputMode("update") \
-    .format("console") \
-    .start()
-
-consoleDumpPopularArtist = popularArtist \
+#.option("checkpointLocation", checkpoint_dir + "/top_artists") \
+query3 = totalPlaytime \
     .writeStream \
     .outputMode("complete") \
-    .format("console") \
+    .foreachBatch(lambda df, id: write_to_db(df, id, "total_playtime")) \
     .start()
-
-consoleDumpTotalPlayed.awaitTermination()
-consoleDumpPopularTracks.awaitTermination()
-consoleDumpOPopularTracksWindow.awaitTermination()
-consoleDumpPopularArtist.awaitTermination()
+#.option("checkpointLocation", checkpoint_dir + "/total_playtime") \
+spark.streams.awaitAnyTermination()

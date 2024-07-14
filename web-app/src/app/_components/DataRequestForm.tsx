@@ -3,15 +3,12 @@
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import React from "react";
 import { z } from "zod";
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -19,14 +16,12 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import axios from "axios";
-import SendDemoRequest from "@/app/_components/sendDemoRequest";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
   spotifyUser: z.string({
@@ -44,12 +39,13 @@ export default function DataRequestForm({
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
+  const router = useRouter();
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const uid = data.spotifyUser;
-    axios.get("/api/fetch-db?uid=" + uid).then((response) => {
-      console.log(response);
-    });
+    if (uid) {
+      router.push(`/results?uid=${uid}`);
+    }
   }
   return (
     <div className={"text-white w-full flex flex-col space-y-4"}>
@@ -101,11 +97,6 @@ export default function DataRequestForm({
           </Button>
         </form>
       </Form>
-      {!disabled && (
-        <div className={"w-2/3"}>
-          <SendDemoRequest uid={form.getValues("spotifyUser")} />
-        </div>
-      )}
     </div>
   );
 }
