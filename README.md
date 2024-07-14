@@ -115,6 +115,11 @@ When all prerequisites are installed, you can start the project with the followi
 skaffold dev
 ```
 
+In a separate Terminal run the following command to access the web app under [the following Url](http://localhost/):
+
+```bash
+minikube tunnel
+````
 
 ## Use Case Description
 
