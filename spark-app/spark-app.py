@@ -1,3 +1,4 @@
+from datetime import datetime
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import IntegerType, StringType, StructType, TimestampType
@@ -18,7 +19,8 @@ spark = SparkSession.builder \
 spark.sparkContext.setLogLevel('WARN')
 
 # Set checkpoint directory
-checkpoint_dir = "hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/krise10"
+tmp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+checkpoint_dir = f"hdfs://my-hadoop-cluster-hadoop-hdfs-nn:9000/tmp/{tmp}"
 spark.sparkContext.setCheckpointDir(checkpoint_dir)
 
 # Example Part 2
