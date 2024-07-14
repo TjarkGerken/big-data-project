@@ -128,13 +128,9 @@ These functions are supplemented with the matching title images and audio sample
 profile picture of the artists in order to offer the genuine Spotify experience and maintain the recognition value.
 
 
-## Implementierung
-### Data Ingestion => Kafka
-### Batch + Stream Processing
-### Serving Layer => Maria DB
-### Frontend
----- Get Data Mechanismus => Erst Cache => Dann Kafka => Dann MariaDB in einer Loop Abfragen => Dann in Cache speichern.
+
 ## System Architecture
+
 ### Overview
 The system includes a frontend application developed with NextJS and a backend application, also based on NextJS, which 
 handles central control and data processing. Users log into the web app with their Spotify accounts to access detailed 
@@ -160,87 +156,100 @@ Each of the components is described in more detail within the following sections
 
 ### Components
 #### Kafka (Data Ingestion)
-Kafka serves as a message queue system, enabling live data streaming. In this architecture, Kafka is used to capture 
-song play activities and forward them to Spark for processing.
+Kafka serves as a message queue system, enabling live data streaming. In this architecture, Kafka is used to capture the
+song play activities requested by the publisher, the NextJS App, and forwards the data to Spark which is acting as the subscriber for processing the Spotify data to the applications needs. The topic is defined by the [kafka-topic.yaml](k8s/kafka-topic.yaml).
 
 #### Spark (Batch + Stream Processing)
 The Spark application is designed to process and analyse streaming data from a Kafka topic, simulating song play
 activities. The processed results are then stored in a MariaDB database. The application follows an ETL 
-(Extract, Transform, Load) pipeline:
+(Extract, Transform, Load) pipeline which is defined in the [spark-app.py](spark-app/spark-app.py):
 
-First, it extracts data from a Kafka topic names `spotify-track-data`. This data includes details about song plays, such
+First, it extracts data from a Kafka topic named `spotify-track-data`. This data includes details about song plays, such
 as the user id, artist name, track name and milliseconds played. The data is then transformed by parsing the JSON messages
 and adding timestamps to facilitate time-based operations. Late-arriving data is handled through watermarking, ensuring 
 the application process out-of-order events effectively.
 
-Next, the data is aggregated to compute key metrics, such as total playtime for each song per user, total playtime for 
-each artist per user and the total playtime for each user. The results are then loaded into corresponding tables in a 
-MariaDB database. Continuous streaming queries are used to process data live with checkpoints (saved in the hadoop cluster) 
-ensuring data consistency and recovery from potential failures.
+Next, the data is aggregated to compute key metrics with functions defined in the [spark-app.py](spark-app/spark-app.py), such as total playtime over all songs with the fucntion `totalPlaytime`, the total playtime for each artist with the functions `topArtist` and the total playtime for each song with the function `topSongs`. The results are then loaded into corresponding tables in the [MariaDB](k8s/mariadb.yaml) beeing `total_playtime`, `top_artists` and `top_songs`. Continuous streaming queries are used to process data live with checkpoints (saved in the hadoop cluster) ensuring data consistency and recovery from potential failures.
 
 #### MariaDB (Serving Layer)
-MariaDB functions as a relational database where the aggregated results from Spark are stored. It acts as the serving 
-layer from which the backend application retrieves the required data.
+[MariaDB](k8s/mariadb.yaml) is used as a relational database where the aggregated results from Spark are stored to enable their retrieval by the backend [NextJS](web-app/). It therefore acts as the serving layer of the application. The [tables of the database schema](k8s/mariadb.yaml) are taylored to the minimum columns required for identification and to display the desired information. 
+
+The table `top_songs` has the columns `UID`, `trackName`, `artistName` and `total_msPlayed`. The first three are strings (type Varchar) and the last one is an integer, all of which must not be null. The `UID` and `track_name`serve as the primary key.
+
+The table `top_artists` has the columns `UID`, `artistName` and `total_msPlayed`. The first two are strings (type Varchar) and the last one is an integer, all of which must not be null. The `UID` and `artist_name` serve as the primary key.
+
+The table `total_playtime` has the columns `UID` and `total_msPlayed`. The first one is a string (type Varchar) and the last one is an integer, all of which must not be null. The UID serves as the primary key.
+
 
 #### Memcached
-
+[Memcached](k8s/memcached.yaml) is a in memory cache which safes the data that has been requested and displayed by the Web-App to reduce retrieval latency and processing ressources when the same data is requested again. It is stored in a key-value fashion, the key being the selected person's `UID` and the value being a JSON storing the associated information, by appending it to the cache pushing out older data if the cache memory is full using timestamps from the moment a piece of data was last requested. Data older than ten minutes will be purged from the cache automaticaly. This is defined by the [setCache-function](web-app/src/app/api/set-cache/route.ts).
 
 #### NextJS Frontend
 The frontend application, developed with NextJS, provides the user interface through which users can access the analyses.
-It communicates with the backend application to retrieve and display the necessary data.
+It communicates with the backend application to retrieve and display the necessary data. The frontend part of the NextJS app is used as the UI which allows the user to send of the authorization request directly to Spotify as well as start the data retrieval request to the NextJS backend. It also serves the purpose of [sending the authentication token]() to the NextJS backend and [send the request for caching](web-app/src/app/api/set-cache/route.ts).
 
 #### NextJS Backend
 The backend application, also developed with NextJS, serves as the central control and data processing layer. It retrieves
 the data from MariaDB, caches it via Memcached, and provides it to the frontend application. The backend application also
-handles the authentication process with the Spotify API.
+handles the authentication process with the Spotify API. It therefore handles all request that require transactions between the Web App UI and the data processing part of the application hiding all system related information from the user to ensure security.
 
 #### Spotify API
-The Spotify API is used for authentication and retrieval of album covers, song previews, and artist profile pictures.
-Users log into the web app with their Spotify accounts to access the analyses. Authentication is carried out via an OAuth 
-flow, where users log in with their Spotify accounts and grant the application access to their account data. However, 
-the actual data used for the analyses is not retrieved from the Spotify API (more on this in the "Challenges" section).
+The Spotify API is used for authentication as well as the retrieval of album covers and artist profile pictures.
+Users log into the web app with their Spotify accounts in the Web App to access the analyses. Authentication is carried out via an OAuth flow, where users grant the application access to their account data by logging in. However, the actual data used for the analyses is not retrieved from the Spotify API due to restricted data access (more on this in the "Challenges" section).
 
 The Spotify API is used for the following functions:
-- Registering the application to obtain the Client ID and Client Secret.
-- Sending a request to the Spotify endpoint with parameters such as client_id, response_type, redirect_uri, scope, and state.
-- User login with their Spotify account, theoretically granting access to account data.
-- Redirecting to the web app.
-- Sending the authorization code to Spotify to obtain the access token, which needs to be refreshed every hour.
-- Fetching album covers, song previews, and artist profile pictures using the access token.
+- Registering the application to obtain the Client ID and Client Secret
+- Sending a request to the Spotify endpoint with parameters such as client_id, response_type, redirect_uri, scope, and state
+- User login with their Spotify account granting access to account data.
+- Redirecting to the web app
+- Sending the authorization code to Spotify to obtain the access token, which needs to be refreshed every hour and is send to the backend when recieved
+- Sending song/artist name to the respective endpoint to fetch song covers, artist profile pictures and infromation, genres using the access token
 
-This detailed description of the system architecture and its individual components provides a comprehensive overview 
-of the entire system and the interactions of various technologies.
+This detailed description of the system architecture and its individual components provides an overview 
+of the entire system and the interactions of various technologies. A more comprehensive display of the Spotify API's functionality can be found in the figure below.
 
 
-##### Authentifizierung
-To make the application work an authorization on spotify is needed. This step is necesarry to request and analyse data. Furthermore,  
+##### Authorization
 
-##### Datenabfrage 
---- Endpoints listen => Wie ist der Prozess => Wir bekommen Track Title => Wir suchen auf dem Search Endpoint => Wir fragen dann die Daten an.
+To make the application work an authorization on spotify is needed. This step is necesarry to get access to the data. Therefore the spotify own authorization process is used. If this part was successful the application sends a request for access and refresh token to spotify. Moreover, this access token is needed to send requests to the Web API which returns the requested data.    
+ 
 ### Daten Modell
 
-## Lernerfahrungen
 
-- Funktionalität der einzelnen Komponenten ist weitaus einfacher, als die zuverlässig Verbindung derer
-## Herausforderungen
+## Learnings
 
-Spotify-API:
+- Ensuring the functionality of individual components is way easier than keeping up a stable and functional conection between them
+- The biggest issues won't always come from the parts of the project that can be directly associated with the components of the application
 
-Zu Beginn haben wir die Idee verfolgt über die Authentifizierung des Spotify-Benutzerkontos mittels Spotify-API die Daten der individuellen Benutzer in Echtzeit abzufragen, um diese anschließend in das System zu streamen, um die Nutzung der Anwendung jeder Person mit einem Spotify-Konto zu ermöglichen und die maximale Aktualität der Daten und damit Analysen zu gewährleisten.
+## Challenges
 
-Die Einschränkungen der Spotify-API in Hinblick auf den Umfang der abfragbaren Historie auf die letzten 50 Elemente hat diesen Plan jedoch zu nichte gemacht. Wir haben zunächst versucht durch die Angabe eines Timestamps, durch welchen es möglich ist die Elemente nach diesem Zeitpunkt abzufragen, eine Verkettung an Anfragen mit jeweils einem Umfang von 50 Elementen dynamische definierte Zeiträume abzufragen, jedoch ist diese Funktion ebenfalls streng auf die letzten 50 Elemente beschränkt und bietet so kein wirkliches "Big-Data"-Szenario.
+# Spotify API:
 
-Daher haben wir die durch die Datenschutzgesetze Deutschlands festgelegte Auskunftspflicht für Spotify gegenüber ihren Kunden in Anspruch genommen und uns somit Zugang zu den jeweiligen Nutzerhistorien der Gruppenmitglieder verschafft, welche nun in der Web-App auswählbar sind.
+Initially, we pursued the idea of using the Spotify API to query the data of individual users in real time via the authentication of the Spotify user account in order to subsequently stream this data into the system, to enable the use of the application by anyone with a Spotify account and to ensure the maximum timeliness of the data and thus analyses.
 
-weitere:
+However, the limitations of the Spotify API in terms of the scope of the queryable history to the last 50 items has frustrated this plan. We initially tried to query a chain of requests with a scope of 50 elements each for dynamically defined periods of time by specifying a timestamp, which makes it possible to query the elements after this point in time, but this function is also strictly limited to the last 50 elements and thus does not offer a real "big data" scenario.
 
-- MongoDB (non relational DB)
-- Orchestration und zuverlässige Verbindung der einzelnen Komponenten
-- DNS-Probleme
-- Apple <--> Windows Diskrepanzen
-- Unzureichende Ressourcen 
+We therefore made use of Spotify's obligation to provide the user's streaming information to them. By requesting our groupmembers last years history we can offer the option to select the data set to be analyzed in the Web App dropdown menu.
 
+# MongoDB to MariaDB:
 
+Another change of plans occured when we first planned to use a non relational Database in MongoDB thinking that a Database without a strict schema will make the storage of different data easier to handle. But after having troubles replacing the MongoDB with the initially predefined MariaDB and recieving the data from spotify now knowing the data strcuture and the attributes we need for our analyses we decided that using a MariaDB makes more sense for our very straight forward data structure also ensuring further type security.
+
+# Setup and configuration issues:
+
+While persuing the project we encountered multiple issues related to the application setup as well as hardware ressource induced compications.
+
+One of them beeing the task to get the system to run on all groupmembers laptops having to make addoptions to the different opperation system by for example changing the the exit sequences of the yaml-files in the k8s folder from "CLRF" used on Apple devices to "LF" used by Windows devices.
+
+Also not all of the devices are private devices and therefore don't offer full access to configurations enforcing the use of virtual machines and other techniques which add further obstacles in the fight for the very limited hardware ressources.
+
+Limited hardware ressources, espacially ram, was a big issue in general which got even more severe as the project continued to grow and therefore required more and more ressources to the point where heavy configurations had to be made to even enable the full functionality of the application. These shortages made the development process increasingly slow because changes to the live application often ends in a rebuild sequence or a new start through skaffold dev which takes a lot of time when all the ressources are caught up in maintaining the system.
+
+Keeping up all the components and ensuring their stable functionality was another setup related issue since topics won't always start when the assigned ressources are not enough, the kubernetes cluster might crash, spark can't build a conection to the database or fetching data ends in a runtime error because either Kafka crashed or the available ressources arn't enough to process and analyse the data with spark quickly enough.
+
+Another issue was related to the funcionality of the DNS...
+
+A functional challange was the "communication" between NextJS and Spark so that the Backend knows when Spark has finished the processing completely and the final data lays in the MariaDB because displying the content to early would falsify the analyses. We ensured this by implementing a check sequence where when NextJS fetched the same data five times in a row we can conclude that Spark finished its processing and the data in the MariaDB is final.
 
 ## Deploy
 
