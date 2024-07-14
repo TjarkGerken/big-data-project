@@ -2,6 +2,29 @@
 This repository contains the code for the project of the course Big Data at the DHBW Mannheim. The aim was to analyze the 
 music streaming data of individuals.
 
+## Table of Contents
+- [DHBW Mannheim - Big Data](#dhbw-mannheim---big-data)
+    - [Contributor](#contributor)
+    - [Tech-Stack](#tech-stack)
+    - [Prerequisites](#prerequisites)
+    - [Use Case Description](#use-case-description)
+    - [System Architecture](#system-architecture)
+        - [Overview](#overview)
+        - [Components](#components)
+            - [Kafka (Data Ingestion)](#kafka-data-ingestion)
+            - [Spark (Batch + Stream Processing)](#spark-batch--stream-processing)
+            - [MariaDB (Serving Layer)](#mariadb-serving-layer)
+            - [Memcached](#memcached)
+            - [Next.js Frontend](#nextjs-frontend)
+            - [Next.js Backend](#nextjs-backend)
+            - [Spotify API](#spotify-api)
+                - [Authorization](#authorization)
+    - [Learnings](#learnings)
+    - [Challenges](#challenges)
+        - [Spotify API:](#spotify-api)
+        - [MongoDB to MariaDB:](#mongodb-to-mariadb)
+        - [Setup and configuration issues:](#setup-and-configuration-issues)
+
 ## Contributor
 - Yanick Bedel (8424886)
 - Tjark Gerken (8692717)
@@ -83,15 +106,15 @@ helm status my-hadoop-cluster 2>&1 >>/dev/null 2>&1 || \
         --set yarn.nodeManager.replicas=3
 
 
-# Install NodeJS through Node Version Manager
+# Install NodeJS through Node Version Manager (Optional for Developing and Testing of the Web App)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install v18.20.3
 
 cd web-app
-npm install 
-npm run build
+yarn install 
+yarn run build
 
 # Install Skaffold
 curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
@@ -160,7 +183,7 @@ transformed, and loaded into the database.
 
 The data flow begins with the Kafka component, which acts as the data ingestion layer. Spark processes this data in
 live and stores it in the database. The results are then retrieved by the backend application and passed to the 
-frontend application, where they are presented to the users.
+frontend application, where they’re presented to the users.
 
 ![System Architecture](imgs/NewApplicationSchema.svg "Systemarchitektur")
 
@@ -197,11 +220,11 @@ The [tables of the database schema](k8s/mariadb.yaml) are tailored to the minimu
 and to display the desired information. 
 
 The table `top_songs` has the columns `UID`, `trackName`, `artistName` and `total_msPlayed`. The first three are strings
-(type Varchar), and the last one is an integer, all of which must not be null. The `UID` and `track_name`serve as the 
+(type Varchar), and the last one is an integer, all of which mustn’t be null. The `UID` and `track_name`serve as the 
 primary key.
 
 The table `top_artists` has the columns `UID`, `artistName` and `total_msPlayed`. The first two are strings 
-(type Varchar), and the last one is an integer, all of which must not be null. The `UID` and `artist_name` serve as the 
+(type Varchar), and the last one is an integer, all of which mustn’t be null. The `UID` and `artist_name` serve as the 
 primary key.
 
 The table `total_playtime` has the columns `UID` and `total_msPlayed`.
@@ -274,8 +297,11 @@ used by the backend to make the requests for the cosmetic data.
 ## Learnings
 - Ensuring the functionality of individual components is way easier than keeping up a stable and functional connection 
 between them
-- The biggest issues won't always come from the parts of the project that can be directly associated with the components 
-of the application
+- The biggest issues will not always come from the parts of the project
+  that can be directly associated with the components of the application
+- Even with small data sample, the application can be very resource-intensive. Showing the need for distributed systems
+when larger data amounts have to be processed.
+- Setting up and integrating a system with multiple components and navigating systems difference 
 
 # Challenges
 
@@ -298,7 +324,7 @@ Web App dropdown menu.
 The initially planned system architecture looked at follows:
 ![System Architecture](imgs/OldApplicationSchema.svg "Systemarchitektur")
 
-# MongoDB to MariaDB:
+## MongoDB to MariaDB:
 
 Another change of plans occurred when we first planned to use a non-relational database in MongoDB thinking that a 
 Database without a strict schema will make the storage of different data easier to handle.
@@ -306,17 +332,18 @@ But after having trouble replacing the MongoDB with the initially predefined Mar
 from spotify now knowing the data structure and the attributes we need for our analysis, we decided that using a MariaDB
 makes more sense for our very straight forward data structure also ensuring further type security.
 
-# Setup and configuration issues:
+## Setup and configuration issues:
 
 While pursuing the project,
 we encountered multiple issues related to the application setup as well as hardware resources 
 induced complications.
 
 One of them being the task to get the system to run on all group members devices, having to make adoptions to the 
-different operating systems by, for example, changing the escape sequences of the yaml-files in the k8s folder from "CLRF" 
-used on Apple devices to "LF" used by Windows devices.
+different operating systems by. When using git on Windows, the YAML files in the [k8s folder](k8s/) are 
+saved with crlf as a line ending. However, since Docker is run in Windows Subsystem for Linux (WSL), the escape
+sequence has to be changed to LF to be able to run in the kubernetes cluster.
 
-Also, not all the devices are private devices and therefore don't offer full access to configurations enforcing the use 
+Also, not all the devices are private devices and therefore do not offer full access to configurations enforcing the use 
 of virtual machines and other techniques which add further obstacles in the fight for the very limited hardware 
 resources.
 
@@ -326,9 +353,9 @@ made to even enable the full functionality of the application. These shortages m
 slow. This is because changes to the live application often end in a rebuild sequence or a new start through skaffold dev, which 
 takes a lot of time when all the resources are caught up in maintaining the system.
 
-Keeping up all the components and ensuring their stable functionality was another setup related issue since topics won't
-always start when the assigned resources are not enough, the kubernetes cluster might crash, spark can't build a connection
-to the database or fetching data ends in a runtime error because either Kafka crashed or the available resources aren't 
+Keeping up all the components and ensuring their stable functionality was another setup related issue since topics will not
+always start when the assigned resources are not enough, the kubernetes cluster might crash, spark can not build a connection
+to the database or fetching data ends in a runtime error because either Kafka crashed or the available resources are not 
 enough to process and analyse the data with spark quickly enough.
 
 A functional challenge was the "communication" between Next.js and Spark so that the Backend knows when Spark has 
@@ -336,6 +363,6 @@ finished the processing and the final data lays in the MariaDB because displayin
 falsify the analysis. We ensured this by implementing a check sequence where when Next.js fetched the same data five times
 in a row, we can conclude that Spark finished its processing and the data in the MariaDB is final.
 
-Another issue was related to the functionality of the DNS. Sometimes we encountered the problem that minikube couldn't 
-reach the container registry and therefore couldn't download and build the necessary images. At different times the 
+Another issue was related to the functionality of the DNS. Sometimes we encountered the problem that minikube could not 
+reach the container registry and therefore could not download and build the necessary images. At different times the 
 containers couldn't reach the Spotify API, also blocking the performance of the application.

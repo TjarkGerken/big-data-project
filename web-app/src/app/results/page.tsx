@@ -54,8 +54,6 @@ function RenderResults() {
           },
         },
       );
-
-      const userData = response.data;
       setUserName(response.data);
     } catch (error) {
       console.error("Error fetching user ID:", error);
@@ -227,9 +225,12 @@ function RenderResults() {
         )}
       </div>
       <div className="flex flex-col items-center mt-6 w-2/3 space-y-8">
-        <DisplayArtists artistData={result.top_artist} />
-        <DisplayTracks trackData={result.top_songs} />
-        <DisplayTotalTime totalTime={result.total_ms_played[0]} />
+        {result && result.top_artist.length >0 &&
+          <DisplayArtists artistData={result.top_artist}/>}
+        { result && result.top_songs.length > 0 &&
+        <DisplayTracks trackData={result.top_songs} />}
+        { result && result.total_ms_played.length > 0 &&
+          <DisplayTotalTime totalTime={result.total_ms_played[0]}/>}
         <Link
           href={"/"}
           className={
