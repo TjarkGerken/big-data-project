@@ -149,8 +149,8 @@ The data flow begins with the Kafka component, which acts as the data ingestion 
 real-time and stores it in the database. The results are then retrieved by the backend application and passed to the 
 frontend application, where they are presented to the users.
 
-![System Architecture](imgs/Alte-Architekur.svg "Systemarchitektur")
-![System Architecture](imgs/system-architecture.svg "Systemarchitektur")
+![System Architecture](imgs/NewApplicationSchema.svg "Systemarchitektur")
+
 
 Each of the components is described in more detail within the following sections.
 
