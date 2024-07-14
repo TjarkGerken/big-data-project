@@ -21,9 +21,9 @@ music streaming data of individuals.
                 - [Authorization](#authorization)
     - [Learnings](#learnings)
     - [Challenges](#challenges)
-        - [Spotify API:](#spotify-api)
-        - [MongoDB to MariaDB:](#mongodb-to-mariadb)
-        - [Setup and configuration issues:](#setup-and-configuration-issues)
+        - [Spotify API](#spotify-api)
+        - [MongoDB to MariaDB](#mongodb-to-mariadb)
+        - [Setup and configuration issues](#setup-and-configuration-issues)
 
 ## Contributor
 - Yanick Bedel (8424886)
@@ -307,7 +307,7 @@ when larger data amounts have to be processed.
 
 # Challenges
 
-## Spotify API:
+## Spotify API
 
 Initially, we pursued the idea of using the Spotify API to query the data of individual users in live via the
 authentication of the Spotify user account in order to subsequently stream this data into the system, to enable the use 
@@ -326,7 +326,7 @@ Web App dropdown menu.
 The initially planned system architecture looked at follows:
 ![System Architecture](imgs/OldApplicationSchema.svg "Systemarchitektur")
 
-## MongoDB to MariaDB:
+## MongoDB to MariaDB
 
 Another change of plans occurred when we first planned to use a non-relational database in MongoDB thinking that a 
 Database without a strict schema will make the storage of different data easier to handle.
@@ -334,7 +334,7 @@ But after having trouble replacing the MongoDB with the initially predefined Mar
 from spotify now knowing the data structure and the attributes we need for our analysis, we decided that using a MariaDB
 makes more sense for our very straight forward data structure also ensuring further type security.
 
-## Setup and configuration issues:
+## Setup and configuration issues
 
 While pursuing the project,
 we encountered multiple issues related to the application setup as well as hardware resources 
