@@ -185,13 +185,11 @@ The table `total_playtime` has the columns `UID` and `total_msPlayed`. The first
 [Memcached](k8s/memcached.yaml) is a in memory cache which safes the data that has been requested and displayed by the Web-App to reduce retrieval latency and processing ressources when the same data is requested again. It is stored in a key-value fashion, the key being the selected person's `UID` and the value being a JSON storing the associated information, by appending it to the cache pushing out older data if the cache memory is full using timestamps from the moment a piece of data was last requested. Data older than ten minutes will be purged from the cache automaticaly. This is defined by the [setCache-function](web-app/src/app/api/set-cache/route.ts).
 
 #### NextJS Frontend
-The frontend application, developed with NextJS, provides the user interface through which users can access the analyses.
-It communicates with the backend application to retrieve and display the necessary data. The frontend part of the NextJS app is used as the UI which allows the user to send of the authorization request directly to Spotify as well as start the data retrieval request to the NextJS backend. It also serves the purpose of [sending the authentication token]() to the NextJS backend and [send the request for caching](web-app/src/app/api/set-cache/route.ts).
+The frontend application, developed with [NextJS](web-app/), provides the user interface through which users can access the analyses.
+It communicates with the backend application to retrieve and display the necessary data. The frontend part of the [NextJS](web-app/) app is used as the UI which allows the user to [log into their Spotify account](web-app/src/app/_components/spotifyAuthorization.tsx) for authorization purposes using the `SpotifyAuthorization` function and to [send the token](web-app/src/app/api/auth-request/route.ts) recieved doing that again to Spotify to gain an authorization token using the `authOptions` function as well as start the [data retrieval request](web-app/src/app/results/page.tsx) using the `useEffect` function to the [NextJS](web-app/) backend. It also serves the purpose of [sending the request for caching](web-app/src/app/api/set-cache/route.ts).
 
 #### NextJS Backend
-The backend application, also developed with NextJS, serves as the central control and data processing layer. It retrieves
-the data from MariaDB, caches it via Memcached, and provides it to the frontend application. The backend application also
-handles the authentication process with the Spotify API. It therefore handles all request that require transactions between the Web App UI and the data processing part of the application hiding all system related information from the user to ensure security.
+The backend application, also developed with [NextJS](web-app/), serves as the central control and data processing layer. It checks whether the requested data already is in the [Memcached](k8s/memcached.yaml) retrieves it from the [MariaDB](k8s/mariadb.yaml) if that's not the case and provides it to the frontend application either all with the [`useEffect` function](web-app/src/app/results/page.tsx). The backend application also handles the [fetching process for the cosmetic artist data](web-app/src/app/api/get-artist-data/route.ts) as well as the [cosmetic song data](web-app/src/app/api/get-track-data/route.ts) with the Spotify API. It therefore handles all request that require transactions between the Web App UI and the data processing part of the application hiding all system related information from the user to increase security.
 
 #### Spotify API
 The Spotify API is used for authentication as well as the retrieval of album covers and artist profile pictures.
@@ -211,7 +209,7 @@ of the entire system and the interactions of various technologies. A more compre
 
 ##### Authorization
 
-To make the application work an authorization on spotify is needed. This step is necesarry to get access to the data. Therefore the spotify own authorization process is used. If this part was successful the application sends a request for access and refresh token to spotify. Moreover, this access token is needed to send requests to the Web API which returns the requested data.    
+To make the application work the user has to go through an authorization process with Spotify. This step is necesarry for the user to be able to select data he wants to analyse and therefore to access the features of the application as well as for the application to be able to fetch complementary and cosmetical data. For that case Spotify provides their own log in page to which the user is directed. After logging in with the users credentials successfully the application sends a request for access and as well as a token to Spotify in order to recieve a authentification token which is later used by the backend to make the requests for the cosmtical data.   
  
 ### Daten Modell
 
