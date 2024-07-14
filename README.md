@@ -211,7 +211,7 @@ of the entire system and the interactions of various technologies. A more compre
 
 To make the application work the user has to go through an authorization process with Spotify. This step is necesarry for the user to be able to select data he wants to analyse and therefore to access the features of the application as well as for the application to be able to fetch complementary and cosmetical data. For that case Spotify provides their own log in page to which the user is directed. After logging in with the users credentials successfully the application sends a request for access and as well as a token to Spotify in order to recieve a authentification token which is later used by the backend to make the requests for the cosmtical data.   
  
-### Daten Modell
+### Data Model
 
 
 ## Learnings
@@ -241,13 +241,13 @@ One of them beeing the task to get the system to run on all groupmembers laptops
 
 Also not all of the devices are private devices and therefore don't offer full access to configurations enforcing the use of virtual machines and other techniques which add further obstacles in the fight for the very limited hardware ressources.
 
-Limited hardware ressources, espacially ram, was a big issue in general which got even more severe as the project continued to grow and therefore required more and more ressources to the point where heavy configurations had to be made to even enable the full functionality of the application. These shortages made the development process increasingly slow because changes to the live application often ends in a rebuild sequence or a new start through skaffold dev which takes a lot of time when all the ressources are caught up in maintaining the system.
+Limited hardware ressources, espacially RAM, was a big issue in general which got even more severe as the project continued to grow and therefore required more and more ressources to the point where heavy configurations had to be made to even enable the full functionality of the application. These shortages made the development process increasingly slow because changes to the live application often ends in a rebuild sequence or a new start through skaffold dev which takes a lot of time when all the ressources are caught up in maintaining the system.
 
 Keeping up all the components and ensuring their stable functionality was another setup related issue since topics won't always start when the assigned ressources are not enough, the kubernetes cluster might crash, spark can't build a conection to the database or fetching data ends in a runtime error because either Kafka crashed or the available ressources arn't enough to process and analyse the data with spark quickly enough.
 
-Another issue was related to the funcionality of the DNS...
+A functional challenge was the "communication" between NextJS and Spark so that the Backend knows when Spark has finished the processing completely and the final data lays in the MariaDB because displying the content to early would falsify the analyses. We ensured this by implementing a check sequence where when NextJS fetched the same data five times in a row we can conclude that Spark finished its processing and the data in the MariaDB is final.
 
-A functional challange was the "communication" between NextJS and Spark so that the Backend knows when Spark has finished the processing completely and the final data lays in the MariaDB because displying the content to early would falsify the analyses. We ensured this by implementing a check sequence where when NextJS fetched the same data five times in a row we can conclude that Spark finished its processing and the data in the MariaDB is final.
+Another issue was related to the funcionality of the DNS. Sometimes we encountered the problem that minikube couldn't reach the container registery and therefore couldn't download and build the necessary images. At different times the containers couldn't reach the Spotify API also blocking the performance of the application.
 
 ## Deploy
 
