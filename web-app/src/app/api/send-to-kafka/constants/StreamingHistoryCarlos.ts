@@ -1,4 +1,4 @@
-import { Track } from "@/app/api/send-to-kafka/StreamingHistoryType";
+import { Track } from "@/app/api/send-to-kafka/interfaces/StreamingHistoryType";
 
 export const StreamingHistoryCarlos: Track[] = [
   {

@@ -4,7 +4,6 @@ import SpotifyAuthorization from "@/app/_components/spotifyAuthorization";
 import ResetSpotifyAuthorization from "./_components/ResetSpotifyAuthorization";
 import React, { useEffect, useState } from "react";
 import DataRequestForm from "@/app/_components/DataRequestForm";
-import SendDemoRequest from "@/app/_components/sendDemoRequest";
 
 export default function Home() {
   const [authCode, setAuthCode] = useState<{} | null>(null);

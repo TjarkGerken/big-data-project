@@ -176,7 +176,9 @@ function RenderResults() {
       <Suspense fallback={<div>Loading...</div>}>
         <div
           role="status"
-          className={"flex flex-col py-24 justify-center items-center w-full space-y-5"}
+          className={
+            "flex flex-col py-24 justify-center items-center w-full space-y-5"
+          }
         >
           <svg
             aria-hidden="true"
