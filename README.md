@@ -10,7 +10,7 @@ music streaming data of individuals.
 - David Simon (1893552)
 
 
-## Tech Stack
+## Tech-Stack
 - [Kubernetes](https://kubernetes.io/)
 - [NextJS](https://nextjs.org/)
 - [MariaDB](https://mariadb.org/)
@@ -20,16 +20,14 @@ music streaming data of individuals.
 
 ## Prerequisites
 
-# TODO: Spotify App @Tjark
-
-To run the project locally you need the following tools installed:
+To run the project locally, you need the following tools installed:
 - [Docker](https://docs.docker.com/get-docker/)
 - [Minikube](https://minikube.sigs.k8s.io/docs/start/)
 
 Furthermore, you need a running Kubernetes cluster with both a Strimzi.io Kafka operator 
 and a Hadoop cluster with YARN for checkpointing before you can deploy the app.
 
-In the following we provide a step-by-step guide to set up the project locally.
+In the following, we provide a step-by-step guide to set up the project locally.
 
 ```bash
 # Install Docker
@@ -100,6 +98,18 @@ curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffo
 sudo install skaffold /usr/local/bin/
 
 ```
+To achieve the connection to the Spotify API,
+an application [has
+to be registered via their portal](https://developer.spotify.com/documentation/web-api/concepts/apps) 
+and a Spotify Premium Account.
+This application can then be managed in the 
+[Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications).
+
+The Client ID and Client Secret have to be added to .env file in the [web-app/](web-app/) directory.
+This file has to have the same structure as the [.env.example](web-app/.env.example) file.
+
+```bash
+
 
 When all prerequisites are installed, you can start the project with the following command:
 
@@ -107,26 +117,27 @@ When all prerequisites are installed, you can start the project with the followi
 skaffold dev
 ```
 
+
 ## Use Case Description
 
-The application makes it possible to analyse individual user data from the Spotify Music streaming platform. 
-The data from the last year of the respective user is requested and then analysed in order to present it in
+The application makes it possible to analyze individual user data from the Spotify Music streaming platform. 
+The data from the last year of the respective user is requested and then analyzed to present it in
 an appealing way.
 
 The background to this is to gain a deeper and more detailed insight into the user's taste in music and the 
-associated consumer behaviour in order to be able to make even better decisions when selecting or searching for 
+associated consumer behavior to be able to make even better decisions when selecting or searching for 
 songs in the future and not to forget older treasures.
 
 Even though Spotify itself offers a similar function, it is not sufficient in that it is only created for the user once
 at the end of each year.
 
-With this application we provide the following analysis:
+With this application, we provide the following analysis:
 - Favourite song (longest aggregated playing time of the song over the period)
 - Favourite artist (longest aggregated playing time of the songs of an artist over the period)
-- Total streaming time (Totalled playing time of all songs over the period)
+- Total streaming time (Totaled playing time of all songs over the period)
 
 These functions are supplemented with the matching title and images of the songs as well as the 
-profile picture of the artists in order to offer the genuine Spotify experience and maintain the recognition value.
+profile picture of the artists to offer the genuine Spotify experience and maintain the recognition value.
 
 ## System Architecture
 
@@ -138,7 +149,7 @@ and artist profile pictures.
 
 Data processing is handled by Apache Spark (PySpark). Spark streams data from a Kafka topic, transforms it, and loads 
 the aggregated results into a MariaDB database. Spark uses watermarking to ensure the processing of late-arriving data 
-and stores checkpoints in Hadoop HDFS to maintain data consistency and recoverability.
+and store checkpoints in Hadoop HDFS to maintain data consistency and recoverability.
 
 The data stored in MariaDB is retrieved by the backend application and cached via Memcached to optimize performance. 
 The entire data pipeline follows an ETL (Extract, Transform, Load) approach, where data is continuously extracted, 
@@ -155,8 +166,8 @@ Each of the components is described in more detail within the following sections
 ### Components
 #### Kafka (Data Ingestion)
 Kafka serves as a message queue system, enabling live data streaming. In this architecture, Kafka is used to capture the
-song play activities requested by the publisher, the Next.js App, and forwards the data to Spark which is acting as the 
-subscriber for processing the Spotify data to the applications needs. 
+song play activities requested by the publisher, the Next.js App, and forwards the data to Spark, which is acting as the 
+subscriber for processing the Spotify data to the application needs. 
 The topic is defined by the [kafka-topic.yaml](k8s/kafka-topic.yaml).
 
 #### Spark (Batch + Stream Processing)
@@ -183,15 +194,17 @@ The [tables of the database schema](k8s/mariadb.yaml) are tailored to the minimu
 and to display the desired information. 
 
 The table `top_songs` has the columns `UID`, `trackName`, `artistName` and `total_msPlayed`. The first three are strings
-(type Varchar) and the last one is an integer, all of which must not be null. The `UID` and `track_name`serve as the 
+(type Varchar), and the last one is an integer, all of which must not be null. The `UID` and `track_name`serve as the 
 primary key.
 
 The table `top_artists` has the columns `UID`, `artistName` and `total_msPlayed`. The first two are strings 
-(type Varchar) and the last one is an integer, all of which must not be null. The `UID` and `artist_name` serve as the 
+(type Varchar), and the last one is an integer, all of which must not be null. The `UID` and `artist_name` serve as the 
 primary key.
 
-The table `total_playtime` has the columns `UID` and `total_msPlayed`. The first one is a string (type Varchar) and the 
-last one is an integer, all of which must not be null. The UID serves as the primary key.
+The table `total_playtime` has the columns `UID` and `total_msPlayed`.
+The first one is a string (type Varchar), and the 
+last one is an integer, all of which must not be null.
+The UID serves as the primary key.
 
 
 #### Memcached
@@ -207,7 +220,7 @@ The frontend application, developed with [Next.js](web-app/), provides the user 
 the analyses. It communicates with the backend application to retrieve and display the necessary data. The frontend part
 of the [Next.js](web-app/) app is used as the UI which allows the user to 
 [log into their Spotify account](web-app/src/app/_components/spotifyAuthorization.tsx) for authorization purposes using 
-the `SpotifyAuthorization` function. In the backend the authorization process gets completed by 
+the `SpotifyAuthorization` function. In the backend, the authorization process gets completed by 
 [sending the received code](web-app/src/app/api/auth-request/route.ts) to Spotify to get an authorization token.
 The data can be retrieved from the Spotify API by [sending the song and artist name](web-app/src/app/api/get-artist-data/route.ts)
 to the Spotify API. Furthermore, the frontend also serves the purpose of 
@@ -218,7 +231,7 @@ The backend application, also developed with [Next.js](web-app/), serves as the 
 layer. It handles the connection to other components like the [Memcached](k8s/memcached.yaml) and [MariaDB](k8s/mariadb.yaml).
 The backend application also handles the [fetching process for the cosmetic artist data](web-app/src/app/api/get-artist-data/route.ts) 
 as well as the [cosmetic song data](web-app/src/app/api/get-track-data/route.ts) with the Spotify API. 
-It therefore handles all request that require transactions between the Web App UI and the data processing part of the 
+It therefore handles all requests that require transactions between the Web App UI and the data processing part of the 
 application hiding all system related information from the user to increase security.
 
 #### Spotify API
@@ -247,11 +260,11 @@ functionality can be found in the figure below.
 
 ##### Authorization
 
-To make the application work the user has to go through an authorization process with Spotify. This step is necessary 
-for the user to be able to select data he wants to analyse and therefore to access the features of the application as 
-well as for the application to be able to fetch complementary and cosmetic data. For that case Spotify provides their 
-own login page to which the user is directed. After logging in with the users credentials successfully the application 
-sends a request for access and as well as a token to Spotify in order to receive an authentication token which is later 
+To make the application work, the user has to go through an authorization process with Spotify. This step is necessary 
+for the user to be able to select data he wants to analyze and therefore to access the features of the application as 
+well as for the application to be able to fetch complementary and cosmetic data. For that case, Spotify provides their 
+own login page to which the user is directed. After logging in with the user's credentials successfully, the application 
+sends a request for access and as well as a token to Spotify to receive an authentication token which is later 
 used by the backend to make the requests for the cosmetic data.   
  
 
@@ -276,7 +289,7 @@ point in time, but this function is also strictly limited to the last 50 element
 "big data" scenario.
 
 We therefore made use of Spotify's obligation to provide the user's streaming information to them. By requesting our 
-group members streaming history for the last year we can offer the option to select the data set to be analyzed in the 
+group members' streaming history for the last year, we can offer the option to select the data set to be analyzed in the 
 Web App dropdown menu.
 
 The initially planned system architecture looked at follows:
@@ -285,28 +298,29 @@ The initially planned system architecture looked at follows:
 # MongoDB to MariaDB:
 
 Another change of plans occurred when we first planned to use a non-relational database in MongoDB thinking that a 
-Database without a strict schema will make the storage of different data easier to handle. But after having troubles 
-replacing the MongoDB with the initially predefined MariaDB and receiving the data from spotify now knowing the data 
-structure and the attributes we need for our analysis we decided that using a MariaDB makes more sense for our very 
-straight forward data structure also ensuring further type security.
+Database without a strict schema will make the storage of different data easier to handle.
+But after having trouble replacing the MongoDB with the initially predefined MariaDB and receiving the data
+from spotify now knowing the data structure and the attributes we need for our analysis, we decided that using a MariaDB
+makes more sense for our very straight forward data structure also ensuring further type security.
 
 # Setup and configuration issues:
 
-While pursuing the project we encountered multiple issues related to the application setup as well as hardware ressource
+While pursuing the project,
+we encountered multiple issues related to the application setup as well as hardware resources 
 induced complications.
 
-One of them being the task to get the system to run on all group members devices having to make adoptions to the 
-different operating systems by for example changing the escape sequences of the yaml-files in the k8s folder from "CLRF" 
+One of them being the task to get the system to run on all group members devices, having to make adoptions to the 
+different operating systems by, for example, changing the escape sequences of the yaml-files in the k8s folder from "CLRF" 
 used on Apple devices to "LF" used by Windows devices.
 
 Also, not all the devices are private devices and therefore don't offer full access to configurations enforcing the use 
 of virtual machines and other techniques which add further obstacles in the fight for the very limited hardware 
 resources.
 
-Limited hardware resources, especially RAM, was a big issue in general which got even more severe as the project 
+Limited hardware resources, especially RAM, was a big issue in general that got even more severe as the project 
 continued to grow and therefore required more and more resources to the point where configurations had to be 
 made to even enable the full functionality of the application. These shortages made the development process increasingly 
-slow because changes to the live application often ends in a rebuild sequence or a new start through skaffold dev which 
+slow. This is because changes to the live application often end in a rebuild sequence or a new start through skaffold dev, which 
 takes a lot of time when all the resources are caught up in maintaining the system.
 
 Keeping up all the components and ensuring their stable functionality was another setup related issue since topics won't
@@ -315,10 +329,10 @@ to the database or fetching data ends in a runtime error because either Kafka cr
 enough to process and analyse the data with spark quickly enough.
 
 A functional challenge was the "communication" between Next.js and Spark so that the Backend knows when Spark has 
-finished the processing completely and the final data lays in the MariaDB because displaying the content to early would 
+finished the processing and the final data lays in the MariaDB because displaying the content to early would 
 falsify the analysis. We ensured this by implementing a check sequence where when Next.js fetched the same data five times
-in a row we can conclude that Spark finished its processing and the data in the MariaDB is final.
+in a row, we can conclude that Spark finished its processing and the data in the MariaDB is final.
 
 Another issue was related to the functionality of the DNS. Sometimes we encountered the problem that minikube couldn't 
 reach the container registry and therefore couldn't download and build the necessary images. At different times the 
-containers couldn't reach the Spotify API also blocking the performance of the application.
+containers couldn't reach the Spotify API, also blocking the performance of the application.
