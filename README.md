@@ -108,8 +108,6 @@ This application can then be managed in the
 The Client ID and Client Secret have to be added to .env file in the [web-app/](web-app/) directory.
 This file has to have the same structure as the [.env.example](web-app/.env.example) file.
 
-```bash
-
 
 When all prerequisites are installed, you can start the project with the following command:
 
